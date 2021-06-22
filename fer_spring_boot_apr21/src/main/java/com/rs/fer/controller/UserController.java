@@ -39,6 +39,25 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+@PostMapping("/resetPassword")
+	
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
+
+		ResetPasswordResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+
+			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.resetPassword(request);
+		}
+
+		return response;
+
+	}
 	@PostMapping("/updateUser")
 
 	public UpdateUserResponse updateuser(@RequestBody UpdateUserRequest request) {
