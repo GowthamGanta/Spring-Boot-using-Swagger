@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="fer_spring_boot_apr21/.mvn/wrapper"/>
+	<classpathentry excluding="main/java/|test/java/" kind="src" path="fer_spring_boot_apr21/src"/>
+	<classpathentry kind="src" path="fer_spring_boot_apr21/src/main/java"/>
+	<classpathentry kind="src" path="fer_spring_boot_apr21/src/test/java"/>
+	<classpathentry kind="lib" path="fer_spring_boot_apr21/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
