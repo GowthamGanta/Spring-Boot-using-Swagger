@@ -23,7 +23,9 @@ import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
 /**
- * This class is mainly used for operations on user like registration, login, resetPassword, getUser and updateUser.
+ * This class is mainly used for operations on user like registration, login,
+ * resetPassword, getUser and updateUser.
+ * 
  * @author Personal
  *
  */
@@ -36,5 +38,25 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+
+	@PostMapping("/updateUser")
+
+	public UpdateUserResponse updateuser(@RequestBody UpdateUserRequest request) {
+
+		UpdateUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			// return response with error messages
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.updateuser(request);
+		}
+
+		return response;
+
+	}
 
 }
