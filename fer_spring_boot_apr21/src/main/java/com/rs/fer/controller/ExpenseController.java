@@ -41,8 +41,17 @@ public class ExpenseController {
 
 		EditExpenseResponse response = null;
 
-		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
+		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);expenseValidation.validateEditExpenseRequest(request);
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			// return response with error messages
 			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
