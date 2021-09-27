@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.request.GetExpensesRequest;
+import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -27,6 +29,25 @@ public class ExpenseController {
 	ExpenseService expenseService;
 
 
+	
+	
+	@GetMapping("/getExpense")
+	public GetExpenseResponse getExpenseById(@ModelAttribute GetExpenseRequest request) {
+
+		GetExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			// return response with error messages
+			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpense(request);
+		}
+		return response;
+
+	}
 	
 	@GetMapping("/getExpenses")
 	public GetExpensesResponse getExpenses(@ModelAttribute GetExpensesRequest request) {
