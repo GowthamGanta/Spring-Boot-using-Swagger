@@ -68,7 +68,7 @@ public class UserController {
 		} else {
 			response = userService.resetPassword(request);
 		}
-		System.out.println("Reset Password");
+		System.out.println("Reset Password.........");
 		return response;
 
 	}
