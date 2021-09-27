@@ -79,6 +79,7 @@ public class UserController {
 		GetUserResponse response = null;
 
 		response = userService.getUser(userId);
+		System.out.println(userId);
 
 		return response;
 	}
