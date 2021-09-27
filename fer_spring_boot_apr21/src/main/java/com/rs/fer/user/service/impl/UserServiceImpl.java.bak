@@ -10,12 +10,10 @@ import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.bean.User;
 import com.rs.fer.repository.UserRepository;
-import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.response.GetUserResponse;
-import com.rs.fer.user.response.LoginResponse;
 //github.com/javars100321/javars_jan21.git
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
@@ -67,43 +65,8 @@ public class UserServiceImpl implements UserService {
 		// return null;
 	}
 
-	@Override
-	public LoginResponse login(LoginRequest request) {
-		LoginResponse response = null;
-		int userId = 0;
-
-		// load vo to bean
-		User user = userUtil.loadLoginRequestToUser(request);
-		String username = user.getUsername();
-		String password= user.getPassword();
-		// List<User> findByUsernameAndPassword(String username, String password);
-
-		// save bean to database
-//		List<User> user = userRepository.findByUsernameAndPassword(request);
-
-		List<User> users = userRepository.findByUsernameAndPassword( username,  password);
-		if (users != null && !users.isEmpty()) {
-			User user1 = users.get(0);
-			userId = user1.getUserId();
-		}
-
-		// load response
-		if (userId > 0) {
-			// success
-			response = new LoginResponse(HttpStatus.OK, "000", "Welcome to user", null);
-			//response.setUser(user);
-		} else {
-			// failure
-			response = new LoginResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Invalid username/password..Please try again.", null);
-		}
-
-		return response;
-		// return null;
-	}
-
 	/**
 	 * To get the password based on userId
-	 * 
 	 * @param userId
 	 * @return response
 	 */
@@ -136,51 +99,50 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * To get the user based on userid
-	 * 
 	 * @param userid
 	 * @return response
 	 */
 	@Override
 	public GetUserResponse getUser(int userid) {
 		GetUserResponse response = null;
-
-		// To get the user based on userId
+		
+		//To get the user based on userId
 		Optional<User> userObj = userRepository.findById(userid);
-
+		
 		if (userObj.isPresent()) {
-			// If user is present
+			//If user is present
 			response = new GetUserResponse(HttpStatus.OK, "000", "get User is succesfully ", null);
 			response.setUser(userObj.get());
 
 		} else {
-			// If user not present
+			//If user not present
 			response = new GetUserResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get user is failed", null);
 
 		}
 
 		return response;
 	}
-
+	
 	/**
-	 * UpdateUser
-	 * 
+	 * UpdateUser 
 	 * @param request
 	 * @return
 	 */
 	@Override
-
+	
 	public UpdateUserResponse updateuser(UpdateUserRequest request) {
 		UpdateUserResponse response = null;
-
+		
 		// User is present or not check
-		List<User> users = userRepository.findByEmail(request.getEmail());
+				List<User> users = userRepository.findByEmail(request.getEmail());
 
-		if (!CollectionUtils.isEmpty(users)) {
-			// User already present
-			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "001",
-					"User is already registered with the given email address", null);
-			return response;
-		}
+				if (!CollectionUtils.isEmpty(users)) {
+					// User already present
+					response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "001",
+							"User is already registered with the given email address", null);
+					return response;
+				}
+
 
 		Optional<User> userObj = userRepository.findById(request.getUserId());
 
@@ -194,14 +156,17 @@ public class UserServiceImpl implements UserService {
 			user = userRepository.save(user);
 
 			// User already present
-			response = new UpdateUserResponse(HttpStatus.OK, "000", "User is updated successfully", null);
-			response.setUser(user);
+			response = new UpdateUserResponse(HttpStatus.OK , "000", "User is updated successfully",null);
+		 response.setUser(user);
 		} else {
 			// failure
-			response = new UpdateUserResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "User update failed", null);
+			response = new UpdateUserResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "User update failed",
+					null);
 		}
 
 		return response;
 	}
+	
+	
 
 }

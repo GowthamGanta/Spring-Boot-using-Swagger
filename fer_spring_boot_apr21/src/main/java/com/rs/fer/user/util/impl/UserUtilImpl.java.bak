@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.rs.fer.bean.User;
 import com.rs.fer.bean.Address;
-import com.rs.fer.user.request.LoginRequest;
+
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
@@ -34,24 +34,14 @@ public class UserUtilImpl implements UserUtil {
 	}
 
 	@Override
-	public User loadLoginRequestToUser(LoginRequest request) {
-
-		User user = new User();
-
-		user.setUsername(request.getUsername());
-		user.setPassword(request.getPassword());
-
-		return user;
-	}
-
-	@Override
 	public User loadResetPasswordRequestToUser(ResetPasswordRequest request) {
 
 		return null;
 	}
-
-	@Override
-
+	
+		@Override
+	
+	
 	public User loadUpdateUserRequestToUser(UpdateUserRequest request) {
 
 		User user = new User();
@@ -65,7 +55,7 @@ public class UserUtilImpl implements UserUtil {
 		user.setPassword(request.getPassword());
 		user.setMobile(request.getMobile());
 
-		if (user.getAddress() == null) {
+		if(user.getAddress() == null) {
 			user.setAddress(new Address());
 			user.getAddress().setCreated(DateUtil.getCurrentDate());
 			user.getAddress().setAddressId(request.getAddressId());
@@ -75,15 +65,18 @@ public class UserUtilImpl implements UserUtil {
 			user.getAddress().setState(request.getState());
 			user.getAddress().setPincode(request.getPincode());
 			user.getAddress().setCountry(request.getCountry());
+			
 
 		} else {
 			user.getAddress().setUpdated(DateUtil.getCurrentDate());
 
 		}
-
+		
+		
 		user.setUpdated(DateUtil.getCurrentDate());
 		return user;
 
 	}
+
 
 }
