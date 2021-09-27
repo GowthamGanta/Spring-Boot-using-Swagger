@@ -98,6 +98,7 @@ public class UserController {
 
 		response = userService.getUser(userId);
 		System.out.println(userId);
+		System.out.println(userId);
 
 		return response;
 	}
