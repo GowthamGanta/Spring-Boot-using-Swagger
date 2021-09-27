@@ -11,8 +11,5 @@ public class SpringBootDataJpaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 	}
-	
-	public static void test(String[] args) {
-		SpringApplication.run(SpringBootDataJpaApplication.class, args);
-	}
+
 }
