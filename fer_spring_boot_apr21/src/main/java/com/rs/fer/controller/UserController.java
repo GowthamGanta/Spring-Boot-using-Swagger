@@ -5,12 +5,15 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
@@ -49,6 +52,17 @@ public class UserController {
 	}
 	
 	
+	@GetMapping("/user/{id}")
+	public GetUserResponse getUser(@PathVariable("id") Integer id) {
+		GetUserResponse response = null;
+		Set<String> errorMessages = userValidation.validateGetUserRequest(id);
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.getUser(id);
+		}
+		return response;
+	}
 
 
 }
