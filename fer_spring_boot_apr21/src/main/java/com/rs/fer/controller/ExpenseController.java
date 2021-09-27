@@ -32,60 +32,6 @@ public class ExpenseController {
 	ExpenseService expenseService;
 	
 
-	@PostMapping("/editexpense")
-	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
-
-		EditExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
-
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			// return response with error messages
-			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = expenseService.editExpense(request);
-		}
-
-		return response;
-
-	}
-
-	@PostMapping("/expense")
-	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
-
-		AddExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
-
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-
-			// return response with error
-			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = expenseService.addExpense(request);
-		}
-
-		return response;
-
-	}
-	@GetMapping("/getExpense")
-	public GetExpenseResponse getExpenseById(@ModelAttribute GetExpenseRequest request) {
-
-		GetExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
-
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			// return response with error messages
-			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = expenseService.getExpense(request);
-		}
-		return response;
-
-	}
+	
 
 }

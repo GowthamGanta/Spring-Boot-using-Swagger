@@ -55,59 +55,7 @@ public class UserController {
 		return response;
 	}
 	
-	/*
-	@PostMapping("/login")
-	public LoginResponse login(@RequestBody LoginRequest request) {
-
-		LoginResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateLoginRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.login(request);
-		}
-		return response;
-	}
-	*/
-
 	
-	
-	// get User
-
-	@GetMapping("/user/{id}")
-	public GetUserResponse getUser(@PathVariable("id") Integer id) {
-		GetUserResponse response = null;
-		Set<String> errorMessages = userValidation.validateGetUserRequest(id);
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-		} else {
-			response = userService.getUser(id);
-		}
-		return response;
-	}
-	
-	@PostMapping("/updateUser")
-
-	public UpdateUserResponse updateuser(@RequestBody UpdateUserRequest request) {
-
-		UpdateUserResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
-
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			// return response with error messages
-			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.updateuser(request);
-		}
-
-		return response;
-
-	}
 
 
 }
