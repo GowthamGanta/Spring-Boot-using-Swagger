@@ -35,7 +35,7 @@ public class UserController {
 
 	@Autowired
 	UserValidation userValidation;
-
+	
 	@Autowired
 	UserService userService;
 
