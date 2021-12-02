@@ -11,6 +11,7 @@ public class SpringBootDataJpaApplication {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
 		System.out.println("vvr changes");
+		System.out.println("vegineti changes");
 		
 	}    
 
