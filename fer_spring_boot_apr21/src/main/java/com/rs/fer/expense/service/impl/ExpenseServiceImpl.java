@@ -66,6 +66,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 		} else {
 			// failure
 			response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
+			//added extra line by ashwini
+			//response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
 			response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
 
 			
