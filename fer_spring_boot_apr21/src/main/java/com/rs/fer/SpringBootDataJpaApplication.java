@@ -12,6 +12,7 @@ public class SpringBootDataJpaApplication {
 		
 		System.out.println("vvr changes");
 		
+		
 	}    
 
 }
