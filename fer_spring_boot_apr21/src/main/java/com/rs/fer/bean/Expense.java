@@ -15,6 +15,8 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer expenseId;
 
+	
+	
 	@Column
 	private String type;
 
@@ -119,6 +121,7 @@ public class Expense {
 
 	public String getBywhom() {
 		return bywhom;
+		
 	}
 
 	public void setBywhom(String bywhom) {
