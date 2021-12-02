@@ -12,7 +12,7 @@ public class SpringBootDataJpaApplication {
 		
 		System.out.println("By user2");
 		System.out.println("ashok change");
-		System.out.println("Sirisha change");
+		System.out.println("sirisha change");
 	}    
 
 }
