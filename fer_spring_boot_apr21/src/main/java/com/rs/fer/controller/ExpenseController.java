@@ -28,9 +28,11 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
+
 	
-	@PostMapping("/addExpense")
-	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
+	@PostMapping("/addexpense")
+	public  AddExpenseResponse addExpense(@ModelAttribute AddExpenseRequest request) {
+
 
 		AddExpenseResponse response = null;
 
@@ -60,6 +62,24 @@ public class ExpenseController {
 			response = expenseService.getExpense(request);
 		}
 		return response;
+	}
+	
+	@GetMapping("/getExpenseOptions")
+	public GetExpenseResponse getExpenseOptions(@ModelAttribute GetExpenseRequest request) {
+
+		GetExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			// return response with error messages
+			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpense(request);
+		}
+		return response;
+
 	}
 	
 }
