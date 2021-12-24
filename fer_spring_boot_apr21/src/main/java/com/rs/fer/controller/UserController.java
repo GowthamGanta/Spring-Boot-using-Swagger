@@ -57,51 +57,5 @@ public class UserController {
 		return response;
 	}
 
-	@PostMapping("/login")
-	public LoginResponse login(@RequestBody LoginRequest request) {
-
-		LoginResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateLoginRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.login(request);
-		}
-		return response;
-	}
-
-	@PostMapping("/resetPassword")
-
-	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
-
-		ResetPasswordResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
-
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-
-			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.resetPassword(request);
-		}
-		System.out.println("Reset Password.........");
-		return response;
-
-	}
-
-	@GetMapping("/getUser")
-	public GetUserResponse getUser(@RequestParam int userId) {
-
-		GetUserResponse response = null;
-
-		response = userService.getUser(userId);
-		System.out.println(userId);
-		System.out.println(userId);
-
-		return response;
-	}
+	
 }
