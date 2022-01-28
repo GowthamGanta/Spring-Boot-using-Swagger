@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 //github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,12 +40,9 @@ public class ExpenseController {
 	ExpenseService expenseService;
 
 	@PostMapping("/addExpense")
-
 	public AddExpenseResponse addExpense(@ModelAttribute AddExpenseRequest request) {
-		
-     AddExpenseResponse response = null;
-     
-     
+
+		AddExpenseResponse response = null;
 		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
 
 		// return response with error message
@@ -56,7 +56,7 @@ public class ExpenseController {
 
 		return response;
 	}
-
+	
 	@GetMapping("/getExpensesReport")
 	public GetExpensesResponse getExpensesReport(@ModelAttribute GetExpensesRequest request) {
 
@@ -73,9 +73,9 @@ public class ExpenseController {
 		return response;
 
 	}
-
 	@GetMapping("/getExpense")
-	public GetExpenseResponse getExpense(@ModelAttribute GetExpenseRequest request) {
+	public GetExpenseResponse getExpenseById(@ModelAttribute GetExpenseRequest request) {
+
 		GetExpenseResponse response = null;
 		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
 		// return response with error message
@@ -108,7 +108,6 @@ public class ExpenseController {
 
 		return response;
 	}
-
 	@GetMapping("/getExpenseOptions")
 
 	public GetExpensesResponse getExpenseOptions(@ModelAttribute GetExpensesRequest request) {
