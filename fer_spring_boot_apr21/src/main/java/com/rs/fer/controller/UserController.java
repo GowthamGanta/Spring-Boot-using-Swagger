@@ -121,7 +121,7 @@ public class UserController {
 			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.updateuser(request);
+			response = userService.updateUser(request);
 		}
 		return response;
 	}
