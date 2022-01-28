@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
+import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -61,6 +64,22 @@ public class UserController {
 
 		} else {
 			response = userService.login(request);
+		}
+		return response;
+	
+	}
+	@PutMapping("/updateuser")
+	public UpdateUserResponse updateuser(@RequestBody UpdateUserRequest request) {
+
+		UpdateUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.updateuser(request);
 		}
 		return response;
 	
