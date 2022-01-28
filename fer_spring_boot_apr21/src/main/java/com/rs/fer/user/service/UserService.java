@@ -12,7 +12,7 @@ import com.rs.fer.user.response.UpdateUserResponse;
 
 public interface UserService {
 
-	UpdateUserResponse updateuser(UpdateUserRequest request);
+	UpdateUserResponse updateUser(UpdateUserRequest request);
 
 	RegistrationResponse registration(RegistrationRequest request);
 

@@ -169,7 +169,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 
-	public UpdateUserResponse updateuser(UpdateUserRequest request) {
+	public UpdateUserResponse updateUser(UpdateUserRequest request) {
 		UpdateUserResponse response = null;
 
 		// User is present or not check
@@ -203,5 +203,6 @@ public class UserServiceImpl implements UserService {
 
 		return response;
 	}
+
 
 }
