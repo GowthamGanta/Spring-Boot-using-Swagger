@@ -45,7 +45,7 @@ public class ExpenseController {
 		return response;
 	}
 
-	@PostMapping("/getExpense")
+	@PostMapping("/getExpense" )
 
 	public GetExpenseResponse getExpense(@ModelAttribute GetExpenseRequest request) {
 
