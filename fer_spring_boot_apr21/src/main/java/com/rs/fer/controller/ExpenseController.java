@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 //github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
-import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.request.GetExpensesRequest;
+import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
-import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 //github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.expense.response.GetExpensesResponse;
@@ -34,6 +34,25 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired 
 	ExpenseService expenseService;
+	
+	@PostMapping("/deleteExpense")
+
+	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+
+		// return response with error message
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+
+			response = expenseService.addExpense(request);
+		}
+
+		return response;
+	}
 
 	@GetMapping("/getExpensesReport")
 	public GetExpensesResponse getExpensesReport(@ModelAttribute GetExpensesRequest request) {
@@ -104,25 +123,6 @@ public class ExpenseController {
 		} else {
 
 			response = expenseService.getExpenses(request);
-		}
-
-		return response;
-	}
-	
-	@PutMapping("/editExpense")
-	
-	public EditExpenseResponse editExpense(@ModelAttribute EditExpenseRequest request) {
-
-		EditExpenseResponse response = null;
-		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
-
-		// return response with error message
-		if (!CollectionUtils.isEmpty(errorMessages)) { 
-
-			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-		} else {
-
-			response = expenseService.editExpense(request);
 		}
 
 		return response;
