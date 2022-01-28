@@ -89,8 +89,9 @@ public class ExpenseController {
 	@GetMapping("/getExpenseOptions")
 
 	public GetExpensesResponse getExpenseOptions(@ModelAttribute GetExpensesRequest request) {
-
 		GetExpensesResponse response = null;
+
+		
 		Set<String> errorMessages = expenseValidation.validateGetExpensesRequest(request);
 
 		// return response with error message
