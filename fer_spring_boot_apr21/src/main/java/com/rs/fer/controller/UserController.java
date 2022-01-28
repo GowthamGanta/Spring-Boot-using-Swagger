@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
+import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -65,4 +68,23 @@ public class UserController {
 		return response;
 	
 	}
+	
+	@PutMapping("/resetPassword")
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
+
+		ResetPasswordResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.resetPassword(request);
+		}
+		System.out.println("Rsest Password...........");
+		return response;
+	
+	}
+	
 }
