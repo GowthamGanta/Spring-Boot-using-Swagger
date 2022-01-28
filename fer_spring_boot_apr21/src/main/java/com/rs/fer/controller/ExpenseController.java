@@ -27,8 +27,10 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
+	
+	
 
-	@PostMapping("/ addExpense")
+	@PostMapping("/addExpense")
 
 	public AddExpenseResponse AddExpense(@ModelAttribute AddExpenseRequest request) {
 
