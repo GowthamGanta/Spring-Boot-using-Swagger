@@ -77,6 +77,7 @@ public class UserController {
 		ResetPasswordResponse response = null;
 
 		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+		
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
