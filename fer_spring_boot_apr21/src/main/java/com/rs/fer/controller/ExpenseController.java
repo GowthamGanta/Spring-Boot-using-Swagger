@@ -49,6 +49,25 @@ public class ExpenseController {
 	}
 	
 	
+	@PostMapping("/addExpensma")
+	public AddExpenseResponse addExpensema(@RequestBody AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.addExpense(request);
+		}
+		return response;
+	}
+	
+
+	
 	
 	@DeleteMapping("/deleteExpense{expenseId}")
 	public DeleteExpenseResponse deleteExpense(@ModelAttribute DeleteExpenseRequest request) {

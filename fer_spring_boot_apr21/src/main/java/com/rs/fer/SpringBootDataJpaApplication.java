@@ -12,15 +12,10 @@ public class SpringBootDataJpaApplication {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
 		System.out.println("sir changes");
-		System.out.println("SUSMITHA changes");
-		System.out.println("Roja changes");
-<<<<<<< HEAD
-		System.out.println("Pravalika changes");
-=======
-		System.out.println("Abdul Qadari changes");
+		System.out.println("susmitha changes");
+		System.out.println("ROJA changes");
+		System.out.println("Vijaya changes");
 		
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 	}    
 
 }
-
