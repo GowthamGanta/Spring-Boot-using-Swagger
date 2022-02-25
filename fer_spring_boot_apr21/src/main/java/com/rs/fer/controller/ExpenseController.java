@@ -103,13 +103,12 @@ public class ExpenseController {
 		return response;
 	}
 	
-	@GetMapping("/getExpenseOptions")
-	public GetExpenseResponse getExpenseOptions(@ModelAttribute GetExpenseRequest request) {
+	@GetMapping("/getExpenseOption")
+	public GetExpenseResponse getExpenseOption(@ModelAttribute GetExpenseRequest request) {
 
 		GetExpenseResponse response = null;
 
 		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
-		
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
@@ -119,5 +118,6 @@ public class ExpenseController {
 		}
 		return response;
 	}
+	
 
 }
