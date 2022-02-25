@@ -15,7 +15,7 @@ public class SpringBootDataJpaApplication {
 		System.out.println("susmitha changes");
 		System.out.println("ROJA changes");
 		System.out.println("Vijaya changes");
-		System.out.println("mohan changes");
+		System.out.println("Mohan changes");
 		
 	}    
 
