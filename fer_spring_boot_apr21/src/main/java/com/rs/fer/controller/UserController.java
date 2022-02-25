@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.response.GetUserResponse;
+//github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.UserService;
@@ -62,6 +63,11 @@ public class UserController {
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.getUser(userId);
+		}
+		return response;
+	}
 	
 		
 	
@@ -77,9 +83,8 @@ public class UserController {
 			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.getUser(userId);
+			response = userService.login(request);
 		}
 		return response;
 	}
-	
 }
