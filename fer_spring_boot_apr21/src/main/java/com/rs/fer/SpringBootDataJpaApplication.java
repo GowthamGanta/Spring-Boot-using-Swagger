@@ -11,13 +11,8 @@ public class SpringBootDataJpaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
-		System.out.println("sir changes");
-		System.out.println("susmitha changes");
-		System.out.println("ROJA changes");
-		System.out.println("SOWMYA changes");
-		System.out.println("Vijaya changes");
-		System.out.println("Mohan changes");
-		System.out.println("Pushpa changes");
+		
+		System.out.println("Virus changes");
 	}    
 
 }
