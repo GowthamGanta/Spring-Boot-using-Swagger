@@ -58,55 +58,6 @@ public class UserController {
 	
 		
 	
-
-	@GetMapping("/login")
-	public LoginResponse login(@RequestBody LoginRequest request) {
-
-		LoginResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateLoginRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.login(request);
-		}
-		return response;
-	}
-
-	@PutMapping("/updateUser")
-	public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
-
-		UpdateUserResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.updateUser(request);
-		}
-		return response;
-	}
-	
-	@PutMapping("/resetPassword")
-	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
-
-		ResetPasswordResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.resetPassword(request);
-		}
-		return response;
-	}
-	
 	
 }
 
