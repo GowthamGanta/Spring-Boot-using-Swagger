@@ -24,6 +24,8 @@ import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
+import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.RegistrationResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -34,5 +36,36 @@ public class ExpenseController {
 	@Autowired 
 	ExpenseService expenseService;
 	
-	
+	@PostMapping("/addExpense")
+	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new 	AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.addExpense(request);
+		}
+		return response;
+	}
+	@GetMapping("/getExpenseReportMA")
+	public GetExpensesResponse getExpenseReportMA(@ModelAttribute GetExpensesRequest request) {
+
+		GetExpensesResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpensesRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new 	GetExpensesResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpenses(request);
+		}
+		
+		return response;
+	}
+
 }
