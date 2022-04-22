@@ -12,8 +12,6 @@ public class SpringBootDataJpaApplication {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
 		
-		System.out.println("sai changes");
-		System.out.println("some changes");
 		System.out.println("happy ugadi");
 
 	}    
