@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,4 +62,20 @@ public class UserController {
 		return response;
 	}
 
+	@PostMapping("/registration/ma")
+	public RegistrationResponse registrationMA(@ModelAttribute RegistrationRequest request) {
+
+		RegistrationResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new RegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.registration(request);
+		}
+		return response;
+
+	}
 }
