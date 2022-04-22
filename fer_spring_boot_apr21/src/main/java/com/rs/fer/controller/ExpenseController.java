@@ -35,5 +35,22 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
+	
+	@PostMapping("/addExpense")
+	public AddExpenseResponse registration(@RequestBody AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.addExpense(request);
+		}
+		return response;
+	}
+
 
 }
