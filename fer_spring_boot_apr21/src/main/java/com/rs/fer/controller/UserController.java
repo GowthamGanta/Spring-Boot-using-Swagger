@@ -95,6 +95,24 @@ public class UserController {
 		}
 		return response;
 	}
+	
+	@PutMapping("/updateUser")
+	public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
+
+		UpdateUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.updateUser(request);
+		}
+		return response;
+
+	}
+
 
 
 }
