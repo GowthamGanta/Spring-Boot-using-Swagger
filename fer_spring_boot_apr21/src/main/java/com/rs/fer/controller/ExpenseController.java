@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
@@ -36,4 +37,19 @@ public class ExpenseController {
 	@Autowired
 	ExpenseService expenseService;
 
+	// Add Expense using @ModelAttribute - Akbar
+	@PostMapping("addExpense/ma")
+	public AddExpenseResponse addExpenseMA(@ModelAttribute AddExpenseRequest request) {
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// Return error messages with response
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.addExpense(request);
+		}
+
+		return response;
+	}
 }
