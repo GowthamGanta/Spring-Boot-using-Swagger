@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.bean.User;
@@ -60,5 +61,21 @@ public class UserController {
 		}
 		return response;
 	}
+	
 
+	@GetMapping("/getUser")
+	public GetUserResponse getUser(@RequestParam int userId) {
+
+		GetUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateGetUserRequest(userId);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.getUser(userId);
+		}
+		return response;
+	}
 }
