@@ -69,7 +69,6 @@ public class UserController {
 		LoginResponse response = null;
 
 		Set<String> errorMessages = userValidation.validateLoginRequest(userId);
-		
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
