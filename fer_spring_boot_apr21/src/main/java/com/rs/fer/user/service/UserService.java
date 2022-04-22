@@ -21,6 +21,7 @@ public interface UserService {
 	ResetPasswordResponse resetPassword(ResetPasswordRequest requestd);
 
 	GetUserResponse getUser(int userid);
+
 	
 
 }

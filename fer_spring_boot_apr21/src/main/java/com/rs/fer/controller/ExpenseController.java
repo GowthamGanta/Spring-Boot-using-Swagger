@@ -1,4 +1,4 @@
-package com.rs.fer.controller;
+  package com.rs.fer.controller;
 
 import java.util.Set;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
@@ -52,5 +53,37 @@ public class ExpenseController {
 		return response;
 	}
 
+	// Add Expense using @ModelAttribute - Akbar
+	@PostMapping("addExpense/ma")
+	public AddExpenseResponse addExpenseMA(@ModelAttribute AddExpenseRequest request) {
+		AddExpenseResponse response = null;
 
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// Return error messages with response
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.addExpense(request);
+		}
+
+		return response;
+	}
+
+
+//Delete Expense using @ModelAttribute 
+	
+	@DeleteMapping("deleteExpense/ma")
+	public DeleteExpenseResponse deleteExpenseMA(@ModelAttribute DeleteExpenseRequest request) {
+		DeleteExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
+		// Return error messages with response
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.deleteExpense(request);
+		}
+
+		return response;
+	}
 }
