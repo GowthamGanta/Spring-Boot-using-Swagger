@@ -6,6 +6,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.bean.User;
@@ -57,6 +59,23 @@ public class UserController {
 
 		} else {
 			response = userService.registration(request);
+		}
+		return response;
+	}
+
+	@GetMapping("/login")
+	public LoginResponse login(@RequestParam String username, @RequestParam String password, LoginRequest userId) {
+
+		LoginResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateLoginRequest(userId);
+		
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.login(userId);
 		}
 		return response;
 	}
