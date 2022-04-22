@@ -38,7 +38,7 @@ public class ExpenseController {
 	ExpenseService expenseService;
 	
 	@PostMapping("/addExpense")
-	public AddExpenseResponse registration(@RequestBody AddExpenseRequest request) {
+	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
 
 		AddExpenseResponse response = null;
 
