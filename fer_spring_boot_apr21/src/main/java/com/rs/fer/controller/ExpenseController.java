@@ -53,7 +53,6 @@ public class ExpenseController {
 		return response;
 	}
 
-
 	// Add Expense using @ModelAttribute - Akbar
 	@PostMapping("addExpense/ma")
 	public AddExpenseResponse addExpenseMA(@ModelAttribute AddExpenseRequest request) {
