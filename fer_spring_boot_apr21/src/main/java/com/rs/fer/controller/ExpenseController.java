@@ -1,4 +1,4 @@
-  package com.rs.fer.controller;
+package com.rs.fer.controller;
 
 import java.util.Set;
 
@@ -37,6 +37,7 @@ public class ExpenseController {
 	@Autowired
 	ExpenseService expenseService;
 	
+
 	@PostMapping("/addExpense")
 	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
 
@@ -64,24 +65,6 @@ public class ExpenseController {
 			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
 			response = expenseService.addExpense(request);
-		}
-
-		return response;
-	}
-
-
-//Delete Expense using @ModelAttribute 
-	
-	@DeleteMapping("deleteExpense/ma")
-	public DeleteExpenseResponse deleteExpenseMA(@ModelAttribute DeleteExpenseRequest request) {
-		DeleteExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
-		// Return error messages with response
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-		} else {
-			response = expenseService.deleteExpense(request);
 		}
 
 		return response;
