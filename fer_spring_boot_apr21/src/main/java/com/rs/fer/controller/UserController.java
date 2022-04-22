@@ -62,6 +62,23 @@ public class UserController {
 		}
 		return response;
 	}
+	
+
+	@GetMapping("/getUser")
+	public GetUserResponse getUser(@RequestParam int userId) {
+
+		GetUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateGetUserRequest(userId);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.getUser(userId);
+		}
+		return response;
+	}
 
 	@GetMapping("/login")
 	public LoginResponse login(@RequestParam String username, @RequestParam String password, LoginRequest userId) {
@@ -78,5 +95,6 @@ public class UserController {
 		}
 		return response;
 	}
+
 
 }
