@@ -69,4 +69,22 @@ public class ExpenseController {
 
 		return response;
 	}
+
+
+
+//Delete Expense using @ModelAttribute 
+	@PostMapping("DeleteExpense/ma")
+	public DeleteExpenseResponse  DeleteExpenseMA(@ModelAttribute DeleteExpenseRequest request) {
+		DeleteExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
+		// Return error messages with response
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.deleteExpense(request);
+		}
+
+		return response;
+	}
 }
