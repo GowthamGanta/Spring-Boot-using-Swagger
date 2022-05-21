@@ -38,53 +38,5 @@ public class ExpenseController {
 	ExpenseService expenseService;
 	
 
-	@PostMapping("/addExpense")
-	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
-
-		AddExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = expenseService.addExpense(request);
-		}
-		return response;
-	}
-
-	// Add Expense using @ModelAttribute - Akbar
-	@PostMapping("addExpense/ma")
-	public AddExpenseResponse addExpenseMA(@ModelAttribute AddExpenseRequest request) {
-		AddExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
-		// Return error messages with response
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-		} else {
-			response = expenseService.addExpense(request);
-		}
-
-		return response;
-	}
-
-
-
-//Delete Expense using @ModelAttribute 
-	@PostMapping("DeleteExpense/ma")
-	public DeleteExpenseResponse  DeleteExpenseMA(@ModelAttribute DeleteExpenseRequest request) {
-		DeleteExpenseResponse response = null;
-
-		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
-		// Return error messages with response
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-		} else {
-			response = expenseService.deleteExpense(request);
-		}
-
-		return response;
-	}
+	
 }
