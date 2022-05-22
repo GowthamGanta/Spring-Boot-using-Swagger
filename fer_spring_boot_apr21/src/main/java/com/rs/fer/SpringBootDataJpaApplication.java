@@ -13,6 +13,7 @@ public class SpringBootDataJpaApplication {
 		
 		
 		System.out.println("HAPPY AAMRAS");
+		System.out.println("Happy Sunday");
 
 	}    
 
