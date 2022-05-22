@@ -12,7 +12,7 @@ public class SpringBootDataJpaApplication {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
 		
-		System.out.println("happy ugadi");
+		System.out.println("HAPPY AAMRAS");
 
 	}    
 
