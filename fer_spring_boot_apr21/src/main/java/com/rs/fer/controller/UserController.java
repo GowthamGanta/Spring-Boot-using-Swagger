@@ -47,7 +47,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
+  
 	@PostMapping("/registration")
 	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
 
@@ -63,7 +63,8 @@ public class UserController {
 		}
 		return response;
 	}
-		@GetMapping("/getUser")
+
+	@GetMapping("/getUser")
 	public GetUserResponse getUser(@RequestParam int userId) {
 
 		GetUserResponse response = null;
@@ -80,13 +81,13 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public LoginResponse login(@RequestBody String username , String password , LoginRequest userid) {
+	public LoginResponse login(@RequestBody String username, String password, LoginRequest userid) {
 
 		LoginResponse response = null;
 
 		Set<String> errorMessages = userValidation.validateLoginRequest(userid);
 		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
+		 if(!CollectionUtils.isEmpty(errorMessages)) {
 			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
@@ -94,6 +95,7 @@ public class UserController {
 		}
 		return response;
 	}
+
 	
 	
 	@PutMapping("/resetPassword")
@@ -110,6 +112,31 @@ public class UserController {
 		return response;
 	}
 	  
+	
+
+@PutMapping("/updateUser")
+	public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
+		UpdateUserResponse response = null;
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+//return response errorMessages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.updateUser(request);
+		}
+		return response;
 	}
 
-
+	@PutMapping("/updateUser2")
+	public UpdateUserResponse updateUser2(@ModelAttribute UpdateUserRequest request) {
+		UpdateUserResponse response = null;
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+//return response errorMessages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.updateUser(request);
+		}
+		return response;
+	}
+}
