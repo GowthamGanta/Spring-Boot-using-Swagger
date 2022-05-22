@@ -34,14 +34,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Autowired
 	UserRepository userRepository;
-	
-	
-	
-		/**
+
+	/**
 	 * 
 	 * Edit Expense by expenseId
+	 * 
 	 * @param request
-	 * @return  response
+	 * @return response
 	 */
 
 	@Override
@@ -66,17 +65,17 @@ public class ExpenseServiceImpl implements ExpenseService {
 		} else {
 			// failure
 			response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
-			//added extra line by ashwini
-			//response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
+			// added extra line by ashwini
+			// response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+			// "expense editing failed", null);
 			response = new EditExpenseResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "expense editing failed", null);
 
-			
 		}
 
 		return response;
 
 	}
-	
+
 	/**
 	 * To delete expense based on expenseid
 	 * 
@@ -84,19 +83,17 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * @return response
 	 */
 
-	
 	@Override
 
 	public DeleteExpenseResponse deleteExpense(DeleteExpenseRequest request) {
 
 		DeleteExpenseResponse response = null;
 
-		
 		Optional<Expense> expenseObj = expenseRepository.findById(request.getExpenseid());
 
 		if (expenseObj.isPresent()) {
 
-			// Delete expense based  based on expenseid
+			// Delete expense based based on expenseid
 			expenseRepository.deleteById(request.getExpenseid());
 
 			// if expense is deleted success case
@@ -168,6 +165,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	/**
 	 * To get the expenses based on userId
+	 * 
 	 * @param userId
 	 * @return expense
 	 */
@@ -175,21 +173,49 @@ public class ExpenseServiceImpl implements ExpenseService {
 	public GetExpensesResponse getExpenses(GetExpensesRequest request) {
 		GetExpensesResponse response = null;
 
-		//To load the userObject based on userId
+		// To load the userObject based on userId
 		Optional<User> userObj = userRepository.findById(request.getUserId());
 
 		if (userObj.isPresent()) {
-			//If expenses with that particular userId is present return expenses
-			//load response
-			//success
+			// If expenses with that particular userId is present return expenses
+			// load response
+			// success
 			response = new GetExpensesResponse(HttpStatus.OK, "000", "GetExpenses Success", null);
 			response.setExpenses(userObj.get().getExpenses());
 		} else {
-			//If expenses with that particular userId is not present return response with error messages
+			// If expenses with that particular userId is not present return response with
+			// error messages
 			// failure
 			response = new GetExpensesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expenses", null);
 		}
 
 		return response;
 	}
+
+	
+	/*
+	 * @Override public GetExpenseReportResponse
+	 * getExpenseReport(GetExpenseReportRequest request) {
+	 * 
+	 * GetExpenseReportResponse response = null;
+	 * 
+	 * Optional<Expense> expenseObj =
+	 * expenseRepository.findByType(request.getExpenseReport());
+	 * 
+	 * if (expenseObj.isPresent()) {
+	 * 
+	 * response = new GetExpenseReportResponse(HttpStatus.OK, "000",
+	 * "fetch expense", null);
+	 * 
+	 * response.setExpense(expenseObj.get());
+	 * 
+	 * } else { // failure response = new
+	 * GetExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+	 * "No expense found", null);
+	 * 
+	 * }
+	 * 
+	 * return response; }
+	 */
+
 }

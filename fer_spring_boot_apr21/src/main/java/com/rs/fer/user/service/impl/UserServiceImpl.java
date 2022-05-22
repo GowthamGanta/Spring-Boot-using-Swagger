@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public LoginResponse login(LoginRequest request) {
 		LoginResponse response = null;
-		int userId = 0;
+		int userid = 0;
 
 		// load vo to bean
 		User user = userUtil.loadLoginRequestToUser(request);
@@ -84,11 +84,11 @@ public class UserServiceImpl implements UserService {
 		List<User> users = userRepository.findByUsernameAndPassword( username,  password);
 		if (users != null && !users.isEmpty()) {
 			User user1 = users.get(0);
-			userId = user1.getUserId();
+			userid = user1.getUserId();
 		}
 
 		// load response
-		if (userId > 0) {
+		if (userid > 0) {
 			// success
 			response = new LoginResponse(HttpStatus.OK, "000", "Welcome to user", null);
 			//response.setUser(user);
