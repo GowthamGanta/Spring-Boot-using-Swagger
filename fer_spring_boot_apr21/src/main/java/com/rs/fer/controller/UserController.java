@@ -47,7 +47,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
+  
 	@PostMapping("/registration")
 	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
 
