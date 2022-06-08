@@ -121,8 +121,7 @@ public class FERServiceImpl implements FERService {
 		
 		criteria.add(Restrictions.eq("userId", userId));
 		criteria.add(Restrictions.eq("expenseType", expenseType));
-		criteria.add(Restrictions.eq("date", fromDate));
-		criteria.add(Restrictions.eq("date", toDate));
+		criteria.add(Restrictions.between("date", fromDate, toDate));
 		
 		List<Expense> expenseReport = criteria.list();
 		return expenseReport;
