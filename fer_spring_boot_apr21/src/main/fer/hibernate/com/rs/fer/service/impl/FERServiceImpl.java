@@ -85,9 +85,9 @@ public class FERServiceImpl implements FERService {
 
 		Session session = HibernateUtil.openSession();
 		Query query = session.createQuery("update User u set u.password=? where u.id=? and u.password=?");
-		query.setParameter(0, newpassword);
+		query.setParameter(0, newPassword);
 		query.setParameter(1, id);
-		query.setParameter(2, oldpassword);
+		query.setParameter(2, currentPassword);
 		
 		
 		int numberOfRecAffected = query.executeUpdate();
