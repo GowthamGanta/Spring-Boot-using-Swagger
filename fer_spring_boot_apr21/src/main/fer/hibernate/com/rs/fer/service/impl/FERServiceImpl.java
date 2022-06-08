@@ -101,8 +101,19 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public List<Expense> getExpenseReport(int userId, String expenseType, String fromDate, String toDate) {
-		// TODO Auto-generated method stub
-		return null;
+		//Expense expense = null;
+		
+		Session session = HibernateUtil.openSession();
+		
+		Criteria criteria = session.createCriteria(Expense.class);
+		
+		criteria.add(Restrictions.eq("userId", userId));
+		criteria.add(Restrictions.eq("expenseType", expenseType));
+		criteria.add(Restrictions.eq("date", fromDate));
+		criteria.add(Restrictions.eq("date", toDate));
+		
+		List<Expense> expenseReport = criteria.list();
+		return expenseReport;
 	}
 
 	@Override
