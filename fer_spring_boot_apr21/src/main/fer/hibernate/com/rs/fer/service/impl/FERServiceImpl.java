@@ -51,6 +51,20 @@ public class FERServiceImpl implements FERService {
 	public boolean editExpense(Expense expense) {
 
 		boolean isEditedExpense = false;
+		
+		Session session = HibernateUtil.openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(expense);
+			transaction.commit();
+
+			isEditedExpense = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		session.close();
 
 		
 		return isEditedExpense;
