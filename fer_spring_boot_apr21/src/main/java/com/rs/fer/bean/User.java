@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
+
 @Entity
 @Table
 public class User implements Serializable {
