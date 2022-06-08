@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -82,7 +83,19 @@ public class FERServiceImpl implements FERService {
 	@Override
 	public boolean resetPassword(int id, String currentPassword, String newPassword) {
 
-		return false;
+		Session session = HibernateUtil.openSession();
+		Query query = session.createQuery("update User u set u.password=? where u.id=? and u.password=?");
+		query.setParameter(0, newPassword);
+		query.setParameter(1, id);
+		query.setParameter(2, currentPassword);
+		
+		
+		int numberOfRecAffected = query.executeUpdate();
+		isresetpassword = numberOfRecAffected > 0;
+
+        session.close();
+
+		return isresetpassword;	
 	}
 
 	@Override
