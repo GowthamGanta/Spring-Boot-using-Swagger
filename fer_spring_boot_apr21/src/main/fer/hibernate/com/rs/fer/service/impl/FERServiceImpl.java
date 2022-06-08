@@ -76,6 +76,22 @@ public class FERServiceImpl implements FERService {
 
 		boolean isDeletedExpense = false;
 
+		 Session session = HibernateUtil.openSession();
+			
+	        try {
+				Transaction transaction = session.beginTransaction();
+				Expense expense = new Expense();
+				expense.setId(expenseId);
+				session.delete(expense);
+				transaction.commit();
+				
+				isDeleteExpense = true;
+	        } catch (Exception ex) {
+	        	ex.printStackTrace();
+	        }
+			session.close();
+
+		
 		return isDeletedExpense;
 	}
 
