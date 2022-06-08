@@ -14,9 +14,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.rs.fer.entity.Address;
-import com.rs.fer.entity.Expense;
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
+import com.rs.fer.bean.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.util.DBUtil;
 import com.rs.fer.util.HibernateUtil;
@@ -96,7 +96,9 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean resetPassword(int id, String currentPassword, String newPassword) {
-
+		
+		boolean isresetpassword= false;
+		
 		Session session = HibernateUtil.openSession();
 		Query query = session.createQuery("update User u set u.password=? where u.id=? and u.password=?");
 		query.setParameter(0, newPassword);
