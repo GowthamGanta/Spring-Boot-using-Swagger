@@ -1,7 +1,7 @@
 package com.rs.fer.main;
 
-import com.rs.fer.entity.Address;
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.service.impl.FERServiceImpl;
 

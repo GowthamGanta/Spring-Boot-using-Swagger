@@ -1,4 +1,4 @@
-package com.rs.fer.entity;
+package com.rs.fer.bean;
 
 public class Address {
 	private int id;
