@@ -147,6 +147,17 @@ public class FERServiceImpl implements FERService {
 	public User getUser(int userId) {
 		User user = null;
 
+		
+	Session session = HibernateUtil.openSession();
+		
+		user= (User) session.get(User.class, userId);
+	    if(user.getAddress()==null) {
+	    	user.setAddress(new Address());
+	    }
+		
+		   session.close();
+		
+		
 		return user;
 	}
 
@@ -154,6 +165,21 @@ public class FERServiceImpl implements FERService {
 	public boolean updateUser(User user) {
 		boolean isUpdateUser = false;
 
+		Session session = HibernateUtil.openSession();
+		 try {
+	       Transaction transaction = session.beginTransaction();
+         session.update(user);
+	   
+	       transaction.commit();
+	       
+	       isUpdateUser=true;
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }
+		   session.close();
+
+		
+		
 		return isUpdateUser;
 	}
 
