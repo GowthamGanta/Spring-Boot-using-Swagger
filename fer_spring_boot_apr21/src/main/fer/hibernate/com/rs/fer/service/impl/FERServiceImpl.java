@@ -48,11 +48,22 @@ public class FERServiceImpl implements FERService {
 	}
 
 	@Override
-	public boolean addExpense(Expense expense) {
+	public boolean addExpense(Expense expense);{
 
-		boolean isAddedExpense = false;
 
-		return isAddedExpense;
+        boolean isAddExpense = false;
+
+	       Session session = HibernateUtil.openSession();
+	        
+	       Transaction transaction = session.beginTransaction();
+	       int expenseId = (int) session.save(expense);
+	       isAddExpense = expenseId > 0;
+	       transaction.commit();
+	        
+	        session.close();
+	
+         return isAddExpense;
+
 
 	}
 
