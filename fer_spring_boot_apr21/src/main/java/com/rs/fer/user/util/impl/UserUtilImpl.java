@@ -2,8 +2,8 @@ package com.rs.fer.user.util.impl;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.bean.Address;
-import com.rs.fer.bean.User;
+import com.rs.fer.entity.Address;
+import com.rs.fer.entity.User;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;

@@ -1,4 +1,4 @@
-package com.rs.fer.bean;
+package com.rs.fer.entity;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.rs.fer.bean.Address;
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Address;
+import com.rs.fer.entity.Expense;
 
 @Entity
 @Table

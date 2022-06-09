@@ -1,24 +1,17 @@
 package com.rs.fer.service.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
-import com.rs.fer.bean.User;
+import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
-import com.rs.fer.util.DBUtil;
 import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements FERService {

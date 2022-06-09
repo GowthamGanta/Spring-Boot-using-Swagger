@@ -2,8 +2,8 @@ package com.rs.fer.bean;
 
 import java.util.Set;
 
-import com.rs.fer.bean.Address;
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Address;
+import com.rs.fer.entity.Expense;
 
 public class User {
 
