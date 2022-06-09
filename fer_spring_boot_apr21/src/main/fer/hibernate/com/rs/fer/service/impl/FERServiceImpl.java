@@ -72,7 +72,7 @@ public class FERServiceImpl implements FERService {
 	}
 
 	@Override
-	public boolean deleteExpense(int id) {
+	public boolean deleteExpense(int expenseId) {
 
 		boolean isDeletedExpense = false;
 
@@ -85,7 +85,7 @@ public class FERServiceImpl implements FERService {
 				session.delete(expense);
 				transaction.commit();
 				
-				isDeleteExpense = true;
+				isDeletedExpense = true;
 	        } catch (Exception ex) {
 	        	ex.printStackTrace();
 	        }
