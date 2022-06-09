@@ -133,7 +133,6 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public List<Expense> getExpenseOptions(int userId) {
-		// Expense expense = null;
 
 		Session session = HibernateUtil.openSession();
 
