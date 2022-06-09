@@ -123,9 +123,18 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public List<Expense> getExpenseOptions(int userId) {
-		List<Expense> expenseOptions = new ArrayList<Expense>();
+		// Expense expense = null;
 
-		return expenseOptions;
+		Session session = HibernateUtil.openSession();
+
+		Criteria criteria = session.createCriteria(Expense.class);
+		criteria.add(Restrictions.eq("userid", userid));
+
+		List<Expense> expenses = criteria.list();
+
+		session.close();
+
+		return expenses;
 	}
 
 	@Override
