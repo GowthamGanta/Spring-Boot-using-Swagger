@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.rs.fer.entity.Address;
-import com.rs.fer.entity.Expense;
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
+import com.rs.fer.bean.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.util.DBUtil;
 import com.rs.fer.util.HibernateUtil;
@@ -64,8 +65,22 @@ public class FERServiceImpl implements FERService {
 	@Override
 
 	public boolean editExpense(Expense expense) {
-
+		
 		boolean isEditedExpense = false;
+		
+		Session session = HibernateUtil.openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(expense);
+			transaction.commit();
+
+			isEditedExpense = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		session.close();
 
 		return isEditedExpense;
 
@@ -97,8 +112,22 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean resetPassword(int id, String currentPassword, String newPassword) {
+		
+		boolean isresetpassword= false;
+		
+		Session session = HibernateUtil.openSession();
+		Query query = session.createQuery("update User u set u.password=? where u.id=? and u.password=?");
+		query.setParameter(0, newPassword);
+		query.setParameter(1, id);
+		query.setParameter(2, currentPassword);
+		
+		
+		int numberOfRecAffected = query.executeUpdate();
+		isresetpassword = numberOfRecAffected > 0;
 
-		return false;
+        session.close();
+
+		return isresetpassword;	
 	}
 
 	@Override
@@ -117,8 +146,17 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public List<Expense> getExpenseReport(int userId, String expenseType, String fromDate, String toDate) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Session session = HibernateUtil.openSession();
+		
+		Criteria criteria = session.createCriteria(Expense.class);
+		
+		criteria.add(Restrictions.eq("userId", userId));
+		criteria.add(Restrictions.eq("expenseType", expenseType));
+		criteria.add(Restrictions.between("date", fromDate, toDate));
+		
+		List<Expense> expenseReport = criteria.list();
+		return expenseReport;
 	}
 
 	@Override

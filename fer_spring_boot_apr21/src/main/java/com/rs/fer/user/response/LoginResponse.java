@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.User;
 import com.rs.fer.response.AbstractResponse;
 
 public class LoginResponse extends AbstractResponse {
