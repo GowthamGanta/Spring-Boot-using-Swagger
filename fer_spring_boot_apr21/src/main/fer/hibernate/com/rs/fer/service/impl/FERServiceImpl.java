@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
