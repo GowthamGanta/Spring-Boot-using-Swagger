@@ -1,8 +1,9 @@
 package com.rs.fer.service;
 
 import java.util.List;
-import com.rs.fer.bean.Expense;
-import com.rs.fer.bean.User;
+
+import com.rs.fer.entity.Expense;
+import com.rs.fer.entity.User;
 
 public interface FERService {
 

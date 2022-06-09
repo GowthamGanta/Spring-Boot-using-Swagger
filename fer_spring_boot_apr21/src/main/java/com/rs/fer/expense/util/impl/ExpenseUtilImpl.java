@@ -2,7 +2,7 @@ package com.rs.fer.expense.util.impl;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;

@@ -2,7 +2,7 @@ package com.rs.fer.main;
 
 import java.util.List;
 
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Expense;
 import com.rs.fer.service.FERService;
 import com.rs.fer.service.impl.FERServiceImpl;
 

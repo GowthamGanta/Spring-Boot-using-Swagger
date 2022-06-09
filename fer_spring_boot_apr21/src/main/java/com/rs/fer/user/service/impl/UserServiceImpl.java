@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.rs.fer.bean.User;
+import com.rs.fer.entity.User;
 import com.rs.fer.repository.UserRepository;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;

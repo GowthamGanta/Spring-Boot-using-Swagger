@@ -1,4 +1,4 @@
-package com.rs.fer.bean;
+package com.rs.fer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
