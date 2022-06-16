@@ -80,6 +80,23 @@ public class UserController {
 		}
 		return response;
 	}
+	
+	
+	@PostMapping("/resetPassword")
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
+
+		ResetPasswordResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.resetPassword(request);
+		}
+		return response;
+	}
 
 	@PostMapping("/getUser")
 	public GetUserResponse getUser(@RequestBody GetUserMain userId) {
