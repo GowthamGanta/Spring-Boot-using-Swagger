@@ -56,8 +56,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
 
 			// save bean to database
+			int user_id=expenseObj.get().getUser_id();
+			expense.setUser_id(user_id);
 			expense = expenseRepository.save(expense);
-
+			
 			// load response
 			// success
 			response = new EditExpenseResponse(HttpStatus.OK, "000", "Expense edited successfully", null);
