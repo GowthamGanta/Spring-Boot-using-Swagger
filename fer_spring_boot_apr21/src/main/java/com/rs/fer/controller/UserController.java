@@ -66,17 +66,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public LoginResponse login(@RequestBody String username, String password, LoginRequest userId) {
-
+	public LoginResponse login(@RequestBody LoginRequest request) {
 		LoginResponse response = null;
 
-		Set<String> errorMessages = userValidation.validateLoginRequest(userId);
+		Set<String> errorMessages = userValidation.validateLoginRequest(request);
 		// return response with error messages
 		 if(!CollectionUtils.isEmpty(errorMessages)) {
 			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.login(userId);
+			response = userService.login(request);
 		}
 		return response;
 	}
