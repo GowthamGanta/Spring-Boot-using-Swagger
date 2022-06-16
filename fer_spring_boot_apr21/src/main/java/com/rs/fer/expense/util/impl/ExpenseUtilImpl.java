@@ -6,6 +6,7 @@ import com.rs.fer.entity.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.util.DateUtil;
 
@@ -54,7 +55,7 @@ public class ExpenseUtilImpl implements ExpenseUtil {
 
 		Expense expense = new Expense();
 		expense.setExpenseId(request.getExpenseid());
-
+	
 		return expense;
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,14 +100,14 @@ public class ExpenseController {
 		}
 		return response;
 	}
-	
+
 	@GetMapping("/getExpense")
-	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
+	public GetExpenseResponse getExpense(@ModelAttribute GetExpenseRequest request) {
 
 		GetExpenseResponse response = null;
-		{}
+
 		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
-		
+
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
