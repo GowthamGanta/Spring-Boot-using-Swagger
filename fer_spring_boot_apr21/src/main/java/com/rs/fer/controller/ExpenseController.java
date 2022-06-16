@@ -104,7 +104,7 @@ public class ExpenseController {
 	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
 
 		GetExpenseResponse response = null;
-		
+		{}
 		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
 		
 		// return response with error messages
