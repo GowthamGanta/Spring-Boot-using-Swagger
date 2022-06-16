@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.main.GetUserMain;
+import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -45,10 +47,10 @@ public class UserValidationImpl implements UserValidation {
 	}
 
 	@Override
-	public Set<String> validateGetUserRequest(int userId) {
+	public Set<String> validateGetUserRequest(GetUserRequest request) {
 		Set<String> errorMessages = new HashSet<String>();
 
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, userId, "Please enter valid userId");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter valid userId");
 
 		return errorMessages;
 	}

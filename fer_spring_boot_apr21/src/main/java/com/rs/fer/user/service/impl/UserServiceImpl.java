@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.entity.User;
 import com.rs.fer.repository.UserRepository;
+import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -141,11 +142,11 @@ public class UserServiceImpl implements UserService {
 	 * @return response
 	 */
 	@Override
-	public GetUserResponse getUser(int userid) {
+	public GetUserResponse getUser(GetUserRequest request) {
 		GetUserResponse response = null;
 
 		// To get the user based on userId
-		Optional<User> userObj = userRepository.findById(userid);
+		Optional<User> userObj = userRepository.findById(request.getUserId());
 
 		if (userObj.isPresent()) {
 			// If user is present

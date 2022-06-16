@@ -61,20 +61,20 @@ public class ExpenseController {
 		return response;
 	}
 
-@PostMapping("/getExpenses")
-public GetExpensesResponse getExpenses(@RequestBody GetExpensesRequest request) {
+	@PostMapping("/getExpenses")
+	public GetExpensesResponse getExpenses(@RequestBody GetExpensesRequest request) {
 
-	GetExpensesResponse response = null;
+		GetExpensesResponse response = null;
 
-	Set<String> errorMessages = expenseValidation.validateGetExpensesRequest(request);
+		Set<String> errorMessages = expenseValidation.validateGetExpensesRequest(request);
 
-	// return response with error messages
-	if (!CollectionUtils.isEmpty(errorMessages)) {
-		response = new GetExpensesResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpensesResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
-	} else {
-		response = expenseService.getExpenses(request);
+		} else {
+			response = expenseService.getExpenses(request);
+		}
+		return response;
 	}
-	return response;
-}
 }

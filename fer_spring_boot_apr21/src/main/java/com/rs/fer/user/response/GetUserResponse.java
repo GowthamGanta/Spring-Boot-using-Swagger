@@ -1,9 +1,7 @@
 package com.rs.fer.user.response;
 
 import java.util.Set;
-
 import org.springframework.http.HttpStatus;
-
 import com.rs.fer.entity.User;
 import com.rs.fer.response.AbstractResponse;
 
@@ -26,4 +24,5 @@ public class GetUserResponse extends AbstractResponse {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 }

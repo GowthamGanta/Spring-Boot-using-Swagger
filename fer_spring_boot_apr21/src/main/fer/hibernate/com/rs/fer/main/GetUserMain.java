@@ -21,9 +21,9 @@ public class GetUserMain {
 			System.out.println("User not found");
 		} else {
 			//Name Info
-			System.out.println("FirstName: " + user.getFirstName());
-			System.out.println("MiddleName: " + user.getMiddleName());
-			System.out.println("LastName: " + user.getLastName());
+			System.out.println("FirstName: " + user.getFirstname());
+			System.out.println("MiddleName: " + user.getMiddlename());
+			System.out.println("LastName: " + user.getLastname());
 			
 			//contact Info
 			System.out.println("Email: " + user.getEmail());
@@ -31,11 +31,11 @@ public class GetUserMain {
 		
 			//Address Info
 			Address address = user.getAddress();
-			System.out.println("Line1: " + address.getLineOne());
-			System.out.println("Line2: " + address.getLineTwo());
+			System.out.println("Line1: " + address.getLineone());
+			System.out.println("Line2: " + address.getLinetwo());
 			System.out.println("City: " + address.getCity());
 			System.out.println("State: " + address.getState());
-			System.out.println("Pin Code: " + address.getPinCode());
+			System.out.println("Pin Code: " + address.getPincode());
 			System.out.println("country: " + address.getCountry());
 		}
 	}
