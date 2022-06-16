@@ -55,5 +55,20 @@ public class ExpenseController {
 		}
 		return response;
 	}
+	@PostMapping("/deleteExpense")
+	public DeleteExpenseResponse deleteExpense(@RequestBody DeleteExpenseRequest request) {
+
+		DeleteExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
 	
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.deleteExpense(request);
+		}
+		return response;
+	}
 }
