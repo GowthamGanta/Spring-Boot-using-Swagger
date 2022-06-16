@@ -2,6 +2,7 @@ package com.rs.fer.user.validation;
 
 import java.util.Set;
 
+import com.rs.fer.main.GetUserMain;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -15,7 +16,7 @@ public interface UserValidation {
 
 	Set<String> validateResetPasswordRequest(ResetPasswordRequest request);
 
-	Set<String> validateGetUserRequest(int userId);
+	Set<String> validateGetUserRequest(GetUserMain userId);
 
 	Set<String> validateUpdateUserRequest(UpdateUserRequest request);
 }
