@@ -139,7 +139,7 @@ public class ExpenseController {
 		return response;
 	}
 	
-	@GetMapping("/getExpense")
+	@PostMapping("/getExpense")
 	public GetExpenseResponse getExpenseRequest(@RequestBody GetExpenseRequest request) {
 		GetExpenseResponse response=null;
 		
