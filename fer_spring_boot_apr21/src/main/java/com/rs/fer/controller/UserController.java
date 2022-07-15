@@ -68,7 +68,7 @@ public class UserController {
 	
 
 	@PostMapping("/login")
-	public LoginResponse login(@RequestBody LoginRequest request) {
+	public LoginResponse login1(@RequestBody LoginRequest request) {
 
 		LoginResponse response = null;
 
