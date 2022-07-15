@@ -24,6 +24,8 @@ import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
+import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.RegistrationResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +35,23 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
+	
+	@PostMapping("/addexpensema")
+	public AddExpenseResponse addExpense(@ModelAttribute AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages =expenseValidation.validateAddExpenseRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.addExpense(request);
+		}
+		return response;
+	}
+	
 
 	
 }
