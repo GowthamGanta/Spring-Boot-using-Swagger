@@ -120,6 +120,7 @@ public class UserController {
 		return response ;
 	}
 	
+
 	@PostMapping("/getuser")
 	public GetUserResponse getuser(@RequestBody GetUserRequest request) {
 
@@ -135,5 +136,4 @@ public class UserController {
 		}
 		return response;
 	}
-	
 }
