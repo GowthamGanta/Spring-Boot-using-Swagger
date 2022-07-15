@@ -53,6 +53,24 @@ public class ExpenseController {
 		return response;
 	}
 	
+	@PostMapping("/editExpense")
+	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
+
+		EditExpenseResponse response = null;
+		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
+
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.editExpense(request);
+		}
+
+		
+		return response;
+
+	}
 
 	
 	@PostMapping("/getExpenses")
