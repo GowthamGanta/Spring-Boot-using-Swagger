@@ -84,4 +84,23 @@ public class UserController {
 	}
 	
 	
+	
+	
+	
+	
+	@PostMapping("/userLogin")
+	public LoginResponse login(@ModelAttribute LoginRequest request) {
+		LoginResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateLoginRequest(request);
+		// return response with error messages
+		 if(!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.login(request);
+		}
+		return response;
+	}
+	
 }
