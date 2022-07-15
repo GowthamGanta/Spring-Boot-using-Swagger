@@ -138,4 +138,17 @@ public class ExpenseController {
 		}
 		return response;
 	}
+	
+	@GetMapping("/getExpense")
+	public GetExpenseResponse getExpenseRequest(@RequestBody GetExpenseRequest request) {
+		GetExpenseResponse response=null;
+		
+		Set<String> errorMessages=expenseValidation.validateGetExpenseRequest(request);
+		if(!CollectionUtils.isEmpty(errorMessages)) {
+			response=new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		}else {
+			response=expenseService.getExpense(request);
+		}
+		return response;
+	}
 }
