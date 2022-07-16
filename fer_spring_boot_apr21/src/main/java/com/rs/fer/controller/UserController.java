@@ -96,8 +96,8 @@ public class UserController {
 
 		} else {
 			response = userService.registration(request);
-		}
-		return response;    
+		}   
+		return response;     
 	}
 	
 	
