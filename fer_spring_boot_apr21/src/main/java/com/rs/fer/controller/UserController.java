@@ -87,7 +87,7 @@ public class UserController {
 	public RegistrationResponse userRegistration(@ModelAttribute RegistrationRequest request) {
 
 		RegistrationResponse response = null;
-		
+		  
 		
 		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
 		// return response with error messages
