@@ -83,7 +83,22 @@ public class UserController {
 		return response;
 	}
 	
-	
+	@PostMapping("/userRegistration")
+	public RegistrationResponse userRegistration(@ModelAttribute RegistrationRequest request) {
+
+		RegistrationResponse response = null;
+		
+		
+		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new RegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.registration(request);
+		}
+		return response;
+	}
 	
 	
 	
