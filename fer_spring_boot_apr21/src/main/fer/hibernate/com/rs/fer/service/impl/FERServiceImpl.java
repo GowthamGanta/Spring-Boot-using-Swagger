@@ -34,7 +34,7 @@ public class FERServiceImpl implements FERService {
 
 		List<User> users = criteria.list();
 		if (users != null && !users.isEmpty()) {
-			userId = users.get(0).getId();
+			userId = users.get(0).getUserId();
 		}
 		session.close();
 		return false;
