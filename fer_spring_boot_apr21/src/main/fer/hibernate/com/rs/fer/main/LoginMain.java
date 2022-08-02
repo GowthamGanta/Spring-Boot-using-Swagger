@@ -16,7 +16,7 @@ public class LoginMain {
 		String password = "9542";
 
 		// 2. Pass the input to service layer for business logic execution
-		FERService ferService = (FERService) new FERServiceImpl();
+		FERService ferService = new FERServiceImpl();
 		int userId = ferService.login(userName, password);
 
 		// 3. Display the output
