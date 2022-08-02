@@ -25,7 +25,18 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean login(String username, String password) {
-		// TODO Auto-generated method stub
+		int userId = 0;
+		Session session = HibernateUtil.openSession();
+		Criteria criteria = session.createCriteria(Expense.class);
+
+		criteria.add(Restrictions.eq("username", username));
+		criteria.add(Restrictions.eq("password", password));
+
+		List<User> users = criteria.list();
+		if (users != null && !users.isEmpty()) {
+			userId = users.get(0).getUserId();
+		}
+		session.close();
 		return false;
 	}
 
