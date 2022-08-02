@@ -54,9 +54,30 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean deleteExpense(int expenseId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
+		boolean isDeleteExpense = true;
+
+		Session session = HibernateUtil.openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+
+			Expense expense = new Expense();
+			expense.setId(expenseId);
+
+			session.delete(expense);
+
+			transaction.commit();
+
+		} catch (Exception ex) {
+			isDeleteExpense = false;
+
+		}
+		session.close();
+
+		return isDeleteExpense;
+		}
+	
 
 	@Override
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
@@ -91,8 +112,22 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isUserUpdate = true;
+
+	Session session = HibernateUtil.openSession();
+	try {
+	Transaction transaction = session.beginTransaction();
+
+	session.update(user);
+	transaction.commit();
+	}catch(Exception ex) {
+		isUserUpdate = false;
+	}
+	session.close();
+	
+	return isUserUpdate;
+	
+	
 	}
 
 	
