@@ -13,7 +13,7 @@ public class AddExpenseMain {
 		expense.setType("dygsf");
 		expense.setDate("01-08-2022");
 		expense.setPrice(15);
-		expense.setNoofitems(6);
+		expense.setNumberOfItems(6);
 		expense.setTotal(5000);
 		expense.setBywhom("Me");
 		expense.setUserId(4);
