@@ -1,4 +1,4 @@
-package com.rs.fer.service.impl;
+ package com.rs.fer.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,15 @@ public class FERServiceImpl implements FERService {
 	@Override
 	public boolean addExpense(com.rs.fer.entity.Expense expense) {
 		// TODO Auto-generated method stub
+		boolean isAddExpense = false;
+
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		isAddExpense = (int) session.save(expense) > 0;
+
+		transaction.commit();
+		session.close();
 		return false;
 	}
 
