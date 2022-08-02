@@ -9,7 +9,7 @@ public interface FERService {
 
 	boolean registration(User user);
 	
-	boolean login(String username, String password);
+	int login(String username, String password);
 	
 	boolean addExpense(Expense expense);
 	

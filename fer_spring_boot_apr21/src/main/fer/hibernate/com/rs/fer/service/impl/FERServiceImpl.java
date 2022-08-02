@@ -2,8 +2,12 @@
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 
 import main.fer.hibernate.com.rs.fer.service.FERService;
@@ -17,10 +21,9 @@ public class FERServiceImpl implements FERService {
 		return false;
 	}
 
-	@Override
 	public boolean login(String username, String password) {
 		int userId = 0;
-		Session session = HibernateUtil.openSession();
+		Session session = com.rs.fer.util.HibernateUtil.openSession();
 		Criteria criteria = session.createCriteria(Expense.class);
 
 		criteria.add(Restrictions.eq("username", username));
