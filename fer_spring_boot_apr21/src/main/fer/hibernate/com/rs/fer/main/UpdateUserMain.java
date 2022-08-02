@@ -18,9 +18,9 @@ public class UpdateUserMain {
 
 		User user = ferService.getUser(userId);
 		// Update the name data
-		user.setFirstname("seeta ramulu");
-		user.setMiddlename("nayan");
-		user.setLastname("jupudi");
+		user.setFirstName("seeta ramulu");
+		user.setMiddleName("nayan");
+		user.setLastName("jupudi");
 
 		// update the contact
 		user.setEmail("ravi.1@gmail.com");
@@ -29,11 +29,11 @@ public class UpdateUserMain {
 		// update the address data
 
 		Address address = user.getAddress();
-		address.setLineone("pbkvpalem");
-		address.setLinetwo("ndg");
+		address.setLineOne("pbkvpalem");
+		address.setLineTwo("ndg");
 		address.setCity("vijayawada");
 		address.setState("ap");
-		address.setPincode("521183");
+		address.setPinCode("521183");
 		address.setCountry("india");
 
 		// 2. call the service
