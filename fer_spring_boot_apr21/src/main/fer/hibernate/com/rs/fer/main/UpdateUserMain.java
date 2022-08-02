@@ -17,7 +17,8 @@ public class UpdateUserMain {
 		// To get the original object form DB
 
 		User user = ferService.getUser(userId);
-		// Update the name data
+		
+		// Update the name Data
 		user.setFirstName("seeta ramulu");
 		user.setMiddleName("nayan");
 		user.setLastName("jupudi");
