@@ -34,7 +34,7 @@ public class GetExpenseReportMain {
 				System.out.println("numberofitems :" + expense.getNumberOfItems());
 
 				System.out.println("total :" + expense.getTotal());
-				System.out.println("bywhom :" + expense.getByWhom());
+				System.out.println("bywhom :" + expense.getBywhom());
 				System.out.println("userid :" + expense.getUserId());
 
 				System.out.println("...............");
