@@ -81,8 +81,18 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isResetPassword = false;
+
+		Session session = HibernateUtil.openSession();
+		
+		Query query = session.createQuery("update User u set u.password=:new where u.id and u.password=:old");
+		
+		query.setParameter("new", newPassword);
+		query.setParameter("id", userId);
+		query.setParameter("old", newPassword);
+		
+		isResetPassword = query.executeUpdate() > 0;
+		return isResetPassword;
 	}
 
 	@Override
