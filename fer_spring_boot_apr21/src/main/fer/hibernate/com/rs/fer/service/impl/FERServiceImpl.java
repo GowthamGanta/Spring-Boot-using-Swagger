@@ -92,7 +92,6 @@ public class FERServiceImpl implements FERService {
 		query.setParameter("old", newPassword);
 		
 		isResetPassword = query.executeUpdate() > 0;
-		
 		return isResetPassword;
 	}
 
