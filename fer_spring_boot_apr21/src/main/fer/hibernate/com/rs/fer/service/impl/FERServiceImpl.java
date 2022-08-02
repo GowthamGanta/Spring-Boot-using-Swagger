@@ -1,19 +1,13 @@
 package com.rs.fer.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
-import com.rs.fer.bean.Address;
-import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
-import com.rs.fer.service.FERService;
-import com.rs.fer.util.HibernateUtil;
+
+import main.fer.hibernate.com.rs.fer.service.FERService;
+import main.fer.hibernate.com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements FERService {
 
@@ -74,8 +68,14 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public User getUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+
+		Session session = HibernateUtil.openSession();
+		user = (User) session.get(User.class, userID);
+		session.close();
+
+		return user;
+		
 	}
 
 	@Override
