@@ -1,4 +1,4 @@
-package com.rs.fer.service.impl;
+ package com.rs.fer.service.impl;
 
 import java.util.List;
 
@@ -37,6 +37,7 @@ public class FERServiceImpl implements FERService {
 	@Override
 	public boolean addExpense(com.rs.fer.entity.Expense expense) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -105,6 +106,19 @@ public class FERServiceImpl implements FERService {
 	public List<com.rs.fer.entity.Expense> getExpenseReport(int userId, String expenseType, String fromDate,
 			String toDate) {
 		// TODO Auto-generated method stub
+		List<Expense> expenseReport = null;
+
+		Session session = HibernateUtil.openSession();
+
+		Criteria criteria = session.createCriteria(Expense.class);
+
+		criteria.add(Restrictions.eq("userId", userId));
+		criteria.add(Restrictions.eq("type", expenseType));
+		criteria.add(Restrictions.between("date", fromDate, toDate));
+
+		expenseReport = criteria.list();
+
+		session.close();
 		return null;
 	}
 
