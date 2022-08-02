@@ -80,8 +80,22 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isUserUpdate = true;
+
+	Session session = HibernateUtil.openSession();
+	try {
+	Transaction transaction = session.beginTransaction();
+
+	session.update(user);
+	transaction.commit();
+	}catch(Exception ex) {
+		isUserUpdate = false;
+	}
+	session.close();
+	
+	return isUserUpdate;
+	
+	
 	}
 
 	
