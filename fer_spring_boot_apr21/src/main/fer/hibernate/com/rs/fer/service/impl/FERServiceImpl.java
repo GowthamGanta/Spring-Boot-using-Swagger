@@ -20,7 +20,24 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	public boolean registration(User user) {
 	}
 
-	public boolean login(String username, String password) {
+	@Override
+	public int login(String username, String password) {
+		int Userid = 0;
+
+		Session session = HibernateUtil.openSession();
+
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("username", username));
+		criteria.add(Restrictions.eq("password", password));
+
+		List<User> users = criteria.list();
+
+		if (users != null && !users.isEmpty()) {
+			Userid = users.get(0).getId();
+
+		}
+		session.close();
+		return Userid;
 	}
 
 	@Override
