@@ -128,8 +128,6 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		criteria.add(Restrictions.between("date", fromdate, todate));
 		ExpenseReport = criteria.list();
 
-		session.close();
-
 		return ExpenseReport;
 	}
 
