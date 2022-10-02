@@ -145,6 +145,18 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 
 	@Override
 	public boolean updateUser(User user) {
-	}
+		boolean isUpdateUser = false;
+		Session session = HibernateUtil.openSession();
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(user);
+			transaction.commit();
 
+		} catch (Exception ex) {
+			isUpdateUser = true;
+
+		}
+		session.close();
+		return isUpdateUser;
+	}
 }
