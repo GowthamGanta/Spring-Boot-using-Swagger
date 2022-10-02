@@ -65,6 +65,8 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 
 	@Override
 	public com.rs.fer.entity.Expense getExpense(int expenseId) {
+		
+		
 	}
 
 	@Override
@@ -76,9 +78,17 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 			String toDate) {
 	}
 
+
 	@Override
-	public User getUser(int userId) {
+	public User getUser(int userid) {
+		User user = null;
+		Session session = HibernateUtil.openSession();
+		user = (User) session.get(User.class, userid);
+
+		session.close();
+		return user;
 	}
+
 
 	@Override
 	public boolean updateUser(User user) {
