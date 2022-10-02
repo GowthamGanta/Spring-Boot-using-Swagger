@@ -2,6 +2,7 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 
 public class FERServiceImpl implements com.rs.fer.service.FERService {
@@ -18,7 +19,10 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public boolean editExpense(com.rs.fer.entity.Expense expense) {
+	public boolean editExpense(Expense expense) {
+		public boolean editExpense(Expense expense) {
+			return addExpense(expense);
+		}
 	}
 
 	@Override
