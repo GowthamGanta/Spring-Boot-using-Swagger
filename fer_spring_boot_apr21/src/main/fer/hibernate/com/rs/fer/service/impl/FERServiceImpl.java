@@ -86,7 +86,6 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		user = (User) session.get(User.class, userid);
 
 		session.close();
-
 		return user;
 	}
 
