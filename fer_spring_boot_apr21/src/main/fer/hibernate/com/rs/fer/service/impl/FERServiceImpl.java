@@ -10,6 +10,8 @@ import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
+import com.rs.fer.service.FERService;
+import com.rs.fer.service.Impl.FERServiceImpl;
 import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements com.rs.fer.service.FERService {
@@ -75,8 +77,26 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		return isDeleted;
 	}
 
-	@Override
+
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
+		
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+
+			int userId = 1;
+			String currentPassword = "vinni";
+			String newPassword = "2";
+
+			FERService ferservice = new FERServiceImpl();
+			boolean isResetPassword = ferservice.resetPassword(userId, currentPassword, newPassword);
+
+			if (isResetPassword) {
+				System.out.println("password changed successfully...!");
+			} else {
+				System.out.println("password changed failed.....");
+			}
+
+		
 	}
 
 	@Override
