@@ -2,8 +2,12 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
+import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements com.rs.fer.service.FERService {
 
@@ -15,14 +19,40 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public boolean addExpense(com.rs.fer.entity.Expense expense) {
+	public boolean addExpense(Expense expense) {
+		boolean isAddExpense = true;
+
+		Session session = HibernateUtil.openSession();
+
+		Transaction transaction = session.beginTransaction();
+
+		session.save(expense);
+
+		isAddExpense = (int) session.save(expense) > 0;
+
+		transaction.commit();
+		session.close();
+		return isAddExpense;
 	}
+
 
 	@Override
 	public boolean editExpense(Expense expense) {
-		public boolean editExpense(Expense expense) {
-			return addExpense(expense);
+		boolean isEditExpense = true;
+
+		Session session = HibernateUtil.openSession();
+		try {
+			Transaction transaction = session.beginTransaction();
+
+			session.update(expense);
+			transaction.commit();
+
+		} catch (Exception ex) {
+			isEditExpense = false;
 		}
+		session.close();
+
+		return isEditExpense;
 	}
 
 	@Override
