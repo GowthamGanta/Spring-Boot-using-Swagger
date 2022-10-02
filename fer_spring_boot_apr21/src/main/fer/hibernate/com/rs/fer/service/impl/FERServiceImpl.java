@@ -58,7 +58,21 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public boolean deleteExpense(int expenseId) {
+	public boolean deleteExpense(int expenseid) {
+		boolean isDeleted = true;
+		Session session = HibernateUtil.openSession();
+		try {
+			Transaction transaction = session.beginTransaction();
+			Expense expense = new Expense();
+			expense.setId(expenseid);
+			session.delete(expense);
+			transaction.commit();
+			
+		}catch(Exception ex){
+			isDeleted =false;
+		}
+		session.close();
+		return isDeleted;
 	}
 
 	@Override
