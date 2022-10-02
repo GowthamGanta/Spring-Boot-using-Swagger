@@ -7,7 +7,7 @@ public class ResetPasswordMain {
 
 	public static void main(String[] args) {
 
-		// 1. Get the input from UI
+		// 1. Get  the input from UI
 		int Id = 2;
 		String currentPassword = "YYY";
 		String newPassword = "SSS";
