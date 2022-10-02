@@ -99,20 +99,23 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		
 	}
 
-		@Override
-		public Expense getexpense(int expenseId) {
-			Expense expense = null;
-
-			Session session = HibernateUtil.openSession();
-			expense = (Expense) session.get(Expense.class, expenseId);
-			session.close();
-
-			return expense;
-		}
-
+	@Override
+	public com.rs.fer.entity.Expense getExpense(int expenseId) {
+		
+		
+	}
 
 	@Override
-	public List<com.rs.fer.entity.Expense> getExpenseOptions(int userId) {
+	public List<Expense> getExpenseOptions(int userid) {
+		List<Expense> expenseoptions = null;
+		Session session = HibernateUtil.openSession();
+		Criteria criteria = session.createCriteria(Expense.class);
+		criteria.add(Restrictions.eq("userid", userid));
+
+		expenseoptions = criteria.list();
+		session.close();
+
+		return expenseoptions;
 	}
 
 	@Override
