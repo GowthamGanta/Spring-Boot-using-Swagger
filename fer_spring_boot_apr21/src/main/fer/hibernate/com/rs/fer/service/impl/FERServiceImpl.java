@@ -110,8 +110,8 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public List<com.rs.fer.entity.Expense> getExpenseReport(int userId, String expensetype, String fromdate, String todate) {
-		List<com.rs.fer.entity.Expense> ExpenseReport = new ArrayList<>();
+	public List<Expense> getExpenseReport(int userId, String expensetype, String fromdate, String todate) {
+		List<Expense> ExpenseReport = new ArrayList<>();
 		Session session = HibernateUtil.openSession();
 		Criteria criteria = session.createCriteria(User.class);
 		criteria.add(Restrictions.eq("userId", userId));
