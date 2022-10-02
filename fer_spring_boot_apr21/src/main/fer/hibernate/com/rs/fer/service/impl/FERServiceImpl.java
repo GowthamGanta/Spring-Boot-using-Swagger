@@ -2,8 +2,10 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
@@ -104,7 +106,16 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public List<com.rs.fer.entity.Expense> getExpenseOptions(int userId) {
+	public List<Expense> getExpenseOptions(int userid) {
+		List<Expense> expenseoptions = null;
+		Session session = HibernateUtil.openSession();
+		Criteria criteria = session.createCriteria(Expense.class);
+		criteria.add(Restrictions.eq("userid", userid));
+
+		expenseoptions = criteria.list();
+		session.close();
+
+		return expenseoptions;
 	}
 
 	@Override
