@@ -135,11 +135,11 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 	}
 
 	@Override
-	public List<Expense> getExpenseOptions(int userid) {
+	public List<Expense> getExpenseOptions(int userId) {
 		List<Expense> expenseoptions = null;
 		Session session = HibernateUtil.openSession();
 		Criteria criteria = session.createCriteria(Expense.class);
-		criteria.add(Restrictions.eq("userId", userid));
+		criteria.add(Restrictions.eq("userId", userId));
 
 		expenseoptions = criteria.list();
 		session.close();
@@ -188,4 +188,13 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		session.close();
 		return isUpdateUser;
 	}
+
+	
+	@Override
+	public boolean editExpense(com.rs.fer.entity.Expense expense) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 }
