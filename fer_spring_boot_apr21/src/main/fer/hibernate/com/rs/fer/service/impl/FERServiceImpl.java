@@ -4,25 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
-import com.rs.fer.service.FERService;
-import com.rs.fer.service.Impl.FERServiceImpl;
 import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements com.rs.fer.service.FERService {
 
 	@Override
 	public boolean registration(User user) {
+		boolean isRegister = true;
+
+		Session session = HibernateUtil.openSession();
+
+		Transaction transaction = session.beginTransaction();
+
+		isRegister = (int) session.save(user) > 0;
+
+		transaction.commit();
+		session.close();
+		return isRegister;
 	}
 
 	@Override
 	public int login(String username, String password) {
-		int Userid = 0;
+		int userId = 0;
 
 		Session session = HibernateUtil.openSession();
 
@@ -33,11 +43,11 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		List<User> users = criteria.list();
 
 		if (users != null && !users.isEmpty()) {
-			Userid = users.get(0).getId();
+			userId = users.get(0).getId();
 
 		}
 		session.close();
-		return Userid;
+		return userId;
 	}
 
 	@Override
@@ -47,8 +57,6 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		Session session = HibernateUtil.openSession();
 
 		Transaction transaction = session.beginTransaction();
-
-		session.save(expense);
 
 		isAddExpense = (int) session.save(expense) > 0;
 
@@ -96,30 +104,34 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 
 
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
+		boolean isResetPassword = false;
 		
-		public static void main(String[] args) {
-			// TODO Auto-generated method stub
-
-			int userId = 1;
-			String currentPassword = "vinni";
-			String newPassword = "2";
-
-			FERService ferservice = new FERServiceImpl();
-			boolean isResetPassword = ferservice.resetPassword(userId, currentPassword, newPassword);
-
-			if (isResetPassword) {
-				System.out.println("password changed successfully...!");
-			} else {
-				System.out.println("password changed failed.....");
-			}
-
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
 		
+		Query query = session.createQuery("update User u set u.password=? where u.id=? and u.password=?");
+		query.setParameter(0, newPassword);
+		query.setParameter(1, userId);
+		query.setParameter(2, currentPassword);
+		
+		isResetPassword = query.executeUpdate() > 0;
+		
+		transaction.commit();
+		session.close();
+		
+		return isResetPassword;
 	}
 
 	@Override
 	public com.rs.fer.entity.Expense getExpense(int expenseId) {
+		Expense expense = null;
 		
+		Session session = HibernateUtil.openSession();
+		expense = (Expense) session.get(Expense.class, expenseId);
+
+		session.close();
 		
+		return expense;
 	}
 
 	@Override
@@ -127,7 +139,7 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		List<Expense> expenseoptions = null;
 		Session session = HibernateUtil.openSession();
 		Criteria criteria = session.createCriteria(Expense.class);
-		criteria.add(Restrictions.eq("userid", userid));
+		criteria.add(Restrictions.eq("userId", userid));
 
 		expenseoptions = criteria.list();
 		session.close();
