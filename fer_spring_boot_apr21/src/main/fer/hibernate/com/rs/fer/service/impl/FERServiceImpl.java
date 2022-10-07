@@ -11,9 +11,10 @@ import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
+import com.rs.fer.service.FERService;
 import com.rs.fer.util.HibernateUtil;
 
-public class FERServiceImpl implements com.rs.fer.service.FERService {
+public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean registration(User user) {
@@ -48,21 +49,6 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		}
 		session.close();
 		return userId;
-	}
-
-	@Override
-	public boolean addExpense(Expense expense) {
-		boolean isAddExpense = true;
-
-		Session session = HibernateUtil.openSession();
-
-		Transaction transaction = session.beginTransaction();
-
-		isAddExpense = (int) session.save(expense) > 0;
-
-		transaction.commit();
-		session.close();
-		return isAddExpense;
 	}
 
 	@Override
@@ -189,12 +175,24 @@ public class FERServiceImpl implements com.rs.fer.service.FERService {
 		return isUpdateUser;
 	}
 
-	
-	@Override
-	public boolean editExpense(com.rs.fer.entity.Expense expense) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
+
+	@Override
+	public boolean addExpense(com.rs.fer.entity.Expense expense) {
+		boolean isAddExpense = true;
+
+		Session session = HibernateUtil.openSession();
+
+		Transaction transaction = session.beginTransaction();
+
+		isAddExpense = (int) session.save(expense) > 0;
+
+		transaction.commit();
+		session.close();
+		return isAddExpense;
+
+	}
+
+
 }
