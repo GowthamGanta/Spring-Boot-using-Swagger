@@ -51,7 +51,6 @@ public class UserController {
 		}
 		return response;
 	}
-	
 	@PostMapping("/registration1")
 	public RegistrationResponse registration(@ModelAttribute User user) {
 
@@ -67,5 +66,7 @@ public class UserController {
 		}
 		return response;
 	}
+
+	
 
 }
