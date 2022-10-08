@@ -28,7 +28,7 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
-
+	
 	@PostMapping("/addExpense")
 	public AddExpenseResponse registration(@RequestBody AddExpenseRequest request) {
 
@@ -45,6 +45,7 @@ public class ExpenseController {
 		return response;
 	}
 
+	
 	@PutMapping("/editExpense")
 	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
 
