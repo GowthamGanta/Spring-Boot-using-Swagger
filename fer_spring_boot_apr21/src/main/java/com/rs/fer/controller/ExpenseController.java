@@ -17,9 +17,11 @@ import com.rs.fer.bean.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
+import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -29,20 +31,17 @@ import com.rs.fer.user.response.RegistrationResponse;
 @RequestMapping("/api")
 public class ExpenseController {
 
-	
-	
-	
 	@Autowired
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
-	
+
 	@PostMapping("/addExpense")
 	public AddExpenseResponse registration(@RequestBody AddExpenseRequest request) {
 
 		AddExpenseResponse response = null;
 
-		Set<String> errorMessages =expenseValidation.validateAddExpenseRequest(request);
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
@@ -53,7 +52,6 @@ public class ExpenseController {
 		return response;
 	}
 
-	
 	@PutMapping("/editExpense")
 	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
 
@@ -69,7 +67,7 @@ public class ExpenseController {
 		}
 		return response;
 	}
-	
+
 	@DeleteMapping("/deleteExpense")
 	public DeleteExpenseResponse deleteExpense(@ModelAttribute DeleteExpenseRequest request) {
 
@@ -86,8 +84,22 @@ public class ExpenseController {
 		return response;
 	}
 	
+	
+	@PutMapping("/getExpense")
+	public GetExpenseResponse getExpense(@RequestBody GetExpensesRequest request) {
+
+		GetExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpensesRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpense(request);
+		}
+		return response;
+	}
+
 
 }
-
-	
-
