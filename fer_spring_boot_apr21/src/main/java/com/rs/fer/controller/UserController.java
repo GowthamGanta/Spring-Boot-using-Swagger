@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rs.fer.bean.User;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
+import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -84,6 +87,21 @@ public class UserController {
 		return response;
 	}
 
-	
+	@PutMapping ("/updateUser")
+	public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
+
+		UpdateUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.updateUser(request);
+			
+			
+		}
+		return response;
+	}
 
 }
