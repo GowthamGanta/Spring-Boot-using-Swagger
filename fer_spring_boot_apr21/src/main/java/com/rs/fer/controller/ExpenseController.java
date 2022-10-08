@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
-import com.rs.fer.user.request.RegistrationRequest;
-import com.rs.fer.user.response.RegistrationResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -31,8 +29,7 @@ public class ExpenseController {
 		Set<String> errorMessages = expenseValidation.validateexpenseRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new expenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
+			response = new expenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);		
 		} else {
 			response = expenseService.registration(request);
 		}
