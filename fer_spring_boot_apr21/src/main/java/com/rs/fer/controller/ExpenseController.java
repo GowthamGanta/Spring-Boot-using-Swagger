@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,5 +63,21 @@ public class ExpenseController {
 		return response;
 	}
 	
+
+	@PutMapping("/editxepense")
+	public EditExpenseResponse editexpense(@ModelAttribute EditExpenseRequest request) {
+
+		EditExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.editExpense(request);
+		}
+		return response;
+	}
 	
 }
