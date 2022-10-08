@@ -70,7 +70,7 @@ public class ExpenseController {
 		return response;
 	}
 	
-	@DeleteMapping("/deleteExpense1")
+	@DeleteMapping("/deleteExpense")
 	public DeleteExpenseResponse deleteExpense(@ModelAttribute DeleteExpenseRequest request) {
 
 		DeleteExpenseResponse response = null;
