@@ -190,25 +190,4 @@ public class FERServiceImpl implements FERService {
 		session.close();
 		return isUpdateUser;
 	}
-
-
-	
-
-	@Override
-	public boolean addExpense(com.rs.fer.entity.Expense expense) {
-		boolean isAddExpense = true;
-
-		Session session = HibernateUtil.openSession();
-
-		Transaction transaction = session.beginTransaction();
-
-		isAddExpense = (int) session.save(expense) > 0;
-
-		transaction.commit();
-		session.close();
-		return isAddExpense;
-
-	}
-
-
 }
