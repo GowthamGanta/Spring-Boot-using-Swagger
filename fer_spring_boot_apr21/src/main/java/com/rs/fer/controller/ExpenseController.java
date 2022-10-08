@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.expense.request.GetExpenseRequest;
+import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
+import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.RegistrationResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -21,17 +25,19 @@ public class ExpenseController {
 	ExpenseValidation expenseValidation;
 	@Autowired
 	ExpenseService expenseService;
-	@PostMapping("/registration")
-	public ExpenseResponse registration(@RequestBody ExpenseRequest request) {
+	
+	@PostMapping("/getExpenses")
+	public GetExpensesResponse getExpense(@RequestBody GetExpenseRequest request) {
 
-		ExpenseResponse response = null;
+		GetExpensesResponse response = null;
 
-		Set<String> errorMessages = expenseValidation.validateexpenseRequest(request);
+		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new expenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);		
+			response = new GetExpensesResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
 		} else {
-			response = expenseService.registration(request);
+			response = expenseService.getExpenses(response);
 		}
 		return response;
 	}
