@@ -1,10 +1,11 @@
 package com.rs.fer.expense.util;
 
-import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.entity.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
-import com.rs.fer.expense.request.ExpenseReportRequest;
+import com.rs.fer.expense.request.GetExpenseRequest;
+
 
 public interface ExpenseUtil {
 
@@ -13,7 +14,6 @@ public interface ExpenseUtil {
 	Expense loadEditExpenseRequestToExpense(EditExpenseRequest request);
 
 	Expense loadDeleteExpenseRequestToExpense(DeleteExpenseRequest request);
-
-	Expense loadExpenseReportRequestToExpense(ExpenseReportRequest request);
-
+	
+	
 }

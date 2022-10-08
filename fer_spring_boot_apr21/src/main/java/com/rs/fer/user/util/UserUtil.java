@@ -1,6 +1,6 @@
 package com.rs.fer.user.util;
 
-import com.rs.fer.user.entity.User;
+import com.rs.fer.entity.User;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;

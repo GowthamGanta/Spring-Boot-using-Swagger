@@ -2,13 +2,12 @@ package com.rs.fer.expense.request;
 
 public class ExpenseReportRequest {
 
-	private String type;
-
-	private String fromDate;
-
-	private String toDate;
-
-	private int UserId;
+	
+	 private String type;
+	 
+	 private String fromDate ;
+	 
+	private String toDate ;
 
 	public String getType() {
 		return type;
@@ -33,13 +32,5 @@ public class ExpenseReportRequest {
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-
-	public int getUserId() {
-		return UserId;
-	}
-
-	public void setUserId(int userId) {
-		UserId = userId;
-	}
-
 }
+

@@ -15,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
+import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.impl.UserServiceImpl;
 import com.rs.fer.user.util.UserUtil;
@@ -27,7 +29,7 @@ public class UserServiceImplTest {
 	private UserServiceImpl userServiceImpl;
 	
 	@Mock
-	UserRepository userRepository;
+	UserRepository userRepository; 
 	
 	@Mock
 	UserUtil userUtil;
@@ -39,6 +41,8 @@ public class UserServiceImplTest {
 		
 		User user = new User();
 		user.setUserId(1);
+		
+	
 		
 		//Mock		
 		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
@@ -108,7 +112,7 @@ public class UserServiceImplTest {
 		//Mock		
 		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
 		
-		when(userRepository.save(Mockito.any())).thenThrow(MockitoException.class);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
 		
 		when(userUtil.loadRegistrationRequestToUser(Mockito.any())).thenReturn(user);
 		
@@ -121,11 +125,71 @@ public class UserServiceImplTest {
 		request.setUsername("admin");
 		request.setPassword("rs");
 		request.setMobile("2342343243");
-		
+		 
 		//2.
 		RegistrationResponse response = userServiceImpl.registration(request);
 		
 		//3.
 		assertEquals("002", response.statusCode);
 	}
+
+
+
+	@Test
+	public void testLogin() {
+		
+		List<User> users = new ArrayList<>(1);
+		
+		User user = new User();
+		user.setUserId(1);
+		
+		//Mock		
+		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+		
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+		
+		when(userUtil.loadLoginRequestToUser(Mockito.any())).thenReturn(user);
+		
+		//1.
+		LoginRequest request = new LoginRequest();
+		
+		request.setUsername("admin");
+		request.setPassword("rs");
+		
+		//2. 
+		LoginResponse response = userServiceImpl.login(request);
+		
+		//3.
+		//assertEquals("000", response.statusCode);
+	}
+	
+	
+	@Test
+	public void testLoginFailure() {
+		
+		List<User> users = new ArrayList<>(1);
+		
+		User user = new User();
+		//user.setUserId(1);
+		
+		//Mock		
+		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+		
+		when(userRepository.save(Mockito.any())).thenThrow(MockitoException.class);
+		
+		when(userUtil.loadLoginRequestToUser(Mockito.any())).thenReturn(user);
+		
+		//1.
+		LoginRequest request = new LoginRequest();
+		
+		request.setUsername("admin");
+		request.setPassword("rs");
+		
+		//2.
+		LoginResponse response = userServiceImpl.login(request);
+		
+		//3.
+		assertEquals("002", response.statusCode);
+	}
 }
+

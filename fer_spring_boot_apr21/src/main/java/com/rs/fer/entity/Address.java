@@ -1,4 +1,4 @@
-package com.rs.fer.user.entity;
+package com.rs.fer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

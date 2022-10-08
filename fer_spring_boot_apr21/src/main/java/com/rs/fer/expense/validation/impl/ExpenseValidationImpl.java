@@ -9,7 +9,6 @@ import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
-import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -81,15 +80,6 @@ public class ExpenseValidationImpl implements ExpenseValidation {
 	public Set<String> validateExpenseReportRequest(ExpenseReportRequest request) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Set<String> validateGetExpenseOptionsRequest(GetExpenseOptionsRequest request) {
-		Set<String> errorMessages = new LinkedHashSet<String>();
-
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter UserId");
-
-		return errorMessages;
 	}
 
 }

@@ -1,30 +1,29 @@
 package com.rs.fer.expense.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.rs.fer.expense.entity.Expense;
-import com.rs.fer.expense.repository.ExpenseRepository;
+import com.rs.fer.entity.Expense;
+import com.rs.fer.entity.User;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
-import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
+import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
-import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
+import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.util.ExpenseUtil;
-import com.rs.fer.user.entity.User;
-import com.rs.fer.user.repository.UserRepository;
+import com.rs.fer.repository.ExpenseRepository;
+import com.rs.fer.repository.UserRepository;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
@@ -59,8 +58,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
 
 			// save bean to database
+			int user_id=expenseObj.get().getUser_id();
+			expense.setUser_id(user_id);
 			expense = expenseRepository.save(expense);
-
+			
 			// load response
 			// success
 			response = new EditExpenseResponse(HttpStatus.OK, "000", "Expense edited successfully", null);
@@ -166,30 +167,15 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	}
 
+	/**
+	 * To get the expenses based on userId
+	 * 
+	 * @param userId
+	 * @return expense
+	 */
 	@Override
-	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
-
-		ExpenseReportResponse response = null;
-
-		List<Expense> expenseReport = ExpenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
-
-		if (!expenseReport.isEmpty()) {
-
-			response = new ExpenseReportResponse(HttpStatus.OK, "000", "fetch expense", null);
-
-			response.setExpense(expenseReport);
-
-		} else { // failure response = new
-			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
-
-		}
-
-		return response;
-	}
-	
-	@Override
-	public GetExpenseOptionsResponse getExpenseOptions(GetExpenseOptionsRequest request) {
-		GetExpenseOptionsResponse response = null;
+	public GetExpensesResponse getExpenses(GetExpensesRequest request) {
+		GetExpensesResponse response = null;
 
 		// To load the userObject based on userId
 		Optional<User> userObj = userRepository.findById(request.getUserId());
@@ -198,16 +184,48 @@ public class ExpenseServiceImpl implements ExpenseService {
 			// If expenses with that particular userId is present return expenses
 			// load response
 			// success
-			response = new GetExpenseOptionsResponse(HttpStatus.OK, "000", "GetExpenses Success", null);
+			response = new GetExpensesResponse(HttpStatus.OK, "000", "GetExpenses Success", null);
 			response.setExpenses(userObj.get().getExpenses());
 		} else {
 			// If expenses with that particular userId is not present return response with
 			// error messages
 			// failure
-			response = new GetExpenseOptionsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expenses", null);
+			response = new GetExpensesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expenses", null);
 		}
 
 		return response;
 	}
+
+	@Override
+	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	/*
+	 * @Override public GetExpenseReportResponse
+	 * getExpenseReport(GetExpenseReportRequest request) {
+	 * 
+	 * GetExpenseReportResponse response = null;
+	 * 
+	 * Optional<Expense> expenseObj =
+	 * expenseRepository.findByType(request.getExpenseReport());
+	 * 
+	 * if (expenseObj.isPresent()) {
+	 * 
+	 * response = new GetExpenseReportResponse(HttpStatus.OK, "000",
+	 * "fetch expense", null);
+	 * 
+	 * response.setExpense(expenseObj.get());
+	 * 
+	 * } else { // failure response = new
+	 * GetExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+	 * "No expense found", null);
+	 * 
+	 * }
+	 * 
+	 * return response; }
+	 */
 
 }

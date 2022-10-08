@@ -1,0 +1,5 @@
+package com.rs.fer.user.response;
+
+public class LoginResponse {
+
+}

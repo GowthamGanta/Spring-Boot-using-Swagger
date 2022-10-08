@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.rs.fer.bean.Expense" table="expense_hbm">
+		
+		<id name="id" column="expense_id" >
+			<generator class="identity" />
+		</id>
+		
+		<property name="type" />
+
+		<property name="date" />
+		
+		<property name="price" />
+		
+		<property name="numberOfItems" />
+		
+		<property name="total" />
+		
+		<property name="bywhom" />
+		
+		<property name="userId" column="uid" />
+		
+	</class>
+</hibernate-mapping>
