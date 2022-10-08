@@ -65,7 +65,7 @@ public class ExpenseController {
 	}
 
 	@PutMapping("/editExpense1")
-	public EditExpenseResponse editExpense (@ModelAttribute Expense expense) {
+	public EditExpenseResponse editExpense(@ModelAttribute Expense expense) {
 
 		EditExpenseResponse response = null;
 
