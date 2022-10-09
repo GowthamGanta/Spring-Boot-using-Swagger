@@ -15,10 +15,10 @@ public class ResetPasswordMain {
 		// 2. call the service the business logic ececution
 		FERService ferService = new FERServiceImpl();
 		boolean isResetPassword = ferService.resetPassword(Id, currentPassword, newPassword);
-
-		// 3. Display the option
+   
+		// 3.     Display the option
 		if (isResetPassword) {
-			System.out.println("password changed successfully");
+			System.out.println("password changed successfully.............");
 		} else {
 			System.out.println("password reset is failed");
 		}
