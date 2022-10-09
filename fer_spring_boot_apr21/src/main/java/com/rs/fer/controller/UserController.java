@@ -51,7 +51,7 @@ public class UserController {
 		return response;
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/login/ma")
 	public LoginResponse login(@ModelAttribute LoginRequest request) {
 
 		LoginResponse response = null;
