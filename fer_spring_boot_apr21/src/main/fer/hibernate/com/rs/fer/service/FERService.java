@@ -11,7 +11,7 @@ public interface FERService {
 	
 	int login(String username, String password);
 	
-	boolean addExpense(com.rs.fer.bean.Expense expense);
+	boolean addExpense(Expense expense);
 	
 	boolean editExpense(Expense expense);
 	
