@@ -11,10 +11,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
+=======
+import com.rs.fer.bean.User;
+>>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+<<<<<<< HEAD
+=======
+import com.rs.fer.user.request.ResetPasswordRequest;
+>>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
+import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -28,6 +37,8 @@ import com.rs.fer.user.validation.UserValidation;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+	private static final RegistrationRequest request = null;
 
 	@Autowired
 	UserValidation userValidation;
@@ -50,6 +61,7 @@ public class UserController {
 		}
 		return response;
 	}
+<<<<<<< HEAD
 	
 	@PostMapping("/login/ma")
 	public LoginResponse login(@ModelAttribute LoginRequest request) {
@@ -68,5 +80,54 @@ public class UserController {
 	}
 	
 	
+=======
+	@PostMapping("/registration1")
+	public RegistrationResponse registration(@ModelAttribute User user) {
+
+		RegistrationResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new RegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.registration(request);
+		}
+		return response;
+	}
+	@PostMapping("/resetPassword")
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
+
+		ResetPasswordResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.resetPassword(request);
+		}
+		return response;
+	}
+
+	@PostMapping("/login")
+	public LoginResponse login(@RequestBody LoginRequest request) {
+
+		LoginResponse response = null;
+		
+		
+		Set<String> errorMessages = userValidation.validateLoginRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.login(request);
+		}
+		return response;
+	}
+>>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 
 }
