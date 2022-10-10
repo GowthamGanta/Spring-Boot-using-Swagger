@@ -15,8 +15,6 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer expenseId;
 
-	
-	
 	@Column
 	private String type;
 
@@ -70,13 +68,12 @@ public class Expense {
 		this.expenseId = expenseId;
 	}
 
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 
 	public int getUser_id() {
 		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
 	}
 
 	public String getType() {
@@ -121,7 +118,7 @@ public class Expense {
 
 	public String getBywhom() {
 		return bywhom;
-		
+
 	}
 
 	public void setBywhom(String bywhom) {

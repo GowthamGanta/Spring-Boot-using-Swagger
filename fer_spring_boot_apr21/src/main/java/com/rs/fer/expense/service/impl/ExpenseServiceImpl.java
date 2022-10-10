@@ -58,10 +58,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
 
 			// save bean to database
-			int user_id=expenseObj.get().getUser_id();
+			int user_id = expenseObj.get().getUser_id();
 			expense.setUser_id(user_id);
 			expense = expenseRepository.save(expense);
-			
+
 			// load response
 			// success
 			response = new EditExpenseResponse(HttpStatus.OK, "000", "Expense edited successfully", null);
@@ -198,34 +198,23 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
-	/*
-	 * @Override public GetExpenseReportResponse
-	 * getExpenseReport(GetExpenseReportRequest request) {
-	 * 
-	 * GetExpenseReportResponse response = null;
-	 * 
-	 * Optional<Expense> expenseObj =
-	 * expenseRepository.findByType(request.getExpenseReport());
-	 * 
-	 * if (expenseObj.isPresent()) {
-	 * 
-	 * response = new GetExpenseReportResponse(HttpStatus.OK, "000",
-	 * "fetch expense", null);
-	 * 
-	 * response.setExpense(expenseObj.get());
-	 * 
-	 * } else { // failure response = new
-	 * GetExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
-	 * "No expense found", null);
-	 * 
-	 * }
-	 * 
-	 * return response; }
-	 */
+		ExpenseReportResponse response = null;
+
+		Optional<Expense> expenseObj = expenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
+
+		if (expenseObj.isPresent()) {
+
+			response = new ExpenseReportResponse(HttpStatus.OK, "000", "fetch expense", null);
+
+			response.setExpense(expenseObj.get());
+
+		} else { // failure response = new
+			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
+
+		}
+
+		return response;
+	}
 
 }
