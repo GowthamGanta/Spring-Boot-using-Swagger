@@ -12,6 +12,7 @@ public class SpringBootDataJpaApplication {
 		SpringApplication.run(SpringBootDataJpaApplication.class, args);
 		
 		System.out.println("Hi");
+		System.out.println("Bye");
 	}    
 
 }
