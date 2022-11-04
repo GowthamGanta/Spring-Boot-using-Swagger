@@ -77,7 +77,6 @@ public class UserController {
 
 		GetUserResponse response = null;
 		
-
 		Set<String> errorMessages = userValidation.validateGetUserRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
