@@ -59,6 +59,7 @@ public class UserController {
 	public GetUserResponse getuser(@PathParam(value = "userid") GetUserRequest request) {
 
 		GetUserResponse response = null;
+		
 
 		Set<String> errorMessages = userValidation.validateGetUserRequest(request);
 		// return response with error messages
