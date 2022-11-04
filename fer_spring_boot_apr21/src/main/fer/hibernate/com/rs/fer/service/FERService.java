@@ -12,6 +12,7 @@ public interface FERService {
 	int login(String username, String password);
 	
 	boolean addExpense(Expense expense);
+
 	
 	boolean editExpense(Expense expense);
 	

@@ -190,4 +190,16 @@ public class FERServiceImpl implements FERService {
 		session.close();
 		return isUpdateUser;
 	}
+
+	@Override
+	public boolean addExpense(com.rs.fer.entity.Expense expense) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean editExpense(com.rs.fer.entity.Expense expense) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

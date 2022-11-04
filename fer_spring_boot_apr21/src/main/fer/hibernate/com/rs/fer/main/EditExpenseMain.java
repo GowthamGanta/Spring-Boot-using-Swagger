@@ -1,6 +1,6 @@
 package com.rs.fer.main;
 
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Expense;
 import com.rs.fer.service.FERService;
 import com.rs.fer.service.impl.FERServiceImpl;
 
@@ -16,7 +16,7 @@ public class EditExpenseMain {
 		expense.setPrice(12);
 		expense.setNumberOfItems(2);
 		expense.setTotal(24);
-		expense.setByWhom("me");
+		expense.setBywhom("me");
 		expense.setUserId(2);
 		expense.setId(2);
 

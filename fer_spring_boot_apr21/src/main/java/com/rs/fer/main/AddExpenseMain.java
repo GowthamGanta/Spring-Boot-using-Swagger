@@ -1,6 +1,6 @@
 package com.rs.fer.main;
 
-import com.rs.fer.bean.Expense;
+import com.rs.fer.entity.Expense;
 import com.rs.fer.service.FERService;
 import com.rs.fer.service.impl.FERServiceImpl;
 
@@ -19,6 +19,7 @@ public class AddExpenseMain {
 		expense.setUserId(4);
 		//2. Pass the input to service layer for business logic execution
 		FERService ferService = new FERServiceImpl();
+		
 		boolean isAddExpense = ferService.addExpense(expense);
 			
 		//3. Display the output 
