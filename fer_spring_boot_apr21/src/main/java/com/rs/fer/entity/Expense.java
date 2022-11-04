@@ -39,8 +39,8 @@ public class Expense {
 	@Column
 	private String updated;
 
-	@Column
-	private int user_id;
+	@Column(name="user_id")
+	private int userId;
 
 	public Expense() {
 
@@ -68,12 +68,12 @@ public class Expense {
 		this.expenseId = expenseId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public int getUserId() {
+		return userId;
 	}
-
-	public int getUser_id() {
-		return user_id;
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getType() {

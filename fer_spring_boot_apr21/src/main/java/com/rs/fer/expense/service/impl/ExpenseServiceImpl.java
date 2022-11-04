@@ -1,5 +1,6 @@
 package com.rs.fer.expense.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,6 @@ public class ExpenseServiceImpl implements ExpenseService {
 			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
 
 			// save bean to database
-			int user_id = expenseObj.get().getUser_id();
-			expense.setUser_id(user_id);
 			expense = expenseRepository.save(expense);
 
 			// load response
@@ -201,13 +200,13 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 		ExpenseReportResponse response = null;
 
-		Optional<Expense> expenseObj = expenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
+		List<Expense> expenseReport = expenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
 
-		if (expenseObj.isPresent()) {
+		if (!expenseReport.isEmpty()) {
 
 			response = new ExpenseReportResponse(HttpStatus.OK, "000", "fetch expense", null);
 
-			response.setExpense(expenseObj.get());
+			response.setExpense(expenseReport);
 
 		} else { // failure response = new
 			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
