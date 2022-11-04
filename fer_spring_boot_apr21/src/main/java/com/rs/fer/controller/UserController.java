@@ -2,6 +2,8 @@ package com.rs.fer.controller;
 
 import java.util.Set;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +38,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-  
+
 	@PostMapping("/registration")
 	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
 
@@ -64,6 +66,22 @@ public class UserController {
 			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 			
+		} else {
+			response = userService.getUser(request);
+		}
+		return response;
+	}
+
+	@PostMapping("/getuser")
+	public GetUserResponse getuser(@PathParam(value = "") GetUserRequest request) {
+
+		GetUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateGetUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
 		} else {
 			response = userService.getUser(request);
 		}
