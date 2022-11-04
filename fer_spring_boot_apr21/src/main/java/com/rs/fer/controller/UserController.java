@@ -65,7 +65,6 @@ public class UserController {
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
-			
 		} else {
 			response = userService.getUser(request);
 		}
