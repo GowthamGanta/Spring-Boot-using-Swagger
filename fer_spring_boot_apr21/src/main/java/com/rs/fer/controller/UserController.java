@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rs.fer.user.request.RegistrationRequest;
-import com.rs.fer.user.response.RegistrationResponse;
+import com.rs.fer.entity.User;
+
+import com.rs.fer.user.request.UpdateUserRequest;
+import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -26,7 +28,9 @@ import com.rs.fer.user.validation.UserValidation;
 @RequestMapping("/api")
 public class UserController {
 
-	private static final RegistrationRequest request = null;
+	private static final UpdateUserRequest request = null;
+	
+	
 
 	@Autowired
 	UserValidation userValidation;
@@ -34,20 +38,24 @@ public class UserController {
 	@Autowired
 	UserService userService;
   
-	@PostMapping("/registration")
-	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
+	
+	
+	@PostMapping("/updateUser")
+	public UpdateUserResponse updateUser(@RequestBody User user) {
 
-		RegistrationResponse response = null;
+		UpdateUserResponse response = null;
 
-		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
+		Set<String> errorMessages = userValidation.validateUpdateUserRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new RegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+			response = new UpdateUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.registration(request);
+			response = userService.updateUser(request);
 		}
 		return response;
 	}
+
+
 
 }
