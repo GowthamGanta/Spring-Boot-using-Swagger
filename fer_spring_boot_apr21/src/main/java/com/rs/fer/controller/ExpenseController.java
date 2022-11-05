@@ -30,9 +30,7 @@ public class ExpenseController {
 	
 	@Autowired
 	ExpenseService expenseService;
-	
-	
-	
+		
 	@PostMapping("/addExpense")
 	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
 
@@ -48,25 +46,7 @@ public class ExpenseController {
 			
 		}
 return response;
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	@GetMapping("/expenseReport")
 	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
 		ExpenseReportResponse response = null;
