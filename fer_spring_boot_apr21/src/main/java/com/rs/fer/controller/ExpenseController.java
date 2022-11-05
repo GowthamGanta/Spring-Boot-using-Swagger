@@ -27,26 +27,25 @@ public class ExpenseController {
 
 	@Autowired
 	ExpenseValidation expenseValidation;
-	
+
 	@Autowired
 	ExpenseService expenseService;
-		
+
 	@PostMapping("/addExpense")
 	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
 
-		AddExpenseResponse response=null;
-		
-		Set<String> errorMessages =expenseValidation.validateAddExpenseRequest(request);
-		//To show return response with error message.
-		if(!CollectionUtils.isEmpty(errorMessages)) {
-			response= new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED,"999", null, errorMessages );
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// To show return response with error message.
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.addExpense(request);
 		}
-		else {
-			response=expenseService.addExpense(request);
-			
-		}
-return response;
-	}	
+		return response;
+	}
+
 	@GetMapping("/expenseReport")
 	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
 		ExpenseReportResponse response = null;
@@ -62,6 +61,3 @@ return response;
 		return response;
 	}
 }
-
-	
-
