@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -89,6 +91,22 @@ public class ExpenseController {
 
 		} else {
 			response = expenseService.editExpense(request);
+		}
+		return response;
+	}
+	@GetMapping("/getExpenseOptions/{GetExpenseOptionsRequest}")
+	public GetExpenseOptionsResponse getExpense(@PathVariable GetExpenseOptionsRequest request) {
+
+		GetExpenseOptionsResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseOptionsRequest(request)
+		;
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpenseOptions(request);
 		}
 		return response;
 	}

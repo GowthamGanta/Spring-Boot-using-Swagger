@@ -13,12 +13,14 @@ import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.response.GetExpensesResponse;
 import com.rs.fer.expense.service.ExpenseService;
@@ -211,6 +213,29 @@ public class ExpenseServiceImpl implements ExpenseService {
 		} else { // failure response = new
 			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
 
+		}
+
+		return response;
+	}
+	
+	@Override
+	public GetExpenseOptionsResponse getExpenseOptions(GetExpenseOptionsRequest request) {
+		GetExpenseOptionsResponse response = null;
+
+		// To load the userObject based on userId
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		if (userObj.isPresent()) {
+			// If expenses with that particular userId is present return expenses
+			// load response
+			// success
+			response = new GetExpenseOptionsResponse(HttpStatus.OK, "000", "GetExpenses Success", null);
+			response.setExpenses(userObj.get().getExpenses());
+		} else {
+			// If expenses with that particular userId is not present return response with
+			// error messages
+			// failure
+			response = new GetExpenseOptionsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expenses", null);
 		}
 
 		return response;
