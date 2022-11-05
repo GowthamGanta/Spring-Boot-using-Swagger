@@ -1,15 +1,21 @@
-package com.rs.fer.controller;
+  package com.rs.fer.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.entity.Expense;
+import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
+import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -24,6 +30,24 @@ public class ExpenseController {
 	
 	@Autowired
 	ExpenseService expenseService;
+	
+	@PutMapping("/editExpense")
+	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
+
+		EditExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.editExpense(request);
+		}
+		return response;
+	}
+	
+	
 	
 	@GetMapping("/expenseReport")
 	public ExpenseReportResponse expenseReport(ExpenseReportRequest request) {
