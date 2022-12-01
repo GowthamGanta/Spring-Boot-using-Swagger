@@ -2,8 +2,12 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
+import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl  implements FERService {
 
@@ -21,8 +25,18 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public boolean addExpense(com.rs.fer.entity.Expense expense) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isAddExpense = false;
+		{
+			Session session = HibernateUtil.getSessionFactory().openSession();
+	
+			Transaction transaction = session.beginTransaction();
+			isAddExpense = (int) session.save(expense) > 0;
+			transaction.commit();
+	
+			session.close();
+	
+			return isAddExpense;
+		}
 	}
 
 	@Override
