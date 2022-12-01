@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.utill.HibernateUtil;
@@ -44,10 +45,20 @@ Session session = HibernateUtil.getSessionFactory().openSession();
 	}
 
 	@Override
-	public boolean addExpense(com.rs.fer.entity.Expense expense) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addExpense(Expense expense) {
+		boolean isAddExpense = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Transaction transaction = session.beginTransaction();
+		isAddExpense = (int) session.save(expense) > 0;
+		transaction.commit();
+
+		session.close();
+
+		return isAddExpense;
 	}
+
 
 	@Override
 	public boolean editExpense(com.rs.fer.entity.Expense expense) {
