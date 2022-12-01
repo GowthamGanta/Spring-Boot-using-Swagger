@@ -77,8 +77,25 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean deleteExpense(int expenseId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isDeleteExpense = true;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Expense expense = new Expense();
+			expense.setId(expenseid);
+
+			Transaction transaction = session.beginTransaction();
+			session.delete(expense);
+			transaction.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			isDeleteExpense = false;
+		}
+
+		session.close();
+
+		return isDeleteExpense;
 	}
 
 	@Override
