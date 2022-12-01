@@ -2,6 +2,7 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -44,8 +45,25 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isReset = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Query query = session.createQuery("update User u set u.password=:pass, u.password=:password where u.id=:id ");
+
+		query.setParameter("id", userId);
+		query.setParameter("pass", currentPassword);
+		query.setParameter("password", newPassword);
+
+		int numberOfRecAffected = query.executeUpdate();
+		isReset = numberOfRecAffected > 0;
+
+		Transaction transaction = session.beginTransaction();
+
+		transaction.commit();
+		session.close();
+
+		return isReset;
 	}
 
 	@Override
