@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.utill.HibernateUtil;
@@ -68,8 +69,16 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public com.rs.fer.entity.Expense getExpense(int expenseId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Expense expense = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		expense = (Expense) session.get(Expense.class, expenseId);
+		session.close();
+
+		return expense;
+			return null;
 	}
 
 	@Override
