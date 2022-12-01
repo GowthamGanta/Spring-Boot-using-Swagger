@@ -1,11 +1,9 @@
 package com.rs.fer.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -48,7 +46,7 @@ public class FERServiceImpl implements FERService {
 		List<User> users = criteria.list();
 		if (users != null && !users.isEmpty()) {
 			isValidUser = true;
-			
+
 		}
 		session.close();
 
@@ -169,8 +167,21 @@ public class FERServiceImpl implements FERService {
 	@Override
 	public List<com.rs.fer.entity.Expense> getExpenseReport(int userId, String expenseType, String fromDate,
 			String toDate) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Expense> getExpenseReport = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Criteria criteria = session.createCriteria(Expense.class);
+
+		criteria.add(Restrictions.eq("userId", userId));
+		criteria.add(Restrictions.eq("type", expenseType));
+		criteria.add(Restrictions.between("date", fromDate, toDate));
+
+		getExpenseReport = criteria.list();
+
+		session.close();
+
+		return getExpenseReport;
 	}
 
 	@Override
@@ -196,16 +207,15 @@ public class FERServiceImpl implements FERService {
 		try {
 			Transaction transaction = session.beginTransaction();
 			session.update(user);
-			transaction.commit(); 
+			transaction.commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			isUserUpdate = false;
 		}
-		
+
 		session.close();
 
 		return isUserUpdate;
 	}
-
 
 }
