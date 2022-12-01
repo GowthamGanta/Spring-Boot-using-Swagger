@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.utill.HibernateUtil;
@@ -92,8 +93,16 @@ Session session = HibernateUtil.getSessionFactory().openSession();
 
 	@Override
 	public List<com.rs.fer.entity.Expense> getExpenseOptions(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Expense> getexpenseOptions = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Criteria criteria = session.createCriteria(Expense.class);
+		criteria.add(Restrictions.eq("userId", userId));
+
+		getexpenseOptions = criteria.list();
+
+		return getexpenseOptions;
 	}
 
 	@Override
