@@ -1,23 +1,36 @@
 package com.rs.fer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.User;
 import com.rs.fer.service.FERService;
-import com.rs.fer.utill.HibernateUtil;
+import com.rs.fer.util.HibernateUtil;
 
-public class FERServiceImpl  implements FERService {
+public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean registration(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isRegister = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Transaction transaction = session.beginTransaction();
+		isRegister = (int) session.save(user) > 0;
+		transaction.commit();
+
+		session.close();
+
+		return isRegister;
 	}
 
 	@Override
@@ -27,18 +40,19 @@ public class FERServiceImpl  implements FERService {
 	}
 
 	@Override
-	public boolean addExpense(Expense expense) {
+	public boolean addExpense(com.rs.fer.entity.Expense expense) {
 		boolean isAddExpense = false;
+		{
+			Session session = HibernateUtil.getSessionFactory().openSession();
 
-		Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction transaction = session.beginTransaction();
+			isAddExpense = (int) session.save(expense) > 0;
+			transaction.commit();
 
-		Transaction transaction = session.beginTransaction();
-		isAddExpense = (int) session.save(expense) > 0;
-		transaction.commit();
+			session.close();
 
-		session.close();
-
-		return isAddExpense;
+			return isAddExpense;
+		}
 	}
 
 	@Override
@@ -61,6 +75,7 @@ public class FERServiceImpl  implements FERService {
 
 		return isEditExpense;
 	}
+
 	@Override
 	public boolean deleteExpense(int expenseId) {
 		boolean isDeleteExpense = true;
@@ -118,7 +133,7 @@ public class FERServiceImpl  implements FERService {
 		session.close();
 
 		return expense;
-			return null;
+		return null;
 	}
 
 	@Override
@@ -162,5 +177,5 @@ public class FERServiceImpl  implements FERService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }
