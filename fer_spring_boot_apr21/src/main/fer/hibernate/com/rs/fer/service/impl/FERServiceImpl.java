@@ -35,8 +35,23 @@ public class FERServiceImpl implements FERService {
 
 	@Override
 	public int login(String username, String password) {
-		// TODO Auto-generated method stub
-		return 0;
+		boolean isValidUser = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Criteria criteria = session.createCriteria(User.class);
+
+		criteria.add(Restrictions.eq("username", "username"));
+
+		criteria.add(Restrictions.eq("password", "password"));
+
+		List<User> users = criteria.list();
+		if (users != null && !users.isEmpty()) {
+			isValidUser = true;
+		}
+		session.close();
+
+		return isValidUser;
 	}
 
 	@Override
@@ -143,10 +158,10 @@ public class FERServiceImpl implements FERService {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Criteria criteria = session.createCriteria(Expense.class);
-		
+
 		criteria.add(Restrictions.eq("userId", userId));
 
-		getexpenseOptions = criteria.list();  
+		getexpenseOptions = criteria.list();
 
 		return getexpenseOptions;
 	}
