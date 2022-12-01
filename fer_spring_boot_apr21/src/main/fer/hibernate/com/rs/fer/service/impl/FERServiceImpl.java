@@ -1,20 +1,36 @@
 package com.rs.fer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
-import com.rs.fer.entity.User;
+import com.rs.fer.bean.Address;
+import com.rs.fer.bean.Expense;
+import com.rs.fer.bean.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.util.HibernateUtil;
 
-public class FERServiceImpl  implements FERService {
+public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean registration(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isRegister = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Transaction transaction = session.beginTransaction();
+		isRegister = (int) session.save(user) > 0;
+		transaction.commit();
+
+		session.close();
+
+		return isRegister;
 	}
 
 	@Override
@@ -28,38 +44,95 @@ public class FERServiceImpl  implements FERService {
 		boolean isAddExpense = false;
 		{
 			Session session = HibernateUtil.getSessionFactory().openSession();
-	
+
 			Transaction transaction = session.beginTransaction();
 			isAddExpense = (int) session.save(expense) > 0;
 			transaction.commit();
-	
+
 			session.close();
-	
+
 			return isAddExpense;
 		}
 	}
 
 	@Override
-	public boolean editExpense(com.rs.fer.entity.Expense expense) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean editExpense(Expense expense) {
+
+		boolean isEditExpense = true;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(expense);
+			transaction.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			isEditExpense = true;
+
+		}
+		session.close();
+
+		return isEditExpense;
 	}
 
 	@Override
 	public boolean deleteExpense(int expenseId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isDeleteExpense = true;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Expense expense = new Expense();
+			expense.setId(expenseid);
+
+			Transaction transaction = session.beginTransaction();
+			session.delete(expense);
+			transaction.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			isDeleteExpense = false;
+		}
+
+		session.close();
+
+		return isDeleteExpense;
 	}
 
 	@Override
 	public boolean resetPassword(int userId, String currentPassword, String newPassword) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isReset = false;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Query query = session.createQuery("update User u set u.password=:pass, u.password=:password where u.id=:id ");
+
+		query.setParameter("id", userId);
+		query.setParameter("pass", currentPassword);
+		query.setParameter("password", newPassword);
+
+		int numberOfRecAffected = query.executeUpdate();
+		isReset = numberOfRecAffected > 0;
+
+		Transaction transaction = session.beginTransaction();
+
+		transaction.commit();
+		session.close();
+
+		return isReset;
 	}
 
 	@Override
 	public com.rs.fer.entity.Expense getExpense(int expenseId) {
-		// TODO Auto-generated method stub
+
+		Expense expense = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		expense = (Expense) session.get(Expense.class, expenseId);
+		session.close();
+
+		return expense;
 		return null;
 	}
 
@@ -78,8 +151,17 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public User getUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		user = (User) session.get(User.class, userId);
+		if (user.getAddress() == null) {
+			user.setAddress(new Address());
+		}
+		session.close();
+
+		return user;
 	}
 
 	@Override
@@ -87,5 +169,5 @@ public class FERServiceImpl  implements FERService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }
