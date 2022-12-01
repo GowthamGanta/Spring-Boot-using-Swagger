@@ -59,7 +59,6 @@ public class FERServiceImpl implements FERService {
 		boolean isAddExpense = false;
 		{
 			Session session = HibernateUtil.getSessionFactory().openSession();
-
 			Transaction transaction = session.beginTransaction();
 			isAddExpense = (int) session.save(expense) > 0;
 			transaction.commit();
