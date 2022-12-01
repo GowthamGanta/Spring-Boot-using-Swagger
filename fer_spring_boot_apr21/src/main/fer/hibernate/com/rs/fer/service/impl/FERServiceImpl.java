@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.rs.fer.bean.Address;
@@ -12,12 +13,24 @@ import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
 import com.rs.fer.utill.HibernateUtil;
 
-public class FERServiceImpl  implements FERService {
+public class FERServiceImpl implements FERService {
 
 	@Override
 	public boolean registration(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isRegister = false;
+
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+
+		factory = HibernateUtil.getSessionFactory();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Transaction transaction = session.beginTransaction();
+		isRegister = (int) session.save(user) > 0;
+		transaction.commit();
+
+		session.close();
+
+		return isRegister;
 	}
 
 	@Override
@@ -61,6 +74,7 @@ public class FERServiceImpl  implements FERService {
 
 		return isEditExpense;
 	}
+
 	@Override
 	public boolean deleteExpense(int expenseId) {
 		// TODO Auto-generated method stub
@@ -101,7 +115,7 @@ public class FERServiceImpl  implements FERService {
 		session.close();
 
 		return expense;
-			return null;
+		return null;
 	}
 
 	@Override
@@ -137,5 +151,5 @@ public class FERServiceImpl  implements FERService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }
