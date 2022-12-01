@@ -2,11 +2,9 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
@@ -23,25 +21,9 @@ public class FERServiceImpl  implements FERService {
 	}
 
 	@Override
-	public boolean login(String username, String password) {
-
-		boolean isValidUser = false;
-
-Session session = HibernateUtil.getSessionFactory().openSession();
-       
-		Criteria criteria = session.createCriteria(User.class);
-		
-		criteria.add(Restrictions.eq("username", "username"));
-		
-		criteria.add(Restrictions.eq("password", "password"));
-		
-	List<User> users = criteria.list();
-	if(users !=null && !users.isEmpty()) {
-		isValidUser = true;
-	}
-		session.close();
-		
-		return isValidUser;
+	public int login(String username, String password) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -129,24 +111,8 @@ Session session = HibernateUtil.getSessionFactory().openSession();
 
 	@Override
 	public boolean updateUser(User user) {
-		
-		boolean isUserUpdate = true;
-
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			Transaction transaction = session.beginTransaction();
-			session.update(user);
-			transaction.commit(); 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			isUserUpdate = false;
-		}
-		
-		session.close();
-
-		return isUserUpdate;
-
-		
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
