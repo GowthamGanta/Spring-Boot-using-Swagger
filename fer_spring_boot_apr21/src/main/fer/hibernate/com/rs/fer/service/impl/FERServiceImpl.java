@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.rs.fer.bean.Address;
 import com.rs.fer.bean.Expense;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
-import com.rs.fer.utill.HibernateUtil;
+import com.rs.fer.util.HibernateUtil;
 
 public class FERServiceImpl implements FERService {
 
@@ -19,9 +18,6 @@ public class FERServiceImpl implements FERService {
 	public boolean registration(User user) {
 		boolean isRegister = false;
 
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-
-		factory = HibernateUtil.getSessionFactory();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Transaction transaction = session.beginTransaction();
