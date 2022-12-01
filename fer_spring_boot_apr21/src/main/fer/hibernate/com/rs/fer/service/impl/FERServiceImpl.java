@@ -41,13 +41,26 @@ public class FERServiceImpl  implements FERService {
 		return isAddExpense;
 	}
 
-
 	@Override
-	public boolean editExpense(com.rs.fer.entity.Expense expense) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean editExpense(Expense expense) {
 
+		boolean isEditExpense = true;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(expense);
+			transaction.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			isEditExpense = true;
+
+		}
+		session.close();
+
+		return isEditExpense;
+	}
 	@Override
 	public boolean deleteExpense(int expenseId) {
 		// TODO Auto-generated method stub
