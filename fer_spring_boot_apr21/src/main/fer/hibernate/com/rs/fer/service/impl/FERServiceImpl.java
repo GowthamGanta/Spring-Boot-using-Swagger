@@ -3,6 +3,7 @@ package com.rs.fer.service.impl;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.rs.fer.bean.Address;
 import com.rs.fer.entity.User;
@@ -83,8 +84,23 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean isUserUpdate = true;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction transaction = session.beginTransaction();
+			session.update(user);
+			transaction.commit(); 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			isUserUpdate = false;
+		}
+		
+		session.close();
+
+		return isUserUpdate;
+
 	}
 	
 }
