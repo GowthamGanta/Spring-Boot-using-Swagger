@@ -143,9 +143,10 @@ public class FERServiceImpl implements FERService {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Criteria criteria = session.createCriteria(Expense.class);
+		
 		criteria.add(Restrictions.eq("userId", userId));
 
-		getexpenseOptions = criteria.list();
+		getexpenseOptions = criteria.list();  
 
 		return getexpenseOptions;
 	}
