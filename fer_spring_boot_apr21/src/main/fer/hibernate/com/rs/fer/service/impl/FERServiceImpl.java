@@ -48,6 +48,7 @@ public class FERServiceImpl implements FERService {
 		List<User> users = criteria.list();
 		if (users != null && !users.isEmpty()) {
 			isValidUser = true;
+			
 		}
 		session.close();
 
