@@ -2,8 +2,12 @@ package com.rs.fer.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
+
+import com.rs.fer.bean.Address;
 import com.rs.fer.entity.User;
 import com.rs.fer.service.FERService;
+import com.rs.fer.utill.HibernateUtil;
 
 public class FERServiceImpl  implements FERService {
 
@@ -64,8 +68,17 @@ public class FERServiceImpl  implements FERService {
 
 	@Override
 	public User getUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		user = (User) session.get(User.class, userId);
+		if (user.getAddress() == null) {
+			user.setAddress(new Address());
+		}
+		session.close();
+
+		return user;
 	}
 
 	@Override
