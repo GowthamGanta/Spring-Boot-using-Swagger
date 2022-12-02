@@ -20,8 +20,6 @@ import com.rs.fer.user.validation.UserValidation;
 @RequestMapping("/api")
 public class UserController {
 
-	private static final RegistrationRequest request = null;
-
 	@Autowired
 	UserValidation userValidation;
 
