@@ -76,13 +76,13 @@ public class UserServiceImpl implements UserService {
 		// load vo to bean
 		User user = userUtil.loadLoginRequestToUser(request);
 		String username = user.getUsername();
-		String password= user.getPassword();
+		String password = user.getPassword();
 		// List<User> findByUsernameAndPassword(String username, String password);
 
 		// save bean to database
 //		List<User> user = userRepository.findByUsernameAndPassword(request);
 
-		List<User> users = userRepository.findByUsernameAndPassword( username,  password);
+		List<User> users = userRepository.findByUsernameAndPassword(username, password);
 		if (users != null && !users.isEmpty()) {
 			User user1 = users.get(0);
 			userid = user1.getUserId();
@@ -92,10 +92,11 @@ public class UserServiceImpl implements UserService {
 		if (userid > 0) {
 			// success
 			response = new LoginResponse(HttpStatus.OK, "000", "Welcome to user", null);
-			//response.setUser(user);
+			// response.setUser(user);
 		} else {
 			// failure
-			response = new LoginResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Invalid username/password..Please try again.", null);
+			response = new LoginResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+					"Invalid username/password..Please try again.", null);
 		}
 
 		return response;
@@ -204,6 +205,5 @@ public class UserServiceImpl implements UserService {
 
 		return response;
 	}
-
 
 }
