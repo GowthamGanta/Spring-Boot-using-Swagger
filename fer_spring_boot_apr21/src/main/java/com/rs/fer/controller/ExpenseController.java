@@ -59,7 +59,6 @@ public class ExpenseController {
 	 * deleteExpenseMa(@PathVariable("expenseId") int id) {
 	 * 
 	 * DeleteExpenseResponse response = null;
-	 * 
 	 * boolean isDeleteExpense = ferService.deleteExpense(id); if (isDeleteExpense)
 	 * { return new ResponseEntity<>(id, HttpStatus.CREATED); } else { return new
 	 * ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
