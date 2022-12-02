@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.GetUserRequest;
-import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
@@ -30,7 +29,7 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/getUser")
-	public GetUserResponse registration(@RequestBody GetUserRequest request) {
+	public GetUserResponse getUser(@RequestBody GetUserRequest request) {
 
 		GetUserResponse response = null;
 
