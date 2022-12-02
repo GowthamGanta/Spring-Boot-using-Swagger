@@ -49,7 +49,6 @@ public class ExpenseController {
 		// return response with error messages
 		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
 			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
 		} else {
 			response = expenseService.addExpense(request);
 		}
