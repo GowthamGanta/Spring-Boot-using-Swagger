@@ -5,6 +5,7 @@
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +22,13 @@ import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -126,6 +129,23 @@ public class ExpenseController {
 		return response;
 
 	}
+	
+	
+	@GetMapping("/getExpenseOptions")
+	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
+
+		GetExpenseOptionsResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseOptionsRequest(request);
+		// return response with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpenseOptions(request);
+		}
+		return response;
+}
 
 
 
