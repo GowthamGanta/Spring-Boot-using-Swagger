@@ -30,6 +30,8 @@ import com.rs.fer.user.validation.UserValidation;
 @RequestMapping("/api")
 public class UserController {
 
+	
+	
 	@Autowired
 	UserValidation userValidation;
 
