@@ -42,6 +42,8 @@ public class UserController {
 	
 	
 	
+	
+	
 	@PostMapping("/registration")
 	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
 
