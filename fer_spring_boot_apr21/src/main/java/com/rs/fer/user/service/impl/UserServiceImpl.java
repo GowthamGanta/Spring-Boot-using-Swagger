@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService {
 				userRepository.save(user);
 				response = new ResetPasswordResponse(HttpStatus.OK, "000", "password changed successfully", null);
 			} else {
-
+ 
 				// failure
 
 				response = new ResetPasswordResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
