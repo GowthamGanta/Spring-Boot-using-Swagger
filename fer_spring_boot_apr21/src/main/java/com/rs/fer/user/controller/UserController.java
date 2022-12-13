@@ -79,7 +79,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public void  login(@RequestBody LoginRequest request) {
+	public LoginResponse  login(@RequestBody LoginRequest request) {
 
 		LoginResponse response = null;
 
@@ -92,7 +92,7 @@ public class UserController {
 		} else {
 			response = userService.login(request);
 		}
-		return;
+		return response;
 	}
 	
 	
@@ -114,7 +114,7 @@ public class UserController {
 	}
 
 	@PutMapping("/resetPassword")
-	public void resetPassword(@RequestBody ResetPasswordRequest request) {
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
 
 		ResetPasswordResponse response = null;
 
@@ -126,7 +126,7 @@ public class UserController {
 		} else {
 			response = userService.resetPassword(request);
 		}
-		return;
+		return response;
 	}
 
 	@PutMapping("/updateUser")
