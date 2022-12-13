@@ -131,7 +131,8 @@ public class UserServiceImplTest {
 	}
 
 	@Test
-	public void testResetPassword() {
+	public void testResetPassword()
+	{
 
 		User user = new User();
 		user.setUserId(1);
