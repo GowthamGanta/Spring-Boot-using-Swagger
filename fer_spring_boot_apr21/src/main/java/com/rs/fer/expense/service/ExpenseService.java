@@ -6,14 +6,12 @@ import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
-import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
-import com.rs.fer.expense.response.GetExpensesResponse;
 
 
 public interface ExpenseService {
@@ -26,8 +24,6 @@ public interface ExpenseService {
 
 	GetExpenseResponse getExpense(GetExpenseRequest request);
 
-	GetExpensesResponse getExpenses(GetExpensesRequest request);
-	
 	GetExpenseOptionsResponse getExpenseOptions(GetExpenseOptionsRequest request);
 
 	ExpenseReportResponse expenseReport(ExpenseReportRequest request);

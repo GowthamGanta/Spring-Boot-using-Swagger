@@ -1,4 +1,4 @@
-package com.rs.fer.controller;
+package com.rs.fer.user.controller;
 
 import java.util.Set;
 

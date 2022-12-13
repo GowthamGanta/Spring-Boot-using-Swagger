@@ -4,9 +4,8 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.entity.Address;
-import com.rs.fer.entity.User;
 import com.rs.fer.response.AbstractResponse;
+import com.rs.fer.user.entity.User;
 
 public class UpdateUserResponse extends AbstractResponse{
 

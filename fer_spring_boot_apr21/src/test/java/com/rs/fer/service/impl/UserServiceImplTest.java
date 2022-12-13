@@ -13,8 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.entity.User;
-import com.rs.fer.repository.UserRepository;
+import com.rs.fer.user.entity.User;
+import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.impl.UserServiceImpl;
