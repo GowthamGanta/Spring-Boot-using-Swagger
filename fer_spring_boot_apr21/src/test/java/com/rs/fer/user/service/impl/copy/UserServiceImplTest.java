@@ -1,4 +1,4 @@
-package com.rs.fer.service.impl;
+package com.rs.fer.user.service.impl.copy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
