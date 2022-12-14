@@ -41,7 +41,6 @@ public class UserServiceImplTest {
 		
 		User user = new User();
 		user.setUserId(1);
-		
 	
 		
 		//Mock		
