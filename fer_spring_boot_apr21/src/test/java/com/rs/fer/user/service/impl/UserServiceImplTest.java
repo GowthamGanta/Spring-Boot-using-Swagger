@@ -124,7 +124,7 @@ public class UserServiceImplTest {
 		RegistrationRequest request = new RegistrationRequest();
 		request.setFirstname("admin");
 		request.setMiddlename("k");
-		request.setLastname("rs");
+		request.setLastname("rs");  
 		request.setEmail("admin@rs.com");
 		request.setUsername("admin");
 		request.setPassword("rs");
@@ -245,7 +245,7 @@ public class UserServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
-
+  
 	@Test
 	public void testResetPasswordMismatch() {
 
