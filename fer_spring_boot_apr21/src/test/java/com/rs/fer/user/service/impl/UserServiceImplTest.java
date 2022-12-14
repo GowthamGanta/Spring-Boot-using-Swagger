@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,9 +18,10 @@ import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
-import com.rs.fer.user.service.impl.UserServiceImpl;
+import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.util.UserUtil;
 
 
@@ -193,5 +195,78 @@ public class UserServiceImplTest {
 		//3.
 		assertEquals("002", response.statusCode);
 	}
-}
+	
+	@Test
+	public void testResetPassword()
+	{
 
+		User user = new User();
+		user.setUserId(1);
+		user.setPassword("rs");
+
+		Optional<User> userObj = Optional.of(user);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+		// 1.
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		request.setCurrentPassword("rs");
+		request.setNewPassword("123");
+
+		// 2.
+		ResetPasswordResponse response = userServiceImpl.resetPassword(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+	@Test
+	public void testResetPasswordUserNotPresent() {
+
+		User user = null;
+
+		Optional<User> userObj = Optional.empty();
+		
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		// 1.
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		request.setCurrentPassword("rs");
+		request.setNewPassword("123");
+
+		// 2.
+		ResetPasswordResponse response = userServiceImpl.resetPassword(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+
+	}
+
+	@Test
+	public void testResetPasswordMismatch() {
+
+		
+		User user = new User();
+		// user.setUserId(1);
+		user.setPassword("rs1233333");
+		java.util.Optional<User> userObj = java.util.Optional.of(user);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+		// 1.
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		request.setCurrentPassword("rs");
+		request.setNewPassword("123");
+
+		// 2.
+		ResetPasswordResponse response = userServiceImpl.resetPassword(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+
+	}
+
+}
