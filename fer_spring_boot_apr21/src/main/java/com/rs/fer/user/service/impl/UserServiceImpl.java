@@ -72,6 +72,8 @@ public class UserServiceImpl implements UserService {
 	public LoginResponse login(LoginRequest request) {
 		LoginResponse response = null;
 		int userid = 0;
+		
+		
 
 		// load vo to bean
 		String username = request.getUsername();
