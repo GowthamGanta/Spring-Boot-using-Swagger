@@ -16,15 +16,17 @@ import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
 @SpringBootTest
 public class ExpenseServiceImplTest {
-
+ 
 	@InjectMocks
 	private ExpenseServiceImpl expenseServiceImpl;
 
@@ -147,6 +149,46 @@ public class ExpenseServiceImplTest {
 
 		// 3.
 		assertEquals("002", response.statusCode);
+	}
+
+	@Test
+	public void testGetExpenseOptions() {
+		Expense expense = new Expense();
+		User user = new User();
+
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		// 1.
+		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+		request.setUserId(1);
+		// 2.
+		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetExpenseOptionsNotPresent() {
+		Expense expense = new Expense();
+		User user = new User();
+
+		user.setUserId(1);
+		Optional<User> userObj = Optional.empty();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		// 1.
+		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+		request.setUserId(1);
+		// 2.
+		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+
 	}
 
 }
