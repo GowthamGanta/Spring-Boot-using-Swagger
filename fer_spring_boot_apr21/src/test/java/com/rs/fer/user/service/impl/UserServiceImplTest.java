@@ -42,7 +42,7 @@ public class UserServiceImplTest {
 		User user = new User();
 		user.setUserId(1);
 	
-		
+		 
 		//Mock		
 		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
 		
