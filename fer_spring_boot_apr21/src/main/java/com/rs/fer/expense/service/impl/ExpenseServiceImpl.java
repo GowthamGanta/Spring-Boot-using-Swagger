@@ -1,4 +1,4 @@
-package com.rs.fer.expense.service.impl;
+ package com.rs.fer.expense.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,20 +46,20 @@ public class ExpenseServiceImpl implements ExpenseService {
 	 * @return response
 	 */
 
-	@Override
+
 	public EditExpenseResponse editExpense(EditExpenseRequest request) {
 		EditExpenseResponse response = null;
 
 		// User is present or not check
 		Optional<Expense> expenseObj = expenseRepository.findById(request.getExpenseId());
 
-		if (expenseObj.isPresent()) {
+		if (expenseObj.isPresent()) { 
 
 			// load vo to bean
 			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
 
 			// save bean to database
-			expense = expenseRepository.save(expense);
+			expense = expenseRepository.save(expense); 
 
 			// load response
 			// success
