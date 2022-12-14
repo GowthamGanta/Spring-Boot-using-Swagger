@@ -144,14 +144,12 @@ public class UserServiceImplTest {
 		
 		User user = new User();
 		user.setUserId(1);
+		users.add(user);
 		
 		//Mock		
-		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+		when(userRepository.findByUsernameAndPassword(Mockito.anyString(),Mockito.anyString())).thenReturn(users);
 		
-		when(userRepository.save(Mockito.any())).thenReturn(user);
-		
-		when(userUtil.loadLoginRequestToUser(Mockito.any())).thenReturn(user);
-		
+			
 		//1.
 		LoginRequest request = new LoginRequest();
 		
@@ -162,7 +160,7 @@ public class UserServiceImplTest {
 		LoginResponse response = userServiceImpl.login(request);
 		
 		//3.
-		//assertEquals("000", response.statusCode);
+		assertEquals("000", response.statusCode);
 	}
 	
 	
@@ -175,7 +173,7 @@ public class UserServiceImplTest {
 		//user.setUserId(1);
 		
 		//Mock		
-		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+		when(userRepository.findByUsernameAndPassword(Mockito.anyString(),Mockito.anyString())).thenReturn(users);
 		
 		when(userRepository.save(Mockito.any())).thenThrow(MockitoException.class);
 		

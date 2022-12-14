@@ -74,9 +74,8 @@ public class UserServiceImpl implements UserService {
 		int userid = 0;
 
 		// load vo to bean
-		User user = userUtil.loadLoginRequestToUser(request);
-		String username = user.getUsername();
-		String password= user.getPassword();
+		String username = request.getUsername();
+		String password= request.getPassword();
 		// List<User> findByUsernameAndPassword(String username, String password);
 
 		// save bean to database
