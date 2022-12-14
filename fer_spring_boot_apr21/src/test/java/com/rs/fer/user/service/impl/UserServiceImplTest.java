@@ -22,6 +22,7 @@ import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.impl.UserServiceImpl;
 import com.rs.fer.user.util.UserUtil;
 
+
 @SpringBootTest
 public class UserServiceImplTest {
 
