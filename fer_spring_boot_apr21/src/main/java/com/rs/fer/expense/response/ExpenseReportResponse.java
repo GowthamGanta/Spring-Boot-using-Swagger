@@ -1,45 +1,31 @@
 package com.rs.fer.expense.response;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-public class ExpenseReportResponse {
+import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.response.AbstractResponse;
 
-     private String type;
-	 
-	 private String fromDate ;
-	 
-	 private String toDate ;
+public class ExpenseReportResponse extends AbstractResponse {
 
-	public ExpenseReportResponse(HttpStatus preconditionFailed, String string, Object object,
-			Set<String> errorMessages) {
-		// TODO Auto-generated constructor stub
+	private List<Expense> expense;
+
+	public ExpenseReportResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
+		super(status, statusCode, message, errorMessages);
+		this.status = status;
+		this.statusCode = statusCode;
+		this.message = message;
+		this.errorMessages = errorMessages;
 	}
 
-	public String getType() {
-		return type;
+	public List<Expense> getExpense() {
+		return expense;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setExpense(List<Expense> expense) {
+		this.expense = expense;
 	}
 
-	public String getFromDate() {
-		return fromDate;
-		
-	}
-
-	public void setFromDate(String fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public String getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(String toDate) {
-		this.toDate = toDate;
-	}
-	 
 }

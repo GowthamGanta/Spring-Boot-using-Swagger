@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.main.GetUserMain;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;

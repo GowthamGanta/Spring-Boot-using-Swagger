@@ -1,4 +1,4 @@
-package com.rs.fer.entity;
+package com.rs.fer.expense.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +15,6 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer expenseId;
 
-	
-	
 	@Column
 	private String type;
 
@@ -41,8 +39,8 @@ public class Expense {
 	@Column
 	private String updated;
 
-	@Column
-	private int user_id;
+	@Column(name="user_id")
+	private int userId;
 
 	public Expense() {
 
@@ -70,13 +68,12 @@ public class Expense {
 		this.expenseId = expenseId;
 	}
 
-
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getType() {
@@ -121,7 +118,7 @@ public class Expense {
 
 	public String getBywhom() {
 		return bywhom;
-		
+
 	}
 
 	public void setBywhom(String bywhom) {
