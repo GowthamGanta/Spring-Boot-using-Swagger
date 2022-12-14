@@ -73,8 +73,6 @@ public class UserServiceImpl implements UserService {
 		LoginResponse response = null;
 		int userid = 0;
 		
-		
-
 		// load vo to bean
 		String username = request.getUsername();
 		String password= request.getPassword();
