@@ -159,7 +159,7 @@ public class ExpenseServiceImplTest {
 		user.setUserId(1);
 		Optional<User> userObj = Optional.of(user);
 
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(expenseRepository.findByUserId(Mockito.anyInt())).thenReturn(userObj);
 		// 1.
 		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
 		request.setUserId(1);
@@ -178,8 +178,7 @@ public class ExpenseServiceImplTest {
 
 		user.setUserId(1);
 		Optional<User> userObj = Optional.empty();
-
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(expenseRepository.findByUserId(Mockito.anyInt())).thenReturn(userObj);
 		// 1.
 		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
 		request.setUserId(1);
