@@ -2,6 +2,7 @@ package com.rs.fer.user.util.impl;
 
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
@@ -38,9 +39,10 @@ public class UserUtilImpl implements UserUtil {
 		user.setOtp(otp);
 		Random random = new Random();
 
-		String verificationCode = "" + random.nextInt(9000) + 1000;
+	//	String verificationCode = "" + random.nextInt (9000) + 1000 ;
+		String uuid = UUID.randomUUID().toString();
 
-		user.setVerificationCode(verificationCode);
+		user.setVerificationCode(uuid);
 		
 		user.setEmailVerify("N");
 		user.setMobileVerify("N");
