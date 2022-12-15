@@ -32,18 +32,20 @@ public class UserUtilImpl implements UserUtil {
 		user.setMobile(request.getMobile());
 
 		user.setCreated(DateUtil.getCurrentDate());
+		
+		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
+
+		user.setOtp(otp);
+		Random random = new Random();
+
+		String verificationCode = "" + random.nextInt(9000) + 1000;
+
+		user.setVerificationCode(verificationCode);
+		
 		user.setEmailVerify("N");
 		user.setMobileVerify("N");
-		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
-		System.out.println(otp);
-		user.setOtp(otp);
-
-		String verificationcode = "1234567890";// Define strings with all digital letters
-
-		Random sj = new Random();// Instantiate a Random class
-
-		System.out.print("Generates 4-digit verification code =");
-		user.setVerificationCode(verificationcode);
+		
+		
 		return user;
 	}
 
