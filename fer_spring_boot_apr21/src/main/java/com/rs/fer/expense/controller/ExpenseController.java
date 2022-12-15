@@ -1,6 +1,4 @@
- package com.rs.fer.expense.controller;
-
-
+package com.rs.fer.expense.controller;
 
 import java.util.Set;
 
@@ -52,8 +50,6 @@ public class ExpenseController {
 		}
 		return response;
 	}
-	
-	
 
 	@PutMapping("/getExpense")
 	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
@@ -111,6 +107,7 @@ public class ExpenseController {
 		}
 		return response;
 	}
+
 	@PutMapping("/editExpense")
 	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
 
@@ -126,8 +123,7 @@ public class ExpenseController {
 		return response;
 
 	}
-	
-	
+
 	@GetMapping("/getExpenseOptions")
 	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
 
@@ -142,8 +138,6 @@ public class ExpenseController {
 			response = expenseService.getExpenseOptions(request);
 		}
 		return response;
-}
-
-
+	}
 
 }

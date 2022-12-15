@@ -16,10 +16,7 @@ import com.rs.fer.expense.response.GetExpenseResponse;
 
 public interface ExpenseService {
 
-	static EditExpenseResponse editExpense(EditExpenseRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	EditExpenseResponse editExpense(EditExpenseRequest request);
 
 	DeleteExpenseResponse deleteExpense(DeleteExpenseRequest request);
 

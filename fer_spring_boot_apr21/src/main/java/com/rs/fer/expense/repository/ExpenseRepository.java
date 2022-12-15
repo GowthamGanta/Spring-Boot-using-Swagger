@@ -13,8 +13,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Integer> {
 
 	List<Expense> findByUserId(int userId);
 
-	static List<Expense> findByUserIdAndTypeAndDateBetween(int userId, String type, String fromDate, String toDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	List<Expense> findByUserIdAndTypeAndDateBetween(int userId, String type, String fromDate, String toDate);
+	
 }
