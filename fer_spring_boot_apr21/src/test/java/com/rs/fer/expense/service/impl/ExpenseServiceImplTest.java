@@ -18,10 +18,14 @@ import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
+import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
+import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
+import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
+import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
@@ -186,6 +190,151 @@ public class ExpenseServiceImplTest {
 		// 3.
 		assertEquals("002", response.statusCode);
 
+	}
+
+	@Test
+	public void testEditExpenseSuccess() {
+
+		Expense expense = new Expense();
+		expense.setUserId(1);
+
+		Optional<Expense> expenseObj = Optional.of(expense);
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+		when(expenseRepository.save(Mockito.any())).thenReturn(expense);
+		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any())).thenReturn(expense);
+
+		// 1.
+		EditExpenseRequest request = new EditExpenseRequest();
+		request.setType("tea");
+		request.setDate("28-09-2022");
+		request.setPrice(10);
+		request.setNumberOfItems(3);
+		request.setTotal(30);
+		request.setBywhom("rs");
+
+		// 2.
+		EditExpenseResponse response = expenseServiceImpl.editExpense(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testEditExpenseFailure() {
+
+		Expense expense = new Expense();
+		// expense.setUserId(1);
+
+		Optional<Expense> expenseObj = Optional.empty();
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+		when(expenseRepository.save(Mockito.any())).thenReturn(expense);
+		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any())).thenReturn(expense);
+
+		// 1.
+		EditExpenseRequest request = new EditExpenseRequest();
+		request.setType("tea");
+		request.setDate("28-09-2022");
+		request.setPrice(10);
+		request.setNumberOfItems(3);
+		request.setTotal(30);
+		request.setBywhom("rs");
+
+		// 2.
+		EditExpenseResponse response = expenseServiceImpl.editExpense(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+	}
+
+	@Test
+	public void testGetExpense() {
+
+		Expense expense = new Expense();
+		expense.setUserId(1);
+
+		Optional<Expense> expenseObj = Optional.of(expense);
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+
+		// 1.
+		GetExpenseRequest request = new GetExpenseRequest();
+
+		// 2.
+		GetExpenseResponse response = expenseServiceImpl.getExpense(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testGetExpenseNotFound() {
+
+		Expense expense = new Expense();
+		// expense.setUserId(1);
+
+		Optional<Expense> expenseObj = Optional.empty();
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+
+		// 1.
+		GetExpenseRequest request = new GetExpenseRequest();
+
+		// 2.
+		GetExpenseResponse response = expenseServiceImpl.getExpense(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+	}
+	
+	@Test
+	public void testGetExpenseOptionsSuccess() {
+
+		Expense expense = new Expense();
+
+		User user = new User();
+		user.setUserId(1);
+		user.setExpenses(new LinkedHashSet<Expense>());
+
+		Optional<User> userObj = Optional.of(user);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		// 1.
+		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+
+		// 2.
+		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testGetExpenseOptionsNotFound() {
+
+		Optional<User> userObj = Optional.empty();
+
+		Expense expense = new Expense();
+		// expense.setUserId(1);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		// 1.
+		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+
+		// 2.
+		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
 	}
 
 }

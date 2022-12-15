@@ -16,12 +16,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
+import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.UpdateUserRequest;
+import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
+import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.util.UserUtil;
 
 
@@ -270,5 +274,176 @@ public class UserServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
+	 
+	@Test
+	public void testUpdateUser() {
 
+		User user = new User();
+		user.setUserId(1);
+
+		List<User> users = new ArrayList<>(1);
+
+		// Mock
+		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+
+		// 1.
+		UpdateUserRequest request = new UpdateUserRequest();
+		request.setFirstname("admin");
+		request.setMiddlename("k");
+		request.setLastname("rs");
+		request.setEmail("admin@rs.com");
+		request.setUsername("admin");
+		request.setPassword("rs");
+		request.setMobile("2342343243");
+
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+
+		request.setLineone("100ft");
+		request.setLinetwo("road");
+		request.setCity("hyd");
+		request.setState("ts");
+		request.setPincode("50081");
+		request.setCountry("IND");
+
+		UpdateUserResponse response = userServiceImpl.updateUser(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testUpdateUserNotPresent() {
+
+		List<User> users = new ArrayList<>(1);
+
+		User user = new User();
+		// user.setUserId(1);
+
+		// Mock
+		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+
+		// 1.
+		UpdateUserRequest request = new UpdateUserRequest();
+		request.setFirstname("admin");
+		request.setMiddlename("k");
+		request.setLastname("rs");
+		request.setEmail("admin@rs.com");
+		request.setUsername("admin");
+		request.setPassword("rs");
+		request.setMobile("2342343243");
+
+		Optional<User> userObj = Optional.empty();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+
+		request.setLineone("100ft");
+		request.setLinetwo("road");
+		request.setCity("hyd");
+		request.setState("ts");
+		request.setPincode("50081");
+		request.setCountry("IND");
+
+		UpdateUserResponse response = userServiceImpl.updateUser(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+
+	}
+
+	@Test
+	public void testUpdateUserDuplicate() {
+
+		User user = new User();
+		user.setUserId(1);
+
+		List<User> users = new ArrayList<>(1);
+		users.add(user);
+
+		// Mock
+		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
+
+		// 1.
+		UpdateUserRequest request = new UpdateUserRequest();
+		request.setFirstname("admin");
+		request.setMiddlename("k");
+		request.setLastname("rs");
+		request.setEmail("admin@rs.com");
+		request.setUsername("admin");
+		request.setPassword("rs");
+		request.setMobile("2342343243");
+
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+
+		request.setLineone("100ft");
+		request.setLinetwo("road");
+		request.setCity("hyd");
+		request.setState("ts");
+		request.setPincode("50081");
+		request.setCountry("IND");
+
+		UpdateUserResponse response = userServiceImpl.updateUser(request);
+
+		// 3.
+		assertEquals("001", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetUser() {
+
+		User user = new User();
+		user.setUserId(1);
+
+		Optional<User> userObj = Optional.of(user);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		// 1.
+		GetUserRequest request = new GetUserRequest();
+
+		// 2.
+		GetUserResponse response = userServiceImpl.getUser(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testGetUserNotFound() {
+
+		User user = new User();
+		// user.setUserId(1);
+
+		Optional<User> userObj = Optional.of(user);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		// 1.
+		GetUserRequest request = new GetUserRequest();
+
+		// 2.
+		GetUserResponse response = userServiceImpl.getUser(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
 }
