@@ -171,7 +171,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 		ExpenseReportResponse response = null;
 
-		List<Expense> expenseReport = ExpenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
+		List<Expense> expenseReport = expenseRepository.findByUserIdAndTypeAndDateBetween(request.getUserId(), request.getType(), request.getFromDate(), request.getToDate());
 
 		if (!expenseReport.isEmpty()) {
 
