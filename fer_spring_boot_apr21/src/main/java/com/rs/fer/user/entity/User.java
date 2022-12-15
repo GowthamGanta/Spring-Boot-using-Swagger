@@ -27,7 +27,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
@@ -51,12 +51,21 @@ public class User implements Serializable {
 
 	@Column
 	private String mobile;
-	
+
 	@Column
 	private String created;
-	
+
 	@Column
 	private String updated;
+
+	@Column
+	private String otp;
+	@Column
+	private String verificationCode;
+	@Column
+	private String verifymobile;
+	@Column
+	private String verifyemail;
 
 	public User() {
 
@@ -72,7 +81,42 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.mobile = mobile;
+		this.otp = otp;
+		this.verificationCode = verificationCode;
+		this.verifymobile = verifymobile;
+		this.verifyemail = verifyemail;
+	}
 
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public String getVerifymobile() {
+		return verifymobile;
+	}
+
+	public void setVerifymobile(String verifymobile) {
+		this.verifymobile = verifymobile;
+	}
+
+	public String getVerifyemail() {
+		return verifyemail;
+	}
+
+	public void setVerifyemail(String verifyemail) {
+		this.verifyemail = verifyemail;
 	}
 
 	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -179,6 +223,5 @@ public class User implements Serializable {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-	
-	
+
 }
