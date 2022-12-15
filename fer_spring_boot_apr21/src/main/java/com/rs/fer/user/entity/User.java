@@ -63,9 +63,9 @@ public class User implements Serializable {
 	@Column
 	private String verificationCode;
 	@Column
-	private String verifymobile;
+	private String mobileVerify;
 	@Column
-	private String verifyemail;
+	private String emailVerify;
 
 	public User() {
 
@@ -83,8 +83,24 @@ public class User implements Serializable {
 		this.mobile = mobile;
 		this.otp = otp;
 		this.verificationCode = verificationCode;
-		this.verifymobile = verifymobile;
-		this.verifyemail = verifyemail;
+		this.mobileVerify = mobileVerify;
+		this.emailVerify = emailVerify;
+	}
+
+	public String getMobileVerify() {
+		return mobileVerify;
+	}
+
+	public void setMobileVerify(String mobileVerify) {
+		this.mobileVerify = mobileVerify;
+	}
+
+	public String getEmailVerify() {
+		return emailVerify;
+	}
+
+	public void setEmailVerify(String emailVerify) {
+		this.emailVerify = emailVerify;
 	}
 
 	public String getOtp() {
@@ -101,22 +117,6 @@ public class User implements Serializable {
 
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
-	}
-
-	public String getVerifymobile() {
-		return verifymobile;
-	}
-
-	public void setVerifymobile(String verifymobile) {
-		this.verifymobile = verifymobile;
-	}
-
-	public String getVerifyemail() {
-		return verifyemail;
-	}
-
-	public void setVerifyemail(String verifyemail) {
-		this.verifyemail = verifyemail;
 	}
 
 	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
