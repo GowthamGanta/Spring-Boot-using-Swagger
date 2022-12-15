@@ -1,5 +1,8 @@
 package com.rs.fer.user.util.impl;
 
+import java.text.DecimalFormat;
+import java.util.Random;
+
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.user.entity.Address;
@@ -29,7 +32,18 @@ public class UserUtilImpl implements UserUtil {
 		user.setMobile(request.getMobile());
 
 		user.setCreated(DateUtil.getCurrentDate());
+		user.setEmailVerify("N");
+		user.setMobileVerify("N");
+		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
+		System.out.println(otp);
+		user.setOtp(otp);
 
+		String verificationcode = "1234567890";// Define strings with all digital letters
+
+		Random sj = new Random();// Instantiate a Random class
+
+		System.out.print("Generates 4-digit verification code =");
+		user.setVerificationCode(verificationcode);
 		return user;
 	}
 
