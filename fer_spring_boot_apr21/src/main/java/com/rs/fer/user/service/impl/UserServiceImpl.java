@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserUtil userUtil;
 
-	@Autowired
+	@Autowired  
 	UserRepository userRepository;
 
 	@Override
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
 		ResetPasswordResponse response = null;
 		Optional<User> userObj = userRepository.findById(request.getUserId());
 		if (userObj.isPresent()) {
-			User user = userObj.get();
+			User user = userObj.get();  
 			if (user.getPassword().equals(request.getCurrentPassword())) {
 
 				// success

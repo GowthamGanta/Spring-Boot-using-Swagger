@@ -150,7 +150,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 		Optional<Expense> expenseObj = expenseRepository.findById(request.getExpenseId());
 
-		if (expenseObj.isPresent()) {
+		if (expenseObj.isPresent()) {  
 
 			response = new GetExpenseResponse(HttpStatus.OK, "000", "fetch expense", null);
 
