@@ -5,11 +5,13 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
+import com.rs.fer.user.request.ValidateOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
+import com.rs.fer.user.response.ValidateOtpResponse;
 
 public interface UserService {
 
@@ -23,6 +25,6 @@ public interface UserService {
 
 	GetUserResponse getUser(GetUserRequest request);
 
-	
+	ValidateOtpResponse validateOtp(ValidateOtpRequest request);
 
 }

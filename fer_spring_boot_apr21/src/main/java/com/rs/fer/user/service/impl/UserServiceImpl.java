@@ -15,12 +15,14 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
+import com.rs.fer.user.request.ValidateOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 //github.com/javars100321/javars_jan21.git
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
+import com.rs.fer.user.response.ValidateOtpResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.util.UserUtil;
 
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserUtil userUtil;
 
-	@Autowired  
+	@Autowired
 	UserRepository userRepository;
 
 	@Override
@@ -72,16 +74,16 @@ public class UserServiceImpl implements UserService {
 	public LoginResponse login(LoginRequest request) {
 		LoginResponse response = null;
 		int userid = 0;
-		
+
 		// load vo to bean
 		String username = request.getUsername();
-		String password= request.getPassword();
+		String password = request.getPassword();
 		// List<User> findByUsernameAndPassword(String username, String password);
 
 		// save bean to database
 //		List<User> user = userRepository.findByUsernameAndPassword(request);
 
-		List<User> users = userRepository.findByUsernameAndPassword( username,  password);
+		List<User> users = userRepository.findByUsernameAndPassword(username, password);
 		if (users != null && !users.isEmpty()) {
 			User user1 = users.get(0);
 			userid = user1.getUserId();
@@ -91,10 +93,11 @@ public class UserServiceImpl implements UserService {
 		if (userid > 0) {
 			// success
 			response = new LoginResponse(HttpStatus.OK, "000", "Welcome to user", null);
-			//response.setUser(user);
+			// response.setUser(user);
 		} else {
 			// failure
-			response = new LoginResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Invalid username/password..Please try again.", null);
+			response = new LoginResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+					"Invalid username/password..Please try again.", null);
 		}
 
 		return response;
@@ -112,7 +115,7 @@ public class UserServiceImpl implements UserService {
 		ResetPasswordResponse response = null;
 		Optional<User> userObj = userRepository.findById(request.getUserId());
 		if (userObj.isPresent()) {
-			User user = userObj.get();  
+			User user = userObj.get();
 			if (user.getPassword().equals(request.getCurrentPassword())) {
 
 				// success
@@ -120,7 +123,7 @@ public class UserServiceImpl implements UserService {
 				userRepository.save(user);
 				response = new ResetPasswordResponse(HttpStatus.OK, "000", "password changed successfully", null);
 			} else {
- 
+
 				// failure
 
 				response = new ResetPasswordResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
@@ -204,5 +207,34 @@ public class UserServiceImpl implements UserService {
 		return response;
 	}
 
+	@Override
+	public ValidateOtpResponse validateOtp(ValidateOtpRequest request) {
+		ValidateOtpResponse response = null;
 
+		Optional<User> userObj = userRepository.findById(Integer.parseInt(request.getId()));
+
+		if (userObj.isPresent()) {
+			User user = userObj.get();
+			if (user.getOtp().equals(request.getId())) {
+
+				// success
+				user.setOtp(request.getOtp());
+				userRepository.save(user);
+				response = new ValidateOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
+			} else {
+
+				// failure
+
+				response = new ValidateOtpResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
+						"Id and Otp which is on the account are not matching", null);
+
+			}
+
+		} else {
+			response = new ValidateOtpResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+
+		}
+
+		return response;
+	}
 }
