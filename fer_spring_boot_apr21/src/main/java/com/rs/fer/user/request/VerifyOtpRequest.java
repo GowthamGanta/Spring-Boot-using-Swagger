@@ -1,6 +1,6 @@
 package com.rs.fer.user.request;
 
-public class ValidateOtpRequest {
+public class VerifyOtpRequest {
 
 	private String id;
 
@@ -22,4 +22,5 @@ public class ValidateOtpRequest {
 		this.otp = otp;
 	}
 
+	
 }

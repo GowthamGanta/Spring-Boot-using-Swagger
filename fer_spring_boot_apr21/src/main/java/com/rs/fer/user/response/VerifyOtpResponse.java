@@ -7,11 +7,12 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
-public class ValidateOtpResponse extends AbstractResponse {
+public class VerifyOtpResponse extends AbstractResponse {
 
+	
 	private User user;
 
-	public ValidateOtpResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
+	public VerifyOtpResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
 
 		this.status = status;

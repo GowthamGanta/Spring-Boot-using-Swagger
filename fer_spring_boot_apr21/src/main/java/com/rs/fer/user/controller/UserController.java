@@ -17,13 +17,15 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
-import com.rs.fer.user.request.ValidateOtpRequest;
+import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
-import com.rs.fer.user.response.ValidateOtpResponse;
+import com.rs.fer.user.response.VerifyEmailResponse;
+import com.rs.fer.user.response.VerifyOtpResponse;
 //github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
@@ -147,18 +149,34 @@ public class UserController {
 		return response;
 	}
 	
-	@PutMapping("/validateOtp")
-	public ValidateOtpResponse validateOtp(@RequestBody ValidateOtpRequest request) {
+	@PutMapping("/verifyOtp")
+	public VerifyOtpResponse verifyOtp(@RequestBody VerifyOtpRequest request) {
 
-		ValidateOtpResponse response = null;
+		VerifyOtpResponse response = null;
 
-		Set<String> errorMessages = userValidation.validateOtpRequest(request);
+		Set<String> errorMessages = userValidation.verifyOtpRequest(request);
 
 		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new ValidateOtpResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+			response = new VerifyOtpResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.validateOtp(request);
+			response = userService.verifyOtp(request);
+		}
+		return response;
+	}
+
+	@PutMapping("/verifyEmail")
+	public VerifyEmailResponse verifyEmail(@RequestBody VerifyEmailRequest request) {
+
+		VerifyEmailResponse response = null;
+
+		Set<String> errorMessages = userValidation.verifyEmailRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new VerifyEmailResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.verifyEmail(request);
 		}
 		return response;
 	}

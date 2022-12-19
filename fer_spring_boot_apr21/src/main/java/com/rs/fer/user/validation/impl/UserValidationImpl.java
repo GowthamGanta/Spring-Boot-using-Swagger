@@ -11,7 +11,8 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
-import com.rs.fer.user.request.ValidateOtpRequest;
+import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.validation.UserValidation;
 import com.rs.fer.util.FERUtil;
 
@@ -92,7 +93,7 @@ public class UserValidationImpl implements UserValidation {
 	}
 
 	@Override
-	public Set<String> validateOtpRequest(ValidateOtpRequest request) {
+	public Set<String> verifyOtpRequest(VerifyOtpRequest request) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
@@ -101,5 +102,16 @@ public class UserValidationImpl implements UserValidation {
 
 		return errorMessages;
 	}
+
+	@Override
+	public Set<String> verifyEmailRequest(VerifyEmailRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getVerificationCode(),
+				"Please enter VerificationCode");
+
+		return errorMessages;
+			}
 
 }

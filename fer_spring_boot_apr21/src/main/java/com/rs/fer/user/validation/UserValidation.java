@@ -7,7 +7,8 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
-import com.rs.fer.user.request.ValidateOtpRequest;
+import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 
 public interface UserValidation {
 
@@ -20,6 +21,9 @@ public interface UserValidation {
 	Set<String> validateGetUserRequest(GetUserRequest request);
 
 	Set<String> validateUpdateUserRequest(UpdateUserRequest request);
-	
-	Set<String> validateOtpRequest(ValidateOtpRequest request);
+
+	Set<String> verifyEmailRequest(VerifyEmailRequest request);
+
+	Set<String> verifyOtpRequest(VerifyOtpRequest request);
+
 }

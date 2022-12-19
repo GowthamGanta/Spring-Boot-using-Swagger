@@ -15,14 +15,16 @@ import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
-import com.rs.fer.user.request.ValidateOtpRequest;
+import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 //github.com/javars100321/javars_jan21.git
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
-import com.rs.fer.user.response.ValidateOtpResponse;
+import com.rs.fer.user.response.VerifyEmailResponse;
+import com.rs.fer.user.response.VerifyOtpResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.util.UserUtil;
 
@@ -208,8 +210,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ValidateOtpResponse validateOtp(ValidateOtpRequest request) {
-		ValidateOtpResponse response = null;
+	public VerifyOtpResponse verifyOtp(VerifyOtpRequest request) {
+		VerifyOtpResponse response = null;
 
 		Optional<User> userObj = userRepository.findById(Integer.parseInt(request.getId()));
 
@@ -220,21 +222,53 @@ public class UserServiceImpl implements UserService {
 				// success
 				user.setOtp(request.getOtp());
 				userRepository.save(user);
-				response = new ValidateOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
+				response = new VerifyOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
 			} else {
 
 				// failure
 
-				response = new ValidateOtpResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
+				response = new VerifyOtpResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
 						"Id and Otp which is on the account are not matching", null);
 
 			}
 
 		} else {
-			response = new ValidateOtpResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+			response = new VerifyOtpResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
 
 		}
 
 		return response;
+	}
+
+	@Override
+	public VerifyEmailResponse verifyEmail(VerifyEmailRequest request) {
+		VerifyEmailResponse response = null;
+
+		Optional<User> userObj = userRepository.findById(Integer.parseInt(request.getId()));
+
+		if (userObj.isPresent()) {
+			User user = userObj.get();
+			if (user.getVerificationCode().equals(request.getId())) {
+
+				// success
+				user.setVerificationCode(request.getVerificationCode());
+				userRepository.save(user);
+				response = new VerifyEmailResponse(HttpStatus.OK, "000", "VerificationCode Updated successfully", null);
+			} else {
+
+				// failure
+
+				response = new VerifyEmailResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
+						"Id and VerificationCode which is on the account are not matching", null);
+
+			}
+
+		} else {
+			response = new VerifyEmailResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+
+		}
+
+		return response;
+
 	}
 }
