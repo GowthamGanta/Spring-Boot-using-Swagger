@@ -1,0 +1,44 @@
+package com.rs.fer.user.controller;
+
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rs.fer.user.request.BlockUserRequest;
+import com.rs.fer.user.response.BlockUserResponse;
+import com.rs.fer.user.service.AdminService;
+
+import com.rs.fer.user.validation.AdminValidation;
+
+@RestController
+@RequestMapping("/api")
+public class AdminController {
+
+	@Autowired
+	AdminValidation adminValidation;
+
+	@Autowired
+	AdminService adminService;
+
+	@PostMapping("/blockUser")
+	public BlockUserResponse blockUser(@RequestBody BlockUserRequest request) {
+
+		BlockUserResponse response = null;
+
+		Set<String> errorMessages = adminValidation.validateBlockUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new BlockUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = adminService.blockUser(request);
+		}
+		return response;
+	}
+}

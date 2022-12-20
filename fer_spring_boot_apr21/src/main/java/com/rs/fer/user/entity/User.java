@@ -66,6 +66,8 @@ public class User implements Serializable {
 	private String mobileVerify;
 	@Column
 	private String emailVerify;
+	@Column
+	private String blockStatus;
 
 	public User() {
 
@@ -81,10 +83,19 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.mobile = mobile;
-		this.otp = otp;
-		this.verificationCode = verificationCode;
-		this.mobileVerify = mobileVerify;
-		this.emailVerify = emailVerify;
+		this.blockStatus = blockStatus;
+		// this.otp = otp;
+		// this.verificationCode = verificationCode;
+		// this.mobileVerify = mobileVerify;
+		// this.emailVerify = emailVerify;
+	}
+
+	public String getBlockStatus() {
+		return blockStatus;
+	}
+
+	public void setBlockStatus(String blockStatus) {
+		this.blockStatus = blockStatus;
 	}
 
 	public String getMobileVerify() {
