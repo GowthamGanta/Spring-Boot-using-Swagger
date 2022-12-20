@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.BlockUserRequest;
+import com.rs.fer.user.request.UnblockUserRequest;
 import com.rs.fer.user.response.BlockUserResponse;
+import com.rs.fer.user.response.UnblockUserResponse;
 import com.rs.fer.user.service.AdminService;
 
 import com.rs.fer.user.validation.AdminValidation;
@@ -38,6 +40,21 @@ public class AdminController {
 
 		} else {
 			response = adminService.blockUser(request);
+		}
+		return response;
+	}
+	@PostMapping("/unblockUser")
+	public UnblockUserResponse unblockUser(@RequestBody UnblockUserRequest request) {
+
+		UnblockUserResponse response = null;
+
+		Set<String> errorMessages = adminValidation.validateUnblockUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UnblockUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = adminService.unblockUser(request);
 		}
 		return response;
 	}
