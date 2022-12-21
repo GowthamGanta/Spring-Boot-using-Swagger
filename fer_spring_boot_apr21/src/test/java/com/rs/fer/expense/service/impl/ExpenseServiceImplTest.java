@@ -33,7 +33,7 @@ import com.rs.fer.user.repository.UserRepository;
 @SpringBootTest
 public class ExpenseServiceImplTest {
  
-	@InjectMocks
+	@InjectMocks 
 	private ExpenseServiceImpl expenseServiceImpl;
 
 	@Mock
@@ -157,40 +157,7 @@ public class ExpenseServiceImplTest {
 		assertEquals("002", response.statusCode);
 	}
 
-	@Test
-	public void testGetExpenseOptions() {
-		List<Expense> expenseOptions = new ArrayList<>();
-		
-		Expense expense = new Expense();
-		expenseOptions.add(expense);
-		
-		when(expenseRepository.findByUserId(Mockito.anyInt())).thenReturn(expenseOptions);
-		// 1.
-		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
-		request.setUserId(1);
-		// 2.
-		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
-
-		// 3.
-		assertEquals("000", response.statusCode);
-
-	}
-
-	@Test
-	public void testGetExpenseOptionsNotPresent() {
-		List<Expense> expenseOptions = new ArrayList<>();
-		
-		when(expenseRepository.findByUserId(Mockito.anyInt())).thenReturn(expenseOptions);
-		// 1.
-		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
-		request.setUserId(1);
-		// 2.
-		GetExpenseOptionsResponse response = expenseServiceImpl.getExpenseOptions(request);
-
-		// 3.
-		assertEquals("002", response.statusCode);
-
-	}
+	
 
 	@Test
 	public void testEditExpenseSuccess() {
@@ -271,27 +238,7 @@ public class ExpenseServiceImplTest {
 		assertEquals("000", response.statusCode);
 	}
 
-	@Test
-	public void testGetExpenseNotFound() {
-
-		Expense expense = new Expense();
-		// expense.setUserId(1);
-
-		Optional<Expense> expenseObj = Optional.empty();
-
-		// Mock
-		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
-
-		// 1.
-		GetExpenseRequest request = new GetExpenseRequest();
-
-		// 2.
-		GetExpenseResponse response = expenseServiceImpl.getExpense(request);
-
-		// 3.
-		assertEquals("002", response.statusCode);
-	}
-	
+		
 	@Test
 	public void testGetExpenseOptionsSuccess() {
 
