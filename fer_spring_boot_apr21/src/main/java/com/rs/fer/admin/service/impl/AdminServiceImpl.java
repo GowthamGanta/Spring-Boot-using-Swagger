@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.UnblockUserRequest;
+import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.UnblockUserResponse;
+import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
-import com.rs.fer.user.request.BlockUserRequest;
-import com.rs.fer.user.request.UnblockUserRequest;
-import com.rs.fer.user.response.BlockUserResponse;
-import com.rs.fer.user.response.UnblockUserResponse;
-import com.rs.fer.user.service.AdminService;
+
 
 import com.rs.fer.user.util.UserUtil;
 
@@ -90,5 +91,6 @@ public class AdminServiceImpl implements AdminService {
 		return response;
 
 	}
+		
 
 }

@@ -1,9 +1,9 @@
 package com.rs.fer.admin.service;
 
-import com.rs.fer.user.request.BlockUserRequest;
-import com.rs.fer.user.request.UnblockUserRequest;
-import com.rs.fer.user.response.BlockUserResponse;
-import com.rs.fer.user.response.UnblockUserResponse;
+import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.UnblockUserRequest;
+import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.UnblockUserResponse;
 
 public interface AdminService {
 

@@ -5,10 +5,9 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.user.request.BlockUserRequest;
-import com.rs.fer.user.request.UnblockUserRequest;
-import com.rs.fer.user.validation.AdminValidation;
-
+import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.UnblockUserRequest;
+import com.rs.fer.admin.validation.AdminValidation;
 import com.rs.fer.util.FERUtil;
 
 @Component
