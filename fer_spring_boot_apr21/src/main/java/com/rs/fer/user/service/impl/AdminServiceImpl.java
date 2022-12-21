@@ -57,8 +57,8 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return response;
 	}
-	@Override
-	public UnblockUserResponse UnblockUser(UnblockUserRequest request) {
+		@Override
+	public UnblockUserResponse unblockUser(UnblockUserRequest request) {
 		UnblockUserResponse response = null;
 
 		// To get the user based on userId
@@ -88,6 +88,7 @@ public class AdminServiceImpl implements AdminService {
 
 		}
 		return response;
+
 	}
 
 }

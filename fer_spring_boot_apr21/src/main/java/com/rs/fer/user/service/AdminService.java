@@ -9,6 +9,6 @@ public interface AdminService {
 
 	BlockUserResponse blockUser(BlockUserRequest request);
 
-	UnblockUserResponse UnblockUser(UnblockUserRequest request);
+	UnblockUserResponse unblockUser(UnblockUserRequest request);
 
 }
