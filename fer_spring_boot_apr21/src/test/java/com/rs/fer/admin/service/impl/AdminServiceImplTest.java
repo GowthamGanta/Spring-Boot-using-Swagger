@@ -16,7 +16,7 @@ import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
 @SpringBootTest
-public class AdminServiceImplTest {
+public class AdminServiceImplTest { 
 
 	@InjectMocks 
 	private AdminServiceImpl adminServiceImpl;
