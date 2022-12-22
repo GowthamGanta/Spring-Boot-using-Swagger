@@ -1,5 +1,6 @@
 package com.rs.fer.admin.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service;
 import com.rs.fer.admin.request.BlockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
-
 
 import com.rs.fer.user.util.UserUtil;
 
@@ -22,11 +23,11 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	UserUtil userUtil;
- 
+
 	@Autowired
 	UserRepository userRepository;
 
-	@Override 
+	@Override
 	public BlockUserResponse blockUser(BlockUserRequest request) {
 		BlockUserResponse response = null;
 
@@ -58,7 +59,8 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return response;
 	}
-		@Override
+
+	@Override
 	public UnblockUserResponse unblockUser(UnblockUserRequest request) {
 		UnblockUserResponse response = null;
 
@@ -76,7 +78,8 @@ public class AdminServiceImpl implements AdminService {
 			// If user already is blocked
 
 			if ("N".equals(user.getBlockStatus())) {
-				response = new UnblockUserResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "User is already unblocked", null);
+				response = new UnblockUserResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "User is already unblocked",
+						null);
 
 			} else {
 				// unblock the user
@@ -91,6 +94,23 @@ public class AdminServiceImpl implements AdminService {
 		return response;
 
 	}
-		
+
+	@Override
+	public GetUnblockUserResponse getUnblockUsers() {
+		GetUnblockUserResponse response = null;
+
+		List<User> users = userRepository.findByBlockStatus("N");
+		if (users.isEmpty()) {
+			// no results found
+			response = new GetUnblockUserResponse(HttpStatus.OK, "101", "No users found", null);
+
+		} else {
+			// success
+			response = new GetUnblockUserResponse(HttpStatus.OK, "000", "User present ", null);
+			response.setUsers(users);
+		}
+
+		return response;
+	}
 
 }
