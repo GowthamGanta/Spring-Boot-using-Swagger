@@ -1,4 +1,5 @@
 package com.rs.fer.admin.service.impl;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -113,13 +114,17 @@ public class AdminServiceImplTest {
 	public void testUserIsAlreadyBlocked() {
 
 		User user = new User();
+
 		user.setBlockStatus("y");
+
 		user.setUserId(1);
+
 		Optional<User> userObj = Optional.of(user);
 
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 
 		BlockUserRequest request = new BlockUserRequest();
+
 		BlockUserResponse response = adminServiceImpl.blockUser(request);
 		assertEquals("002", response.statusCode);
 
