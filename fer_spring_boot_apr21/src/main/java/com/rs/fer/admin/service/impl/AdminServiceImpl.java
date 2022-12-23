@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.rs.fer.admin.request.BlockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.GetBlockUserResponse;
 import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
@@ -19,12 +20,15 @@ import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.util.UserUtil;
 
 @Service
+
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
+	
 	UserUtil userUtil;
 
 	@Autowired
+	
 	UserRepository userRepository;
 
 	@Override
@@ -97,6 +101,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public GetUnblockUserResponse getUnblockUsers() {
+
 		GetUnblockUserResponse response = null;
 
 		List<User> users = userRepository.findByBlockStatus("N");
@@ -105,12 +110,33 @@ public class AdminServiceImpl implements AdminService {
 			response = new GetUnblockUserResponse(HttpStatus.OK, "101", "No users found", null);
 
 		} else {
+
 			// success
 			response = new GetUnblockUserResponse(HttpStatus.OK, "000", "User present ", null);
 			response.setUsers(users);
 		}
 
 		return response;
+	}
+
+	@Override
+	public GetBlockUserResponse getBlockUsers() {
+
+		GetBlockUserResponse response = null;
+
+		List<User> users = userRepository.findByBlockStatus("Y");
+		if (users.isEmpty()) {
+			// no results found
+			response = new GetBlockUserResponse(HttpStatus.OK, "101", "No users found", null);
+
+		} else {
+			// success
+			response = new GetBlockUserResponse(HttpStatus.OK, "000", "User present ", null);
+			response.setUsers(users);
+		}
+
+		return response;
+
 	}
 
 }

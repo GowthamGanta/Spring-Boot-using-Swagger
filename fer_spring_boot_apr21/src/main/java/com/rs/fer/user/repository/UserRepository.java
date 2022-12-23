@@ -17,12 +17,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	List<User> findByUserIdAndPassword(int userId, String password);
 
-	List<User> findByBlockStatus(String Blockstatus);
-
-	
-
-	//// List<User> findByUsernameAndPassword(User user);
-
-	// List<User> findByUsernameAndPassword(LoginRequest request);
+	List<User> findByBlockStatus(String BlockStatus);
 
 }

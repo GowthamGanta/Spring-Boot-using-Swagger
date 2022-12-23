@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rs.fer.admin.request.BlockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.GetBlockUserResponse;
 import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.admin.validation.AdminValidation;
 
-
-
 @RestController
-@RequestMapping("/api") 
+@RequestMapping("/api")
 public class AdminController {
 
 	@Autowired
@@ -45,6 +44,7 @@ public class AdminController {
 		}
 		return response;
 	}
+
 	@PostMapping("/unblockUser")
 	public UnblockUserResponse unblockUser(@RequestBody UnblockUserRequest request) {
 
@@ -60,10 +60,19 @@ public class AdminController {
 		}
 		return response;
 	}
+
 	@PostMapping("/getUnblockUsers")
 	public GetUnblockUserResponse getUnblockUser() {
 
 		return adminService.getUnblockUsers();
 
 	}
+
+	@PostMapping("/getBlockUsers")
+	public GetBlockUserResponse getBlockUser() {
+
+		return adminService.getBlockUsers();
+
+	}
+
 }
