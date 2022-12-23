@@ -39,6 +39,7 @@ public class UserServiceImplTest {
 	private UserServiceImpl userServiceImpl;
 
 	@Mock
+
 	UserRepository userRepository;
 
 	@Mock
