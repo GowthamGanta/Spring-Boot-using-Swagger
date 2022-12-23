@@ -22,12 +22,14 @@ import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
+import com.rs.fer.user.response.VerifyOtpResponse;
 import com.rs.fer.user.util.UserUtil;
 
 @SpringBootTest
@@ -436,4 +438,37 @@ public class UserServiceImplTest {
 		assertEquals("002", response.statusCode);
 	}
 
+	@Test
+	public void testVerifyOtp() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setOtp("123456");
+
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("1");
+		request.setOtp("123456");
+
+		// 2.
+		VerifyOtpResponse response = userServiceImpl.verifyOtp(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testIdAndOtpMissmatch() {
+
+		User user = new User();
+		user.setUserId(2);
+		user.setOtp("1234567");
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+	}
 }
