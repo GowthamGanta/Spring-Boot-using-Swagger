@@ -552,4 +552,5 @@ public class UserServiceImplTest {
 		// 3.
 		assertEquals("101", response.statusCode);
 	}
+
 }

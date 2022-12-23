@@ -220,6 +220,7 @@ public class UserServiceImpl implements UserService {
 			if (user.getOtp().equals(request.getOtp())) {
 
 				// success
+				
 				user.setMobileVerify("Y");
 				userRepository.save(user);
 				response = new VerifyOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
