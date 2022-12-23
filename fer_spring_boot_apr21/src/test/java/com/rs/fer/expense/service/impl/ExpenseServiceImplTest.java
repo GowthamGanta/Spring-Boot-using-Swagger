@@ -238,6 +238,26 @@ public class ExpenseServiceImplTest {
 		assertEquals("000", response.statusCode);
 	}
 
+	@Test
+	public void testGetExpenseNotFound() {
+
+		Expense expense = new Expense();
+		// expense.setUserId(1);
+
+		Optional<Expense> expenseObj = Optional.empty();
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+
+		// 1.
+		GetExpenseRequest request = new GetExpenseRequest();
+
+		// 2.
+		GetExpenseResponse response = expenseServiceImpl.getExpense(request);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+	}
 		
 	@Test
 	public void testGetExpenseOptionsSuccess() {
