@@ -51,6 +51,7 @@ public class UserServiceImplTest {
 		List<User> users = new ArrayList<>(1);
 
 		User user = new User();
+
 		user.setUserId(1);
 
 		// Mock
