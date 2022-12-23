@@ -185,7 +185,7 @@ public void testGetUnBlockUserResponseFailure() {
 	
 	List<User> users = new ArrayList<>();
 
-
+	
 	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
 
 	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers();
