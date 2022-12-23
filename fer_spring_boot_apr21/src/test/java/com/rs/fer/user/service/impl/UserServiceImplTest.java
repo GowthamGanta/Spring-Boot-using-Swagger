@@ -493,4 +493,63 @@ public class UserServiceImplTest {
 		assertEquals("102", response.statusCode);
 	}
 
+	@Test
+	public void testVerifyOtp() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setOtp("123456");
+
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("1");
+		request.setOtp("123456");
+
+		// 2.
+		VerifyOtpResponse response = userServiceImpl.verifyOtp(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testIdAndOtpMissmatch() {
+
+		User user = new User();
+		user.setUserId(2);
+		user.setOtp("1234567");
+		Optional<User> userObj = Optional.of(user);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		when(userRepository.save(Mockito.any())).thenReturn(user);
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("1");
+		request.setOtp("123456");
+		// 2.
+		VerifyOtpResponse response = userServiceImpl.verifyOtp(request);
+
+		// 3.
+		assertEquals("102", response.statusCode);
+	}
+
+	@Test
+	public void testUserNotPresent() {
+		Optional<User> userObj = Optional.empty();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("1");
+		request.setOtp("123456");
+		// 2.
+		VerifyOtpResponse response = userServiceImpl.verifyOtp(request);
+
+		// 3.
+		assertEquals("101", response.statusCode);
+	}
 }

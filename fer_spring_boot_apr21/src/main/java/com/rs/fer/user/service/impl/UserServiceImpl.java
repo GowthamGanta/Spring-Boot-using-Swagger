@@ -217,10 +217,10 @@ public class UserServiceImpl implements UserService {
 
 		if (userObj.isPresent()) {
 			User user = userObj.get();
-			if (user.getOtp().equals(request.getId())) {
+			if (user.getOtp().equals(request.getOtp())) {
 
 				// success
-				user.setOtp(request.getOtp());
+				user.setMobileVerify("Y");
 				userRepository.save(user);
 				response = new VerifyOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
 			} else {
