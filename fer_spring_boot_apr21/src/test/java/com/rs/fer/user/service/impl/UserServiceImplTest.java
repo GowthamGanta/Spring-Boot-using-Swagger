@@ -129,6 +129,7 @@ public class UserServiceImplTest {
 		// 1.
 		RegistrationRequest request = new RegistrationRequest();
 		request.setFirstname("admin");
+
 		request.setMiddlename("k");
 		request.setLastname("rs");
 		request.setEmail("admin@rs.com");
