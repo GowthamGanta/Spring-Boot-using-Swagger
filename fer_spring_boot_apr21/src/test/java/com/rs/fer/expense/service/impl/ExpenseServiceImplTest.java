@@ -19,11 +19,13 @@ import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
+import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.util.ExpenseUtil;
@@ -43,7 +45,6 @@ public class ExpenseServiceImplTest {
 
 	@Mock
 	UserRepository userRepository;
-
 	@Test
 	public void testDeleteExpense() {
 
@@ -283,5 +284,49 @@ public class ExpenseServiceImplTest {
 		// 3.
 		assertEquals("002", response.statusCode);
 	}
+	@Test
+	public void testExpenseReport() {
 
-}
+		Expense expense = new Expense();
+		expense.setUserId(1);
+
+		List<Expense> expenseReport = new ArrayList<>(1);
+		expenseReport.add(expense);
+		
+		when(expenseRepository.findByUserIdAndTypeAndDateBetween(Mockito.anyInt(), Mockito.anyString(),
+				Mockito.anyString(), Mockito.anyString())).thenReturn(expenseReport);
+
+		ExpenseReportRequest request = new ExpenseReportRequest();
+
+		request.setUserId(1);
+		request.setType("tea");
+		request.setFromDate("14/12/22");
+		request.setToDate("14/12/23");
+
+		ExpenseReportResponse response = expenseServiceImpl.expenseReport(request);
+
+		assertEquals("000", response.statusCode);
+
+	}
+	
+	
+	@Test
+	public void testExpenseReportIsEmpty() {
+
+		List<Expense> expenseReport = new ArrayList<>(1);
+
+		when(expenseRepository.findByUserIdAndTypeAndDateBetween(Mockito.anyInt(), Mockito.anyString(),
+				Mockito.anyString(), Mockito.anyString())).thenReturn(expenseReport);
+
+		ExpenseReportRequest request = new ExpenseReportRequest();
+
+		request.setUserId(1);
+		request.setType("tea");
+		request.setFromDate("14/12/22");
+		request.setToDate("14/12/23");
+
+		ExpenseReportResponse response = expenseServiceImpl.expenseReport(request);
+
+		assertEquals("002", response.statusCode);
+	}
+}	
