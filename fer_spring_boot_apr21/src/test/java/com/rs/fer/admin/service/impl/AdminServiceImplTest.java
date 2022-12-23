@@ -3,6 +3,8 @@ package com.rs.fer.admin.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.admin.request.BlockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
+import com.rs.fer.admin.response.GetBlockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
@@ -47,7 +50,7 @@ public class AdminServiceImplTest {
 	}
 
 	@Test
-	public void testUserNotPresent() {
+	public void testUnblockUserNotPresent() {
 
 		Optional<User> userObj = Optional.empty();
 		// Mock
@@ -80,7 +83,7 @@ public class AdminServiceImplTest {
 	}
 
 	@Test
-	public void testblockuser() {
+	public void testBlockUser() {
 		User user = new User();
 		user.setBlockStatus("Y");
 		user.setUserId(1);
@@ -97,8 +100,7 @@ public class AdminServiceImplTest {
 	}
 
 	@Test
-	public void testUserIsNotPresent() {
-		// User user = new User();
+	public void testBlockUserIsNotPresent() {
 
 		Optional<User> userObj = Optional.empty();
 
@@ -128,6 +130,33 @@ public class AdminServiceImplTest {
 		BlockUserResponse response = adminServiceImpl.blockUser(request);
 		assertEquals("002", response.statusCode);
 
+	}
+
+	@Test
+	public void testGetBlockUsers() {
+		User user = new User();
+		user.setBlockStatus("Y");
+		List<User> users = new ArrayList<>();
+		users.add(user);
+
+		// Mock
+		when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+
+		GetBlockUserResponse response = adminServiceImpl.getBlockUsers();
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetBlockUserResponseFailure() {
+		List<User> users = new ArrayList<>();
+
+		when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+
+		GetBlockUserResponse response = adminServiceImpl.getBlockUsers();
+		assertEquals("101", response.statusCode);
 	}
 
 }
