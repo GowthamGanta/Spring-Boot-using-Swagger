@@ -17,6 +17,7 @@ import com.rs.fer.admin.request.BlockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
 import com.rs.fer.admin.response.GetBlockUserResponse;
+import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
@@ -159,5 +160,36 @@ public class AdminServiceImplTest {
 		GetBlockUserResponse response = adminServiceImpl.getBlockUsers();
 		assertEquals("101", response.statusCode);
 	}
+
+
+
+@Test
+public void testGetUnBlockUsers() {
+	User user = new User();
+	user.setBlockStatus("N");
+	List<User> users = new ArrayList<>();
+	users.add(user);
+
+	// Mock
+	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+
+	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers();
+
+	// 3.
+	assertEquals("000", response.statusCode);
+
+}
+
+@Test
+public void testGetUnBlockUserResponseFailure() {
+	
+	List<User> users = new ArrayList<>();
+
+
+	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+
+	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers();
+	assertEquals("101", response.statusCode);
+}
 
 }
