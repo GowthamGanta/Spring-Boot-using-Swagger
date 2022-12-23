@@ -248,10 +248,10 @@ public class UserServiceImpl implements UserService {
 
 		if (userObj.isPresent()) {
 			User user = userObj.get();
-			if (user.getVerificationCode().equals(request.getId())) {
+			if (user.getVerificationCode().equals(request.getVerificationCode())) {
 
 				// success
-				user.setVerificationCode(request.getVerificationCode());
+				user.setEmailVerify("Y");
 				userRepository.save(user);
 				response = new VerifyEmailResponse(HttpStatus.OK, "000", "VerificationCode Updated successfully", null);
 			} else {

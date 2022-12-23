@@ -39,7 +39,6 @@ public class UserServiceImplTest {
 	private UserServiceImpl userServiceImpl;
 
 	@Mock
-
 	UserRepository userRepository;
 
 	@Mock
@@ -51,7 +50,6 @@ public class UserServiceImplTest {
 		List<User> users = new ArrayList<>(1);
 
 		User user = new User();
-
 		user.setUserId(1);
 
 		// Mock
@@ -129,7 +127,6 @@ public class UserServiceImplTest {
 		// 1.
 		RegistrationRequest request = new RegistrationRequest();
 		request.setFirstname("admin");
-
 		request.setMiddlename("k");
 		request.setLastname("rs");
 		request.setEmail("admin@rs.com");
@@ -442,36 +439,58 @@ public class UserServiceImplTest {
 	}
 
 	@Test
-	public void testVerifyOtp() {
+	public void testVerifyEmail() {
 
 		User user = new User();
 		user.setUserId(1);
-		user.setOtp("123456");
-
+		user.setVerificationCode("abcd1234");
 		Optional<User> userObj = Optional.of(user);
 
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		VerifyOtpRequest request = new VerifyOtpRequest();
+		VerifyEmailRequest request = new VerifyEmailRequest();
 		request.setId("1");
-		request.setOtp("123456");
+		request.setVerificationCode("abcd1234");
+		VerifyEmailResponse response = userServiceImpl.verifyEmail(request);
 
-		// 2.
-		VerifyOtpResponse response = userServiceImpl.verifyOtp(request);
-
-		// 3.
 		assertEquals("000", response.statusCode);
 	}
 
 	@Test
-	public void testIdAndOtpMissmatch() {
+	public void testVerifyEmailIsNotPresent() {
+
+		User user = new User();
+		// user.setUserId(1);
+		// user.setVerificationCode("abcd1234");
+		Optional<User> userObj = Optional.empty();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		VerifyEmailRequest request = new VerifyEmailRequest();
+		request.setId("1");
+		request.setVerificationCode("abcd1234");
+		VerifyEmailResponse response = userServiceImpl.verifyEmail(request);
+
+		assertEquals("101", response.statusCode);
+	}
+
+	@Test
+	public void testVerifyEmailIsMissMatch() {
 
 		User user = new User();
 		user.setUserId(2);
-		user.setOtp("1234567");
+		user.setVerificationCode("naveen1234");
 		Optional<User> userObj = Optional.of(user);
 
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		VerifyEmailRequest request = new VerifyEmailRequest();
+		request.setId("1");
+		request.setVerificationCode("abcd1234");
+		VerifyEmailResponse response = userServiceImpl.verifyEmail(request);
+
+		assertEquals("102", response.statusCode);
 	}
+
 }
