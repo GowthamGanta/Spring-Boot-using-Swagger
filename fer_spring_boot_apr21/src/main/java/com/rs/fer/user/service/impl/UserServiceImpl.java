@@ -216,6 +216,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userObj = userRepository.findById(Integer.parseInt(request.getId()));
 
 		if (userObj.isPresent()) {
+			
 			User user = userObj.get();
 			if (user.getOtp().equals(request.getOtp())) {
 

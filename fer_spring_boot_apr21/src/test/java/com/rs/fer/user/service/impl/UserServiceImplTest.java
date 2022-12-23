@@ -520,6 +520,7 @@ public class UserServiceImplTest {
 	public void testIdAndOtpMissmatch() {
 
 		User user = new User();
+
 		user.setUserId(2);
 		user.setOtp("1234567");
 		Optional<User> userObj = Optional.of(user);
