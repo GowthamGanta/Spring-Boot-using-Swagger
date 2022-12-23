@@ -45,6 +45,7 @@ public class ExpenseServiceImplTest {
 
 	@Mock
 	UserRepository userRepository;
+	
 	@Test
 	public void testDeleteExpense() {
 
