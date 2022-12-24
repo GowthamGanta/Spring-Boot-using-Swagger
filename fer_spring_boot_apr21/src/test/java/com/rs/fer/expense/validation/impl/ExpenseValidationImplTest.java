@@ -134,8 +134,8 @@ public class ExpenseValidationImplTest {
 
 		EditExpenseRequest request = new EditExpenseRequest();
         request.setExpenseId(1);
-		// request.setType("tea");
-		request.setDate("24/12/22");
+		request.setType("tea");
+		//request.setDate("24/12/22");
 		request.setPrice(150);
 		request.setNumberOfItems(2);
 		request.setTotal(300);

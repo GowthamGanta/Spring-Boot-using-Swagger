@@ -21,10 +21,6 @@ import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
-import com.rs.fer.user.request.RegistrationRequest;
-import com.rs.fer.user.response.RegistrationResponse;
-import com.rs.fer.user.service.UserService;
-import com.rs.fer.user.validation.UserValidation;
 
 @SpringBootTest
 public class ExpenseControllerTest {
