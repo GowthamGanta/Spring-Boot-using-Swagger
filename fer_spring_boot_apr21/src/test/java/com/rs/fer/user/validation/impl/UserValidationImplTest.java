@@ -168,7 +168,7 @@ public class UserValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
-	}
+	} 
 
 	@Test
 	public void testValidateLoginFailure() {

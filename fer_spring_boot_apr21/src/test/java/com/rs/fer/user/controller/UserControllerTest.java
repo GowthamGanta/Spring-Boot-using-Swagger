@@ -57,7 +57,7 @@ public class UserControllerTest {
 
 		assertEquals("000", response.statusCode);
 
-	}
+	} 
 
 	@Test
 	public void testRegistrationFailure() {
@@ -79,7 +79,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testverifyEmail() {
-
+ 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
