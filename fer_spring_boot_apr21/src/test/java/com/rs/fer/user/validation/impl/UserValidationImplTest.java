@@ -86,7 +86,7 @@ public class UserValidationImplTest {
 		// request.setVerificationCode("p1a2v3i4t5h6r7a8");
 
 		Set<String> errorMessages = userValidationImpl.verifyEmailRequest(request);
-
+ 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();
 
