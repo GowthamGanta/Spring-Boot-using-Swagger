@@ -1,6 +1,5 @@
 package com.rs.fer.user.validation.impl;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
@@ -10,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 
 @SpringBootTest
@@ -89,5 +89,34 @@ public class UserValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	@Test
+	public void testValidateResetPassword() {
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		request.setUserId(1);  
+		request.setCurrentPassword("admin");
+		request.setNewPassword("rs");
+				Set<String> errorMessages = userValidationImpl.validateResetPasswordRequest(request);
+		
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty(); 
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+		 
+	}  
+	@Test
+	public void testValidateResetPasswordFailure() {
+		
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		request.setUserId(1);
+		request.setCurrentPassword("admin");
+		//request.setNewPassword("rs");
 
+		Set<String> errorMessages = userValidationImpl.validateResetPasswordRequest(request);
+		
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+		
+	}
 }
