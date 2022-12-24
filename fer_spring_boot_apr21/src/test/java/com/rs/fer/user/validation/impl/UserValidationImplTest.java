@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 
 @SpringBootTest
 public class UserValidationImplTest {
@@ -118,5 +119,36 @@ public class UserValidationImplTest {
 		
 		assertEquals(isExpectedEmpty, isActualEmpty);
 		
+	}
+	@Test
+	public void testverifyOtpRequest() {
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("1");
+		request.setOtp("12345");
+
+		Set<String> errorMessages = userValidationImpl.verifyOtpRequest(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testverifyOtpFailure() {
+
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		request.setId("2");
+		// request.setOtp("12345");
+
+		Set<String> errorMessages = userValidationImpl.verifyOtpRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
 	}
 }

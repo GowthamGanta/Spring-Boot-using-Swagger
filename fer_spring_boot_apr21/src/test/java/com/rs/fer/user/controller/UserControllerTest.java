@@ -16,9 +16,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
+import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
+import com.rs.fer.user.response.VerifyOtpResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -140,6 +142,42 @@ public class UserControllerTest {
 
 		// Then
 		ResetPasswordResponse response = userController.resetPassword(request);
+
+		assertEquals("999", response.statusCode);
+	}
+	@Test
+	public void testVerifyOtp() {  
+//Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		 
+		VerifyOtpRequest request = new VerifyOtpRequest();
+		VerifyOtpResponse response = new VerifyOtpResponse(HttpStatus.OK, "000", "", null);
+		
+		//when
+		when(userValidation.verifyOtpRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.verifyOtp(Mockito.any())).thenReturn(response);
+		
+		//Then
+		VerifyOtpResponse otpResponse = userController.verifyOtp(request);
+		
+		assertEquals("000", response.statusCode);
+		
+		}
+
+	@Test  
+	public void testVerifyOtpFailure() { 
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Otp");
+
+		VerifyOtpRequest request = new VerifyOtpRequest();  
+
+		// When
+		when(userValidation.verifyOtpRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		VerifyOtpResponse response = userController.verifyOtp(request);
 
 		assertEquals("999", response.statusCode);
 	}
