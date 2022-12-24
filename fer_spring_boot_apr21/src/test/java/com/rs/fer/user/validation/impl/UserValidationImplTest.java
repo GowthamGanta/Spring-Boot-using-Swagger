@@ -12,6 +12,7 @@ import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 
@@ -219,5 +220,67 @@ public class UserValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
+	}
+	@Test
+	public void testValidateUpdateUser() {
+
+		
+		UpdateUserRequest request = new UpdateUserRequest();
+		
+		request.setUserId(1);
+		
+		request.setFirstname("adminn");
+		request.setMiddlename("rss");
+		request.setEmail("adminn@rss.com.");
+		request.setUsername("adminss");
+		request.setPassword("rss");
+		request.setMobile("12341234");
+		
+		
+		request.setLineone("100ft");
+		request.setLinetwo("street1");
+		request.setCity("hyd");
+		request.setState("TS");
+		request.setPincode("500018");
+		request.setCountry("INDIA");
+		 
+		Set<String> errorMessages = userValidationImpl.validateUpdateUserRequest(request);
+		 
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.contains("errormessage");
+		
+		assertEquals(isExpectedEmpty, isExpectedEmpty);
+		
+	}
+	
+	@Test
+	public void testUpdateUserfailure() {
+		
+		UpdateUserRequest request = new UpdateUserRequest();
+		
+		request.setUserId(1);
+		
+		//request.setFirstname("adminn");
+		request.setMiddlename("rss");
+		request.setEmail("adminn@rss.com.");
+		request.setUsername("adminss");
+		request.setPassword("rss");
+		request.setMobile("12341234");
+		
+		
+		request.setLineone("100ft");
+		request.setLinetwo("street1rs");
+		request.setCity("hyd");
+		request.setState("TS");
+		request.setPincode("500018");
+		request.setCountry("INDIA");
+		
+		Set<String> errorMessages = userValidationImpl.validateUpdateUserRequest(request);
+ 		 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+		
 	}
 }
