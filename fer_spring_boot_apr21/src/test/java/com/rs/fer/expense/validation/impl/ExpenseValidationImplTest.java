@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 
 @SpringBootTest
@@ -148,6 +149,42 @@ public class ExpenseValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
+	} 
+	
+	@Test
+	public void testvalidateGetExpenseOptionsRequest() {
+		
+		GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+		
+		request.setUserId(1);
+		
+		Set<String> errorMessages = expenseValidationImpl.validateGetExpenseOptionsRequest(request);
+		
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);	
+	}  
+	
+	@Test
+
+	public void testvalidateGetExpenseOptionsRequestFailure() {
+
+	GetExpenseOptionsRequest request = new GetExpenseOptionsRequest();
+	
+	request.setUserId(0);
+	
+	
+	Set<String> errorMessages = expenseValidationImpl.validateGetExpenseOptionsRequest(request);
+	
+	boolean isExpectedEmpty = false;
+	boolean isActualEmpty = errorMessages.isEmpty();
+	
+	assertEquals(isExpectedEmpty, isActualEmpty);  
+	  
+	
 	}
+	
 
 }
