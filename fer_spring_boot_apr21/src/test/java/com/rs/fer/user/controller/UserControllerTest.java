@@ -71,6 +71,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testverifyEmail() {
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
