@@ -14,8 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
+import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
+import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
@@ -104,8 +106,45 @@ public class ExpenseControllerTest {
 		GetExpenseResponse response = expenseController.getExpense(request);
 
 		assertEquals("999", response.statusCode);
+	} 
+	
+	@Test
+	public void testEditExpense() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		EditExpenseRequest request = new EditExpenseRequest();
+		EditExpenseResponse response = new EditExpenseResponse(HttpStatus.OK, "000", "", null);
+
+		when(expenseValidation.validateEditExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+		when(expenseService.editExpense(Mockito.any())).thenReturn(response);
+
+		EditExpenseResponse Response = expenseController.editExpense(request);
+
+		assertEquals("000", response.statusCode);
+
+	}
+	
+	@Test
+	public void testEditExpenseFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Type");
+
+		EditExpenseRequest request = new EditExpenseRequest();
+
+		// When
+		when(expenseValidation.validateEditExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		EditExpenseResponse response = expenseController.editExpense(request);
+
+		assertEquals("999", response.statusCode);
 	}
 
+
+	
 }
 
 

@@ -127,5 +127,27 @@ public class ExpenseValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	
+	@Test
+
+	public void testvalidateEditExpenseRequestFailure() {
+
+		EditExpenseRequest request = new EditExpenseRequest();
+        request.setExpenseId(1);
+		// request.setType("tea");
+		request.setDate("24/12/22");
+		request.setPrice(150);
+		request.setNumberOfItems(2);
+		request.setTotal(300);
+		request.setBywhom("me");
+
+		Set<String> errorMessages = expenseValidationImpl.validateEditExpenseRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
 
 }
