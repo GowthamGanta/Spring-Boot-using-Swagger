@@ -31,7 +31,7 @@ public class UserControllerTest {
 	UserService userService;
 
 	@Test
-	public void testRegistration() {
+	public void testRegistration() { 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
@@ -48,7 +48,7 @@ public class UserControllerTest {
 		assertEquals("000", response.statusCode);
 
 	}
-
+ 
 	@Test
 	public void testRegistrationFailure() {
 
@@ -66,5 +66,5 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
-
+	
 }
