@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.user.request.GetUserRequest;
+import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 
-@SpringBootTest
+@SpringBootTest 
 public class UserValidationImplTest {
 
 	@InjectMocks
@@ -144,6 +146,73 @@ public class UserValidationImplTest {
 		// request.setOtp("12345");
 
 		Set<String> errorMessages = userValidationImpl.verifyOtpRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	@Test
+	public void testValidateLoginRequest() {
+
+		LoginRequest request = new LoginRequest();
+
+		request.setUsername("admin");
+		request.setPassword("rs");
+
+		Set<String> errorMessages = userValidationImpl.validateLoginRequest(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testValidateLoginFailure() {
+
+		LoginRequest request = new LoginRequest();
+
+		// request.setUsername("admin");
+		request.setPassword("rs");
+
+		Set<String> errorMessages = userValidationImpl.validateLoginRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testValidateGetUserRequest() {
+
+		GetUserRequest request = new GetUserRequest();
+
+		request.setUserId(1);
+
+		Set<String> errorMessages = userValidationImpl.validateGetUserRequest(request);
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.contains(errorMessages);
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+
+	public void testValidateGetUserFailure() {
+
+		GetUserRequest request = new GetUserRequest();
+
+		request.setUserId(0);
+
+		Set<String> errorMessages = userValidationImpl.validateGetUserRequest(request);
 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();

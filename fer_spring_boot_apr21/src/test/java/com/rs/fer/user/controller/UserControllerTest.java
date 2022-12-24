@@ -13,10 +13,14 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.user.request.GetUserRequest;
+import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
+import com.rs.fer.user.response.GetUserResponse;
+import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
@@ -181,4 +185,77 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+	@Test
+	public void testLogin() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		LoginRequest request = new LoginRequest();
+		LoginResponse response = new LoginResponse(HttpStatus.OK, "000", "", null);
+
+		// When
+		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.login(Mockito.any())).thenReturn(response);
+
+		// Then
+		LoginResponse regResponse = userController.login(request);
+
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testLoginFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Password");
+
+		LoginRequest request = new LoginRequest();
+
+		// When
+		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		LoginResponse response = userController.login(request);
+
+		assertEquals("999", response.statusCode);
+	}
+
+	@Test
+	public void testGetUser() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetUserRequest request = new GetUserRequest();
+		GetUserResponse response = new GetUserResponse(HttpStatus.OK, "000", "", null);
+
+		// When
+		when(userValidation.validateGetUserRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.getUser(Mockito.any())).thenReturn(response);
+
+		// Then
+		GetUserResponse getuserResponse = userController.getUser(request);
+
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testGetUserFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("GetUser is  not valid");
+
+		GetUserRequest request = new GetUserRequest();
+
+		// When
+		when(userValidation.validateGetUserRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		GetUserResponse response = userController.getUser(request);
+
+		assertEquals("999", response.statusCode);
+	}
 }
+
