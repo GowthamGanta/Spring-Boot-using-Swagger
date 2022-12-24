@@ -14,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
+import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
+import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -68,4 +70,42 @@ public class ExpenseControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+	@Test
+	public void testgetExpense() {
+		
+		Set<String> errorMessages = new LinkedHashSet<>();
+		
+		GetExpenseRequest request = new GetExpenseRequest();
+		GetExpenseResponse response = new GetExpenseResponse(HttpStatus.OK, "000", "", null);
+		
+		when(expenseValidation.validateGetExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+		when(expenseService.getExpense(Mockito.any())).thenReturn(response);
+		
+		GetExpenseResponse Response = expenseController.getExpense(request);
+
+		assertEquals("000", response.statusCode);
+
+
+	}
+
+	@Test
+	public void testGetExpenseFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Type");
+
+		GetExpenseRequest request = new GetExpenseRequest();  
+
+		// When
+		when(expenseValidation.validateGetExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		GetExpenseResponse response = expenseController.getExpense(request);
+
+		assertEquals("999", response.statusCode);
+	}
+
 }
+
+
