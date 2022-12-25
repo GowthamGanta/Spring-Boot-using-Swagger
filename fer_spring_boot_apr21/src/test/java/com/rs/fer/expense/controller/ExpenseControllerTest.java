@@ -14,10 +14,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
+import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
+import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
@@ -175,7 +177,42 @@ public class ExpenseControllerTest {
 
 		assertEquals("999", response.statusCode);
 	} 
+	@Test
+	public void testDeleteExpense() {
+		
+		Set<String> errorMessages = new LinkedHashSet<>();
+		  
+		DeleteExpenseRequest request = new DeleteExpenseRequest();
+		DeleteExpenseResponse response = new DeleteExpenseResponse(HttpStatus.OK, "000", "", null);
+		
+		when(expenseValidation.validateGetExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+		when(expenseService.deleteExpense(Mockito.any())).thenReturn(response);
+		
+		DeleteExpenseResponse Response = expenseController.deleteExpense(request);
 
+		assertEquals("000", response.statusCode);
+
+
+	}  
+
+	
+	@Test
+	public void testDeleteExpenseFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Type");
+
+		DeleteExpenseRequest request = new DeleteExpenseRequest();  
+
+		// When
+		when(expenseValidation.validateDeleteExpenseRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		DeleteExpenseResponse response = expenseController.deleteExpense(request);
+
+		assertEquals("999", response.statusCode);
+	}
 	
 }
 

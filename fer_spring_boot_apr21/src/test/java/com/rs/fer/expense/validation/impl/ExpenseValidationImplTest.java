@@ -1,5 +1,4 @@
 package com.rs.fer.expense.validation.impl;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Set;
@@ -11,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
+import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
@@ -186,5 +186,36 @@ public class ExpenseValidationImplTest {
 	
 	}
 	
+	@Test
+	public void testvalidateDeleteExpenseRequest() {
 
+		DeleteExpenseRequest request = new DeleteExpenseRequest();
+
+		request.setExpenseid(1);
+
+		Set<String> errorMessages = expenseValidationImpl.validateDeleteExpenseRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test 
+
+	public void testvalidateDeleteExpenseFailure() {
+
+		GetExpenseRequest request = new GetExpenseRequest();
+
+		request.setExpenseId(0);
+
+		Set<String> errorMessages = expenseValidationImpl.validateGetExpenseRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
 }
