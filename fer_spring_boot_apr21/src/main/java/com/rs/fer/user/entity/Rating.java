@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Rating {
 	
 	@Id
-	@Column(name = "review_id")
+	@Column(name = "rating_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
