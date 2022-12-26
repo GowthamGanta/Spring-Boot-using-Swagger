@@ -129,15 +129,15 @@ public class User implements Serializable {
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
 	}
+	
+	@OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Rating> ratings;
 
 	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private Set<Expense> expenses;
 	
-    @OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Rating> ratings;
-
 	@OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "addr_id", referencedColumnName = "address_id")
 	private Address address;
