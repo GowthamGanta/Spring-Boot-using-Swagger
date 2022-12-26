@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
+import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
@@ -282,5 +283,39 @@ public class UserValidationImplTest {
 		
 		assertEquals(isExpectedEmpty, isActualEmpty);
 		
+	}
+	
+	@Test
+	public void testValidateRatingRequest() {
+		
+		RatingRequest request = new RatingRequest();
+		request.setComments("found");
+		request.setRating(4);
+		request.setReviewedby(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateRatingRequest(request);
+		 
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateRatingRequestFailure() {
+		
+		RatingRequest request = new RatingRequest();
+		//request.setComments("found");
+		request.setRating(4);
+		request.setReviewedby(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateRatingRequest(request);
+		 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
 }
