@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
+import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
@@ -22,6 +23,7 @@ import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
+import com.rs.fer.user.response.RatingResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
@@ -153,7 +155,8 @@ public class UserControllerTest {
 	}
 	@Test
 	public void testVerifyOtp() {  
-//Mock
+		
+        //Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 		 
 		VerifyOtpRequest request = new VerifyOtpRequest();
@@ -259,6 +262,7 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+	
 	@Test
 	public void testUpdateUser() {
 		
@@ -296,5 +300,45 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+	
+	@Test
+	public void testRating() {
+ 
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		RatingRequest request = new RatingRequest();
+		RatingResponse response = new RatingResponse(HttpStatus.OK, "000", "", null);
+		
+		// When
+		when(userValidation.validateRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.rating(Mockito.any())).thenReturn(response);
+
+		// Then
+		RatingResponse ratingResponse = userController.rating(request);
+
+		assertEquals("000", ratingResponse.statusCode);
+
+	}
+	
+	@Test
+	public void testRatingFailure() {
+ 
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter  Comments");
+
+		RatingRequest request = new RatingRequest();
+		
+		// When
+		when(userValidation.validateRatingRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		RatingResponse ratingResponse = userController.rating(request);
+
+		assertEquals("999", ratingResponse.statusCode);
+
+	}
+		
 }
 

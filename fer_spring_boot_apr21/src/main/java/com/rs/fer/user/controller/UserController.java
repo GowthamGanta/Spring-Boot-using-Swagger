@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
+import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
@@ -21,6 +22,7 @@ import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
+import com.rs.fer.user.response.RatingResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
@@ -180,5 +182,20 @@ public class UserController {
 		}
 		return response;
 	}
+	
+	@PostMapping("/rating")
+	public RatingResponse rating(@RequestBody RatingRequest request) {
 
+		RatingResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateRatingRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new RatingResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.rating(request);
+		}
+		return response;  
+	}
 }
