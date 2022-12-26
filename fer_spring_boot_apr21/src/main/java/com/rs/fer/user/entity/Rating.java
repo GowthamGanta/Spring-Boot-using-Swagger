@@ -63,7 +63,7 @@ public class Rating {
 	public void setReviewedBy(int reviewedBy) {
 		this.reviewedBy = reviewedBy;
 	}
-	public int getReviewIdId() {
+	public int getReviewId() {
 		return reviewId;
 	}
 	public void setReviewId(int reviewId) {
