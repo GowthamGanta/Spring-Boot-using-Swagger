@@ -14,10 +14,15 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.admin.request.UnblockUserRequest;
+import com.rs.fer.admin.response.UnblockUserResponse;
+import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.repository.RatingRepository;
 import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
+import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
@@ -25,6 +30,7 @@ import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
+import com.rs.fer.user.response.RatingResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
@@ -40,6 +46,9 @@ public class UserServiceImplTest {
 
 	@Mock
 	UserRepository userRepository;
+	
+	@Mock
+	RatingRepository ratingRepository;
 
 	@Mock
 	UserUtil userUtil;
@@ -50,7 +59,7 @@ public class UserServiceImplTest {
 		List<User> users = new ArrayList<>(1);
 
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(3);
 
 		// Mock
 		when(userRepository.findByEmail(Mockito.anyString())).thenReturn(users);
@@ -80,7 +89,7 @@ public class UserServiceImplTest {
 	public void testRegistrationDuplicateEmail() {
 
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(3);
 
 		List<User> users = new ArrayList<>(1);
 		users.add(user);
@@ -553,5 +562,49 @@ public class UserServiceImplTest {
 		// 3.
 		assertEquals("101", response.statusCode);
 	}
+	
+	@Test
+	public void testUserNotFound() {
 
+		User user = new User();
+		//user.setUserId(1);
+		Optional<User> userObj = Optional.empty();
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		//when(userUtil.loadRatingRequestToUserId(Mockito.any())).thenReturn(user);
+
+		RatingRequest request = new RatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setReviewedby(4);
+		
+		RatingResponse response = userServiceImpl.rating(request);
+
+		// 3.
+		assertEquals("101", response.statusCode);
+
+	}
+	
+	@Test
+	public void testUserBlocked() {
+
+		User user = new User();
+		user.setBlockStatus("Y");
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		//when(userUtil.loadRatingRequestToUserId(Mockito.any())).thenReturn(user);
+
+		RatingRequest request = new RatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setReviewedby(4);
+		
+		RatingResponse response = userServiceImpl.rating(request);
+
+		// 3.
+		assertEquals("102", response.statusCode);
+
+	}
 }
