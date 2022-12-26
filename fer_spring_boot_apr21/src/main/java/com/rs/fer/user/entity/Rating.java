@@ -1,12 +1,43 @@
 package com.rs.fer.user.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+
 public class Rating {
 	
-	private int id;
-	private String comments;
-	private int rating;
-	private int reviewedBy;
+	@Id
+	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	@Column
+	private int id;
+	@Column
+	private String comments;
+	@Column
+	private int rating;
+	@Column
+	private int reviewedBy;
+	
+	public Rating() {
+
+	}
+
+	public Rating(int userId, int id, String comments, int rating, int reviewedBy) {
+
+		this.userId = userId;
+		this.id = id;
+		this.comments = comments;
+		this.rating = rating;
+		this.reviewedBy = reviewedBy;
+	}
+	
 	
 	public int getId() {
 		return id;
