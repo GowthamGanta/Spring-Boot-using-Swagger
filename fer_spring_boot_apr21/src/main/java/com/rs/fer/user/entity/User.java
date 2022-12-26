@@ -32,7 +32,7 @@ public class User implements Serializable {
 	private int userId;
 
 	@Column
-	private String firstname;
+	private String firstname; 
 
 	@Column
 	private String middlename;
@@ -131,6 +131,7 @@ public class User implements Serializable {
 	}
 	
 	@OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
 	private Set<Rating> ratings;
 
 	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
