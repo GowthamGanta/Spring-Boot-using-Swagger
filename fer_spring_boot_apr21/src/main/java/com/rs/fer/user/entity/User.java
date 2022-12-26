@@ -68,6 +68,18 @@ public class User implements Serializable {
 	private String emailVerify;
 	@Column
 	private String blockStatus;
+	
+	@Column
+	private int id;
+	
+	@Column
+	private String comments;
+	
+	@Column
+	private int rating;
+	
+	@Column
+	private int reviewedBy;
 
 	public User() {
 
@@ -134,6 +146,9 @@ public class User implements Serializable {
 
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private Set<Expense> expenses;
+	
+    @OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Rating> ratings;
 
 	@OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "addr_id", referencedColumnName = "address_id")
@@ -202,6 +217,38 @@ public class User implements Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public int getReviewedBy() {
+		return reviewedBy;
+	}
+
+	public void setReviewedBy(int reviewedBy) {
+		this.reviewedBy = reviewedBy;
+	}
 
 	public Set<Expense> getExpenses() {
 		return expenses;
@@ -234,9 +281,5 @@ public class User implements Serializable {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-	
-	@OneToMany(targetEntity = Entity.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	
-	private Set<Rating> ratings;
 	
 }
