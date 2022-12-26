@@ -68,18 +68,6 @@ public class User implements Serializable {
 	private String emailVerify;
 	@Column
 	private String blockStatus;
-	
-	@Column
-	private int id;
-	
-	@Column
-	private String comments;
-	
-	@Column
-	private int rating;
-	
-	@Column
-	private int reviewedBy;
 
 	public User() {
 
@@ -218,38 +206,14 @@ public class User implements Serializable {
 		this.mobile = mobile;
 	}
 	
-	public int getId() {
-		return id;
+	public Set<Rating> getRatings() {
+		return ratings;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRatings(Set<Rating> ratings) {
+		this.ratings = ratings;
 	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public int getReviewedBy() {
-		return reviewedBy;
-	}
-
-	public void setReviewedBy(int reviewedBy) {
-		this.reviewedBy = reviewedBy;
-	}
-
+	
 	public Set<Expense> getExpenses() {
 		return expenses;
 	}
