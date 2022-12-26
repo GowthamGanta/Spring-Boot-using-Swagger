@@ -98,8 +98,7 @@ public class UserValidationImpl implements UserValidation {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getOtp(),
-				"Please enter Otp");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getOtp(), "Please enter Otp");
 
 		return errorMessages;
 	}
@@ -113,7 +112,7 @@ public class UserValidationImpl implements UserValidation {
 				"Please enter VerificationCode");
 
 		return errorMessages;
-			}
+	}
 
 	@Override
 	public Set<String> validateRatingRequest(RatingRequest request) {
@@ -126,5 +125,4 @@ public class UserValidationImpl implements UserValidation {
 
 		return errorMessages;
 	}
-
 }
