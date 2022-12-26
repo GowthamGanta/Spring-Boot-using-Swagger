@@ -234,5 +234,9 @@ public class User implements Serializable {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-
+	
+	@OneToMany(targetEntity = Entity.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	
+	private Set<Rating> ratings;
+	
 }
