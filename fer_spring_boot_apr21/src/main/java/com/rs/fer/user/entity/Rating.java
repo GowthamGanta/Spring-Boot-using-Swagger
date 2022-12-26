@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class Rating {
 	
 	@Id
+	@Column(name = "review_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
@@ -22,20 +23,20 @@ public class Rating {
 	
 	private int reviewedBy;
 	
-	private int reviewId;
+	private int userId;
 	
 	public Rating() {
 
 	}
 
-	public Rating(int id, String comments, int rating, int reviewedBy, int reviewId) {
+	public Rating(int id, String comments, int rating, int reviewedBy, int userId) {
 
 		
 		this.id = id;
 		this.comments = comments;
 		this.rating = rating;
 		this.reviewedBy = reviewedBy;
-		this.reviewId = reviewId;
+		this.userId = userId;
 	}
 	
 	
@@ -63,11 +64,11 @@ public class Rating {
 	public void setReviewedBy(int reviewedBy) {
 		this.reviewedBy = reviewedBy;
 	}
-	public int getReviewId() {
-		return reviewId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setReviewId(int reviewId) {
-		this.reviewId = reviewId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 }
