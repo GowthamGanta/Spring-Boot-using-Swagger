@@ -3,8 +3,6 @@ package com.rs.fer.user.util.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
-import com.rs.fer.user.util.impl.UserUtilImpl;
-import com.rs.fer.user.validation.impl.UserValidationImpl;
 
 @SpringBootTest
 public class UserUtilImplTest {
@@ -118,5 +114,6 @@ public class UserUtilImplTest {
 
 		assertEquals(isExpectedEmpty, isExpectedEmpty);
 	}
+	
 
 }
