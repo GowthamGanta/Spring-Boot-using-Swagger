@@ -25,6 +25,25 @@ public class Rating {
 	
 	private int userId;
 	
+	private int created;
+	
+	 public int getCreated() {
+		return created;
+	}
+
+	public void setCreated(int created) {
+		this.created = created;
+	}
+
+	public int getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(int updated) {
+		this.updated = updated;
+	}
+	private int updated;
+	
 	public Rating() {
 
 	}
