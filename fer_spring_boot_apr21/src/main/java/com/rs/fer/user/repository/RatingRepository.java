@@ -13,6 +13,6 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	List<Rating> findByUserIdAndReviewedBy(int userId, int reviewedById);
 
-	List<Rating> save(User userId);
+	List<Rating> save(User userId); 
 
 }
