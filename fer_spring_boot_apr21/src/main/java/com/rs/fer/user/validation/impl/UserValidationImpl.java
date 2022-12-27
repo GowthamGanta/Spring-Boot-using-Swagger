@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
-import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
@@ -115,12 +115,12 @@ public class UserValidationImpl implements UserValidation {
 	}
 
 	@Override
-	public Set<String> validateRatingRequest(RatingRequest request) {
+	public Set<String> validateSaveRatingRequest(SaveRatingRequest request) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getComments(), "Please enter Comments");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getRating(), "Please enter Rating");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getReviewedby(), "Please enter reviewer Id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getReviewerId(), "Please enter reviewer Id");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter User Id");
 
 		return errorMessages;
