@@ -7,10 +7,12 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.user.entity.Address;
+import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.util.UserUtil;
 import com.rs.fer.util.DateUtil;
@@ -102,6 +104,12 @@ public class UserUtilImpl implements UserUtil {
 		user.setUpdated(DateUtil.getCurrentDate());
 		return user;
 
+	}
+
+	@Override
+	public Rating loadSaveRatingRequestToUserId(SaveRatingRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

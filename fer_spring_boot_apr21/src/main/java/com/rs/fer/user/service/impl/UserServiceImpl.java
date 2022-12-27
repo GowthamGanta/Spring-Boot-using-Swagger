@@ -8,12 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.repository.RatingRepository;
 import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
@@ -22,6 +25,7 @@ import com.rs.fer.user.response.LoginResponse;
 //github.com/javars100321/javars_jan21.git
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
+import com.rs.fer.user.response.SaveRatingResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
 import com.rs.fer.user.response.VerifyOtpResponse;
@@ -36,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	RatingRepository ratingRepository;
 
 	@Override
 	public RegistrationResponse registration(RegistrationRequest request) {
@@ -268,6 +275,60 @@ public class UserServiceImpl implements UserService {
 		} else {
 			response = new VerifyEmailResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
 
+		}
+
+		return response;
+
+	}
+	@Override
+	public SaveRatingResponse saveRating(SaveRatingRequest request) {
+		SaveRatingResponse response = null;
+
+		// To get the User based on userId
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		// If user is not present
+		if (!userObj.isPresent()) {
+			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+		}
+
+		// User is blocked
+		User user = userObj.get();
+		if ("Y".equals(user.getBlockStatus())) {
+			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
+		}
+
+		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
+		// Current reviewer present
+		if (!reviewerObj.isPresent()) {
+			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
+		}
+
+		// Reviewer is blocked
+		User reviewer = reviewerObj.get();
+		if ("Y".equals(user.getBlockStatus())) {
+			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
+		}
+
+		// Ratings given already
+		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(),
+				request.getReviewerId());
+		if (CollectionUtils.isEmpty(ratings)) {
+			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
+		}
+		// load vo to bean
+		Rating rating = userUtil.loadSaveRatingRequestToUserId(request);
+
+		// save bean to database
+		rating = ratingRepository.save(rating);
+		// load response
+		if (rating.getUserId() > 0) {
+			// success
+			response = new SaveRatingResponse(HttpStatus.OK, "000", "Rating saved successfully ", null);
+			response.setRating(reviewer);
+		} else {
+			// failure
+			response = new SaveRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "106", "Rating saved failed", null);
 		}
 
 		return response;
