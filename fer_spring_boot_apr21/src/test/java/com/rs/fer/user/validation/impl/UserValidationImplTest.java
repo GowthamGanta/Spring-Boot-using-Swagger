@@ -10,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
-import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
@@ -198,9 +198,9 @@ public class UserValidationImplTest {
 
 		Set<String> errorMessages = userValidationImpl.validateGetUserRequest(request);
 
-		boolean isExpectedEmpty = false;
+		boolean isExpectedEmpty = true;
 
-		boolean isActualEmpty = errorMessages.contains(errorMessages);
+		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
@@ -248,9 +248,9 @@ public class UserValidationImplTest {
 		Set<String> errorMessages = userValidationImpl.validateUpdateUserRequest(request);
 		 
 		boolean isExpectedEmpty = true;
-		boolean isActualEmpty = errorMessages.contains("errormessage");
+		boolean isActualEmpty = errorMessages.isEmpty();
 		
-		assertEquals(isExpectedEmpty, isExpectedEmpty);
+		assertEquals(isExpectedEmpty, isActualEmpty);
 		
 	}
 	
@@ -288,13 +288,13 @@ public class UserValidationImplTest {
 	@Test
 	public void testValidateRatingRequest() {
 		
-		RatingRequest request = new RatingRequest();
+		SaveRatingRequest request = new SaveRatingRequest();
 		request.setComments("found");
 		request.setRating(4);
-		request.setReviewedby(5);
+		request.setReviewerId(5);
 		request.setUserId(1);
 		
-		Set<String> errorMessages = userValidationImpl.validateRatingRequest(request);
+		Set<String> errorMessages = userValidationImpl.validateSaveRatingRequest(request);
 		 
 		boolean isExpectedEmpty = true;
 		boolean isActualEmpty = errorMessages.isEmpty();
@@ -305,13 +305,13 @@ public class UserValidationImplTest {
 	@Test
 	public void testValidateRatingRequestFailure() {
 		
-		RatingRequest request = new RatingRequest();
+		SaveRatingRequest request = new SaveRatingRequest();
 		//request.setComments("found");
 		request.setRating(4);
-		request.setReviewedby(5);
+		request.setReviewerId(5);
 		request.setUserId(1);
 		
-		Set<String> errorMessages = userValidationImpl.validateRatingRequest(request);
+		Set<String> errorMessages = userValidationImpl.validateSaveRatingRequest(request);
 		 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();

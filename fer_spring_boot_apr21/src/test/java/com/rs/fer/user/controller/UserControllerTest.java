@@ -15,17 +15,17 @@ import org.springframework.http.HttpStatus;
 
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
-import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
-import com.rs.fer.user.response.RatingResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
+import com.rs.fer.user.response.SaveRatingResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
 import com.rs.fer.user.response.VerifyOtpResponse;
@@ -57,9 +57,9 @@ public class UserControllerTest {
 		when(userService.registration(Mockito.any())).thenReturn(response);
 
 		// Then
-		RegistrationResponse Response = userController.registration(request);
+		RegistrationResponse regResponse = userController.registration(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", regResponse.statusCode);
 
 	} 
 
@@ -97,7 +97,7 @@ public class UserControllerTest {
 		// Then
 		VerifyEmailResponse verResponse = userController.verifyEmail(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", verResponse.statusCode);
 
 	}
 
@@ -133,7 +133,7 @@ public class UserControllerTest {
 				// Then
 				ResetPasswordResponse resetPwdResponse = userController.resetPassword(request);
 
-				assertEquals("000", response.statusCode);
+				assertEquals("000", resetPwdResponse.statusCode);
 		
 	}
 	@Test
@@ -169,7 +169,7 @@ public class UserControllerTest {
 		//Then
 		VerifyOtpResponse otpResponse = userController.verifyOtp(request);
 		
-		assertEquals("000", response.statusCode);
+		assertEquals("000", otpResponse.statusCode);
 		
 		}
 
@@ -205,7 +205,7 @@ public class UserControllerTest {
 		// Then
 		LoginResponse regResponse = userController.login(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", regResponse.statusCode);
 
 	}
 
@@ -242,7 +242,7 @@ public class UserControllerTest {
 		// Then
 		GetUserResponse getuserResponse = userController.getUser(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", getuserResponse.statusCode);
 	}
 
 	@Test
@@ -307,15 +307,15 @@ public class UserControllerTest {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		RatingRequest request = new RatingRequest();
-		RatingResponse response = new RatingResponse(HttpStatus.OK, "000", "", null);
+		SaveRatingRequest request = new SaveRatingRequest();
+		SaveRatingResponse response = new SaveRatingResponse(HttpStatus.OK, "000", "", null);
 		
 		// When
-		when(userValidation.validateRatingRequest(Mockito.any())).thenReturn(errorMessages);
-		when(userService.rating(Mockito.any())).thenReturn(response);
+		when(userValidation.validateSaveRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.saveRating(Mockito.any())).thenReturn(response);
 
 		// Then
-		RatingResponse ratingResponse = userController.rating(request);
+		SaveRatingResponse ratingResponse = userController.saveRating(request);
 
 		assertEquals("000", ratingResponse.statusCode);
 
@@ -328,13 +328,13 @@ public class UserControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter  Comments");
 
-		RatingRequest request = new RatingRequest();
+		SaveRatingRequest request = new SaveRatingRequest();
 		
 		// When
-		when(userValidation.validateRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userValidation.validateSaveRatingRequest(Mockito.any())).thenReturn(errorMessages);
 
 		// Then
-		RatingResponse ratingResponse = userController.rating(request);
+		SaveRatingResponse ratingResponse = userController.saveRating(request);
 
 		assertEquals("999", ratingResponse.statusCode);
 

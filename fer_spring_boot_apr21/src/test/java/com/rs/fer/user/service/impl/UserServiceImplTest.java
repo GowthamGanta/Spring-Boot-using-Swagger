@@ -14,25 +14,22 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.admin.request.UnblockUserRequest;
-import com.rs.fer.admin.response.UnblockUserResponse;
-import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.RatingRepository;
 import com.rs.fer.user.repository.UserRepository;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
-import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
-import com.rs.fer.user.response.RatingResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
+import com.rs.fer.user.response.SaveRatingResponse;
 import com.rs.fer.user.response.UpdateUserResponse;
 import com.rs.fer.user.response.VerifyEmailResponse;
 import com.rs.fer.user.response.VerifyOtpResponse;
@@ -231,8 +228,6 @@ public class UserServiceImplTest {
 	@Test
 	public void testResetPasswordUserNotPresent() {
 
-		User user = null;
-
 		Optional<User> userObj = Optional.empty();
 
 		// Mock
@@ -429,9 +424,6 @@ public class UserServiceImplTest {
 	@Test
 	public void testGetUserNotFound() {
 
-		User user = new User();
-		// user.setUserId(1);
-
 		Optional<User> userObj = Optional.empty();
 
 		// Mock
@@ -469,9 +461,6 @@ public class UserServiceImplTest {
 	@Test
 	public void testVerifyEmailIsNotPresent() {
 
-		User user = new User();
-		// user.setUserId(1);
-		// user.setVerificationCode("abcd1234");
 		Optional<User> userObj = Optional.empty();
 
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
@@ -566,19 +555,17 @@ public class UserServiceImplTest {
 	@Test
 	public void testUserNotFound() {
 
-		User user = new User();
-		//user.setUserId(1);
 		Optional<User> userObj = Optional.empty();
 		// Mock
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 		//when(userUtil.loadRatingRequestToUserId(Mockito.any())).thenReturn(user);
 
-		RatingRequest request = new RatingRequest();
+		SaveRatingRequest request = new SaveRatingRequest();
 		request.setComments("found");
 		request.setRating(5);
-		request.setReviewedby(4);
+		request.setReviewerId(4);
 		
-		RatingResponse response = userServiceImpl.rating(request);
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
 
 		// 3.
 		assertEquals("101", response.statusCode);
@@ -596,12 +583,12 @@ public class UserServiceImplTest {
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 		//when(userUtil.loadRatingRequestToUserId(Mockito.any())).thenReturn(user);
 
-		RatingRequest request = new RatingRequest();
+		SaveRatingRequest request = new SaveRatingRequest();
 		request.setComments("found");
 		request.setRating(5);
-		request.setReviewedby(4);
+		request.setReviewerId(4);
 		
-		RatingResponse response = userServiceImpl.rating(request);
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
 
 		// 3.
 		assertEquals("102", response.statusCode);
