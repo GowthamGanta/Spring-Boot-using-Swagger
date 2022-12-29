@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.rs.fer.user.entity.Address;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -114,6 +115,12 @@ public class UserUtilImpl implements UserUtil {
 
 	@Override
 	public Rating loadEditRatingRequestToUserId(EditRatingRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rating loadDeleteRatingRequestToUserId(DeleteRatingRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

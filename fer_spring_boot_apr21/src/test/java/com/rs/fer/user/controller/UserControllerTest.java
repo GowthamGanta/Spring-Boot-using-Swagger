@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -21,6 +22,7 @@ import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
+import com.rs.fer.user.response.DeleteRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
@@ -302,7 +304,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void testRating() {
+	public void testSaveRating() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
@@ -322,7 +324,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void testRatingFailure() {
+	public void testSaveRatingFailure() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
@@ -339,6 +341,44 @@ public class UserControllerTest {
 		assertEquals("999", ratingResponse.statusCode);
 
 	}
+	@Test
+	public void testDeleteRating() {
+ 
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		DeleteRatingResponse response = new DeleteRatingResponse(HttpStatus.OK, "000", "", null);
+		
+		// When
+		when(userValidation.validateDeleteRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.deleteRating(Mockito.any())).thenReturn(response);
+
+		// Then
+		DeleteRatingResponse deleteratingResponse = userController.deleteRating(request);
+
+		assertEquals("000", deleteratingResponse.statusCode);
+
+	}
+	@Test
+	public void testDeleteRatingFailure() {
+ 
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter  Comments");
+
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		
+		// When
+		when(userValidation.validateDeleteRatingRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		DeleteRatingResponse deleteratingResponse = userController.deleteRating(request);
+
+		assertEquals("999", deleteratingResponse.statusCode);
+
+	}
+
 		
 }
 

@@ -1,5 +1,6 @@
 package com.rs.fer.user.service;
 
+import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
@@ -9,6 +10,7 @@ import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
+import com.rs.fer.user.response.DeleteRatingResponse;
 import com.rs.fer.user.response.EditRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
@@ -40,5 +42,7 @@ public interface UserService {
 	SaveRatingResponse saveRating(SaveRatingRequest request);
 
 	EditRatingResponse editRating(EditRatingRequest request);
+
+	DeleteRatingResponse deleteRating(DeleteRatingRequest request);
 
 }

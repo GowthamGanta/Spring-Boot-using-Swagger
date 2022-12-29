@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -286,7 +287,7 @@ public class UserValidationImplTest {
 	}
 	
 	@Test
-	public void testValidateRatingRequest() {
+	public void testValidateSaveRatingRequest() {
 		
 		SaveRatingRequest request = new SaveRatingRequest();
 		request.setComments("found");
@@ -303,7 +304,7 @@ public class UserValidationImplTest {
 	}
 	
 	@Test
-	public void testValidateRatingRequestFailure() {
+	public void testValidateSaveRatingRequestFailure() {
 		
 		SaveRatingRequest request = new SaveRatingRequest();
 		//request.setComments("found");
@@ -312,6 +313,39 @@ public class UserValidationImplTest {
 		request.setUserId(1);
 		
 		Set<String> errorMessages = userValidationImpl.validateSaveRatingRequest(request);
+		 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	@Test
+	public void testValidateDeleteRatingRequest() {
+		
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setComments("found");
+		request.setRating(4);
+		request.setReviewerId(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateDeleteRatingRequest(request);
+		 
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateDeleteRatingRequestFailure() {
+		
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		//request.setComments("found");
+		request.setRating(4);
+		request.setReviewerId(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateDeleteRatingRequest(request);
 		 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();

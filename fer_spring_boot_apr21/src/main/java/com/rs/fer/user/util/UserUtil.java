@@ -2,6 +2,7 @@ package com.rs.fer.user.util;
 
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -23,5 +24,7 @@ public interface UserUtil {
 	Rating loadSaveRatingRequestToUserId(SaveRatingRequest request);
 
 	Rating loadEditRatingRequestToUserId(EditRatingRequest request);
+
+	Rating loadDeleteRatingRequestToUserId(DeleteRatingRequest request);
 
 }
