@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.user.request.DeleteRatingRequest;
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -22,7 +22,7 @@ import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
-import com.rs.fer.user.response.DeleteRatingResponse;
+import com.rs.fer.user.response.EditRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
@@ -304,7 +304,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void testSaveRating() {
+	public void testRating() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
@@ -324,7 +324,7 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	public void testSaveRatingFailure() {
+	public void testRatingFailure() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
@@ -342,43 +342,44 @@ public class UserControllerTest {
 
 	}
 	@Test
-	public void testDeleteRating() {
+	public void testEditRating() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		DeleteRatingRequest request = new DeleteRatingRequest();
-		DeleteRatingResponse response = new DeleteRatingResponse(HttpStatus.OK, "000", "", null);
+		EditRatingRequest request = new EditRatingRequest();
+		EditRatingResponse response = new EditRatingResponse(HttpStatus.OK, "000", "", null);
 		
 		// When
-		when(userValidation.validateDeleteRatingRequest(Mockito.any())).thenReturn(errorMessages);
-		when(userService.deleteRating(Mockito.any())).thenReturn(response);
+		when(userValidation.validateEditRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.editRating(Mockito.any())).thenReturn(response);
 
 		// Then
-		DeleteRatingResponse deleteratingResponse = userController.deleteRating(request);
+		EditRatingResponse ratingResponse = userController.editRating(request);
 
-		assertEquals("000", deleteratingResponse.statusCode);
+		assertEquals("000", ratingResponse.statusCode);
 
 	}
+
+
 	@Test
-	public void testDeleteRatingFailure() {
+	public void testEditRatingFailure() {
  
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter  Comments");
 
-		DeleteRatingRequest request = new DeleteRatingRequest();
+		EditRatingRequest request = new EditRatingRequest();
 		
 		// When
-		when(userValidation.validateDeleteRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userValidation.validateEditRatingRequest(Mockito.any())).thenReturn(errorMessages);
 
 		// Then
-		DeleteRatingResponse deleteratingResponse = userController.deleteRating(request);
+		
+		EditRatingResponse ratingResponse = userController.editRating(request);
 
-		assertEquals("999", deleteratingResponse.statusCode);
+		assertEquals("999", ratingResponse.statusCode);
 
 	}
-
-		
 }
 
