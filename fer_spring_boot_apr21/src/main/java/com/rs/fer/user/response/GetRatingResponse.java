@@ -16,8 +16,7 @@ public class GetRatingResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 
-	}
-
+	} 
 	private Rating rating;
 
 	public Rating getRating() {

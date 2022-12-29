@@ -64,7 +64,7 @@ public class UserController {
 		}
 		return response;
 	}
-
+ 
 	@PostMapping("/registration/ma")
 	public RegistrationResponse registrationMa(@ModelAttribute RegistrationRequest request) {
 
@@ -241,4 +241,4 @@ public class UserController {
 		}
 		return response;
 	}
-}
+} 

@@ -6,7 +6,7 @@ public class GetRatingRequest {
 
 	public int getRatingId() {
 		return ratingId;
-	}
+	} 
 
 	public void setRatingId(int ratingId) {
 		this.ratingId = ratingId;

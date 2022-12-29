@@ -346,7 +346,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+ 
 	@Override
 	public DeleteRatingResponse deleteRating(DeleteRatingRequest request) {
 		// TODO Auto-generated method stub

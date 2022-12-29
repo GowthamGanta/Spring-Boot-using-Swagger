@@ -15,7 +15,7 @@ public class GetUserResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
-
+	
 	private User user;
 
 	public User getUser() {

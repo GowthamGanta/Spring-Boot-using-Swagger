@@ -253,7 +253,7 @@ public class UserValidationImplTest {
 		boolean isActualEmpty = errorMessages.isEmpty();
 		
 		assertEquals(isExpectedEmpty, isActualEmpty);
-		
+ 		
 	}
 	
 	@Test
@@ -367,7 +367,7 @@ public class UserValidationImplTest {
 		
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
-	
+	 
 	@Test
 	public void testValidateGetRatingRequestFailure() {
 		

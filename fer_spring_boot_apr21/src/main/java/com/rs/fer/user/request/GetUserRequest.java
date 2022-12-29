@@ -12,3 +12,4 @@ public class GetUserRequest {
 		this.userId = userId;
 	}
 }
+ 

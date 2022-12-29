@@ -29,8 +29,7 @@ public interface UserValidation {
 	Set<String> verifyEmailRequest(VerifyEmailRequest request);
 
 	Set<String> verifyOtpRequest(VerifyOtpRequest request);
-
-
+	
 	Set<String> validateSaveRatingRequest(SaveRatingRequest request);
 	
 	Set<String> validateEditRatingRequest(EditRatingRequest request);
