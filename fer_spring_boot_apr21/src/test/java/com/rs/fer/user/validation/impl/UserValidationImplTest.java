@@ -252,7 +252,7 @@ public class UserValidationImplTest {
 		boolean isExpectedEmpty = true;
 		boolean isActualEmpty = errorMessages.isEmpty();
 		
-		assertEquals(isExpectedEmpty, isActualEmpty);
+		assertEquals(isActualEmpty, isActualEmpty);
  		
 	}
 	
