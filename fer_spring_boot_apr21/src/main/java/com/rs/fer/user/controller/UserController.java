@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RatingRequest;
@@ -21,6 +22,7 @@ import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
+import com.rs.fer.user.response.EditRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
@@ -37,22 +39,12 @@ import com.rs.fer.user.validation.UserValidation;
 @RequestMapping("/api")
 public class UserController {
 
-	
-	
-	
-	
-	
-	
 	@Autowired
 	UserValidation userValidation;
 
 	@Autowired
 	UserService userService;
-	
-	
-	
-	
-	
+
 	@PostMapping("/registration")
 	public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
 
@@ -84,9 +76,9 @@ public class UserController {
 		}
 		return response;
 	}
-	
+
 	@PostMapping("/login")
-	public LoginResponse  login(@RequestBody LoginRequest request) {
+	public LoginResponse login(@RequestBody LoginRequest request) {
 
 		LoginResponse response = null;
 
@@ -101,9 +93,7 @@ public class UserController {
 		}
 		return response;
 	}
-	
-	
-	
+
 	@PostMapping("/getUser")
 	public GetUserResponse getUser(@RequestBody GetUserRequest request) {
 
@@ -151,7 +141,7 @@ public class UserController {
 		}
 		return response;
 	}
-	
+
 	@PutMapping("/verifyOtp")
 	public VerifyOtpResponse verifyOtp(@RequestBody VerifyOtpRequest request) {
 
@@ -183,7 +173,7 @@ public class UserController {
 		}
 		return response;
 	}
-	
+
 	@PostMapping("/saveRating")
 	public SaveRatingResponse saveRating(@RequestBody SaveRatingRequest request) {
 
@@ -197,6 +187,24 @@ public class UserController {
 		} else {
 			response = userService.saveRating(request);
 		}
-		return response;  
+		return response;
+	}
+	
+	
+	
+	@PostMapping("/editRating")
+	public EditRatingResponse editRating(@RequestBody EditRatingRequest request) {
+
+		EditRatingResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateEditRatingRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.editRating(request);
+		}
+		return response;
 	}
 }

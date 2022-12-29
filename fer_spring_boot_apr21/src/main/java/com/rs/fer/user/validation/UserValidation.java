@@ -2,6 +2,7 @@ package com.rs.fer.user.validation;
 
 import java.util.Set;
 
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -29,4 +30,6 @@ public interface UserValidation {
 
 
 	Set<String> validateSaveRatingRequest(SaveRatingRequest request);
+	
+	Set<String> validateEditRatingRequest(EditRatingRequest request);
 }

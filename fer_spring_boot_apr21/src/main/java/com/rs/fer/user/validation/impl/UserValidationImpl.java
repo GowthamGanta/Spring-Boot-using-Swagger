@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -116,6 +117,18 @@ public class UserValidationImpl implements UserValidation {
 
 	@Override
 	public Set<String> validateSaveRatingRequest(SaveRatingRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getComments(), "Please enter Comments");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getRating(), "Please enter Rating");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getReviewerId(), "Please enter reviewer Id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter User Id");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateEditRatingRequest(EditRatingRequest request) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getComments(), "Please enter Comments");

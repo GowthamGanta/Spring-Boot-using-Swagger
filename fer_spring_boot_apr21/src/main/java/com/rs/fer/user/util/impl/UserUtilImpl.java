@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.rs.fer.user.entity.Address;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -35,21 +36,20 @@ public class UserUtilImpl implements UserUtil {
 		user.setMobile(request.getMobile());
 
 		user.setCreated(DateUtil.getCurrentDate());
-		
+
 		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
 
 		user.setOtp(otp);
 		Random random = new Random();
 
-	//	String verificationCode = "" + random.nextInt (9000) + 1000 ;
+		// String verificationCode = "" + random.nextInt (9000) + 1000 ;
 		String uuid = UUID.randomUUID().toString();
 
 		user.setVerificationCode(uuid);
-		
+
 		user.setEmailVerify("N");
 		user.setMobileVerify("N");
-		
-		
+
 		return user;
 	}
 
@@ -108,6 +108,12 @@ public class UserUtilImpl implements UserUtil {
 
 	@Override
 	public Rating loadSaveRatingRequestToUserId(SaveRatingRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Rating loadEditRatingRequestToUserId(EditRatingRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}
