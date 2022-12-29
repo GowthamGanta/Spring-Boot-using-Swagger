@@ -12,6 +12,8 @@ import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.RatingRepository;
 import com.rs.fer.user.repository.UserRepository;
+import com.rs.fer.user.request.DeleteRatingRequest;
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -20,6 +22,8 @@ import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
+import com.rs.fer.user.response.DeleteRatingResponse;
+import com.rs.fer.user.response.EditRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 //github.com/javars100321/javars_jan21.git
@@ -40,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	RatingRepository ratingRepository;
 
@@ -223,12 +227,12 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userObj = userRepository.findById(Integer.parseInt(request.getId()));
 
 		if (userObj.isPresent()) {
-			
+
 			User user = userObj.get();
 			if (user.getOtp().equals(request.getOtp())) {
 
 				// success
-				
+
 				user.setMobileVerify("Y");
 				userRepository.save(user);
 				response = new VerifyOtpResponse(HttpStatus.OK, "000", "Otp Updated successfully", null);
@@ -280,6 +284,7 @@ public class UserServiceImpl implements UserService {
 		return response;
 
 	}
+
 	@Override
 	public SaveRatingResponse saveRating(SaveRatingRequest request) {
 		SaveRatingResponse response = null;
@@ -311,8 +316,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// Ratings given already
-		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(),
-				request.getReviewerId());
+		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(), request.getReviewerId());
 		if (CollectionUtils.isEmpty(ratings)) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
 		}
@@ -333,5 +337,17 @@ public class UserServiceImpl implements UserService {
 
 		return response;
 
+	}
+
+	@Override
+	public EditRatingResponse editRating(EditRatingRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DeleteRatingResponse deleteRating(DeleteRatingRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
