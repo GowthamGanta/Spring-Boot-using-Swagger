@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.request.DeleteRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -346,6 +347,34 @@ public class UserValidationImplTest {
 		request.setUserId(1);
 		
 		Set<String> errorMessages = userValidationImpl.validateDeleteRatingRequest(request);
+		 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateGetRatingRequest() {
+		
+		GetRatingRequest request = new GetRatingRequest();
+		request.setRatingId(1);;
+		
+		Set<String> errorMessages = userValidationImpl.validateGetRatingRequest(request);
+		 
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateGetRatingRequestFailure() {
+		
+		GetRatingRequest request = new GetRatingRequest();
+		//request.setRatingId(1);;
+		
+		Set<String> errorMessages = userValidationImpl.validateGetRatingRequest(request);
 		 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();

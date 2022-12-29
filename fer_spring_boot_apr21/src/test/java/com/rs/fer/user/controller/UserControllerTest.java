@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -23,6 +24,7 @@ import com.rs.fer.user.request.UpdateUserRequest;
 import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.EditRatingResponse;
+import com.rs.fer.user.response.GetRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
@@ -63,7 +65,7 @@ public class UserControllerTest {
 
 		assertEquals("000", regResponse.statusCode);
 
-	} 
+	}
 
 	@Test
 	public void testRegistrationFailure() {
@@ -85,7 +87,7 @@ public class UserControllerTest {
 
 	@Test
 	public void testverifyEmail() {
- 
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
@@ -120,24 +122,26 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+
 	@Test
 	public void testRestPasswordSucess() {
 		// Mock
-				Set<String> errorMessages = new LinkedHashSet<>();
+		Set<String> errorMessages = new LinkedHashSet<>();
 
-				ResetPasswordRequest request = new ResetPasswordRequest();
-				ResetPasswordResponse response = new ResetPasswordResponse(HttpStatus.OK, "000", "", null);
+		ResetPasswordRequest request = new ResetPasswordRequest();
+		ResetPasswordResponse response = new ResetPasswordResponse(HttpStatus.OK, "000", "", null);
 
-				// When
-				when(userValidation.validateResetPasswordRequest(Mockito.any())).thenReturn(errorMessages);
-				when(userService.resetPassword(Mockito.any())).thenReturn(response);
+		// When
+		when(userValidation.validateResetPasswordRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.resetPassword(Mockito.any())).thenReturn(response);
 
-				// Then
-				ResetPasswordResponse resetPwdResponse = userController.resetPassword(request);
+		// Then
+		ResetPasswordResponse resetPwdResponse = userController.resetPassword(request);
 
-				assertEquals("000", resetPwdResponse.statusCode);
-		
+		assertEquals("000", resetPwdResponse.statusCode);
+
 	}
+
 	@Test
 	public void testResetPasswordFailure() {
 
@@ -155,34 +159,35 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+
 	@Test
-	public void testVerifyOtp() {  
-		
-        //Mock
+	public void testVerifyOtp() {
+
+		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-		 
+
 		VerifyOtpRequest request = new VerifyOtpRequest();
 		VerifyOtpResponse response = new VerifyOtpResponse(HttpStatus.OK, "000", "", null);
-		
-		//when
+
+		// when
 		when(userValidation.verifyOtpRequest(Mockito.any())).thenReturn(errorMessages);
 		when(userService.verifyOtp(Mockito.any())).thenReturn(response);
-		
-		//Then
-		VerifyOtpResponse otpResponse = userController.verifyOtp(request);
-		
-		assertEquals("000", otpResponse.statusCode);
-		
-		}
 
-	@Test  
-	public void testVerifyOtpFailure() { 
+		// Then
+		VerifyOtpResponse otpResponse = userController.verifyOtp(request);
+
+		assertEquals("000", otpResponse.statusCode);
+
+	}
+
+	@Test
+	public void testVerifyOtpFailure() {
 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter Otp");
 
-		VerifyOtpRequest request = new VerifyOtpRequest();  
+		VerifyOtpRequest request = new VerifyOtpRequest();
 
 		// When
 		when(userValidation.verifyOtpRequest(Mockito.any())).thenReturn(errorMessages);
@@ -192,6 +197,7 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+
 	@Test
 	public void testLogin() {
 		// Mock
@@ -264,29 +270,29 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
-	
-	@Test
-	public void testUpdateUser() {
-		
-		//mock
-		Set<String> errorMessages = new LinkedHashSet<>();
-		
-		UpdateUserRequest request = new UpdateUserRequest();
-		UpdateUserResponse response = new UpdateUserResponse(HttpStatus.OK, "000", "", null);
-		
-		//When
-		when(userValidation.validateUpdateUserRequest(Mockito.any())).thenReturn(errorMessages);
-		when(userService.updateUser(Mockito.any())).thenReturn(response);
-		
-		//Then
-		UpdateUserResponse UpdtUrsresponse = userController.updateUser(request);
-		
-		assertEquals("000", UpdtUrsresponse.statusCode);
-		
-	} 
 
 	@Test
-	public void testUpdateUserFailure(){
+	public void testUpdateUser() {
+
+		// mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		UpdateUserRequest request = new UpdateUserRequest();
+		UpdateUserResponse response = new UpdateUserResponse(HttpStatus.OK, "000", "", null);
+
+		// When
+		when(userValidation.validateUpdateUserRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.updateUser(Mockito.any())).thenReturn(response);
+
+		// Then
+		UpdateUserResponse UpdtUrsresponse = userController.updateUser(request);
+
+		assertEquals("000", UpdtUrsresponse.statusCode);
+
+	}
+
+	@Test
+	public void testUpdateUserFailure() {
 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
@@ -302,16 +308,16 @@ public class UserControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
-	
+
 	@Test
 	public void testRating() {
- 
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		SaveRatingRequest request = new SaveRatingRequest();
 		SaveRatingResponse response = new SaveRatingResponse(HttpStatus.OK, "000", "", null);
-		
+
 		// When
 		when(userValidation.validateSaveRatingRequest(Mockito.any())).thenReturn(errorMessages);
 		when(userService.saveRating(Mockito.any())).thenReturn(response);
@@ -322,16 +328,16 @@ public class UserControllerTest {
 		assertEquals("000", ratingResponse.statusCode);
 
 	}
-	
+
 	@Test
 	public void testRatingFailure() {
- 
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter  Comments");
 
 		SaveRatingRequest request = new SaveRatingRequest();
-		
+
 		// When
 		when(userValidation.validateSaveRatingRequest(Mockito.any())).thenReturn(errorMessages);
 
@@ -341,15 +347,16 @@ public class UserControllerTest {
 		assertEquals("999", ratingResponse.statusCode);
 
 	}
+
 	@Test
 	public void testEditRating() {
- 
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		EditRatingRequest request = new EditRatingRequest();
 		EditRatingResponse response = new EditRatingResponse(HttpStatus.OK, "000", "", null);
-		
+
 		// When
 		when(userValidation.validateEditRatingRequest(Mockito.any())).thenReturn(errorMessages);
 		when(userService.editRating(Mockito.any())).thenReturn(response);
@@ -361,25 +368,63 @@ public class UserControllerTest {
 
 	}
 
-
 	@Test
 	public void testEditRatingFailure() {
- 
+
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter  Comments");
 
 		EditRatingRequest request = new EditRatingRequest();
-		
+
 		// When
 		when(userValidation.validateEditRatingRequest(Mockito.any())).thenReturn(errorMessages);
 
 		// Then
-		
+
 		EditRatingResponse ratingResponse = userController.editRating(request);
 
 		assertEquals("999", ratingResponse.statusCode);
 
 	}
-}
 
+	@Test
+	public void testGetRating() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetRatingRequest request = new GetRatingRequest();
+		GetRatingResponse response = new GetRatingResponse(HttpStatus.OK, "000", "", null);
+
+		// When
+		when(userValidation.validateGetRatingRequest(Mockito.any())).thenReturn(errorMessages);
+		when(userService.getRating(Mockito.any())).thenReturn(response);
+
+		// Then
+		GetRatingResponse ratingResponse = userController.getRating(request);
+
+		assertEquals("000", ratingResponse.statusCode);
+
+	}
+
+	@Test
+	public void testGetRatingFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter  ratings");
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		// When
+		when(userValidation.validateGetRatingRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+
+		GetRatingResponse ratingResponse = userController.getRating(request);
+
+		assertEquals("999", ratingResponse.statusCode);
+
+	}
+}

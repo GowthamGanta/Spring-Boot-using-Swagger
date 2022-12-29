@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -150,5 +151,14 @@ public class UserValidationImpl implements UserValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter User Id");
 
 		return errorMessages;
-			}
+	}
+
+	@Override
+	public Set<String> validateGetRatingRequest(GetRatingRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getRatingId(), "Please enter valid RatingId");
+
+		return errorMessages;
+	}
 }

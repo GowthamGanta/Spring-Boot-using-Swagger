@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RatingRequest;
@@ -25,6 +26,7 @@ import com.rs.fer.user.request.VerifyEmailRequest;
 import com.rs.fer.user.request.VerifyOtpRequest;
 import com.rs.fer.user.response.DeleteRatingResponse;
 import com.rs.fer.user.response.EditRatingResponse;
+import com.rs.fer.user.response.GetRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
@@ -221,6 +223,21 @@ public class UserController {
 
 		} else {
 			response = userService.deleteRating(request);
+		}
+		return response;
+	}
+	@PostMapping("/getRating")
+	public GetRatingResponse getRating(@RequestBody GetRatingRequest request) {
+
+		GetRatingResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateGetRatingRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.getRating(request);
 		}
 		return response;
 	}
