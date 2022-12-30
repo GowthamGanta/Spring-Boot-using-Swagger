@@ -119,9 +119,9 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateEditExpenseRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.editExpense(Mockito.any())).thenReturn(response);
 
-		EditExpenseResponse EditExpenseResponse = expenseController.editExpense(request);
+		EditExpenseResponse editExpenseResponse = expenseController.editExpense(request);
 
-		assertEquals("000", EditExpenseResponse.statusCode);
+		assertEquals("000", editExpenseResponse.statusCode);
 
 	}
 	
@@ -154,9 +154,9 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateGetExpenseOptionsRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.getExpenseOptions(Mockito.any())).thenReturn(response);
 		
-		GetExpenseOptionsResponse GetExpenseOptionsResponse = expenseController.getExpense(request);
+		GetExpenseOptionsResponse getExpenseOptionsResponse = expenseController.getExpense(request);
 
-		assertEquals("000", GetExpenseOptionsResponse.statusCode);
+		assertEquals("000", getExpenseOptionsResponse.statusCode);
 
     }
 	
