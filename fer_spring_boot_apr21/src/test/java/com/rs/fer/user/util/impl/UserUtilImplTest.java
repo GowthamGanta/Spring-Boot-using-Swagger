@@ -80,7 +80,7 @@ public class UserUtilImplTest {
 		boolean isExpectedNotEmpty = true;
 		String isActualNotEmpty = errorMessages.getVerificationCode();
 
-		assertEquals(isExpectedNotEmpty, isExpectedNotEmpty);
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
 	}
 
 	@Test
@@ -110,9 +110,9 @@ public class UserUtilImplTest {
 		User errorMessages = userUtilImpl.loadUpdateUserRequestToUser(request);
 
 		boolean isExpectedEmpty = false;
-		// String isActualEmpty = errorMessages.getVerificationCode();
+		 String isActualEmpty = errorMessages.getVerificationCode();
 
-		assertEquals(isExpectedEmpty, isExpectedEmpty);
+		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
 
 }

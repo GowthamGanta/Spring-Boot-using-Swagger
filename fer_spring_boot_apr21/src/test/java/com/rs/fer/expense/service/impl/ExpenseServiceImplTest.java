@@ -243,7 +243,7 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testGetExpenseNotFound() {
 
-		Expense expense = new Expense();
+		//Expense expense = new Expense();
 		// expense.setUserId(1);
 
 		Optional<Expense> expenseObj = Optional.empty();
@@ -265,7 +265,7 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testGetExpenseOptionsSuccess() {
 
-		Expense expense = new Expense();
+		//Expense expense = new Expense();
 
 		User user = new User();
 		user.setUserId(1);
@@ -291,7 +291,7 @@ public class ExpenseServiceImplTest {
 
 		Optional<User> userObj = Optional.empty();
 
-		Expense expense = new Expense();
+		//Expense expense = new Expense();
 		// expense.setUserId(1);
 
 		// Mock
