@@ -41,7 +41,6 @@ public class UserUtilImpl implements UserUtil {
 		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
 
 		user.setOtp(otp);
-		Random random = new Random();
 
 		// String verificationCode = "" + random.nextInt (9000) + 1000 ;
 		String uuid = UUID.randomUUID().toString();
