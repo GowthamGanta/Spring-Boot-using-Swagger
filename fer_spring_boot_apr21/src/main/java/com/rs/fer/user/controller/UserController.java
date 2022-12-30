@@ -17,7 +17,6 @@ import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
-import com.rs.fer.user.request.RatingRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.SaveRatingRequest;
@@ -62,7 +61,9 @@ public class UserController {
 		} else {
 			response = userService.registration(request);
 		}
+		
 		return response;
+		
 	}
  
 	@PostMapping("/registration/ma")

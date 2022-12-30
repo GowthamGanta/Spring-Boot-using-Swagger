@@ -83,11 +83,6 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.mobile = mobile;
-		this.blockStatus = blockStatus;
-		// this.otp = otp;
-		// this.verificationCode = verificationCode;
-		// this.mobileVerify = mobileVerify;
-		// this.emailVerify = emailVerify;
 	}
 
 	public String getBlockStatus() {
