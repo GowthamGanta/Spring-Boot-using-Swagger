@@ -49,9 +49,9 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateAddExpenseRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.addExpense(Mockito.any())).thenReturn(response);
 
-		AddExpenseResponse regResponse = expenseController.addExpense(request);
+		AddExpenseResponse AddExpenseResponse = expenseController.addExpense(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", AddExpenseResponse.statusCode);
 
 	}
 
@@ -83,9 +83,9 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateGetExpenseRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.getExpense(Mockito.any())).thenReturn(response);
 		
-		GetExpenseResponse Response = expenseController.getExpense(request);
+		GetExpenseResponse GetExpenseResponse = expenseController.getExpense(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", GetExpenseResponse.statusCode);
 
 
 	}
@@ -188,7 +188,7 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateGetExpenseRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.deleteExpense(Mockito.any())).thenReturn(response);
 		
-		DeleteExpenseResponse Response = expenseController.deleteExpense(request);
+		DeleteExpenseResponse DeleteExpenseResponse = expenseController.deleteExpense(request);
 
 		assertEquals("000", response.statusCode);
 

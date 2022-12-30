@@ -47,9 +47,9 @@ public class AdminControllerTest {
 		when(adminService.blockUser(Mockito.any())).thenReturn(response);
 
 		// Then
-		BlockUserResponse Response = adminController.blockUser(request);
+		BlockUserResponse BlockUserResponse = adminController.blockUser(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", BlockUserResponse.statusCode);
 
 	}
 
@@ -84,9 +84,9 @@ public class AdminControllerTest {
 		when(adminService.unblockUser(Mockito.any())).thenReturn(response);
 
 		// Then
-		UnblockUserResponse Response = adminController.unblockUser(request);
+		UnblockUserResponse UnblockUserResponse = adminController.unblockUser(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", UnblockUserResponse.statusCode);
 
 	}
 
