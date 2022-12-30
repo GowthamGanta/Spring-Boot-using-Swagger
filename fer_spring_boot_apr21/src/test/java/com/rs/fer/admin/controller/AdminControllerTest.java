@@ -19,8 +19,6 @@ import com.rs.fer.admin.response.BlockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.admin.validation.AdminValidation;
-import com.rs.fer.user.request.RegistrationRequest;
-import com.rs.fer.user.response.RegistrationResponse;
 
 @SpringBootTest
 public class AdminControllerTest {
