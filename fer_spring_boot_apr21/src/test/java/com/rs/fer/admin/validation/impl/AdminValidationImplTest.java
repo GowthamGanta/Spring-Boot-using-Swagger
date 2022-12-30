@@ -28,7 +28,7 @@ public class AdminValidationImplTest {
 
 		boolean isExpectedEmpty = false;
 
-		boolean isActualEmpty = errorMessages.contains(errorMessages);
+		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
@@ -62,7 +62,7 @@ public class AdminValidationImplTest {
 
 		boolean isExpectedEmpty = false;
 
-		boolean isActualEmpty = errorMessages.contains(errorMessages);
+		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
