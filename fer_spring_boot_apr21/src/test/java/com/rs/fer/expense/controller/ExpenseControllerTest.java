@@ -190,7 +190,7 @@ public class ExpenseControllerTest {
 		
 		DeleteExpenseResponse DeleteExpenseResponse = expenseController.deleteExpense(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", DeleteExpenseResponse.statusCode);
 
 
 	}  
