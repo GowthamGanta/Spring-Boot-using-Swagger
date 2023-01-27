@@ -18,7 +18,9 @@ import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.admin.validation.AdminValidation;
+import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
@@ -51,4 +53,20 @@ public class AdminController2 {
 
 	}
 
+	@PostMapping("/login")
+	public LoginResponse login(@RequestBody LoginRequest request) {
+
+		LoginResponse response = null;
+
+		// int userId = ferService.login(username, password);
+		Set<String> errorMessages = userValidation.validateLoginRequest(request);
+
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoginResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = userService.login(request);
+		}
+		return response;
+	}
 }
