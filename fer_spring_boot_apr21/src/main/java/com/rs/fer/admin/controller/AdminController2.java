@@ -1,10 +1,11 @@
-p0ackage com.rs.fer.admin.controller;
+package com.rs.fer.admin.controller;
 
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.admin.validation.AdminValidation;
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -86,4 +89,23 @@ public class AdminController2 {
 		}
 		return response;
 	}
+	
+	@GetMapping("/getExpenseOptions")
+	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
+
+		GetExpenseOptionsResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseOptionsRequest(request);
+		// return response with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpenseOptions(request);
+		}
+		return response;
+	}
+
+}
+
 }
