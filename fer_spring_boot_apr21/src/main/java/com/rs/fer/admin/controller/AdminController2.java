@@ -5,7 +5,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,13 @@ import com.rs.fer.admin.response.GetUnblockUserResponse;
 import com.rs.fer.admin.response.UnblockUserResponse;
 import com.rs.fer.admin.service.AdminService;
 import com.rs.fer.admin.validation.AdminValidation;
+<<<<<<< HEAD
+import com.rs.fer.expense.request.GetExpenseOptionsRequest;
+import com.rs.fer.expense.response.GetExpenseOptionsResponse;
+=======
+import com.rs.fer.expense.request.GetExpenseRequest;
+import com.rs.fer.expense.response.GetExpenseResponse;
+>>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
@@ -71,19 +80,40 @@ public class AdminController2 {
 		}
 		return response;
 	}
-	@PostMapping("/getUser")
-	public GetUserResponse getUser(@RequestBody GetUserRequest request) {
+	
+	@PutMapping("/getExpense")
+	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
 
-		GetUserResponse response = null;
+		GetExpenseResponse response = null;
 
-		Set<String> errorMessages = userValidation.validateGetUserRequest(request);
+		Set<String> errorMessages = expenseValidation.validateGetExpenseRequest(request);
 		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = userService.getUser(request);
+			response = expenseService.getExpense(request);
+		}
+		return response;
+
+	}
+	
+	@GetMapping("/getExpenseOptions")
+	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
+
+		GetExpenseOptionsResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateGetExpenseOptionsRequest(request);
+		// return response with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetExpenseOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.getExpenseOptions(request);
 		}
 		return response;
 	}
+
+}
+
 }
