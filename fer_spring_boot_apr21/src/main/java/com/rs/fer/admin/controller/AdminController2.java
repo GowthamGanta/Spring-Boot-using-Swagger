@@ -78,7 +78,7 @@ public class AdminController2 {
 		EditExpenseResponse response = null;
 
 		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
-		// return respnse with error messages
+		// return response with error messages
 		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
 			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
