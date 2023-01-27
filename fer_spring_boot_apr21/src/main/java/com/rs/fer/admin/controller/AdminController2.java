@@ -1,4 +1,4 @@
-p0ackage com.rs.fer.admin.controller;
+package com.rs.fer.admin.controller;
 
 import java.util.Set;
 
