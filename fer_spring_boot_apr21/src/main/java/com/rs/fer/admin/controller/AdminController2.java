@@ -5,23 +5,21 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
-import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
+import com.rs.fer.expense.service.ExpenseService;
+import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.response.LoginResponse;
@@ -35,6 +33,12 @@ public class AdminController2 {
 
 	@Autowired
 	UserValidation userValidation;
+	
+	@Autowired
+	ExpenseService expenseService;
+
+	@Autowired
+	ExpenseValidation expenseValidation;
 
 	@Autowired
 	UserService userService;
@@ -94,7 +98,6 @@ public class AdminController2 {
 	@GetMapping("/getExpenseOptions")
 	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
 
-<<<<<<< HEAD
 		GetExpenseOptionsResponse response = null;
 
 		Set<String> errorMessages = expenseValidation.validateGetExpenseOptionsRequest(request);
@@ -108,7 +111,6 @@ public class AdminController2 {
 		return response;
 	}
 
-}
 @GetMapping("/expenseReport")
 public ExpenseReportResponse expenseReport(@RequestBody ExpenseReportRequest request) {
 
@@ -130,13 +132,8 @@ public ExpenseReportResponse expenseReport(@RequestBody ExpenseReportRequest req
 		response = expenseService.expenseReport(request);
 	}
 	return response;
-}
-
 
 }
-=======
-	
+
 	
 }
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
