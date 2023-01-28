@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
+import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
@@ -33,7 +35,7 @@ public class AdminController2 {
 
 	@Autowired
 	UserValidation userValidation;
-	
+
 	@Autowired
 	ExpenseService expenseService;
 
@@ -77,7 +79,7 @@ public class AdminController2 {
 		}
 		return response;
 	}
-	
+
 	@PutMapping("/getExpense")
 	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
 
@@ -94,7 +96,7 @@ public class AdminController2 {
 		return response;
 
 	}
-	
+
 	@GetMapping("/getExpenseOptions")
 	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
 
@@ -111,29 +113,44 @@ public class AdminController2 {
 		return response;
 	}
 
-@GetMapping("/expenseReport")
-public ExpenseReportResponse expenseReport(@RequestBody ExpenseReportRequest request) {
+	@GetMapping("/expenseReport")
+	public ExpenseReportResponse expenseReport(@RequestBody ExpenseReportRequest request) {
 
-	ExpenseReportResponse response = null;
+		ExpenseReportResponse response = null;
 
-	Set<String> errorMessages = expenseValidation.validateExpenseReportRequest(request);
+		Set<String> errorMessages = expenseValidation.validateExpenseReportRequest(request);
 
-	/*
-	 * List<Expense> expenseObj =
-	 * expenseReportRepository.findByUserIdAndTypeAndDateBetween(request.getUserId()
-	 * , request.getType(),request.getFromDate(),request.getToDate());
-	 */
+		/*
+		 * List<Expense> expenseObj =
+		 * expenseReportRepository.findByUserIdAndTypeAndDateBetween(request.getUserId()
+		 * , request.getType(),request.getFromDate(),request.getToDate());
+		 */
 
-	if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
 
-		response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
+			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
 
-	} else {
-		response = expenseService.expenseReport(request);
+		} else {
+			response = expenseService.expenseReport(request);
+		}
+		return response;
+
 	}
-	return response;
 
-}
+	@PutMapping("/editExpense")
+	public EditExpenseResponse editExpense(@RequestBody EditExpenseRequest request) {
 
-	
+		EditExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateEditExpenseRequest(request);
+		// return respnse with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.editExpense(request);
+		}
+		return response;
+
+	}
+
 }
