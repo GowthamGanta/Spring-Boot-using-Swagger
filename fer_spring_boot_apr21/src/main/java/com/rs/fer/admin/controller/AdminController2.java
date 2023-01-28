@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
+import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
@@ -38,7 +40,6 @@ import com.rs.fer.user.validation.UserValidation;
 @RestController
 @RequestMapping("/adminapi")
 public class AdminController2 {
-
 
 	@Autowired
 	UserValidation userValidation;
@@ -159,6 +160,7 @@ public class AdminController2 {
 		return response;
 
 	}
+
 	@PostMapping("/getUser")
 	public GetUserResponse getUser(@RequestBody GetUserRequest request) {
 
@@ -174,6 +176,7 @@ public class AdminController2 {
 		}
 		return response;
 	}
+
 	@PutMapping("/resetPassword")
 	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
 
@@ -189,6 +192,7 @@ public class AdminController2 {
 		}
 		return response;
 	}
+
 	@PutMapping("/updateUser")
 	public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
 
@@ -201,6 +205,21 @@ public class AdminController2 {
 
 		} else {
 			response = userService.updateUser(request);
+		}
+		return response;
+	}
+
+	@PostMapping("/addExpense")
+	public AddExpenseResponse addExpense(@RequestBody AddExpenseRequest request) {
+
+		AddExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateAddExpenseRequest(request);
+		// return response with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = expenseService.addExpense(request);
 		}
 		return response;
 	}
