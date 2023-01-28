@@ -25,9 +25,11 @@ import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
+import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.service.UserService;
 import com.rs.fer.user.validation.UserValidation;
 
@@ -166,6 +168,21 @@ public class AdminController2 {
 
 		} else {
 			response = userService.getUser(request);
+		}
+		return response;
+	}
+	@PutMapping("/resetPassword")
+	public ResetPasswordResponse resetPassword(@RequestBody ResetPasswordRequest request) {
+
+		ResetPasswordResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateResetPasswordRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new ResetPasswordResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.resetPassword(request);
 		}
 		return response;
 	}
