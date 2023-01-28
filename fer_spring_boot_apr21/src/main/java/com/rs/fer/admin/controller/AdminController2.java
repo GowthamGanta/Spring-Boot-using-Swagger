@@ -22,8 +22,10 @@ import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
 import com.rs.fer.expense.validation.ExpenseValidation;
+import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
+import com.rs.fer.user.response.GetUserResponse;
 import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.service.UserService;
@@ -151,6 +153,21 @@ public class AdminController2 {
 		}
 		return response;
 
+	}
+	@PostMapping("/getUser")
+	public GetUserResponse getUser(@RequestBody GetUserRequest request) {
+
+		GetUserResponse response = null;
+
+		Set<String> errorMessages = userValidation.validateGetUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = userService.getUser(request);
+		}
+		return response;
 	}
 
 }
