@@ -5,7 +5,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.expense.request.AddExpenseRequest;
+import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
+import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
@@ -220,6 +224,23 @@ public class AdminController2 {
 			response = new AddExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
 			response = expenseService.addExpense(request);
+		}
+		return response;
+	}
+
+	@DeleteMapping("/deleteExpense")
+
+	public DeleteExpenseResponse deleteExpense(@ModelAttribute DeleteExpenseRequest request) {
+
+		DeleteExpenseResponse response = null;
+
+		Set<String> errorMessages = expenseValidation.validateDeleteExpenseRequest(request);
+		// return response with error messages
+		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
+			response = new DeleteExpenseResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = expenseService.deleteExpense(request);
 		}
 		return response;
 	}
