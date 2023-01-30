@@ -249,7 +249,7 @@ public class UserValidationImplTest {
 		 
 		Set<String> errorMessages = userValidationImpl.validateUpdateUserRequest(request);
 		 
-		boolean isExpectedEmpty = true;
+		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();
 		
 		assertEquals(isExpectedEmpty, isActualEmpty);
