@@ -18,7 +18,7 @@ public class AdminValidationImplTest {
 	private AdminValidationImpl adminValidationImpl;
 
 	@Test
-	public void testvalidateBlockUserRequest() {
+	public void testValidateBlockUserRequest() {
 
 		BlockUserRequest request = new BlockUserRequest();
 
@@ -36,7 +36,7 @@ public class AdminValidationImplTest {
 
 	@Test
 
-	public void testvalidateBlockUserRequestFailure() {
+	public void testValidateBlockUserRequestFailure() {
 
 		BlockUserRequest request = new BlockUserRequest();
 
@@ -70,7 +70,7 @@ public class AdminValidationImplTest {
 
 	@Test
 
-	public void testvalidateUnblockUserRequestFailure() {
+	public void testValidateUnblockUserRequestFailure() {
 
 		UnblockUserRequest request = new UnblockUserRequest();
 
