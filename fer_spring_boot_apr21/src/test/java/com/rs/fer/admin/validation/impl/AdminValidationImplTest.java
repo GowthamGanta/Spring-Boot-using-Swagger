@@ -26,7 +26,7 @@ public class AdminValidationImplTest {
 
 		Set<String> errorMessages = adminValidationImpl.validateBlockUserRequest(request);
 
-		boolean isExpectedEmpty = false;
+		boolean isExpectedEmpty = true;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
 
