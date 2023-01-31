@@ -23,7 +23,7 @@ public class Message {
 	private String date;
 
 	@Column
-	private String readFalg;
+	private String readFlag;
 
 	@Column
 	private int senderId;
@@ -66,12 +66,12 @@ public class Message {
 		this.date = date;
 	}
 
-	public String getReadFalg() {
-		return readFalg;
+	public String getReadFlag() {
+		return readFlag;
 	}
 
-	public void setReadFalg(String readFalg) {
-		this.readFalg = readFalg;
+	public void setReadFlag(String readFlag) {
+		this.readFlag = readFlag;
 	}
 
 	public int getSenderId() {

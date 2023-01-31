@@ -6,7 +6,7 @@ import com.rs.fer.message.request.SaveMessageRequest;
 
 public interface MessageUtil {
 
-	Message loadSaveMessageRequest(SaveMessageRequest request);
+	Message loadSaveMessageRequest(SaveMessageRequest request, int messageThreadId);
 	
-	MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request);
+	MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request, int senderId, int receiverId);
 }

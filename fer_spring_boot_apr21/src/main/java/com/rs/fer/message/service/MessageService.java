@@ -1,5 +1,10 @@
 package com.rs.fer.message.service;
 
-public class MessageService {
+import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.response.SaveMessageResponse;
 
+public interface MessageService {
+
+	SaveMessageResponse saveMessage(SaveMessageRequest request);
+	
 }

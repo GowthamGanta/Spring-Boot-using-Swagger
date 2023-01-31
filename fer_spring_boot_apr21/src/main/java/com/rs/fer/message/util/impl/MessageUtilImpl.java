@@ -12,7 +12,7 @@ import com.rs.fer.util.DateUtil;
 public class MessageUtilImpl implements MessageUtil{
 
 	@Override
-	public Message loadSaveMessageRequest(SaveMessageRequest request) {
+	public Message loadSaveMessageRequest(SaveMessageRequest request, int messageThreadId) {
 		
 		Message message = new Message();
 		
@@ -25,7 +25,7 @@ public class MessageUtilImpl implements MessageUtil{
 	}
 
 	@Override
-	public MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request) {
+	public MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request, int senderId, int receiverId) {
 		
 		MessageThread messageThread = new MessageThread();
 	
