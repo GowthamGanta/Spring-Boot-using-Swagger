@@ -20,7 +20,7 @@ public class MessageThread {
 	private int senderId;
 
 	@Column
-	private int reciverId;
+	private int receiverId;
 
 	public int getMessageThreadId() {
 		return messageThreadId;
@@ -38,12 +38,12 @@ public class MessageThread {
 		this.senderId = senderId;
 	}
 
-	public int getReciverId() {
-		return reciverId;
+	public int getReceiverId() {
+		return receiverId;
 	}
 
-	public void setReciverId(int reciverId) {
-		this.reciverId = reciverId;
+	public void setReceiverId(int receiverId) {
+		this.receiverId = receiverId;
 	}
 
 }

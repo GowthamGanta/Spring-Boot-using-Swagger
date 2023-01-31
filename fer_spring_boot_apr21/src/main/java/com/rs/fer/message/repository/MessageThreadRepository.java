@@ -1,5 +1,14 @@
 package com.rs.fer.message.repository;
 
-public class MessageThreadRepository {
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.rs.fer.message.entity.MessageThread;
+
+public interface MessageThreadRepository extends JpaRepository<MessageThread, Integer>{
+
+	List<MessageThread> findBySenderId(int senderId);
+	
+	List<MessageThread> findByReceiverId(int receiverId);
 }
