@@ -1,15 +1,10 @@
 package com.rs.fer.message.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,17 +26,20 @@ public class Message {
 	private String readFalg;
 
 	@Column
-	private String senderId;
+	private int senderId;
 
+	@Column
+	private int messageThreadId;
+	
 	public Message() {
 
 	}
 
-	public Message(String message, String senderId) {
+	public Message(String message, int senderId, int messageThreadId) {
 
 		this.message = message;
 		this.senderId = senderId;
-		// this.messageThreadId = messageThreadId;
+		this.messageThreadId = messageThreadId;
 	}
 
 	public int getId() {
@@ -76,24 +74,19 @@ public class Message {
 		this.readFalg = readFalg;
 	}
 
-	public String getSenderId() {
+	public int getSenderId() {
 		return senderId;
 	}
 
-	public void setSenderId(String senderId) {
+	public void setSenderId(int senderId) {
 		this.senderId = senderId;
 	}
 
-	@OneToMany(targetEntity = MessageThread.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "thread_id", referencedColumnName = "mesageThread_id")
-	private Set<MessageThread> messageThreadId;
-
-	public void setMessageThreadId(Set<MessageThread> messageThreadId) {
-		this.messageThreadId = messageThreadId;
-	}
-
-	public Set<MessageThread> getMessageThreadId() {
+	public int getMessageThreadId() {
 		return messageThreadId;
 	}
-
+	
+	public void setMessageThreadId(int messageThreadId) {
+		this.messageThreadId = messageThreadId;
+	}
 }
