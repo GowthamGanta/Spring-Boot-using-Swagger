@@ -14,12 +14,19 @@ public class SaveMessageResponse extends AbstractResponse{
 		super(status, statusCode, message, errorMessages);
 		this.status = status;
 		this.statusCode = statusCode;
-		//this.message = message;
+		this.message = message;
 		this.errorMessages = errorMessages;
 		
 	}
 	
-	private Message message;
+	private Message messages; 
 	
+	public Message getMessages() {
+		return messages;
+	}
+	
+	public void setMessages(Message messages) {
+		this.messages = messages;
+	}
 	
 }
