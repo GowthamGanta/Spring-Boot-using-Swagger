@@ -1,5 +1,39 @@
 package com.rs.fer.message.util.impl;
 
-public class MessageUtilImpl {
+import org.springframework.stereotype.Component;
+
+import com.rs.fer.message.entity.Message;
+import com.rs.fer.message.entity.MessageThread;
+import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.util.MessageUtil;
+import com.rs.fer.util.DateUtil;
+
+@Component
+public class MessageUtilImpl implements MessageUtil{
+
+	@Override
+	public Message loadSaveMessageRequest(SaveMessageRequest request) {
+		
+		Message message = new Message();
+		
+		message.setMessage(request.getMessage());
+		message.setDate(DateUtil.getCurrentDate());
+		message.setSenderId(request.getSenderId());
+		message.setMessageThreadId(request.getMessageThreadId());
+		
+		return message;
+	}
+
+	@Override
+	public MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request) {
+		
+		MessageThread messageThread = new MessageThread();
+	
+		messageThread.setMessages(request.getMessages());
+		messageThread.setSenderId(request.getSenderId());
+		messageThread.setReceiverId(request.getReceiverId());
+		
+		return messageThread;
+	}
 
 }

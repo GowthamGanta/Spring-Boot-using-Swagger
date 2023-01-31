@@ -1,5 +1,12 @@
 package com.rs.fer.message.util;
 
-public class MessageUtil {
+import com.rs.fer.message.entity.Message;
+import com.rs.fer.message.entity.MessageThread;
+import com.rs.fer.message.request.SaveMessageRequest;
 
+public interface MessageUtil {
+
+	Message loadSaveMessageRequest(SaveMessageRequest request);
+	
+	MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request);
 }
