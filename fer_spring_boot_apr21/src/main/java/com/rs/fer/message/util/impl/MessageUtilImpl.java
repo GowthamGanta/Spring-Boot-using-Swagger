@@ -20,6 +20,7 @@ public class MessageUtilImpl implements MessageUtil{
 		message.setDate(DateUtil.getCurrentDate());
 		message.setSenderId(request.getSenderId());
 		message.setMessageThreadId(request.getMessageThreadId());
+		message.setReadFlag("N");
 		
 		return message;
 	}

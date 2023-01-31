@@ -3,10 +3,13 @@ package com.rs.fer.message.validation.impl;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import com.rs.fer.message.request.SaveMessageRequest;
 import com.rs.fer.message.validation.MessageValidation;
 import com.rs.fer.util.FERUtil;
 
+@Component
 public class MessageValidationImpl implements MessageValidation {
 
 	@Override

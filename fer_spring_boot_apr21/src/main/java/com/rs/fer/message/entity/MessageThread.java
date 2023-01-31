@@ -27,6 +27,16 @@ public class MessageThread {
 	@Column
 	private int receiverId;
 
+	public MessageThread() {
+
+	}
+
+	public MessageThread(int senderId, int receiverId) {
+
+		this.senderId = senderId;
+		this.receiverId = receiverId;
+	}
+
 	public int getMessageThreadId() {
 		return messageThreadId;
 	}
@@ -54,11 +64,11 @@ public class MessageThread {
 	@OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "message_id", referencedColumnName = "messageThread_id")
 	private Set<Message> messages;
-	
+
 	public Set<Message> getMessages() {
 		return messages;
 	}
-	
+
 	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
