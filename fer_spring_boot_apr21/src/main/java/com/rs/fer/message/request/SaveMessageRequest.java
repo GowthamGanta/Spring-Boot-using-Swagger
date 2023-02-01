@@ -34,14 +34,4 @@ public class SaveMessageRequest {
 		this.receiverId = receiverId;
 	}
 
-	public int getMessageThreadId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public Set<Message> getMessages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
