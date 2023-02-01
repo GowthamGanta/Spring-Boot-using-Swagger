@@ -111,7 +111,7 @@ public class UserUtilImplTest {
 
 		boolean isExpectedEmpty = false;
 		 String isActualEmpty = errorMessages.getVerificationCode();
-
+		 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
 

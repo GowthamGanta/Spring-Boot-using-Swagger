@@ -18,7 +18,7 @@ public class AdminValidationImplTest {
 	private AdminValidationImpl adminValidationImpl;
 
 	@Test
-	public void testvalidateBlockUserRequest() {
+	public void testValidateBlockUserRequest() {
 
 		BlockUserRequest request = new BlockUserRequest();
 
@@ -26,7 +26,7 @@ public class AdminValidationImplTest {
 
 		Set<String> errorMessages = adminValidationImpl.validateBlockUserRequest(request);
 
-		boolean isExpectedEmpty = false;
+		boolean isExpectedEmpty = true;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
 
@@ -36,7 +36,7 @@ public class AdminValidationImplTest {
 
 	@Test
 
-	public void testvalidateBlockUserRequestFailure() {
+	public void testValidateBlockUserRequestFailure() {
 
 		BlockUserRequest request = new BlockUserRequest();
 
@@ -52,7 +52,7 @@ public class AdminValidationImplTest {
 	}
 
 	@Test
-	public void testvalidateUnblockUserRequest() {
+	public void testValidateUnblockUserRequest() {
 
 		UnblockUserRequest request = new UnblockUserRequest();
 
@@ -60,7 +60,7 @@ public class AdminValidationImplTest {
 
 		Set<String> errorMessages = adminValidationImpl.validateUnblockUserRequest(request);
 
-		boolean isExpectedEmpty = false;
+		boolean isExpectedEmpty = true;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
 
@@ -70,7 +70,7 @@ public class AdminValidationImplTest {
 
 	@Test
 
-	public void testvalidateUnblockUserRequestFailure() {
+	public void testValidateUnblockUserRequestFailure() {
 
 		UnblockUserRequest request = new UnblockUserRequest();
 

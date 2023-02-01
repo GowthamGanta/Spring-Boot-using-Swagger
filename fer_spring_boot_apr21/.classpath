@@ -28,5 +28,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="/fer_spring_boot_swagger_jun22_local"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
