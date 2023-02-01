@@ -243,7 +243,6 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testGetExpenseNotFound() {
 
-		// expense.setUserId(1);
 
 		Optional<Expense> expenseObj = Optional.empty();
 
@@ -288,8 +287,6 @@ public class ExpenseServiceImplTest {
 	public void testGetExpenseOptionsNotFound() {
 
 		Optional<User> userObj = Optional.empty();
-
-		// expense.setUserId(1);
 
 		// Mock
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);

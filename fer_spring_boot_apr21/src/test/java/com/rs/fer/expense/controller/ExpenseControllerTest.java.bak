@@ -52,7 +52,6 @@ public class ExpenseControllerTest {
 		AddExpenseResponse AddExpenseResponse = expenseController.addExpense(request);
 
 		assertEquals("000", AddExpenseResponse.statusCode);
-		
 
 	}
 
