@@ -62,7 +62,7 @@ public class MessageThread {
 	}
 
 	@OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "message_id", referencedColumnName = "messageThread_id")
+	@JoinColumn(name = "thread_id", referencedColumnName = "messageThread_id")
 	private Set<Message> messages;
 
 	public Set<Message> getMessages() {

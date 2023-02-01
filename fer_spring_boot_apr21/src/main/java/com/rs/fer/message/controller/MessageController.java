@@ -25,8 +25,8 @@ public class MessageController {
 	@Autowired
 	MessageService messageService;
 
-	@PostMapping("/saveMessage")
-	public SaveMessageResponse saveMessage(@RequestBody SaveMessageRequest request) {
+	@PostMapping("/sendMessage")
+	public SaveMessageResponse sendMessage(@RequestBody SaveMessageRequest request) {
 
 		SaveMessageResponse response = null;
 		Set<String> errorMessages = messageValidation.validateSaveMessage(request);

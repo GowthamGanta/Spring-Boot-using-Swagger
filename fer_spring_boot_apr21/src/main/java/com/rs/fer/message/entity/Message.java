@@ -28,7 +28,7 @@ public class Message {
 	@Column
 	private int senderId;
 
-	@Column
+	@Column(name="thread_id")
 	private int messageThreadId;
 	
 	public Message() {

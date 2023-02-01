@@ -55,6 +55,8 @@ public class MessageServiceImpl implements MessageService {
 
 			// save message thread
 			messageThread = messageThreadRepository.save(messageThread);
+		} else {
+			messageThread = messageThreadObj.isPresent() ? messageThreadObj.get() : messageThreadObject.get();
 		}
 
 		// load VO data into message entity

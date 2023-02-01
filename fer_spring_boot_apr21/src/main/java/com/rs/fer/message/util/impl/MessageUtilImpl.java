@@ -19,7 +19,7 @@ public class MessageUtilImpl implements MessageUtil{
 		message.setMessage(request.getMessage());
 		message.setDate(DateUtil.getCurrentDate());
 		message.setSenderId(request.getSenderId());
-		message.setMessageThreadId(request.getMessageThreadId());
+		message.setMessageThreadId(messageThreadId);
 		message.setReadFlag("N");
 		
 		return message;
@@ -30,7 +30,6 @@ public class MessageUtilImpl implements MessageUtil{
 		
 		MessageThread messageThread = new MessageThread();
 	
-		messageThread.setMessages(request.getMessages());
 		messageThread.setSenderId(request.getSenderId());
 		messageThread.setReceiverId(request.getReceiverId());
 		
