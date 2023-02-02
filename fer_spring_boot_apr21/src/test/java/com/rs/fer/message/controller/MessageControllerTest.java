@@ -13,7 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.service.MessageService;
 import com.rs.fer.message.validation.MessageValidation;
@@ -68,4 +70,34 @@ public class MessageControllerTest {
 
 	}
 
+	@Test
+	public void testGetMessages() {
+		
+		Set<String> errorMessages = new LinkedHashSet<>();
+		
+		GetMessagesRequest request = new GetMessagesRequest();
+		GetMessagesResponse response = new GetMessagesResponse(HttpStatus.OK, "000", "", null);
+		
+		when(messageValidation.validateGetMessages(Mockito.any())).thenReturn(errorMessages);
+		when(messageService.getMessages(Mockito.any())).thenReturn(response);
+		
+		GetMessagesResponse getResponse = messageController.getMessages(request);
+
+		assertEquals("999", getResponse.statusCode);
+	}
+	
+	@Test
+	public void testGetMessagesFailure() {
+		
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please entre messageThreadId");
+		
+		GetMessagesRequest request = new GetMessagesRequest();
+		
+		when(messageValidation.validateGetMessages(Mockito.any())).thenReturn(errorMessages);
+		
+		GetMessagesResponse response = messageController.getMessages(request);
+		
+		assertEquals("999", response.statusCode);
+	}
 }
