@@ -7,6 +7,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
+import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
 
 public class MessageValidationImplTest {
@@ -49,5 +50,41 @@ public class MessageValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
+	
+	@Test
+	public void testvalidateGetMessagesRequest() {
+
+		GetMessagesRequest request = new GetMessagesRequest();
+
+		request.setMessageTheradId(1);
+		request.setUserdId(1);
+
+		Set<String> errorMessages = messageValidationImpl.validateGetMessages(request); 
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test
+	public void testvalidateGetMessagesRequestFailure() {
+
+		GetMessagesRequest request = new GetMessagesRequest();
+
+		request.setMessageTheradId(1);
+		//request.setUserdId(1);
+
+		Set<String> errorMessages = messageValidationImpl.validateGetMessages(request); 
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	
 
 }
