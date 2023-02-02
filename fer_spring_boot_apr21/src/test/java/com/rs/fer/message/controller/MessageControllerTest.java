@@ -84,7 +84,6 @@ public class MessageControllerTest {
 		GetMessagesResponse getResponse = messageController.getMessages(request);
 
 		assertEquals("000", getResponse.statusCode);
-		
 	}
 	
 	@Test
@@ -100,6 +99,5 @@ public class MessageControllerTest {
 		GetMessagesResponse response = messageController.getMessages(request);
 		
 		assertEquals("999", response.statusCode);
-		
 	}
 }
