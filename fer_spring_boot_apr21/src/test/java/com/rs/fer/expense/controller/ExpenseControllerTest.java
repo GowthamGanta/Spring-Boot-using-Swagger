@@ -51,12 +51,9 @@ public class ExpenseControllerTest {
 
 		AddExpenseResponse addExpenseResponse = expenseController.addExpense(request);
 
-<<<<<<< HEAD
-		assertEquals("000", AddExpenseResponse.statusCode);
-		
-=======
 		assertEquals("000", addExpenseResponse.statusCode);
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
+		
+		assertEquals("000", addExpenseResponse.statusCode);
 
 	}
 
@@ -195,11 +192,8 @@ public class ExpenseControllerTest {
 		
 		DeleteExpenseResponse deleteExpenseResponse = expenseController.deleteExpense(request);
 
-<<<<<<< HEAD
-		assertEquals("000", DeleteExpenseResponse.statusCode);
-=======
 		assertEquals("000", deleteExpenseResponse.statusCode);
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
+		assertEquals("000", deleteExpenseResponse.statusCode);
 
 
 	}  
