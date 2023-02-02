@@ -7,4 +7,6 @@ public interface MessageService {
 
 	SaveMessageResponse sendMessage(SaveMessageRequest request);
 	
+	
+	
 }
