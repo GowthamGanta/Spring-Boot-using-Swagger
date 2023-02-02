@@ -96,6 +96,7 @@ public class MessageServiceImpl implements MessageService {
 			response.setMessages(messageThreadObjects.get(request.getMessageTheradId()));
 		}
 		
+		
 		return response;
 	}
 
