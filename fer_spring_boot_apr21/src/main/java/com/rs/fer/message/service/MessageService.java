@@ -5,6 +5,6 @@ import com.rs.fer.message.response.SaveMessageResponse;
 
 public interface MessageService {
 
-	SaveMessageResponse saveMessage(SaveMessageRequest request);
+	SaveMessageResponse sendMessage(SaveMessageRequest request);
 	
 }

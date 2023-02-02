@@ -11,6 +11,4 @@ public interface MessageRepository extends JpaRepository<Message, Integer>{
 
 	List<Message> findByMessageThreadId(int messageThreadId);
 
-	List<MessageThread> save(MessageThread messageThread);
-	
 }

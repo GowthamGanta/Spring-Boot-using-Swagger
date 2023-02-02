@@ -34,7 +34,7 @@ public class MessageController {
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
-			response = messageService.saveMessage(request);
+			response = messageService.sendMessage(request);
 		}
 		return response;
 

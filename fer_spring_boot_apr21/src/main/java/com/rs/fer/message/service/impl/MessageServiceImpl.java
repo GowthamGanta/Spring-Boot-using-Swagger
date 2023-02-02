@@ -1,7 +1,6 @@
 package com.rs.fer.message.service.impl;
 
-import java.util.Optional;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,26 +27,24 @@ public class MessageServiceImpl implements MessageService {
 	MessageThreadRepository messageThreadRepository;
 
 	@Override
-	public SaveMessageResponse saveMessage(SaveMessageRequest request) {
+	public SaveMessageResponse sendMessage(SaveMessageRequest request) {
 
 		SaveMessageResponse response = null;
 		Message message = null;
 		MessageThread messageThread = null;
 
 		// To get the message thread based on sender and receiver match
-		Optional<MessageThread> messageThreadObj = messageThreadRepository
+		List<MessageThread> messageThreadObjects = messageThreadRepository
 				.findBySenderIdAndReceiverId(request.getSenderId(), request.getReceiverId());
 
-		Optional<MessageThread> messageThreadObject = null;
-
 		// To get the message thread based on receiver and sender match
-		if (!messageThreadObj.isPresent()) {
-			messageThreadObject = messageThreadRepository.findBySenderIdAndReceiverId(request.getReceiverId(),
+		if (messageThreadObjects == null || messageThreadObjects.isEmpty()) {
+			messageThreadObjects = messageThreadRepository.findBySenderIdAndReceiverId(request.getReceiverId(),
 					request.getSenderId());
 		}
 
 		// If Message Thread is not found
-		if (!messageThreadObj.isPresent() && !messageThreadObject.isPresent()) {
+		if (messageThreadObjects == null || messageThreadObjects.isEmpty()) {
 
 			// load vo data into messageThread entity
 			messageThread = messageUtil.loadSaveMessageThreadRequest(request, request.getSenderId(),
@@ -56,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
 			// save message thread
 			messageThread = messageThreadRepository.save(messageThread);
 		} else {
-			messageThread = messageThreadObj.isPresent() ? messageThreadObj.get() : messageThreadObject.get();
+			messageThread = messageThreadObjects.get(0);
 		}
 
 		// load VO data into message entity
