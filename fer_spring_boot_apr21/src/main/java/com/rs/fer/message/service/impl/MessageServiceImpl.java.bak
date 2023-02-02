@@ -9,9 +9,7 @@ import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
 import com.rs.fer.message.repository.MessageRepository;
 import com.rs.fer.message.repository.MessageThreadRepository;
-import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
-import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.service.MessageService;
 import com.rs.fer.message.util.MessageUtil;
@@ -78,25 +76,6 @@ public class MessageServiceImpl implements MessageService {
 
 		return response;
 	}
-
-	@Override
-	public GetMessagesResponse getMessages(GetMessagesRequest request) {
-
-		GetMessagesResponse response = null;
-		
-		List<Message> messageThreadObjects = messageRepository.findByMessageThreadId(request.getMessageTheradId());
-		
-		if(messageThreadObjects.isEmpty()) {
-			
-			response = new GetMessagesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No Messages found", null);
-			
-		} else {
-			
-			response = new GetMessagesResponse(HttpStatus.OK, "000", "fetch Messages", null);
-			response.setMessages(messageThreadObjects.get(request.getMessageTheradId()));
-		}
-		
-		return response;
-	}
+	
 
 }
