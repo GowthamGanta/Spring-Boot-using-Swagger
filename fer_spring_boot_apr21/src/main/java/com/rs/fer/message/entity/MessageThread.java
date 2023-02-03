@@ -27,14 +27,35 @@ public class MessageThread {
 	@Column
 	private int receiverId;
 
+	@Column
+	private String mobile;
+
+	@Column
+	private String email;
+
+	@Column
+	private String otp;
+
+	@Column
+	private String verificationCode;
+
+	@Column
+	private String mobileVerify;
+
+	@Column
+	private String emailVerify;
+
 	public MessageThread() {
 
 	}
 
-	public MessageThread(int senderId, int receiverId) {
+	public MessageThread(int senderId, int receiverId, String email, String mobile) {
 
 		this.senderId = senderId;
 		this.receiverId = receiverId;
+		this.email = email;
+		this.mobile = mobile;
+		
 	}
 
 	public int getMessageThreadId() {
@@ -72,4 +93,53 @@ public class MessageThread {
 	public void setMessages(Set<Message> messages) {
 		this.messages = messages;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public String getMobileVerify() {
+		return mobileVerify;
+	}
+
+	public void setMobileVerify(String mobileVerify) {
+		this.mobileVerify = mobileVerify;
+	}
+
+	public String getEmailVerify() {
+		return emailVerify;
+	}
+
+	public void setEmailVerify(String emailVerify) {
+		this.emailVerify = emailVerify;
+	}
+
 }

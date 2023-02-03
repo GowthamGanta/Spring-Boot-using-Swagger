@@ -1,12 +1,17 @@
 package com.rs.fer.message.request;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 public class SaveMessageRequest {
 
 	private String message;
 	private int senderId;
 	private int receiverId;
+	private String email;
+	private String mobile;
 
 	public String getMessage() {
 		return message;
@@ -30,6 +35,22 @@ public class SaveMessageRequest {
 
 	public void setReceiverId(int receiverId) {
 		this.receiverId = receiverId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 }
