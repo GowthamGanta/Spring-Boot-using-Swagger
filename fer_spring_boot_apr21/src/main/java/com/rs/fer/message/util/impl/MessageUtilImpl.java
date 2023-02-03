@@ -1,9 +1,5 @@
 package com.rs.fer.message.util.impl;
 
-import java.text.DecimalFormat;
-import java.util.Random;
-import java.util.UUID;
-
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.message.entity.Message;
@@ -36,20 +32,6 @@ public class MessageUtilImpl implements MessageUtil {
 
 		messageThread.setSenderId(request.getSenderId());
 		messageThread.setReceiverId(request.getReceiverId());
-		messageThread.setEmail(request.getEmail());
-		messageThread.setMobile(request.getMobile());
-
-		String otp = new DecimalFormat("000000").format(new Random().nextInt(999999));
-
-		messageThread.setOtp(otp);
-
-		// String verificationCode = "" + random.nextInt (9000) + 1000 ;
-		String uuid = UUID.randomUUID().toString();
-
-		messageThread.setVerificationCode(uuid);
-
-		messageThread.setEmailVerify("N");
-		messageThread.setMobileVerify("N");
 
 		return messageThread;
 	}
