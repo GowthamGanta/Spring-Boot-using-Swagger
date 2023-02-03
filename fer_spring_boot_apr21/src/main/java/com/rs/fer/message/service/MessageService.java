@@ -10,6 +10,4 @@ public interface MessageService {
 	SaveMessageResponse sendMessage(SaveMessageRequest request);
 	
 	GetMessagesResponse getMessages(GetMessagesRequest request);
-	
-	
 }
