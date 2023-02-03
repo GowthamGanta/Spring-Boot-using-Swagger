@@ -1,8 +1,6 @@
 package com.rs.fer.message.request;
 
-import java.util.Set;
 
-import com.rs.fer.message.entity.Message;
 
 public class SaveMessageRequest {
 

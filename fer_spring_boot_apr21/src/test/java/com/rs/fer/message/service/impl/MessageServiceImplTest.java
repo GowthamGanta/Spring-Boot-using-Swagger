@@ -101,7 +101,6 @@ public class MessageServiceImplTest {
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
 		assertEquals("001", response.statusCode);
-		
 
 	}
 	
@@ -132,7 +131,7 @@ public class MessageServiceImplTest {
 		
 		
 		Message messageThread = new Message();
-		messageThread.setMessageThreadId(12);
+		//messageThread.setMessageThreadId(1);
 		
 		List<Message> messageThreadObjects = new ArrayList<>();
 		messageThreadObjects.add(messageThread);
@@ -141,12 +140,11 @@ public class MessageServiceImplTest {
         
 		GetMessagesRequest request = new GetMessagesRequest();
 		
-		//request.setUserdId(19);
+		request.setUserdId(1);
 		
 		GetMessagesResponse response = messageServiceImpl.getMessages(request);
 		
 		assertEquals("001", response.statusCode);
-		
 		
 	}
 	

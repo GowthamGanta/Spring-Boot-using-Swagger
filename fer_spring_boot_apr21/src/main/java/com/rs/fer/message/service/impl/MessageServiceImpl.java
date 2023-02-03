@@ -88,7 +88,7 @@ public class MessageServiceImpl implements MessageService {
 		
 		if(messageThreadObjects.isEmpty()) {
 			
-			response = new GetMessagesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "001", "No Messages found", null);
+			response = new GetMessagesResponse(HttpStatus.OK, "001", "No Messages found", null);
 			
 		} else {
 			

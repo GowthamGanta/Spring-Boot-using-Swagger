@@ -15,7 +15,9 @@ import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
 import com.rs.fer.message.repository.MessageRepository;
 import com.rs.fer.message.repository.MessageThreadRepository;
+import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.util.MessageUtil;
 
@@ -99,7 +101,56 @@ public class MessageServiceImplTest {
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
 		assertEquals("001", response.statusCode);
+		
 
 	}
+	
+	@Test
+	public void testGetmessages() {
+		
+		
+		Message messageThread = new Message();
+		messageThread.setMessageThreadId(1);
+		
+		List<Message> messageThreadObjects = new ArrayList<>();
+		messageThreadObjects.add(messageThread);
+		
+		when(messageRepository.findByMessageThreadId(Mockito.anyInt())).thenReturn(messageThreadObjects);
+        
+		GetMessagesRequest request = new GetMessagesRequest();
+		
+		request.setUserdId(1);
+		
+		GetMessagesResponse response = messageServiceImpl.getMessages(request);
+		
+		assertEquals("000", response.statusCode);
+		
+	}
+	
+	@Test
+	public void testGetmessagesFailure() {
+		
+		
+		Message messageThread = new Message();
+		messageThread.setMessageThreadId(12);
+		
+		List<Message> messageThreadObjects = new ArrayList<>();
+		messageThreadObjects.add(messageThread);
+		
+		when(messageRepository.findByMessageThreadId(Mockito.anyInt())).thenReturn(messageThreadObjects);
+        
+		GetMessagesRequest request = new GetMessagesRequest();
+		
+		//request.setUserdId(19);
+		
+		GetMessagesResponse response = messageServiceImpl.getMessages(request);
+		
+		assertEquals("001", response.statusCode);
+		
+		
+	}
+	
+	
+	
 
 }

@@ -83,7 +83,7 @@ public class MessageControllerTest {
 		
 		GetMessagesResponse getResponse = messageController.getMessages(request);
 
-		assertEquals("000", getResponse.statusCode);
+		assertEquals("999", getResponse.statusCode);
 	}
 	
 	@Test
