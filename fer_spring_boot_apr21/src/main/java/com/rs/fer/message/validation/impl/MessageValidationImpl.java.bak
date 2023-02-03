@@ -21,9 +21,8 @@ public class MessageValidationImpl implements MessageValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getMessage(), "Please enter message");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getSenderId(), "Please enter senderId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getReceiverId(), "Please enter receiverId");
- 
+
 		return errorMessages;
-		
 	}
 
 	@Override
