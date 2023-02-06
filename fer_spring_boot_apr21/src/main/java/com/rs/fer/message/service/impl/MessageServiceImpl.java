@@ -1,9 +1,12 @@
 package com.rs.fer.message.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
@@ -15,6 +18,8 @@ import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.service.MessageService;
 import com.rs.fer.message.util.MessageUtil;
+import com.rs.fer.user.entity.User;
+import com.rs.fer.user.repository.UserRepository;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -28,12 +33,62 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	MessageThreadRepository messageThreadRepository;
 
+	@Autowired
+	UserRepository userRepository;
+
 	@Override
 	public SaveMessageResponse sendMessage(SaveMessageRequest request) {
 
 		SaveMessageResponse response = null;
 		Message message = null;
 		MessageThread messageThread = null;
+
+		Optional<User> userObj = userRepository.findById(request.getSenderId());
+
+		if (!userObj.isPresent()) {
+
+			return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "201", "Sender is not found", null);
+		}
+
+		if (userObj.isPresent()) {
+			User sender = userObj.get();
+			
+
+			if ("N".equalsIgnoreCase(sender.getEmailVerify())) {
+				
+
+				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "202",
+						"User is already registered with the given email", null);
+			}
+			if ("N".equalsIgnoreCase(sender.getMobileVerify())) {
+				
+
+				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "203", "Enter otp", null);
+			}
+
+		}
+		
+
+		Optional<User> userObject = userRepository.findById(request.getReceiverId());
+		if (!userObject.isPresent()) {
+
+			return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "204", "Receiver is not found", null);
+		}
+		if (userObject.isPresent()) {
+
+			User receiver = userObj.get();
+
+			if ("N".equalsIgnoreCase(receiver.getEmailVerify())) {
+
+				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "205",
+						"User is already registered with the given email", null);
+			}
+			if ("N".equalsIgnoreCase(receiver.getMobileVerify())) {
+
+				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "206", "Enter otp", null);
+			}
+
+		}
 
 		// To get the message thread based on sender and receiver match
 		List<MessageThread> messageThreadObjects = messageThreadRepository
@@ -83,20 +138,20 @@ public class MessageServiceImpl implements MessageService {
 	public GetMessagesResponse getMessages(GetMessagesRequest request) {
 
 		GetMessagesResponse response = null;
-		
+
 		List<Message> messageThreadObjects = messageRepository.findByMessageThreadId(request.getMessageTheradId());
-		
-		if(messageThreadObjects.isEmpty()) {
-			
+
+		if (messageThreadObjects.isEmpty()) {
+
 			response = new GetMessagesResponse(HttpStatus.OK, "001", "No Messages found", null);
-			
+
 		} else {
-			
+
 			response = new GetMessagesResponse(HttpStatus.OK, "000", "fetch Messages", null);
 			response.setMessages(messageThreadObjects.get(request.getMessageTheradId()));
-		
+
 		}
-		
+
 		return response;
 	}
 

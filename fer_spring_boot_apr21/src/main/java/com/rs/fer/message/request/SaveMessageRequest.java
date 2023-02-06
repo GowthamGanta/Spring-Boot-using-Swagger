@@ -1,10 +1,7 @@
 package com.rs.fer.message.request;
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> branch 'master' of https://github.com/GowthamGanta/Spring-Boot-using-Swagger.git
 public class SaveMessageRequest {
 
 	private String message;
