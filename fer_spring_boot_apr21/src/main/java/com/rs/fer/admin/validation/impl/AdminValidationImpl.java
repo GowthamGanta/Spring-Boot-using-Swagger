@@ -6,6 +6,8 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.GetBlockUserRequest;
+import com.rs.fer.admin.request.GetUnblockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.validation.AdminValidation;
 import com.rs.fer.util.FERUtil;
@@ -27,7 +29,24 @@ public class AdminValidationImpl implements AdminValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
 
 		return errorMessages;
+		
 
+	}
+
+	@Override
+	public Set<String> validateGetBlockUserRequest(GetBlockUserRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetUnblockUserRequest(GetUnblockUserRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter Id");
+
+		return errorMessages;
 	}
 
 }

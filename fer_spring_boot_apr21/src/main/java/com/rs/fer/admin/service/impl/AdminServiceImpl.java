@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.GetBlockUserRequest;
+import com.rs.fer.admin.request.GetUnblockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
 import com.rs.fer.admin.response.GetBlockUserResponse;
@@ -100,7 +102,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public GetUnblockUserResponse getUnblockUsers() {
+	public GetUnblockUserResponse getUnblockUsers(GetUnblockUserRequest request) {
 
 		GetUnblockUserResponse response = null;
 
@@ -120,7 +122,7 @@ public class AdminServiceImpl implements AdminService {
 	}  
 
 	@Override
-	public GetBlockUserResponse getBlockUsers() {
+	public GetBlockUserResponse getBlockUsers(GetBlockUserRequest request) {
 
 		GetBlockUserResponse response = null;
 

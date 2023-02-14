@@ -33,22 +33,24 @@ public class MessageUtilImplTest {
 
 	}
 
+	@Test
 	public void testUtilLoadMessageRequestFailure() {
 
 		SaveMessageRequest request = new SaveMessageRequest();
 
-		request.setMessage("hiAndBye");
-		request.setSenderId(1);
+		//request.setMessage("hiAndBye");
+		request.setSenderId(1); 
 
 		Message errorMessage = messageUtilImpl.loadSaveMessageRequest(request, 1);
 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = (0 != errorMessage.getSenderId() && null != errorMessage.getMessage());
 
-		assertEquals(isExpectedEmpty, isActualEmpty);
+		assertEquals(isExpectedEmpty, isActualEmpty); 
 
 	}
 
+	@Test
 	public void loadSaveMessageThreadRequest() {
 
 		SaveMessageRequest request = new SaveMessageRequest();
@@ -65,12 +67,13 @@ public class MessageUtilImplTest {
 
 	}
 
+	@Test
 	public void loadSaveMessageThreadRequestFailure() {
 
 		SaveMessageRequest request = new SaveMessageRequest();
 
-		request.setSenderId(1);
-		request.setReceiverId(2);
+		//request.setSenderId(1);
+		request.setReceiverId(2); 
 
 		MessageThread errorMessage = messageUtilImpl.loadSaveMessageThreadRequest(request, 1, 2);
 

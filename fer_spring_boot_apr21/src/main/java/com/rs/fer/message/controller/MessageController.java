@@ -32,7 +32,7 @@ public class MessageController {
 	public SaveMessageResponse sendMessage(@RequestBody SaveMessageRequest request) {
 
 		SaveMessageResponse response = null;
-		Set<String> errorMessages = messageValidation.validateSaveMessage(request);
+		Set<String> errorMessages = messageValidation.validateSaveMessageRequest(request);
 
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
@@ -47,7 +47,7 @@ public class MessageController {
 	public GetMessagesResponse getMessages(@RequestBody GetMessagesRequest request) {
 		
 		GetMessagesResponse response = null;
-		Set<String> errorMessages = messageValidation.validateGetMessages(request);
+		Set<String> errorMessages = messageValidation.validateGetMessageRequest(request);
 		
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetMessagesResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);

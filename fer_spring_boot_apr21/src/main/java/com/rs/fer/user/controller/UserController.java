@@ -66,7 +66,7 @@ public class UserController {
 		
 	}
  
-	@PostMapping("/registration/ma")
+	/*@PostMapping("/registration/ma")
 	public RegistrationResponse registrationMa(@ModelAttribute RegistrationRequest request) {
 
 		RegistrationResponse response = null;
@@ -80,7 +80,7 @@ public class UserController {
 			response = userService.registration(request);
 		}
 		return response;
-	}
+	}*/
 
 	@PostMapping("/login")
 	public LoginResponse login(@RequestBody LoginRequest request) {

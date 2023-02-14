@@ -6,10 +6,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
-
+@SpringBootTest
 public class MessageValidationImplTest {
 
 	@InjectMocks
@@ -24,7 +25,7 @@ public class MessageValidationImplTest {
 		request.setReceiverId(4);
 		request.setSenderId(3); 
 
-		Set<String> errorMessages = messageValidationImpl.validateSaveMessage(request); 
+		Set<String> errorMessages = messageValidationImpl.validateSaveMessageRequest(request); 
 
 		boolean isExpectedEmpty = true;
 
@@ -38,11 +39,11 @@ public class MessageValidationImplTest {
 
 		SaveMessageRequest request = new SaveMessageRequest();
 
-		request.setMessage("hi");
-		request.setReceiverId(3);
-		request.setSenderId(4);
+		//request.setMessage("Hi");
+		request.setReceiverId(4);
+		request.setSenderId(3);
 
-		Set<String> errorMessages = messageValidationImpl.validateSaveMessage(request);
+		Set<String> errorMessages = messageValidationImpl.validateSaveMessageRequest(request);
 
 		boolean isExpectedEmpty = false;
 
@@ -59,7 +60,7 @@ public class MessageValidationImplTest {
 		request.setMessageTheradId(1);
 		request.setUserdId(1);
 
-		Set<String> errorMessages = messageValidationImpl.validateGetMessages(request); 
+		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request); 
 
 		boolean isExpectedEmpty = true;
 
@@ -73,10 +74,10 @@ public class MessageValidationImplTest {
 
 		GetMessagesRequest request = new GetMessagesRequest();
 
-		request.setMessageTheradId(1);
-		//request.setUserdId(1);
+		//request.setMessageTheradId(1);
+		request.setUserdId(1);
 
-		Set<String> errorMessages = messageValidationImpl.validateGetMessages(request); 
+		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request); 
 
 		boolean isExpectedEmpty = false;
 

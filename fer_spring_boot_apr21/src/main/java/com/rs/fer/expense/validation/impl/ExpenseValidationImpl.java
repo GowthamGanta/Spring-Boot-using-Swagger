@@ -20,7 +20,7 @@ public class ExpenseValidationImpl implements ExpenseValidation {
 
 	@Override
 	public Set<String> validateEditExpenseRequest(EditExpenseRequest request) {
-		Set<String> errorMessages = new LinkedHashSet<String>();
+		Set<String> errorMessages = new LinkedHashSet<String>(); 
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getExpenseId(), "Please enter expenseId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getType(), "Please enter type");
@@ -68,19 +68,18 @@ public class ExpenseValidationImpl implements ExpenseValidation {
 		return errorMessages;
 	}
 
-	@Override
-	public Set<String> validateGetExpensesRequest(GetExpensesRequest request) {
-		Set<String> errorMessages = new LinkedHashSet<String>();
-
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter UserId");
-
-		return errorMessages;
-	}
 
 	@Override
 	public Set<String> validateExpenseReportRequest(ExpenseReportRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getType(), "Please enter Type");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFromDate(), "Please enter FromDate");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getToDate(), "Please enter ToDate");
+		
+
+		return errorMessages;
+		
 	}
 
 	@Override

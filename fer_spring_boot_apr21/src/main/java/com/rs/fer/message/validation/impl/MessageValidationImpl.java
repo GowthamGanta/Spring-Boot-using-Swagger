@@ -14,7 +14,7 @@ import com.rs.fer.util.FERUtil;
 public class MessageValidationImpl implements MessageValidation {
 
 	@Override
-	public Set<String> validateSaveMessage(SaveMessageRequest request) {
+	public Set<String> validateSaveMessageRequest(SaveMessageRequest request) {
 
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
@@ -27,7 +27,7 @@ public class MessageValidationImpl implements MessageValidation {
 	}
 
 	@Override
-	public Set<String> validateGetMessages(GetMessagesRequest request) {
+	public Set<String> validateGetMessageRequest(GetMessagesRequest request) {
 
 		Set<String> errorMessages = new LinkedHashSet<String>();
 

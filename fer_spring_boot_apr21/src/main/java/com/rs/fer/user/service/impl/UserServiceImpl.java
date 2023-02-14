@@ -343,19 +343,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public EditRatingResponse editRating(EditRatingRequest request) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
  
 	@Override
 	public DeleteRatingResponse deleteRating(DeleteRatingRequest request) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public GetRatingResponse getRating(GetRatingRequest request) {
-		// TODO Auto-generated method stub
+		
 		return null;
+
+		
 	}
 }

@@ -66,8 +66,13 @@ public class UserUtilImpl implements UserUtil {
 
 	@Override
 	public User loadResetPasswordRequestToUser(ResetPasswordRequest request) {
+        
+		User user = new User();
 
-		return null;
+		user.setUserId(request.getUserId());
+		user.setPassword(request.getCurrentPassword());
+		
+		return user;
 	}
 
 	@Override
@@ -87,7 +92,7 @@ public class UserUtilImpl implements UserUtil {
 
 		if (user.getAddress() == null) {
 			user.setAddress(new Address());
-			user.getAddress().setCreated(DateUtil.getCurrentDate());
+			user.getAddress().setCreated(DateUtil.getCurrentDate()); 
 			user.getAddress().setAddressId(request.getAddressId());
 			user.getAddress().setLineone(request.getLineone());
 			user.getAddress().setLinetwo(request.getLinetwo());
@@ -108,7 +113,6 @@ public class UserUtilImpl implements UserUtil {
 
 	@Override
 	public Rating loadSaveRatingRequestToUserId(SaveRatingRequest request) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

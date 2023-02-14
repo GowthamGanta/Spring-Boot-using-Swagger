@@ -83,7 +83,7 @@ public class ExpenseController {
 
 		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
 
-			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No expense found", null);
+			response = new ExpenseReportResponse(HttpStatus.INTERNAL_SERVER_ERROR, "999", "No expense found", null);
 
 		} else {
 			response = expenseService.expenseReport(request);

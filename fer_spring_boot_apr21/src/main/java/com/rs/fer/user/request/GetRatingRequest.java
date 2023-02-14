@@ -12,5 +12,4 @@ public class GetRatingRequest {
 		this.ratingId = ratingId;
 	}
 	
-
 }

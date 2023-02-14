@@ -38,6 +38,8 @@ public class UpdateUserRequest {
 	private String pincode;
 
 	private String country;
+	
+	private String created;
 
 	public int getAddressId() {
 		return addressId;
@@ -158,5 +160,15 @@ public class UpdateUserRequest {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	
+	
 
 }

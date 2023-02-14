@@ -7,7 +7,7 @@ import com.rs.fer.message.request.SaveMessageRequest;
 
 public interface MessageValidation {
 
-	Set<String> validateSaveMessage(SaveMessageRequest request);
+	Set<String> validateSaveMessageRequest(SaveMessageRequest request);
 
-	Set<String> validateGetMessages(GetMessagesRequest request);
+	Set<String> validateGetMessageRequest(GetMessagesRequest request);
 }

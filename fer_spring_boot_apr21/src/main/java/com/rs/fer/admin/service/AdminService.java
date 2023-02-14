@@ -1,6 +1,8 @@
 package com.rs.fer.admin.service;
 
 import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.GetBlockUserRequest;
+import com.rs.fer.admin.request.GetUnblockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
 import com.rs.fer.admin.response.GetBlockUserResponse;
@@ -13,8 +15,9 @@ public interface AdminService {
 
 	UnblockUserResponse unblockUser(UnblockUserRequest request);
 
-	GetUnblockUserResponse getUnblockUsers();
+	GetUnblockUserResponse getUnblockUsers(GetUnblockUserRequest request);
 
-	GetBlockUserResponse getBlockUsers();
+	GetBlockUserResponse getBlockUsers(GetBlockUserRequest request);
+	
 
 }

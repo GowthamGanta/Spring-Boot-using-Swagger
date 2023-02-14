@@ -14,6 +14,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.GetBlockUserRequest;
+import com.rs.fer.admin.request.GetUnblockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 import com.rs.fer.admin.response.BlockUserResponse;
 import com.rs.fer.admin.response.GetBlockUserResponse;
@@ -142,8 +144,10 @@ public class AdminServiceImplTest {
 
 		// Mock
 		when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+		
+		GetBlockUserRequest request = new GetBlockUserRequest();
 
-		GetBlockUserResponse response = adminServiceImpl.getBlockUsers();
+		GetBlockUserResponse response = adminServiceImpl.getBlockUsers(request);
 
 		// 3.
 		assertEquals("000", response.statusCode);
@@ -156,8 +160,10 @@ public class AdminServiceImplTest {
 	
 
 		when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+		
+		GetBlockUserRequest request = new GetBlockUserRequest();
 
-		GetBlockUserResponse response = adminServiceImpl.getBlockUsers();
+		GetBlockUserResponse response = adminServiceImpl.getBlockUsers(request);
 		assertEquals("101", response.statusCode);
 	}
 
@@ -172,8 +178,10 @@ public void testGetUnBlockUsers() {
 
 	// Mock
 	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+	
+	GetUnblockUserRequest request = new GetUnblockUserRequest();
 
-	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers();
+	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers(request);
 
 	// 3.
 	assertEquals("000", response.statusCode);
@@ -187,8 +195,11 @@ public void testGetUnBlockUserResponseFailure() {
 
 	
 	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
+	
+	GetUnblockUserRequest request = new GetUnblockUserRequest();
 
-	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers();
+	GetUnblockUserResponse response = adminServiceImpl.getUnblockUsers(request);
+	
 	assertEquals("101", response.statusCode);
 }
 

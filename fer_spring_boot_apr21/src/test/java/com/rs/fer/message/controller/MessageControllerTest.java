@@ -42,7 +42,7 @@ public class MessageControllerTest {
 
 		
 		// when
-		when(messageValidation.validateSaveMessage(Mockito.any())).thenReturn(errorMessages);
+		when(messageValidation.validateSaveMessageRequest(Mockito.any())).thenReturn(errorMessages);
 		when(messageService.sendMessage(Mockito.any())).thenReturn(response);
 
 		// Then
@@ -61,7 +61,7 @@ public class MessageControllerTest {
 		SaveMessageRequest request = new SaveMessageRequest();
 
 		// when
-		when(messageValidation.validateSaveMessage(Mockito.any())).thenReturn(errorMessages);
+		when(messageValidation.validateSaveMessageRequest(Mockito.any())).thenReturn(errorMessages);
 
 		// Then
 		SaveMessageResponse response = messageController.sendMessage(request);
@@ -78,12 +78,12 @@ public class MessageControllerTest {
 		GetMessagesRequest request = new GetMessagesRequest();
 		GetMessagesResponse response = new GetMessagesResponse(HttpStatus.OK, "000", "", null);
 		
-		when(messageValidation.validateGetMessages(Mockito.any())).thenReturn(errorMessages);
+		when(messageValidation.validateGetMessageRequest(Mockito.any())).thenReturn(errorMessages);
 		when(messageService.getMessages(Mockito.any())).thenReturn(response);
 		
 		GetMessagesResponse getResponse = messageController.getMessages(request);
 
-		assertEquals("999", getResponse.statusCode);
+		assertEquals("000", getResponse.statusCode);
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class MessageControllerTest {
 		
 		GetMessagesRequest request = new GetMessagesRequest();
 		
-		when(messageValidation.validateGetMessages(Mockito.any())).thenReturn(errorMessages);
+		when(messageValidation.validateGetMessageRequest(Mockito.any())).thenReturn(errorMessages);
 		
 		GetMessagesResponse response = messageController.getMessages(request);
 		

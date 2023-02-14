@@ -16,11 +16,13 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
+import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
 import com.rs.fer.expense.response.AddExpenseResponse;
 import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.expense.response.EditExpenseResponse;
+import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
 import com.rs.fer.expense.service.ExpenseService;
@@ -216,6 +218,43 @@ public class ExpenseControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+	
+	
+	
+	@Test
+	public void testExpenseReport() {
+		
+		Set<String> errorMessages = new LinkedHashSet<>();
+		
+		ExpenseReportRequest request = new ExpenseReportRequest();
+		ExpenseReportResponse response = new ExpenseReportResponse(HttpStatus.OK, "000", "", null);
+		
+		when(expenseValidation.validateExpenseReportRequest(Mockito.any())).thenReturn(errorMessages);
+		when(expenseService.expenseReport(Mockito.any())).thenReturn(response);
+		
+		ExpenseReportResponse ExpenseReportResponse = expenseController.expenseReport(request);
+
+		assertEquals("000", response.statusCode);
+
+    }
+	
+	@Test
+	public void testExpenseReportFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Type");
+
+		ExpenseReportRequest request = new ExpenseReportRequest();  
+
+		// When
+		when(expenseValidation.validateExpenseReportRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		ExpenseReportResponse response = expenseController.expenseReport(request);
+
+		assertEquals("999", response.statusCode);
+	} 
 	
 }
 

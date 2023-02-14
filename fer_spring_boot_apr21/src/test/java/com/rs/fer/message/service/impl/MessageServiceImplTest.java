@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +21,8 @@ import com.rs.fer.message.request.SaveMessageRequest;
 import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.util.MessageUtil;
+import com.rs.fer.user.entity.User;
+import com.rs.fer.user.repository.UserRepository;
 
 @SpringBootTest
 public class MessageServiceImplTest {
@@ -29,6 +32,9 @@ public class MessageServiceImplTest {
 
 	@Mock
 	MessageRepository messageRepository;
+	
+	@Mock
+	UserRepository userRepository;
 
 	@Mock
 	MessageThreadRepository messageThreadRepository;
@@ -38,20 +44,26 @@ public class MessageServiceImplTest {
 
 	@Test
 	public void testSendMessage() {
+		
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
 
 		List<MessageThread> messageThreadObjects = new ArrayList<>();
-
+		
 		MessageThread messageThread = new MessageThread();
-		messageThread.setMessageThreadId(1);
+		messageThread.setMessageThreadId(11);
 
 		SaveMessageRequest request = new SaveMessageRequest();
-		request.setSenderId(1);
-		request.setReceiverId(2);
+		request.setSenderId(13);
+		request.setReceiverId(22);
 
 		Message message = new Message();
-		message.setId(1);
+		message.setId(10);
 
 		// Mock
+		
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		
 		when(messageThreadRepository.findBySenderIdAndReceiverId(Mockito.anyInt(), Mockito.anyInt()))
 				.thenReturn(messageThreadObjects);
 
@@ -63,7 +75,7 @@ public class MessageServiceImplTest {
 		when(messageUtil.loadSaveMessageRequest(Mockito.any(), Mockito.anyInt())).thenReturn(message);
 
 		when(messageRepository.save(Mockito.any())).thenReturn(message);
-
+		
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
 		assertEquals("000", response.statusCode);
@@ -72,6 +84,9 @@ public class MessageServiceImplTest {
 
 	@Test
 	public void testSendMessageFailure() {
+		
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
 
 		List<MessageThread> messageThreadObjects = new ArrayList<>();
 
@@ -83,9 +98,12 @@ public class MessageServiceImplTest {
 		request.setReceiverId(22);
 
 		Message message = new Message();
-		//message.setId(10);
+		// message.setId(10);
 
 		// Mock
+		
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		
 		when(messageThreadRepository.findBySenderIdAndReceiverId(Mockito.anyInt(), Mockito.anyInt()))
 				.thenReturn(messageThreadObjects);
 
@@ -103,52 +121,47 @@ public class MessageServiceImplTest {
 		assertEquals("001", response.statusCode);
 
 	}
-	
+
 	@Test
 	public void testGetmessages() {
-		
-		
+
 		Message messageThread = new Message();
 		messageThread.setMessageThreadId(1);
-		
+
 		List<Message> messageThreadObjects = new ArrayList<>();
 		messageThreadObjects.add(messageThread);
-		
+
 		when(messageRepository.findByMessageThreadId(Mockito.anyInt())).thenReturn(messageThreadObjects);
-        
+
 		GetMessagesRequest request = new GetMessagesRequest();
-		
+
 		request.setUserdId(1);
-		
+
 		GetMessagesResponse response = messageServiceImpl.getMessages(request);
-		
+
 		assertEquals("000", response.statusCode);
-		
+
 	}
-	
+
 	@Test
 	public void testGetmessagesFailure() {
-		
-		
+
 		Message messageThread = new Message();
-		//messageThread.setMessageThreadId(1);
-		
+		messageThread.setMessageThreadId(1);
+
 		List<Message> messageThreadObjects = new ArrayList<>();
-		messageThreadObjects.add(messageThread);
-		
+		//messageThreadObjects.add(messageThread);
+
 		when(messageRepository.findByMessageThreadId(Mockito.anyInt())).thenReturn(messageThreadObjects);
-        
+
 		GetMessagesRequest request = new GetMessagesRequest();
-		
+
 		request.setUserdId(1);
-		
+
 		GetMessagesResponse response = messageServiceImpl.getMessages(request);
-		
+
 		assertEquals("001", response.statusCode);
-		
+
 	}
-	
-	
-	
 
 }

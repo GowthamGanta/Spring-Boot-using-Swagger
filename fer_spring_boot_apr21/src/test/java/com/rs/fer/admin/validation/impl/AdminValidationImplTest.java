@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.admin.request.BlockUserRequest;
+import com.rs.fer.admin.request.GetBlockUserRequest;
+import com.rs.fer.admin.request.GetUnblockUserRequest;
 import com.rs.fer.admin.request.UnblockUserRequest;
 
 @SpringBootTest
@@ -84,4 +86,73 @@ public class AdminValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	
+	@Test
+	public void testValidateGetUnblockUserRequest() {
+
+		GetUnblockUserRequest request = new GetUnblockUserRequest();
+
+		request.setId(1);
+
+		Set<String> errorMessages = adminValidationImpl.validateGetUnblockUserRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	
+	@Test
+
+	public void testValidateGetUnblockUserRequestFailure() {
+
+		GetUnblockUserRequest request = new GetUnblockUserRequest();
+
+		request.setId(0);
+
+		Set<String> errorMessages = adminValidationImpl.validateGetUnblockUserRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	
+	@Test
+	public void testValidateGetBlockUserRequest() {
+
+		GetBlockUserRequest request = new GetBlockUserRequest();
+
+		request.setId(1);
+
+		Set<String> errorMessages = adminValidationImpl.validateGetBlockUserRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	
+	@Test
+
+	public void testValidateGetBlockUserRequestFailure() {
+
+		GetBlockUserRequest request = new GetBlockUserRequest();
+
+		request.setId(0);
+
+		Set<String> errorMessages = adminValidationImpl.validateGetBlockUserRequest(request);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	
 }

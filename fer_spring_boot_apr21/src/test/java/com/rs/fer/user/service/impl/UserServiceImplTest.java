@@ -14,6 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.message.entity.MessageThread;
+import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.RatingRepository;
 import com.rs.fer.user.repository.UserRepository;
@@ -573,25 +575,46 @@ public class UserServiceImplTest {
 	}
 	
 	@Test
-	public void testUserBlocked() {
+	public void testSaveRating() {
 
 		User user = new User();
-		user.setBlockStatus("Y");
 		user.setUserId(1);
 		Optional<User> userObj = Optional.of(user);
-		// Mock
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
-		//when(userUtil.loadRatingRequestToUserId(Mockito.any())).thenReturn(user);
-
-		SaveRatingRequest request = new SaveRatingRequest();
+		
+		User reviewer = new User();
+		reviewer.setUserId(1);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+		
+        List<Rating> ratings = new ArrayList<>();
+        
+        SaveRatingRequest request = new SaveRatingRequest();
 		request.setComments("found");
 		request.setRating(5);
 		request.setReviewerId(4);
 		
+		Rating rating = new Rating();
+		rating.setId(1);
+		
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+		
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt()))
+		                                                           .thenReturn(ratings);
+		
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+		
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+		
+		
 		SaveRatingResponse response = userServiceImpl.saveRating(request);
 
 		// 3.
-		assertEquals("102", response.statusCode);
+		assertEquals("000", response.statusCode);
 
 	}
+	
+	
+	
 }

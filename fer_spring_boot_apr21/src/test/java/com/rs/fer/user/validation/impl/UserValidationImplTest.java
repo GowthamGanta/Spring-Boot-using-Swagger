@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.request.DeleteRatingRequest;
+import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
 import com.rs.fer.user.request.LoginRequest;
@@ -375,6 +376,40 @@ public class UserValidationImplTest {
 		//request.setRatingId(1);;
 		
 		Set<String> errorMessages = userValidationImpl.validateGetRatingRequest(request);
+		 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateEditRatingRequest() {
+		
+		EditRatingRequest request = new EditRatingRequest();
+		request.setComments("changed");
+		request.setRating(4);
+		request.setReviewerId(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateEditRatingRequest(request);
+		 
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+		
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testValidateEditRatingRequestFailure() {
+		
+		EditRatingRequest request = new EditRatingRequest();
+		//request.setComments("changed");
+		request.setRating(4);
+		request.setReviewerId(5);
+		request.setUserId(1);
+		
+		Set<String> errorMessages = userValidationImpl.validateEditRatingRequest(request);
 		 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();
