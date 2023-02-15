@@ -11,6 +11,7 @@ import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -33,7 +34,7 @@ public class UserUtilImpl implements UserUtil {
 		user.setLastname(request.getLastname());
 		user.setEmail(request.getEmail());
 		user.setUsername(request.getUsername());
-		user.setPassword(request.getPassword());
+		user.setPassword(request.getPassword()); 
 		user.setMobile(request.getMobile());
 
 		user.setCreated(DateUtil.getCurrentDate());
@@ -112,20 +113,48 @@ public class UserUtilImpl implements UserUtil {
 	}
 
 	@Override
+	
 	public Rating loadSaveRatingRequestToUserId(SaveRatingRequest request) {
-		return null;
+		
+		Rating rating = new Rating();
+
+		rating.setComments(request.getComments());
+		rating.setRating(request.getRating());
+        rating.setReviewedBy(request.getReviewerId());
+        request.setUserId(request.getUserId());
+        
+		return rating;
 	}
 
 	@Override
 	public Rating loadEditRatingRequestToUserId(EditRatingRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		Rating rating = new Rating();
+
+		rating.setComments(request.getComments());
+		rating.setRating(request.getRating());
+        rating.setReviewedBy(request.getReviewerId());
+        request.setUserId(request.getUserId());
+        
+		return rating;
 	}
 
 	@Override
 	public Rating loadDeleteRatingRequestToUserId(DeleteRatingRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		Rating rating = new Rating();
+        request.setUserId(request.getUserId());
+        
+		return rating;
 	}
 
+	@Override
+	public Rating loadGetRatingRequestToUserId(GetRatingRequest request) {
+		
+		Rating rating = new Rating();
+        request.setUserId(request.getUserId());
+        
+		return rating;
+		
+	}
+
+	
 }

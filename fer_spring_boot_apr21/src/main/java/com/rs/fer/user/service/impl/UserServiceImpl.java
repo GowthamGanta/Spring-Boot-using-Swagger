@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.RatingRepository;
@@ -300,7 +301,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// User is blocked
-		User user = userObj.get();
+		User user = userObj.get(); 
 		if ("Y".equals(user.getBlockStatus())) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
@@ -344,20 +345,170 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public EditRatingResponse editRating(EditRatingRequest request) {
 		
-		return null;
+		EditRatingResponse response = null;
+
+		// To get the User based on userId
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		// If user is not present
+		if (!userObj.isPresent()) {
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+		}
+
+		// User is blocked
+		User user = userObj.get(); 
+		if ("Y".equals(user.getBlockStatus())) {
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
+		}
+
+		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
+		// Current reviewer present
+		if (!reviewerObj.isPresent()) {
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
+		}
+
+		// Reviewer is blocked
+		User reviewer = reviewerObj.get();
+		if ("Y".equals(user.getBlockStatus())) {
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
+		}
+
+		// Ratings given already
+		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(), request.getReviewerId());
+		if (CollectionUtils.isEmpty(ratings)) {
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
+		}
+		// load vo to bean
+		Rating rating = userUtil.loadEditRatingRequestToUserId(request);
+
+		// save bean to database
+		rating = ratingRepository.save(rating);
+		// load response
+		if (rating.getUserId() > 0) {
+			// success
+			response = new EditRatingResponse(HttpStatus.OK, "000", "Rating Edited successfully ", null);
+			response.setRating(reviewer);
+		} else {
+			// failure
+			response = new EditRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "106", "Rating Edited failed", null);
+		}
+
+		return response;
+
 	}
  
 	@Override
 	public DeleteRatingResponse deleteRating(DeleteRatingRequest request) {
 		
-		return null;
+		DeleteRatingResponse response = null;
+
+		// To get the User based on userId
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		// If user is not present
+		if (!userObj.isPresent()) {
+			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+		}
+
+		// User is blocked
+		User user = userObj.get(); 
+		if ("Y".equals(user.getBlockStatus())) {
+			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
+		}
+
+		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
+		// Current reviewer present
+		if (!reviewerObj.isPresent()) {
+			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
+		}
+
+		// Reviewer is blocked
+		User reviewer = reviewerObj.get();
+		if ("Y".equals(user.getBlockStatus())) {
+			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
+		}
+
+		// Ratings given already
+		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(), request.getReviewerId());
+		if (CollectionUtils.isEmpty(ratings)) {
+			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
+		}
+		// load vo to bean
+		Rating rating = userUtil.loadDeleteRatingRequestToUserId(request);
+
+		// save bean to database
+		rating = ratingRepository.save(rating);
+		// load response
+		if (rating.getUserId() > 0) {
+			// success
+			response = new DeleteRatingResponse(HttpStatus.OK, "000", "Rating deleted successfully ", null);
+			response.setRating(reviewer);
+		} else {
+			// failure
+			response = new DeleteRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "106", "Rating deletion failed", null);
+		}
+
+		return response;
+
 	}
 
 	@Override
 	public GetRatingResponse getRating(GetRatingRequest request) {
-		
-		return null;
 
 		
+		GetRatingResponse response = null;
+
+		// To get the User based on userId
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		// If user is not present
+		if (!userObj.isPresent()) {
+			return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "101", "User is not found", null);
+		}
+
+		// User is blocked
+		User user = userObj.get(); 
+		if ("Y".equals(user.getBlockStatus())) {
+			return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
+		}
+		
+		if (userObj.isPresent()) {
+			//User user = userObj.get(); 
+			
+
+			if ("N".equalsIgnoreCase(user.getEmailVerify())) {
+				
+
+				return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "103",
+						"User is already registered with the given email", null);
+			}
+			if ("N".equalsIgnoreCase(user.getMobileVerify())) {
+				
+
+				return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "User is Already Registered with the given Number", null);
+			}
+
+		}
+
+		// Ratings given already
+		List<Rating> ratings = ratingRepository.findByUserId(request.getUserId());
+		// load vo to bean
+		Rating rating = userUtil.loadGetRatingRequestToUserId(request);
+
+		// save bean to database
+		rating = ratingRepository.save(rating);
+		
+		// load response
+		if (rating.getUserId() > 0) {
+			// success
+			response = new GetRatingResponse(HttpStatus.OK, "000", "GetExpense Done successfully ", null);
+			response.setRating(rating);
+		} else {
+			// failure
+			response = new GetRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "105", "Get Expense failed", null);
+		}
+
+		return response;	
 	}
+	
 }

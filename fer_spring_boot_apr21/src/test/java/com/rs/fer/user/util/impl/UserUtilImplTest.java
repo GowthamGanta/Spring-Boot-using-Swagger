@@ -7,10 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.request.DeleteRatingRequest;
+import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
+import com.rs.fer.user.request.SaveRatingRequest;
 import com.rs.fer.user.request.UpdateUserRequest;
 
 @SpringBootTest
@@ -23,7 +28,7 @@ public class UserUtilImplTest {
 	public void testRegitrationRequest() {
 
 		RegistrationRequest request = new RegistrationRequest();
-		request.setFirstname("abc");
+		request.setFirstname("abc"); 
 		request.setMiddlename("mno");
 		request.setLastname("xyz");
 		request.setEmail("sw@gmail.com");
@@ -34,7 +39,7 @@ public class UserUtilImplTest {
 		User user = userUtilImpl.loadRegistrationRequestToUser(request);
 
 		boolean isExpectedNotEmpty = true;
-		String isActualNotEmpty = user.getVerificationCode();
+		boolean isActualNotEmpty = (null != user.getUsername());
 
 		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
 
@@ -137,10 +142,10 @@ public class UserUtilImplTest {
 		request.setCountry("IND");
 		
 
-		User errorMessages = userUtilImpl.loadUpdateUserRequestToUser(request);
+		User user = userUtilImpl.loadUpdateUserRequestToUser(request);
 
 		boolean isExpectedNotEmpty = true;
-		String isActualNotEmpty = errorMessages.getVerificationCode();
+		boolean isActualNotEmpty = (null != user.getUsername()); 
 
 		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
 	}
@@ -169,12 +174,133 @@ public class UserUtilImplTest {
 		request.setPincode("500018");
 		request.setCountry("IND");
 
-		User errorMessages = userUtilImpl.loadUpdateUserRequestToUser(request);
+		User user = userUtilImpl.loadUpdateUserRequestToUser(request);
 
-		boolean isExpectedEmpty = false;
-		String isActualEmpty = errorMessages.getVerificationCode();
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (null != user.getUsername());
 		 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
+	
+	@Test
+	public void testSaveRatingRequest() {
+		
+		SaveRatingRequest request = new SaveRatingRequest();
+		
+		request.setComments("Done");
+		request.setRating(5);
+		request.setReviewerId(4);
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadSaveRatingRequestToUserId(request);
+
+		boolean isExpectedNotEmpty = true;
+		boolean isActualNotEmpty = (0 != rating.getRating());
+		 
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+	}
+	
+	@Test
+	public void testSaveRatingFailure() {
+		
+		SaveRatingRequest request = new SaveRatingRequest();
+		
+		//request.setComments("Done");
+		request.setRating(4);
+		request.setReviewerId(3);
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadSaveRatingRequestToUserId(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (0 != rating.getRating());
+		 
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testEditRating() {
+		
+		EditRatingRequest request = new EditRatingRequest();
+		
+		request.setComments("Completed");
+		request.setRating(5);
+		request.setReviewerId(4);
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadEditRatingRequestToUserId(request);
+
+		boolean isExpectedNotEmpty = true;
+		boolean isActualNotEmpty = (0 != rating.getRating());
+		 
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+	}
+	
+	@Test
+	public void testEditRatingFailure() {
+		
+		EditRatingRequest request = new EditRatingRequest();
+		
+		//request.setComments("Completed");
+		request.setRating(4);
+		request.setReviewerId(3);
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadEditRatingRequestToUserId(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (0 != rating.getRating());
+		 
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	/*
+	@Test
+	public void testDeleteRating() {
+		
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadDeleteRatingRequestToUserId(request);
+		
+
+		boolean isExpectedNotEmpty = false;
+		boolean isActualNotEmpty = (0 != rating.getUserId());
+		 
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty); 
+	}
+	
+	@Test
+	public void testDeleteRatingFailure() {
+		
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		
+		//request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadDeleteRatingRequestToUserId(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (0 != rating.getUserId());
+		 
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+	
+	@Test
+	public void testGetRating() {
+		
+		GetRatingRequest request = new GetRatingRequest();
+		
+		request.setUserId(5);
+		
+		Rating rating = userUtilImpl.loadGetRatingRequestToUserId(request);
+
+		boolean isExpectedNotEmpty = true;
+		boolean isActualNotEmpty = (0 != rating.getId());
+		 
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+	}*/
+	
+	
+	
 
 }

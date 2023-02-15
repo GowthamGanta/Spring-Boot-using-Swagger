@@ -4,6 +4,7 @@ import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
+import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
@@ -26,5 +27,7 @@ public interface UserUtil {
 	Rating loadEditRatingRequestToUserId(EditRatingRequest request);
 
 	Rating loadDeleteRatingRequestToUserId(DeleteRatingRequest request);
+
+	Rating loadGetRatingRequestToUserId(GetRatingRequest request);
 
 }
