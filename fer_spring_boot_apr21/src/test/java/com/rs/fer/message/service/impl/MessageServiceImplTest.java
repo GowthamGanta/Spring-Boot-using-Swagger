@@ -78,7 +78,7 @@ public class MessageServiceImplTest {
 		
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
-		assertEquals("000", response.statusCode);
+		assertEquals("000", response.statusCode); 
 
 	}
 
@@ -156,7 +156,7 @@ public class MessageServiceImplTest {
 
 		GetMessagesRequest request = new GetMessagesRequest();
 
-		request.setUserdId(1);
+		request.setUserdId(1); 
 
 		GetMessagesResponse response = messageServiceImpl.getMessages(request);
 

@@ -6,14 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
 import com.rs.fer.message.repository.MessageRepository;
 import com.rs.fer.message.repository.MessageThreadRepository;
+import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.response.DeleteMessageResponse;
 import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.service.MessageService;
@@ -52,22 +53,18 @@ public class MessageServiceImpl implements MessageService {
 
 		if (userObj.isPresent()) {
 			User sender = userObj.get();
-			
 
 			if ("N".equalsIgnoreCase(sender.getEmailVerify())) {
-				
 
 				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "202",
 						"User is already registered with the given email", null);
 			}
 			if ("N".equalsIgnoreCase(sender.getMobileVerify())) {
-				
 
 				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "203", "Enter otp", null);
 			}
 
 		}
-		
 
 		Optional<User> userObject = userRepository.findById(request.getReceiverId());
 		if (!userObject.isPresent()) {
@@ -103,7 +100,7 @@ public class MessageServiceImpl implements MessageService {
 		// If Message Thread is not found
 		if (messageThreadObjects == null || messageThreadObjects.isEmpty()) {
 
-			// load vo data into messageThread entity
+			// load vo data into messageThread entity1
 			messageThread = messageUtil.loadSaveMessageThreadRequest(request, request.getSenderId(),
 					request.getReceiverId());
 
@@ -155,4 +152,26 @@ public class MessageServiceImpl implements MessageService {
 		return response;
 	}
 
+	@Override
+	public DeleteMessageResponse deleteMessage(DeleteMessageRequest request) {
+		DeleteMessageResponse response = null;
+
+		Optional<Message> message = messageRepository.findById(request.getId());
+		if (!message.isPresent()) {
+			return new DeleteMessageResponse(HttpStatus.PRECONDITION_FAILED, "201", "message is not found", null);
+		}
+
+		Message sender = message.get();
+
+		if (sender.getSenderId() != request.getUserId()) {
+			return new DeleteMessageResponse(HttpStatus.PRECONDITION_FAILED, "202", "Id's not Matching", null);
+		} else {
+			int delete = request.getId();
+			messageRepository.deleteById(delete);
+			// response if success
+			response = new DeleteMessageResponse(HttpStatus.OK, "000", "Message deleted successfully", null);
+		}
+
+		return response;
+	}
 }

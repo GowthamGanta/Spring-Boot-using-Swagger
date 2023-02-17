@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
 import com.rs.fer.message.validation.MessageValidation;
@@ -35,6 +36,15 @@ public class MessageValidationImpl implements MessageValidation {
 				"Please enter messageThreadId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserdId(), "Please enter UserId");
 
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateDeleteMessageRequest(DeleteMessageRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter userId");
 		return errorMessages;
 	}
 

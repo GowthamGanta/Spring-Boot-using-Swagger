@@ -13,8 +13,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.response.DeleteMessageResponse;
 import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.message.service.MessageService;
@@ -99,5 +101,43 @@ public class MessageControllerTest {
 		GetMessagesResponse response = messageController.getMessages(request);
 		
 		assertEquals("999", response.statusCode);
+	}
+	
+	@Test
+	public void testDeleteMessage() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+ 
+		DeleteMessageRequest request = new DeleteMessageRequest();
+		DeleteMessageResponse response = new DeleteMessageResponse(HttpStatus.OK, "000", "", null);
+
+		
+		// when
+		when(messageValidation.validateDeleteMessageRequest(Mockito.any())).thenReturn(errorMessages);
+		when(messageService.deleteMessage(Mockito.any())).thenReturn(response);
+
+		// Then
+		DeleteMessageResponse saveResponse = messageController.deleteMessages(request);
+
+		assertEquals("000", saveResponse.statusCode);
+
+	}
+	
+	@Test
+	public void testDeleteMessageFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please entre id");
+
+		DeleteMessageRequest request = new DeleteMessageRequest();
+
+		// when
+		when(messageValidation.validateDeleteMessageRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		DeleteMessageResponse response = messageController.deleteMessages(request);
+
+		assertEquals("999", response.statusCode);
+
 	}
 }

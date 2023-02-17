@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
+import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
 
 @SpringBootTest
@@ -84,4 +85,37 @@ public class MessageUtilImplTest {
 
 	}
 
+	@Test
+	public void loadDeleteMessageThreadRequest() {
+
+		DeleteMessageRequest request = new DeleteMessageRequest();
+		
+		request.setId(1);
+		request.setUserId(2);
+
+		Message errorMessage = messageUtilImpl.loadDeleteMessageRequest(request, 1);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (0 != errorMessage.getId() && 0 != errorMessage.getSenderId());
+
+		assertEquals(isExpectedEmpty, isActualEmpty); 
+
+	}
+	
+	@Test
+	public void loadDeleteMessageThreadRequestFailure() {
+
+		DeleteMessageRequest request = new DeleteMessageRequest();
+		
+		//request.setId(1);
+		request.setUserId(2);
+
+		Message errorMessage = messageUtilImpl.loadDeleteMessageRequest(request, 1);
+
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = (0 != errorMessage.getId() && 0 != errorMessage.getSenderId());
+
+		assertEquals(isExpectedEmpty, isActualEmpty); 
+
+	}
 }
