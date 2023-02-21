@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.request.UpdateMessageRequest;
+
 @SpringBootTest
 public class MessageValidationImplTest {
 
@@ -24,9 +26,9 @@ public class MessageValidationImplTest {
 
 		request.setMessage("Hi");
 		request.setReceiverId(4);
-		request.setSenderId(3); 
+		request.setSenderId(3);
 
-		Set<String> errorMessages = messageValidationImpl.validateSaveMessageRequest(request); 
+		Set<String> errorMessages = messageValidationImpl.validateSaveMessageRequest(request);
 
 		boolean isExpectedEmpty = true;
 
@@ -40,7 +42,7 @@ public class MessageValidationImplTest {
 
 		SaveMessageRequest request = new SaveMessageRequest();
 
-		//request.setMessage("Hi");
+		// request.setMessage("Hi");
 		request.setReceiverId(4);
 		request.setSenderId(3);
 
@@ -52,7 +54,7 @@ public class MessageValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
-	
+
 	@Test
 	public void testvalidateGetMessagesRequest() {
 
@@ -61,7 +63,7 @@ public class MessageValidationImplTest {
 		request.setMessageTheradId(1);
 		request.setUserdId(1);
 
-		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request); 
+		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request);
 
 		boolean isExpectedEmpty = true;
 
@@ -75,10 +77,10 @@ public class MessageValidationImplTest {
 
 		GetMessagesRequest request = new GetMessagesRequest();
 
-		//request.setMessageTheradId(1);
+		// request.setMessageTheradId(1);
 		request.setUserdId(1);
 
-		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request); 
+		Set<String> errorMessages = messageValidationImpl.validateGetMessageRequest(request);
 
 		boolean isExpectedEmpty = false;
 
@@ -86,7 +88,7 @@ public class MessageValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
-	
+
 	@Test
 	public void testvalidateDeleteMessageRequest() {
 
@@ -95,7 +97,7 @@ public class MessageValidationImplTest {
 		request.setId(1);
 		request.setUserId(4);
 
-		Set<String> errorMessages = messageValidationImpl.validateDeleteMessageRequest(request); 
+		Set<String> errorMessages = messageValidationImpl.validateDeleteMessageRequest(request);
 
 		boolean isExpectedEmpty = true;
 
@@ -103,16 +105,16 @@ public class MessageValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
-	
+
 	@Test
 	public void testvalidateDeleteMessagesRequestFailure() {
 
 		DeleteMessageRequest request = new DeleteMessageRequest();
 
-		//request.setId(1);
+		// request.setId(1);
 		request.setUserId(4);
 
-		Set<String> errorMessages = messageValidationImpl.validateDeleteMessageRequest(request); 
+		Set<String> errorMessages = messageValidationImpl.validateDeleteMessageRequest(request);
 
 		boolean isExpectedEmpty = false;
 
@@ -121,6 +123,38 @@ public class MessageValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
 
-	
+	@Test
+	public void testvalidateUpdateMessageRequest() {
+
+		UpdateMessageRequest request = new UpdateMessageRequest();
+
+		request.setId(3);
+		request.setUserId(4);
+
+		Set<String> errorMessages = messageValidationImpl.validateUpdateMessageRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test
+	public void testvalidateUpdateMessageRequestFailure() {
+
+		UpdateMessageRequest request = new UpdateMessageRequest();
+
+		// request.setId(3);
+		request.setUserId(4);
+
+		Set<String> errorMessages = messageValidationImpl.validateUpdateMessageRequest(request);
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.request.UpdateMessageRequest;
 
 public interface MessageValidation {
 
@@ -13,4 +14,6 @@ public interface MessageValidation {
 	Set<String> validateGetMessageRequest(GetMessagesRequest request);
 
 	Set<String> validateDeleteMessageRequest(DeleteMessageRequest request);
+
+	Set<String> validateUpdateMessageRequest(UpdateMessageRequest request);
 }

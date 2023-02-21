@@ -14,9 +14,11 @@ import com.rs.fer.message.repository.MessageThreadRepository;
 import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.GetMessagesRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.request.UpdateMessageRequest;
 import com.rs.fer.message.response.DeleteMessageResponse;
 import com.rs.fer.message.response.GetMessagesResponse;
 import com.rs.fer.message.response.SaveMessageResponse;
+import com.rs.fer.message.response.UpdateMessageResponse;
 import com.rs.fer.message.service.MessageService;
 import com.rs.fer.message.util.MessageUtil;
 import com.rs.fer.user.entity.User;
@@ -173,5 +175,38 @@ public class MessageServiceImpl implements MessageService {
 		}
 
 		return response;
+	}
+	
+	@Override
+	public UpdateMessageResponse updateMessage(UpdateMessageRequest request) {
+		Message updateMessage = new Message();
+		UpdateMessageResponse response = null;
+		Optional<Message> messageOptional = messageRepository.findById(request.getId());
+
+		if (!messageOptional.isPresent()) {
+			return new UpdateMessageResponse(HttpStatus.PRECONDITION_FAILED, "201", "message is not present", null);
+		}
+
+		Message message = messageOptional.get();
+
+		Optional<MessageThread> messageThreadObj = messageThreadRepository.findById(message.getMessageThreadId());
+
+		if (!messageThreadObj.isPresent()) {
+			return new UpdateMessageResponse(HttpStatus.PRECONDITION_FAILED, "202", "Thread is not present", null);
+		}
+
+		MessageThread threadObj = messageThreadObj.get();
+
+		if (threadObj.getReceiverId() == request.getUserId()) {
+			updateMessage.setReadFlag("Y");
+			messageRepository.save(updateMessage);
+			response = new UpdateMessageResponse(HttpStatus.OK, "000", "Message Updated successfully", null);
+		} else {     
+			// response if failure
+			response = new UpdateMessageResponse(HttpStatus.INTERNAL_SERVER_ERROR, "001", "Message Update is failed",
+					null);
+		}
+		return response;
+
 	}
 }

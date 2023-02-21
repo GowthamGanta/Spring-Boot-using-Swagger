@@ -27,14 +27,18 @@ public class MessageThread {
 	@Column
 	private int receiverId;
 
+	@Column
+	private int userId;
+
 	public MessageThread() {
 
 	}
 
-	public MessageThread(int senderId, int receiverId) {
+	public MessageThread(int senderId, int receiverId, int userId) {
 
 		this.senderId = senderId;
 		this.receiverId = receiverId;
+		this.userId = userId;
 
 	}
 
@@ -61,6 +65,14 @@ public class MessageThread {
 	public void setReceiverId(int receiverId) {
 		this.receiverId = receiverId;
 	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	@OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "thread_id", referencedColumnName = "messageThread_id")
@@ -74,4 +86,5 @@ public class MessageThread {
 		this.messages = messages;
 	}
 
+	
 }

@@ -10,7 +10,9 @@ public interface MessageThreadRepository extends JpaRepository<MessageThread, In
 
 	List<MessageThread> findBySenderIdAndReceiverId(int senderId,int receiverId);
 	
-	List<MessageThread> FindByEmail(String email);
+	List<MessageThread> findByUserIdAndSenderId(int userId,int senderId);
+	
+	//List<MessageThread> FindByEmail(String email);
 	
 	
 }
