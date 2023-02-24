@@ -28,9 +28,22 @@ public class AdminController2 {
 	@Autowired
 	AdminValidation adminValidation;
 
-	@Autowired 
+	@Autowired
 	AdminService adminService;
 
-	
+	@PostMapping("/blockUser")
+	public BlockUserResponse blockUser(@RequestBody BlockUserRequest request) {
 
+		BlockUserResponse response = null;
+
+		Set<String> errorMessages = adminValidation.validateBlockUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new BlockUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = adminService.blockUser(request);
+		}
+		return response;
+	}
 }
