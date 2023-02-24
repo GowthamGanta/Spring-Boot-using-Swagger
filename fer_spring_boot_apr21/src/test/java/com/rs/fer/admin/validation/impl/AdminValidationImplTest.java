@@ -24,7 +24,7 @@ public class AdminValidationImplTest {
 
 		BlockUserRequest request = new BlockUserRequest();
 
-		request.setId(1);
+		request.setId(1); 
 
 		Set<String> errorMessages = adminValidationImpl.validateBlockUserRequest(request);
 

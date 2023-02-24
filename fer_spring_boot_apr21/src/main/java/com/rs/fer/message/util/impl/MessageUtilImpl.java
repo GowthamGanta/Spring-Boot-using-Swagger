@@ -6,6 +6,7 @@ import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
 import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
+import com.rs.fer.message.request.UpdateMessageRequest;
 import com.rs.fer.message.util.MessageUtil;
 import com.rs.fer.util.DateUtil;
 
@@ -36,14 +37,4 @@ public class MessageUtilImpl implements MessageUtil {
 
 		return messageThread;
 	}
-		
-	@Override
-	public Message loadDeleteMessageRequest(DeleteMessageRequest request, int messageThreadId) {
-		Message message = new Message();
-		
-		message.setId(request.getId());
-		message.setSenderId(request.getUserId());
-		return message;
-	}
-
 }

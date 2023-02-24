@@ -149,7 +149,6 @@ public class MessageServiceImplTest {
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
 		assertEquals("201", response.statusCode);
-
 	}
 
 	@Test
@@ -185,6 +184,63 @@ public class MessageServiceImplTest {
 		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
 
 		assertEquals("203", response.statusCode);
+
+	}
+
+	@Test
+	public void testReceiverIsNotFound() {
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+
+		SaveMessageRequest request = new SaveMessageRequest();
+		request.setSenderId(13);
+		// request.setReceiverId(null);
+
+		// Mock
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
+
+		assertEquals("204", response.statusCode);
+
+	}
+
+	@Test
+	public void testReceiverAlreadyExists() {
+		User user = new User();
+		Optional<User> userObject = Optional.of(user);
+
+		SaveMessageRequest request = new SaveMessageRequest();
+		//request.setSenderId(13);
+		request.setReceiverId(22);
+		User receiver = userObject.get();
+		receiver.setEmailVerify("Not");
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObject);
+
+		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
+
+		assertEquals("205", response.statusCode);
+
+	}
+	
+	@Test
+	public void testReceiverMobileAlreadyExists() {
+		User user = new User();
+		Optional<User> userObject = Optional.of(user);
+
+		SaveMessageRequest request = new SaveMessageRequest();
+		//request.setSenderId(13);
+		request.setReceiverId(22);
+		User receiver = userObject.get();
+		receiver.setMobileVerify("Not");
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObject);
+
+		SaveMessageResponse response = messageServiceImpl.sendMessage(request);
+
+		assertEquals("206", response.statusCode);
 
 	}
 

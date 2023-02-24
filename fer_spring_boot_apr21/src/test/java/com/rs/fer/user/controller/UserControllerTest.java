@@ -65,7 +65,7 @@ public class UserControllerTest {
 		// Then
 		RegistrationResponse regResponse = userController.registration(request);
 
-		assertEquals("000", regResponse.statusCode);
+		assertEquals("000", regResponse.statusCode); 
 
 	}
 

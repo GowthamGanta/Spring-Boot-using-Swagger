@@ -301,20 +301,20 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// User is blocked
-		User user = userObj.get(); 
+		User user = userObj.get();
 		if ("Y".equals(user.getBlockStatus())) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
 
 		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
 		// Current reviewer present
-		if (!reviewerObj.isPresent()) {
+		if (!reviewerObj.isPresent() || request.getReviewerId() <= 0) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
 		}
 
 		// Reviewer is blocked
 		User reviewer = reviewerObj.get();
-		if ("Y".equals(user.getBlockStatus())) {
+		if ("Y".equals(user.getBlockStatus()) || "S".equals(user.getBlockStatus())) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
 		}
 
@@ -344,7 +344,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public EditRatingResponse editRating(EditRatingRequest request) {
-		
+
 		EditRatingResponse response = null;
 
 		// To get the User based on userId
@@ -356,20 +356,20 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// User is blocked
-		User user = userObj.get(); 
+		User user = userObj.get();
 		if ("Y".equals(user.getBlockStatus())) {
 			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
 
 		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
 		// Current reviewer present
-		if (!reviewerObj.isPresent()) {
+		if (!reviewerObj.isPresent() || request.getReviewerId() <= 0) {
 			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
 		}
 
 		// Reviewer is blocked
 		User reviewer = reviewerObj.get();
-		if ("Y".equals(user.getBlockStatus())) {
+		if ("Y".equals(user.getBlockStatus()) || "S".equals(user.getBlockStatus())) {
 			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
 		}
 
@@ -396,10 +396,10 @@ public class UserServiceImpl implements UserService {
 		return response;
 
 	}
- 
+
 	@Override
 	public DeleteRatingResponse deleteRating(DeleteRatingRequest request) {
-		
+
 		DeleteRatingResponse response = null;
 
 		// To get the User based on userId
@@ -411,20 +411,20 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// User is blocked
-		User user = userObj.get(); 
+		User user = userObj.get();
 		if ("Y".equals(user.getBlockStatus())) {
 			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
 
 		Optional<User> reviewerObj = userRepository.findById(request.getReviewerId());
 		// Current reviewer present
-		if (!reviewerObj.isPresent()) {
+		if (!reviewerObj.isPresent() || request.getReviewerId() <= 0) {
 			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "103", "ReviewerId not present", null);
 		}
 
 		// Reviewer is blocked
 		User reviewer = reviewerObj.get();
-		if ("Y".equals(user.getBlockStatus())) {
+		if ("Y".equals(user.getBlockStatus()) || "S".equals(user.getBlockStatus())) {
 			return new DeleteRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "Reviewer is blocked", null);
 		}
 
@@ -445,7 +445,8 @@ public class UserServiceImpl implements UserService {
 			response.setRating(reviewer);
 		} else {
 			// failure
-			response = new DeleteRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "106", "Rating deletion failed", null);
+			response = new DeleteRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "106", "Rating deletion failed",
+					null);
 		}
 
 		return response;
@@ -455,7 +456,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public GetRatingResponse getRating(GetRatingRequest request) {
 
-		
 		GetRatingResponse response = null;
 
 		// To get the User based on userId
@@ -467,48 +467,41 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// User is blocked
-		User user = userObj.get(); 
+		User user = userObj.get();
 		if ("Y".equals(user.getBlockStatus())) {
 			return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
-		
+
 		if (userObj.isPresent()) {
-			//User user = userObj.get(); 
-			
+			// User user = userObj.get();
 
 			if ("N".equalsIgnoreCase(user.getEmailVerify())) {
-				
 
 				return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "103",
 						"User is already registered with the given email", null);
 			}
 			if ("N".equalsIgnoreCase(user.getMobileVerify())) {
-				
 
-				return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "104", "User is Already Registered with the given Number", null);
+				return new GetRatingResponse(HttpStatus.PRECONDITION_FAILED, "104",
+						"User is Already Registered with the given Number", null);
 			}
 
 		}
 
 		// Ratings given already
 		List<Rating> ratings = ratingRepository.findByUserId(request.getUserId());
-		// load vo to bean
-		Rating rating = userUtil.loadGetRatingRequestToUserId(request);
 
-		// save bean to database
-		rating = ratingRepository.save(rating);
-		
 		// load response
-		if (rating.getUserId() > 0) {
+		if (ratings != null && !ratings.isEmpty()) {
 			// success
-			response = new GetRatingResponse(HttpStatus.OK, "000", "GetExpense Done successfully ", null);
-			response.setRating(rating);
+			response = new GetRatingResponse(HttpStatus.OK, "000", "Rating Done successfully ", null);
+			response.setRating(ratings);
 		} else {
 			// failure
-			response = new GetRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "105", "Get Expense failed", null);
+			response = new GetRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "105", "Rating Fetch is failed", null);
 		}
 
-		return response;	
+		return response;
 	}
-	
+
 }

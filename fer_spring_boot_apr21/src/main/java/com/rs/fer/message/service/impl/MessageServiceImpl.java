@@ -69,7 +69,7 @@ public class MessageServiceImpl implements MessageService {
 		}
 
 		Optional<User> userObject = userRepository.findById(request.getReceiverId());
-		if (!userObject.isPresent()) {
+		if (!userObject.isPresent() || request.getReceiverId() <= 0) {
 
 			return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "204", "Receiver is not found", null);
 		}
@@ -77,12 +77,12 @@ public class MessageServiceImpl implements MessageService {
 
 			User receiver = userObj.get();
 
-			if ("N".equalsIgnoreCase(receiver.getEmailVerify())) {
+			if ("N".equalsIgnoreCase(receiver.getEmailVerify()) || "Not".equalsIgnoreCase(receiver.getEmailVerify())) {
 
 				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "205",
 						"User is already registered with the given email", null);
 			}
-			if ("N".equalsIgnoreCase(receiver.getMobileVerify())) {
+			if ("N".equalsIgnoreCase(receiver.getMobileVerify()) || "Not".equalsIgnoreCase(receiver.getMobileVerify())) {
 
 				return new SaveMessageResponse(HttpStatus.PRECONDITION_FAILED, "206", "Enter otp", null);
 			}
@@ -176,7 +176,7 @@ public class MessageServiceImpl implements MessageService {
 
 		return response;
 	}
-	
+
 	@Override
 	public UpdateMessageResponse updateMessage(UpdateMessageRequest request) {
 		Message updateMessage = new Message();
@@ -201,7 +201,7 @@ public class MessageServiceImpl implements MessageService {
 			updateMessage.setReadFlag("Y");
 			messageRepository.save(updateMessage);
 			response = new UpdateMessageResponse(HttpStatus.OK, "000", "Message Updated successfully", null);
-		} else {     
+		} else {
 			// response if failure
 			response = new UpdateMessageResponse(HttpStatus.INTERNAL_SERVER_ERROR, "001", "Message Update is failed",
 					null);

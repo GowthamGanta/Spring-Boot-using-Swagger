@@ -18,6 +18,5 @@ public interface AdminService {
 	GetUnblockUserResponse getUnblockUsers(GetUnblockUserRequest request);
 
 	GetBlockUserResponse getBlockUsers(GetBlockUserRequest request);
-	
 
 }

@@ -89,5 +89,25 @@ public class Rating {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public int getRatingId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Object getBlockStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getEmailVerify() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMobileVerify() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

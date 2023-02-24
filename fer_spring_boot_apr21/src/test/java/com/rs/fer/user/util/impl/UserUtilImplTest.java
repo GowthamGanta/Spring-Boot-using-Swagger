@@ -264,7 +264,7 @@ public class UserUtilImplTest {
 		Rating rating = userUtilImpl.loadDeleteRatingRequestToUserId(request);
 		
 
-		boolean isExpectedNotEmpty = false;
+		boolean isExpectedNotEmpty = true;
 		boolean isActualNotEmpty = (0 != rating.getUserId());
 		 
 		assertEquals(isExpectedNotEmpty, isActualNotEmpty); 

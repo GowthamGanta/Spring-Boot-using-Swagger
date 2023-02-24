@@ -14,10 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoException;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.message.entity.Message;
-import com.rs.fer.message.entity.MessageThread;
-import com.rs.fer.message.request.GetMessagesRequest;
-import com.rs.fer.message.response.SaveMessageResponse;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.RatingRepository;
@@ -546,7 +542,6 @@ public class UserServiceImplTest {
 		// 3.
 		assertEquals("102", response.statusCode);
 	}
-
 	/*
 	 * @Test public void testUserNotPresent() { Optional<User> userObj =
 	 * Optional.empty();
@@ -600,6 +595,175 @@ public class UserServiceImplTest {
 	}
 
 	@Test
+	public void testSaveRatingFailure() {
+
+		User user = new User();
+		user.setUserId(2);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(3);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(6);
+		request.setReviewerId(7);
+
+		Rating rating = new Rating();
+		// rating.setUserId(3);
+		ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("106", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveRatingGivenAlready() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		Rating rating = new Rating();
+		rating.setUserId(2);
+		// ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("105", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveRatingUserNotFound() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.empty();
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("101", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveRatingUserIsBlocked() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setBlockStatus("Y");
+		Optional<User> userObj = Optional.of(user);
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("102", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveRatingReceiverNotFound() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		request.setUserId(4);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("103", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveRatingReceiverIsBlocked() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setBlockStatus("S");
+		Optional<User> userObj = Optional.of(user);
+
+		SaveRatingRequest request = new SaveRatingRequest();
+		request.setComments("found");
+		request.setRating(5);
+		// request.setUserId(4);
+		request.setReviewerId(4);
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		SaveRatingResponse response = userServiceImpl.saveRating(request);
+
+		// 3.
+		assertEquals("104", response.statusCode);
+
+	}
+
+	@Test
 	public void testEditRating() {
 
 		User user = new User();
@@ -635,6 +799,156 @@ public class UserServiceImplTest {
 
 		// 3.
 		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingUserNotFound() {
+
+		Optional<User> userObj = Optional.empty();
+
+		EditRatingRequest request = new EditRatingRequest();
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+
+		// 3.
+		assertEquals("101", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingUserBlockStatus() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setBlockStatus("Y");
+		Optional<User> userObj = Optional.of(user);
+
+		EditRatingRequest request = new EditRatingRequest();
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+		// 3.
+		assertEquals("102", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingReceiverNotFound() {
+
+		User user = new User();
+		user.setUserId(1);
+		// user.setBlockStatus("Y");
+		Optional<User> userObj = Optional.of(user);
+
+		EditRatingRequest request = new EditRatingRequest();
+		request.setUserId(1);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+
+		// 3.
+		assertEquals("103", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingReceiverBlockStatus() {
+
+		User user = new User();
+		user.setBlockStatus("S");
+		Optional<User> userObj = Optional.of(user);
+
+		EditRatingRequest request = new EditRatingRequest();
+		request.setReviewerId(1);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+		// 3.
+		assertEquals("104", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingGivenAlready() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		EditRatingRequest request = new EditRatingRequest();
+		request.setComments("Comment");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		Rating rating = new Rating();
+		rating.setUserId(2);
+		// ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+
+		// 3.
+		assertEquals("105", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditRatingFailed() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		EditRatingRequest request = new EditRatingRequest();
+		request.setComments("Comment");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		Rating rating = new Rating();
+		rating.setUserId(0);
+		ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		EditRatingResponse response = userServiceImpl.editRating(request);
+
+		// 3.
+		assertEquals("106", response.statusCode);
 
 	}
 
@@ -677,66 +991,328 @@ public class UserServiceImplTest {
 
 	}
 
-	/*@Test
-	public void testGetRating() {
+	@Test
+	public void testDeleteRatingUserNotFound() {
+		Optional<User> userObj = Optional.empty();
+
+		DeleteRatingRequest request = new DeleteRatingRequest();
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+		assertEquals("101", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingUserBlockStatus() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setBlockStatus("Y");
+		Optional<User> userObj = Optional.of(user);
+		DeleteRatingRequest request = new DeleteRatingRequest();
+
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+		assertEquals("102", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingReceiverNotFound() {
+
+		User user = new User();
+		user.setUserId(1);
+		// user.setBlockStatus("Y");
+		Optional<User> userObj = Optional.of(user);
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setUserId(1);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+		assertEquals("103", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingReceiverBlockStatus() {
+
+		User user = new User();
+		user.setUserId(1);
+		user.setBlockStatus("S");
+		Optional<User> userObj = Optional.of(user);
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setReviewerId(1);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+		assertEquals("104", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingGivenAlready() {
 
 		User user = new User();
 		user.setUserId(1);
 		Optional<User> userObj = Optional.of(user);
 
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
 		List<Rating> ratings = new ArrayList<>();
 
-		GetRatingRequest request = new GetRatingRequest();
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setComments("xyz");
+		request.setRating(5);
+		request.setReviewerId(4);
 
 		Rating rating = new Rating();
-		rating.getId();
-		ratings.add(rating);
-
+		rating.setUserId(6);
+		// ratings.add(rating);
 		// Mock
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
 
-		when(ratingRepository.findById(Mockito.anyInt())).thenReturn(ratings);
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
 
-		when(userUtil.loadGetRatingRequestToRatingId(Mockito.any())).thenReturn(rating);
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
 
 		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
 
-		GetRatingResponse response = userServiceImpl.getRating(request);
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
 
-		//
-		assertEquals("000", response.statusCode);
-	}*/
-	
+		// 3.
+		assertEquals("105", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingFailed() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setComments("xyz");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		Rating rating = new Rating();
+		rating.setUserId(1);
+		// ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+
+		// 3.
+		assertEquals("105", response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteRatingDeletionFailed() {
+
+		User user = new User();
+		user.setUserId(1);
+		Optional<User> userObj = Optional.of(user);
+
+		User reviewer = new User();
+		reviewer.setUserId(2);
+		Optional<User> reviewerObj = Optional.of(reviewer);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		DeleteRatingRequest request = new DeleteRatingRequest();
+		request.setComments("xyz");
+		request.setRating(5);
+		request.setReviewerId(4);
+
+		Rating rating = new Rating();
+		rating.setUserId(0);
+		ratings.add(rating);
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+
+		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
+
+		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
+
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+
+		DeleteRatingResponse response = userServiceImpl.deleteRating(request);
+
+		// 3.
+		assertEquals("106", response.statusCode);
+
+	}
+	/*
+	 * @Test public void testGetRating() {
+	 * 
+	 * User user = new User(); user.setUserId(1); Optional<User> userObj =
+	 * Optional.of(user);
+	 * 
+	 * List<Rating> ratings = new ArrayList<>();
+	 * 
+	 * GetRatingRequest request = new GetRatingRequest();
+	 * 
+	 * Rating rating = new Rating(); rating.getId(); ratings.add(rating);
+	 * 
+	 * // Mock when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+	 * 
+	 * when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+	 * 
+	 * when(ratingRepository.findById(Mockito.anyInt())).thenReturn(ratings);
+	 * 
+	 * when(userUtil.loadGetRatingRequestToRatingId(Mockito.any())).thenReturn(
+	 * rating);
+	 * 
+	 * when(ratingRepository.save(Mockito.any())).thenReturn(rating);
+	 * 
+	 * GetRatingResponse response = userServiceImpl.getRating(request);
+	 * 
+	 * // assertEquals("000", response.statusCode); }
+	 */
+
 	@Test
 	public void testGetRating() {
-		
+
 		User user = new User();
 		Optional<User> userObj = Optional.of(user);
 		user.setUserId(1);
 
 		List<Rating> ratings = new ArrayList<>();
-		 
+
 		GetRatingRequest request = new GetRatingRequest();
-		
+
 		Rating rating = new Rating();
 		rating.setUserId(6);
 		ratings.add(rating);
-		
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
-		
-		when(ratingRepository.findByUserId(Mockito.anyInt())).thenReturn(ratings);
-		
-		when(userUtil.loadGetRatingRequestToUserId(Mockito.any())).thenReturn(rating);
 
-		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
-		
-		
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(ratingRepository.findByUserId(Mockito.anyInt())).thenReturn(ratings);
+
 		GetRatingResponse response = userServiceImpl.getRating(request);
 
 		assertEquals("000", response.statusCode);
-		
+
 	}
 
+	@Test
+	public void testGetRatingUserNotFounds() {
+
+		Optional<User> userObj = Optional.empty();
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		GetRatingResponse response = userServiceImpl.getRating(request);
+
+		assertEquals("101", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetRatingBlockStatus() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+		user.setUserId(1);
+		user.setBlockStatus("Y");
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		GetRatingResponse response = userServiceImpl.getRating(request);
+
+		assertEquals("102", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetRatingUserAlreadyExists() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+		user.setUserId(1);
+		user.setEmailVerify("N");
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		GetRatingResponse response = userServiceImpl.getRating(request);
+
+		assertEquals("103", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetRatingUserMobileVerify() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+		user.setUserId(1);
+		user.setMobileVerify("N");
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		GetRatingResponse response = userServiceImpl.getRating(request);
+
+		assertEquals("104", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetRatingFetchFailed() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+		user.setUserId(1);
+
+		List<Rating> ratings = new ArrayList<>();
+
+		GetRatingRequest request = new GetRatingRequest();
+
+		Rating rating = new Rating();
+		rating.setUserId(6);
+		// ratings.add(rating);
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(ratingRepository.findByUserId(Mockito.anyInt())).thenReturn(ratings);
+
+		GetRatingResponse response = userServiceImpl.getRating(request);
+
+		assertEquals("105", response.statusCode);
+
+	}
 }

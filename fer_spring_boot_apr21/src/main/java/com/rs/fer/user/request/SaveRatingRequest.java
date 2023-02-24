@@ -8,6 +8,8 @@ package com.rs.fer.user.request;
 		private int reviewerId;
 
 		private int userId;
+		
+		
  
 		public String getComments() {
 			return comments;

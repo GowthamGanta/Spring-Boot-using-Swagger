@@ -11,7 +11,6 @@ import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
-import com.rs.fer.expense.request.GetExpensesRequest;
 import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.util.FERUtil;
 

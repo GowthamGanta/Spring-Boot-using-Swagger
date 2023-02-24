@@ -62,7 +62,7 @@ public class UserController {
 			response = userService.registration(request);
 		}
 		
-		return response;
+		return response; 
 		
 	}
  

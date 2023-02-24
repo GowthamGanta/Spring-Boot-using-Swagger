@@ -24,7 +24,7 @@ public class EditRatingResponse extends AbstractResponse {
 		return user;
 	}
 
-	public void setRating(Rating rating) {
+	public void setRating(User reviewer) {
 		// TODO Auto-generated method stub
 		
 	}

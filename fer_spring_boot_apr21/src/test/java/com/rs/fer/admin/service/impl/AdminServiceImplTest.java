@@ -174,7 +174,7 @@ public void testGetUnBlockUsers() {
 	User user = new User();
 	user.setBlockStatus("N");
 	List<User> users = new ArrayList<>();
-	users.add(user);
+	users.add(user); 
 
 	// Mock
 	when(userRepository.findByBlockStatus(Mockito.anyString())).thenReturn(users);
