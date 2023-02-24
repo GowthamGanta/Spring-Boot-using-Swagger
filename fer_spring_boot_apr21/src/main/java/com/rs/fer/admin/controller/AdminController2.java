@@ -95,5 +95,22 @@ public class AdminController2 {
 		return response;
 		
 	}
+	@PostMapping("/getBlockUsers")
+	public GetBlockUserResponse getBlockUser(@RequestBody GetBlockUserRequest request) {
+		
+		GetBlockUserResponse response = null;
+
+		Set<String> errorMessages = adminValidation.validateGetBlockUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetBlockUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = adminService.getBlockUsers(request);
+		}
+		return response;
+
+
+	}
 
 }
