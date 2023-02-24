@@ -62,4 +62,21 @@ public class AdminController2 {
 		}
 		return response;
 	}
+
+	@PostMapping("/unblockUser")
+	public UnblockUserResponse unblockUser(@RequestBody UnblockUserRequest request) {
+
+		UnblockUserResponse response = null;
+
+		Set<String> errorMessages = adminValidation.validateUnblockUserRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new UnblockUserResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = adminService.unblockUser(request);
+		}
+		return response;
+		
+	}
 }
