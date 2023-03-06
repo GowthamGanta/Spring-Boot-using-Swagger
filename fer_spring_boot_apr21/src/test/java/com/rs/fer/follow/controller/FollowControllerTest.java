@@ -31,7 +31,7 @@ public class FollowControllerTest {
 
 	@Test
 	public void testSaveFollow() {
-		// Mock
+	 	// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		SaveFollowerRequest request = new SaveFollowerRequest();
