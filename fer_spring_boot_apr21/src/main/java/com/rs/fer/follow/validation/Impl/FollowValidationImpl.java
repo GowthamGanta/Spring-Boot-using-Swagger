@@ -3,10 +3,12 @@ package com.rs.fer.follow.validation.Impl;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.validation.FollowValidation;
 import com.rs.fer.util.FERUtil;
-
+@Component
 public class FollowValidationImpl implements FollowValidation{
 
 	@Override
