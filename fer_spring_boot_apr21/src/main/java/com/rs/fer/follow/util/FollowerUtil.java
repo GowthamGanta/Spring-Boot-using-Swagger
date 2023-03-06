@@ -5,6 +5,6 @@ import com.rs.fer.follow.request.SaveFollowerRequest;
 
 public interface FollowerUtil {
 	
-	Follow loadSaveFollowerRequest(SaveFollowerRequest request, int followerId);
+	Follow loadSaveFollowerRequest(SaveFollowerRequest request, int followerId,int userId);
 
 }
