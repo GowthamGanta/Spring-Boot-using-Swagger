@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.follow.request.SaveFollowerRequest;
@@ -14,6 +15,7 @@ import com.rs.fer.follower.repository.FollowerRepository;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
+@Service
 public class FollowerServiceImpl implements FollowerService {
 
 	@Autowired
