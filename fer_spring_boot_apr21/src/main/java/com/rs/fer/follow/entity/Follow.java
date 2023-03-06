@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="follow")
+@Table(name = "follow")
 public class Follow {
 	@Id
 	@Column(name = "follow_id")
@@ -74,5 +74,4 @@ public class Follow {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-
 }
