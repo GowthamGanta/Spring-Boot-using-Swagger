@@ -16,15 +16,17 @@ import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.validation.FollowValidation;
 
 @RestController
-@RequestMapping("/followers")
+@RequestMapping("/api")
 public class FollowController {
+	
+	@Autowired
+	FollowerService followerService;
+
 
 	@Autowired
 	FollowValidation followValidation;
 
-	@Autowired
-	FollowerService followerService;
-
+	
 	@PostMapping("/saveFollower")
 	public SaveFollowerResponse saveFollower(@RequestBody SaveFollowerRequest request) {
 
