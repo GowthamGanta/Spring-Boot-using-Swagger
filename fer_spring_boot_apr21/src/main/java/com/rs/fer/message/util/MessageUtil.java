@@ -12,3 +12,4 @@ public interface MessageUtil {
 
 	MessageThread loadSaveMessageThreadRequest(SaveMessageRequest request, int senderId, int receiverId);
 }
+
