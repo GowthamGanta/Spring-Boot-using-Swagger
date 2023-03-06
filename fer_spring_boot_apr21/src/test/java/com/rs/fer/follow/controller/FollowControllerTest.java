@@ -64,6 +64,6 @@ public class FollowControllerTest {
 
 		assertEquals("999", response.statusCode);
 
-	}
+	 }
 
 }
