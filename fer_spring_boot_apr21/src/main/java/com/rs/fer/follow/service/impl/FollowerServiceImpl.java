@@ -18,9 +18,8 @@ import com.rs.fer.user.repository.UserRepository;
 @Service
 public class FollowerServiceImpl implements FollowerService {
 
-	//@Autowired
-	//FollowerUtil followerUtil;
-	
+	@Autowired
+	FollowerUtil followerUtil;
 	@Autowired
 	FollowerRepository followerRepository;
 
@@ -77,7 +76,7 @@ public class FollowerServiceImpl implements FollowerService {
 
 		// load request data into follow entity
 
-		//follow = followerUtil.loadSaveFollowerRequest(request, request.getFollowerId(), request.getUserId());
+		follow = followerUtil.loadSaveFollowerRequest(request, request.getFollowerId(), request.getUserId());
 
 		// save message
 
