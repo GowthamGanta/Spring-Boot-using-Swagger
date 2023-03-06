@@ -74,4 +74,6 @@ public class Follow {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
+
+	
 }
