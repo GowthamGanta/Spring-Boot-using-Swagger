@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.follow.request.DeletefollowerRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.validation.Impl.FollowValidationImpl;
 
@@ -50,5 +51,38 @@ public class FollowValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	@Test
+	public void testValidateDeletefollowerRequest() {
+	
+		DeletefollowerRequest request = new DeletefollowerRequest();
+		
+		request.setFollowerId(3);
+		request.setUserId(4);
+		
+		Set<String> follow = followValidationImpl.validateDeleteFollowerRequest(request);
+		
+		boolean isExpectedEmpty = true;
 
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	@Test
+	public void testvalidateDeleteFollowerRequestFailure() {
+		
+		DeletefollowerRequest request = new DeletefollowerRequest();
+		
+	//	request.setFollowerId(3);
+		request.setUserId(4);
+		
+		Set<String> follow = followValidationImpl.validateDeleteFollowerRequest(request);
+		
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
 }
