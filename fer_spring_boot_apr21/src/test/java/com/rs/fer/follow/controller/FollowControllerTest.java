@@ -13,13 +13,18 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.follow.request.DeletefollowerRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
+import com.rs.fer.follow.response.DeletefollowerResponse;
 import com.rs.fer.follow.response.SaveFollowerResponse;
 import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.validation.FollowValidation;
+import com.rs.fer.message.request.DeleteMessageRequest;
+import com.rs.fer.message.response.DeleteMessageResponse;
+
 @SpringBootTest
 public class FollowControllerTest {
-	
+
 	@InjectMocks
 	private FollowController followController;
 
@@ -31,7 +36,7 @@ public class FollowControllerTest {
 
 	@Test
 	public void testSaveFollow() {
-	 	// Mock
+		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		SaveFollowerRequest request = new SaveFollowerRequest();
@@ -47,7 +52,7 @@ public class FollowControllerTest {
 		assertEquals("000", saveResponse.statusCode);
 
 	}
-	
+
 	@Test
 	public void testSaveFollowFailure() {
 		// Mock
@@ -64,6 +69,46 @@ public class FollowControllerTest {
 
 		assertEquals("999", response.statusCode);
 
-	 }
+	}
+
+	@Test
+	public void testDeleteFollow() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		DeletefollowerRequest request = new DeletefollowerRequest();
+		DeletefollowerResponse response = new DeletefollowerResponse(HttpStatus.OK, "000", "", null);
+
+		// when
+		when(followValidation.validateDeleteFollowerRequest(Mockito.any())).thenReturn(errorMessages);
+		when(followService.deleteFollower(Mockito.any())).thenReturn(response);
+
+		// when(followValidation.validateDeleteMessageRequest(Mockito.any())).thenReturn(errorMessages);
+		// when(followController.deleteFollower(Mockito.any())).thenReturn(response);
+
+		// Then
+		DeletefollowerResponse Response = followController.deleteFollower(request);
+
+		assertEquals("000", Response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteFollowFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please entre id");
+
+		DeletefollowerRequest request = new DeletefollowerRequest();
+
+		// when
+		when(followValidation.validateDeleteFollowerRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		DeletefollowerResponse response = followController.deleteFollower(request);
+
+		assertEquals("999", response.statusCode);
+
+	}
 
 }
