@@ -16,7 +16,7 @@ public class Follow {
 
 	private int id;
 
-	@Column
+	@Column(name="user_id")
 	private int userId;
 	@Column
 	private int followerId;
