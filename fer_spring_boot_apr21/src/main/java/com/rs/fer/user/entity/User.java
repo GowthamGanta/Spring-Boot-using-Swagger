@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.follow.entity.Follow;
 
 @Entity
 @Table
@@ -124,7 +125,10 @@ public class User implements Serializable {
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
 	}
-	
+	@OneToMany(targetEntity = Follow.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private Set<Follow> followers;
+
 	@OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	
 	private Set<Rating> ratings;
