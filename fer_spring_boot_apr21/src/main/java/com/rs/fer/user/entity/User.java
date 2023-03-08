@@ -245,5 +245,14 @@ public class User implements Serializable {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
+
+	public Set<Follow> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(Set<Follow> followers) {
+		this.followers = followers;
+	}
+	
 	
 }
