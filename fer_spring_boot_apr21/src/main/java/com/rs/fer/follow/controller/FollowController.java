@@ -76,7 +76,7 @@ public class FollowController {
 			response = followerService.getFollowers(request);
 		}
 
-		return response;
+		return  response;
 	}
 
 }
