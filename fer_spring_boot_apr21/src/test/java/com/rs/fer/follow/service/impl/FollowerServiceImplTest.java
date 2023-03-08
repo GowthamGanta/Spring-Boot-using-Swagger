@@ -15,8 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.follow.request.DeletefollowerRequest;
+import com.rs.fer.follow.request.GetFollowersRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.response.DeletefollowerResponse;
+import com.rs.fer.follow.response.GetFollowersResponse;
 import com.rs.fer.follow.response.SaveFollowerResponse;
 import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.util.FollowerUtil;
@@ -281,5 +283,107 @@ public class FollowerServiceImplTest {
 		assertEquals("503", response.statusCode);
 
 	}
+	
+	@Test
+	public void testGetFollowers() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+
+		GetFollowersRequest request = new GetFollowersRequest();
+		request.setUserId(1);
+		List<Follow> followers = new ArrayList<Follow>(1);
+		Follow follow = new Follow();
+		follow.setUserId(10);
+		followers.add(follow);
+
+		// mock
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(followerRepository.findByUserId(Mockito.anyInt())).thenReturn(followers);
+
+
+		GetFollowersResponse response = followerServiceImpl.getFollowers(request);
+
+		assertEquals("000", response.statusCode);
+
+	}	
+	
+	@Test
+	public void testGetFollowersFailure() {
+
+		User user = new User();
+		Optional<User> userObj = Optional.of(user);
+
+		GetFollowersRequest request = new GetFollowersRequest();
+		//request.setUserId(1);
+		List<Follow> followers = new ArrayList<Follow>(1);
+		Follow follow = new Follow();
+		//follow.setUserId(5);
+		//followers.add(follow);
+
+		// mock
+
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+
+		when(followerRepository.findByUserId(Mockito.anyInt())).thenReturn(followers);
+
+
+		GetFollowersResponse response = followerServiceImpl.getFollowers(request);
+
+		assertEquals("001", response.statusCode);
+
+	}	
+	
+	@Test
+	public void testGetFollowerNotFound() {
+		Optional<Follow> follow = Optional.empty();
+
+		GetFollowersRequest request = new GetFollowersRequest();
+		//request.setId(13);
+		//request.setUserId(22);
+
+		when(followerRepository.findById(Mockito.anyInt())).thenReturn(follow);
+		GetFollowersResponse response = followerServiceImpl.getFollowers(request);
+		assertEquals("601", response.statusCode);
+
+	}
+
+
+	@Test
+	public void testGetUserMobileVerify() {
+		User user = new User();
+		Optional<User> userObject = Optional.of(user);
+
+		GetFollowersRequest request = new GetFollowersRequest();
+		user = userObject.get();
+		user.setMobileVerify("N");
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObject);
+
+		GetFollowersResponse response = followerServiceImpl.getFollowers(request);
+
+		assertEquals("603", response.statusCode);
+
+	} 
+
+	@Test
+	public void testGetUserEmailVerify() {
+		User user = new User();
+		Optional<User> userObject = Optional.of(user);
+
+		GetFollowersRequest request = new GetFollowersRequest();
+		user = userObject.get();
+		user.setEmailVerify("N");
+		// Mock
+		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObject);
+
+		GetFollowersResponse response = followerServiceImpl.getFollowers(request);
+
+		assertEquals("602", response.statusCode);
+
+	}
+
 }
 
