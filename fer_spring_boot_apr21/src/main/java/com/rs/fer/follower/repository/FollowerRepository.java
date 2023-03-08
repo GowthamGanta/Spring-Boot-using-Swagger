@@ -10,5 +10,6 @@ import com.rs.fer.follow.entity.Follow;
 public interface FollowerRepository extends JpaRepository<Follow, Integer> {
 
 	List<Follow> findByUserIdAndFollowerId(int userId, int followerId);
+	List<Follow> findByUserId(int userId);
 
 }
