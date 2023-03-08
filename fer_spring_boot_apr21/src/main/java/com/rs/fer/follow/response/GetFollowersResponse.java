@@ -19,14 +19,15 @@ public class GetFollowersResponse extends AbstractResponse {
 
 	}
 
-	private Follow follwer;
+	private Follow follower;
 
-	public Follow getFollwer() {
-		return follwer;
+	public Follow getFollower() {
+		return follower;
 	}
 
-	public void setFollwer(Follow follwer) {
-		this.follwer = follwer;
+	public void setFollower(Follow follower) {
+		this.follower = follower;
 	}
 
+	
 }
