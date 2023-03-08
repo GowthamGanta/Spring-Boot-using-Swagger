@@ -63,7 +63,7 @@ public class FollowController {
 		return response;
 	}
 
-	@GetMapping("/getFollowers")
+	@PostMapping("/getFollowers")
 	public GetFollowersResponse getFollowers(@RequestBody GetFollowersRequest request) {
 
 		GetFollowersResponse response = null;
@@ -76,7 +76,7 @@ public class FollowController {
 			response = followerService.getFollowers(request);
 		}
 
-		return  response;
+		return response;
 	}
 
 }
