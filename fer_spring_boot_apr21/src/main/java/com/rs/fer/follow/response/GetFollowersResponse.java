@@ -25,7 +25,7 @@ public class GetFollowersResponse extends AbstractResponse {
 		return follower;
 	}
 
-	public void setFollwer(Set<Follow> follower) {
+	public void setFollower(Set<Follow> follower) {
 		this.follower = follower;
 	}
 

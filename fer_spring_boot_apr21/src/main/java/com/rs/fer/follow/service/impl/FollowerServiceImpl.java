@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.follow.request.DeletefollowerRequest;
+import com.rs.fer.follow.request.GetFollowersRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.response.DeletefollowerResponse;
+import com.rs.fer.follow.response.GetFollowersResponse;
 import com.rs.fer.follow.response.SaveFollowerResponse;
 import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.util.FollowerUtil;
@@ -70,25 +72,26 @@ public class FollowerServiceImpl implements FollowerService {
 				return new SaveFollowerResponse(HttpStatus.PRECONDITION_FAILED, "405",
 						"Follower Email Verification is failed", null);
 			}
-			if ("N".equalsIgnoreCase(follower.getMobileVerify()) || "Not".equalsIgnoreCase(follower.getMobileVerify())) {
+			if ("N".equalsIgnoreCase(follower.getMobileVerify())
+					|| "Not".equalsIgnoreCase(follower.getMobileVerify())) {
 
 				return new SaveFollowerResponse(HttpStatus.PRECONDITION_FAILED, "406", "Enter otp", null);
 			}
 
 		}
 
-		// load request data into follow entity 
+		// load request data into follow entity
 
 		follow = followerUtil.loadSaveFollowerRequest(request, request.getFollowerId(), request.getUserId());
 
 		// save message
 
-		followerRepository.save(follow); 
+		followerRepository.save(follow);
 
 		// response if success
 		if (follow.getId() > 0) {
 			response = new SaveFollowerResponse(HttpStatus.OK, "000", " Following Successfully", null);
-			
+
 			response.setFollower(follow);
 
 		} else {
@@ -99,7 +102,7 @@ public class FollowerServiceImpl implements FollowerService {
 
 		return response;
 	}
-	
+
 	@Override
 	public DeletefollowerResponse deleteFollower(DeletefollowerRequest request) {
 
@@ -129,14 +132,60 @@ public class FollowerServiceImpl implements FollowerService {
 		List<Follow> followers = followerRepository.findByUserIdAndFollowerId(request.getUserId(),
 				request.getFollowerId());
 		Follow follow = followers.get(0);
-		
-			int delete = follow.getId();
-			followerRepository.deleteById(delete);
-			// response if success
-			response = new DeletefollowerResponse(HttpStatus.OK, "000", "Follower deleted successfully", null);
-		
+
+		int delete = follow.getId();
+		followerRepository.deleteById(delete);
+		// response if success
+		response = new DeletefollowerResponse(HttpStatus.OK, "000", "Follower deleted successfully", null);
 
 		return response;
 	}
-}
+
+	@Override
+	public GetFollowersResponse getFollowers(GetFollowersRequest request) {
+		
+		GetFollowersResponse response = null;
+
+		Optional<User> userObj = userRepository.findById(request.getUserId());
+
+		if (!userObj.isPresent()) {
+
+			return new GetFollowersResponse(HttpStatus.PRECONDITION_FAILED, "601", "user is not found", null);
+		}
+
+		if (userObj.isPresent()) {
+			User user = userObj.get();
+
+			if ("N".equalsIgnoreCase(user.getEmailVerify())) {
+
+				return new GetFollowersResponse(HttpStatus.PRECONDITION_FAILED, "602",
+						"User Email Verification is Failed ", null);
+			}
+			if ("N".equalsIgnoreCase(user.getMobileVerify())) {
+
+				return new GetFollowersResponse(HttpStatus.PRECONDITION_FAILED, "603", "Enter otp", null);
+			}
+
+		}
+
+		// response if failure
+		List<Follow> followers = followerRepository.findByUserId(request.getUserId());
+
+		if (followers.isEmpty()) {
+
+			response = new GetFollowersResponse(HttpStatus.OK, "001", "Followers Not found", null);
+
+			// response if success
+		} else {
+
+			response = new GetFollowersResponse(HttpStatus.OK, "000", "fetch Followers", null);
+			response.setFollower(userObj.get().getFollowers());
+
+		}
+
+		return response;
+	}
+
+	}
+
 
