@@ -6,11 +6,13 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.follow.request.DeletefollowerRequest;
+import com.rs.fer.follow.request.GetFollowersRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.validation.FollowValidation;
 import com.rs.fer.util.FERUtil;
+
 @Component
-public class FollowValidationImpl implements FollowValidation{
+public class FollowValidationImpl implements FollowValidation {
 
 	@Override
 	public Set<String> validateSaveFollowerRequest(SaveFollowerRequest request) {
@@ -18,7 +20,6 @@ public class FollowValidationImpl implements FollowValidation{
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter userId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFollowerId(), "Please enter followerId");
-
 
 		return errorMessages;
 	}
@@ -30,10 +31,15 @@ public class FollowValidationImpl implements FollowValidation{
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter userId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFollowerId(), "Please enter followerId");
 
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetFollowersRequest(GetFollowersRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUserId(), "Please enter userId");
 
 		return errorMessages;
 	}
-	}
-
-
-
+}
