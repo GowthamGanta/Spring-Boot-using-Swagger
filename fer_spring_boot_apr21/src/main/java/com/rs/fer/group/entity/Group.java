@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.rs.fer.participant.entity.Participant;
+import com.rs.fer.participant.Participant;
 
 @Entity
 @Table(name = "whatsapp_group")

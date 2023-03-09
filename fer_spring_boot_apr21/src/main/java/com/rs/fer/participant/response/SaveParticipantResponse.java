@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.participant.entity.Participant;
+import com.rs.fer.participant.Participant;
 import com.rs.fer.response.AbstractResponse;
 
 public class SaveParticipantResponse extends AbstractResponse {
