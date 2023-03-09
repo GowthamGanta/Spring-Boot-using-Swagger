@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.rs.fer.participant.Participant;
+import com.rs.fer.participant.entity.Participant;
 
 @Entity
 @Table(name = "whatsapp_group")
@@ -63,13 +63,13 @@ public class Group {
 
 	@OneToMany(targetEntity = Participant.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "group_id", referencedColumnName = "group_id")
-	private Set<Participant> particicpants;
+	private Set<Participant> participants;
 
-	public Set<Participant> getParticicpants() {
-		return particicpants;
+	public Set<Participant> getParticipants() {
+		return participants;
 	}
 
-	public void setParticicpants(Set<Participant> particicpants) {
-		this.particicpants = particicpants;
+	public void setParticipants(Set<Participant> participants) {
+		this.participants = participants;
 	}
 }
