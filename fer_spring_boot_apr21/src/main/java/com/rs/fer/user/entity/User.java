@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.follow.entity.Follow;
+import com.rs.fer.group.entity.Group;
 
 @Entity
 @Table
@@ -33,7 +34,7 @@ public class User implements Serializable {
 	private int userId;
 
 	@Column
-	private String firstname; 
+	private String firstname;
 
 	@Column
 	private String middlename;
@@ -125,22 +126,27 @@ public class User implements Serializable {
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
 	}
+
 	@OneToMany(targetEntity = Follow.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private Set<Follow> followers;
+	private Set<Follow> followers;
 
 	@OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	
+
 	private Set<Rating> ratings;
 
 	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private Set<Expense> expenses;
-	
+
 	@OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "addr_id", referencedColumnName = "address_id")
 	private Address address;
+
+	@OneToMany(targetEntity = Group.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	private Set<Group> groups;
 
 	public int getUserId() {
 		return userId;
@@ -205,7 +211,7 @@ public class User implements Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
+
 	public Set<Rating> getRatings() {
 		return ratings;
 	}
@@ -213,7 +219,7 @@ public class User implements Serializable {
 	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
 	}
-	
+
 	public Set<Expense> getExpenses() {
 		return expenses;
 	}
@@ -253,6 +259,12 @@ public class User implements Serializable {
 	public void setFollowers(Set<Follow> followers) {
 		this.followers = followers;
 	}
-	
-	
+
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
 }
