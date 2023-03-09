@@ -10,7 +10,7 @@ import com.rs.fer.group.util.GroupUtil;
 public class GroupUtilImpl implements GroupUtil {
 
 	@Override
-	public Group loadSaveGroupRquest(SaveGroupRequest request, int userId, String groupName) {
+	public Group loadSaveGroupRequest(SaveGroupRequest request, int userId, String groupName) {
 		Group group = new Group();
 
 		group.setUserId(request.getUserId());

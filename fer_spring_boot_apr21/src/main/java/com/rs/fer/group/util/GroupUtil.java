@@ -5,5 +5,5 @@ import com.rs.fer.group.request.SaveGroupRequest;
 
 public interface GroupUtil {
 
-	Group loadSaveGroupRquest(SaveGroupRequest request, int userId, String groupName);
+	Group loadSaveGroupRequest(SaveGroupRequest request, int userId, String groupName);
 }
