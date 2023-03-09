@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.participant.entity.Participant;
 import com.rs.fer.response.AbstractResponse;
 
 public class SaveParticipantResponse extends AbstractResponse {
@@ -19,14 +20,16 @@ public class SaveParticipantResponse extends AbstractResponse {
 
 	}
 
-	private int participants;
+	private Participant participants;
 
-	public int getParticipants() {
+	public Participant getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(int participants) {
+	public void setParticipants(Participant participants) {
 		this.participants = participants;
 	}
+
+	
 
 }
