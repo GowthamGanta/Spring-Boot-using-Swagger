@@ -2,10 +2,10 @@ package com.rs.fer.participant.validation;
 
 import java.util.Set;
 
-import com.rs.fer.participant.request.SavePartcipantRequest;
+import com.rs.fer.participant.request.SaveParticipantRequest;
 
 public interface ParticipantValidation {
 
-	Set<String> validateSavePartcipantRequest(SavePartcipantRequest request);
+	Set<String> validateSaveParticipantRequest(SaveParticipantRequest request);
 
 }

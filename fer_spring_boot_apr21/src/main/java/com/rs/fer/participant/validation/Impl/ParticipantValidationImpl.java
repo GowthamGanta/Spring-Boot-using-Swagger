@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.participant.request.SavePartcipantRequest;
+import com.rs.fer.participant.request.SaveParticipantRequest;
 import com.rs.fer.participant.validation.ParticipantValidation;
 import com.rs.fer.util.FERUtil;
 
@@ -13,7 +13,7 @@ import com.rs.fer.util.FERUtil;
 public class ParticipantValidationImpl implements ParticipantValidation {
 
 	@Override
-	public Set<String> validateSavePartcipantRequest(SavePartcipantRequest request) {
+	public Set<String> validateSaveParticipantRequest(SaveParticipantRequest request) {
 
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
