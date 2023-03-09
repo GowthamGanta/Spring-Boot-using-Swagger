@@ -5,5 +5,5 @@ import com.rs.fer.participant.response.SaveParticipantResponse;
 
 public interface ParticipantService {
 
-	SaveParticipantResponse saveParticipantResponse(SaveParticipantRequest saveParticipantRequest);
+	SaveParticipantResponse saveParticipant(SaveParticipantRequest saveParticipantRequest);
 }

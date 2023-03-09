@@ -32,7 +32,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 	GroupRepository groupRepository;
 
 	@Override
-	public SaveParticipantResponse saveParticipantResponse(SaveParticipantRequest request) {
+	public SaveParticipantResponse saveParticipant(SaveParticipantRequest request) {
 		SaveParticipantResponse response = null;
 
 		Participant participants = new Participant();

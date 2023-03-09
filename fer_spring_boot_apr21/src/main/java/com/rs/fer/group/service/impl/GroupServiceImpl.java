@@ -28,7 +28,7 @@ public class GroupServiceImpl implements GroupService {
 	GroupRepository groupRepository;
 
 	@Override
-	public SaveGroupResponse saveGroupResponse(SaveGroupRequest request) {
+	public SaveGroupResponse saveGroup(SaveGroupRequest request) {
 		SaveGroupResponse response = null;
 		Group group = new Group();
 

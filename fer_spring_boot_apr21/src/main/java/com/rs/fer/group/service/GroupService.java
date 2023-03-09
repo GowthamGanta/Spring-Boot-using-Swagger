@@ -5,5 +5,5 @@ import com.rs.fer.group.response.SaveGroupResponse;
 
 public interface GroupService {
 
-	SaveGroupResponse saveGroupResponse(SaveGroupRequest saveGroupRequest);
+	SaveGroupResponse saveGroup(SaveGroupRequest saveGroupRequest);
 }
