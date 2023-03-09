@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.rs.fer.participant.Participant;
+
 @Entity
 @Table(name = "whatsapp_group")
 public class Group {
@@ -48,7 +50,7 @@ public class Group {
 	}
 
 	public void setUserId(int userId) {
-		this.userId = userId;                              
+		this.userId = userId;
 	}
 
 	public String getGroupName() {
@@ -63,4 +65,11 @@ public class Group {
 	@JoinColumn(name = "group_id", referencedColumnName = "group_id")
 	private Set<Participant> particicpants;
 
+	public Set<Participant> getParticicpants() {
+		return particicpants;
+	}
+
+	public void setParticicpants(Set<Participant> particicpants) {
+		this.particicpants = particicpants;
+	}
 }
