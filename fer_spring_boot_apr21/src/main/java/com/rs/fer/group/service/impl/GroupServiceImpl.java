@@ -35,7 +35,7 @@ public class GroupServiceImpl implements GroupService {
 		Optional<User> userObj = userRepository.findById(request.getUserId());
 		
 		if(!userObj.isPresent()) {
-			response = new SaveGroupResponse(HttpStatus.OK, "801", " Group Created Successfully", null);
+			response = new SaveGroupResponse(HttpStatus.OK, "801", " User Not Found", null);
 		}
 
 		group = groupUtil.loadSaveGroupRequest(request, request.getUserId(), request.getGroupName());
