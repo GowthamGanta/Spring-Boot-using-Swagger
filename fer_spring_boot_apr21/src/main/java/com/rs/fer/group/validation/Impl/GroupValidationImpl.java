@@ -5,12 +5,13 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.group.request.GetGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
 import com.rs.fer.group.validation.GroupValidation;
 import com.rs.fer.util.FERUtil;
 
 @Component
-public class GroupValidationImpl implements GroupValidation {
+public abstract class GroupValidationImpl implements GroupValidation {
 
 	@Override
 	public Set<String> validateSaveGroupRequest(SaveGroupRequest request) {
@@ -23,4 +24,13 @@ public class GroupValidationImpl implements GroupValidation {
 		return errorMessages;
 	}
 
+	@Override
+	public Set<String> validateGetGroupRequest(GetGroupRequest request) {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGroupId(), "Please enter Valid groupId");
+
+		return errorMessages;
+	}
 }
