@@ -76,7 +76,6 @@ public class GroupServiceImpl implements GroupService {
 		groupRepository.deleteById(delete);
 
 		return response;
-
 	}
 
 }
