@@ -10,5 +10,4 @@ public interface GroupService {
 	SaveGroupResponse saveGroup(SaveGroupRequest saveGroupRequest);
 
 	DeleteGroupResponse deleteGroup(DeleteGroupRequest request);
-	
 }

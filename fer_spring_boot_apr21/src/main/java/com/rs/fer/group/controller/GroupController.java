@@ -54,6 +54,7 @@ public class GroupController {
 		} else {
 			response = groupService.deleteGroup(request);
 		}
+
 		return response;
 	}
 
