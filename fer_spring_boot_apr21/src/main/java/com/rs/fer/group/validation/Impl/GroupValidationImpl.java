@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.group.request.DeleteGroupRequest;
 import com.rs.fer.group.request.GetGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
 import com.rs.fer.group.validation.GroupValidation;
@@ -33,4 +34,16 @@ public abstract class GroupValidationImpl implements GroupValidation {
 
 		return errorMessages;
 	}
+	
+	@Override
+	public Set<String> validateDeleteGroupRequest(DeleteGroupRequest request) {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGroupId(), "Please enter Valid groupId");
+
+		return errorMessages;
+	}
+
+	
 }

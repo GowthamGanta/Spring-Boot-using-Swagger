@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.participant.request.DeleteParticipantRequest;
 import com.rs.fer.participant.request.SaveParticipantRequest;
 import com.rs.fer.participant.validation.ParticipantValidation;
 import com.rs.fer.util.FERUtil;
@@ -21,7 +22,18 @@ public class ParticipantValidationImpl implements ParticipantValidation {
 				"Please enter valid participantId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGroupId(), "Please enter valid group id");
 
-		return null;
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateDeleteParticipantRequest(DeleteParticipantRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getParticipantId(),
+				"Please enter ParticipantId");
+
+		return errorMessages;
+
 	}
 
 }
