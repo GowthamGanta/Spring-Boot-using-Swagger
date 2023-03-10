@@ -12,7 +12,7 @@ import com.rs.fer.group.validation.GroupValidation;
 import com.rs.fer.util.FERUtil;
 
 @Component
-public abstract class GroupValidationImpl implements GroupValidation {
+public class GroupValidationImpl implements GroupValidation {
 
 	@Override
 	public Set<String> validateSaveGroupRequest(SaveGroupRequest request) {

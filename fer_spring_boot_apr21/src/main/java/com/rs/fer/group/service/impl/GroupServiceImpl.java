@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.group.entity.Group;
 import com.rs.fer.group.repository.GroupRepository;
+import com.rs.fer.group.request.DeleteGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
+import com.rs.fer.group.response.DeleteGroupResponse;
 import com.rs.fer.group.response.SaveGroupResponse;
 import com.rs.fer.group.service.GroupService;
 import com.rs.fer.group.util.GroupUtil;
+import com.rs.fer.participant.repository.ParticipantRepository;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
@@ -27,14 +30,17 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	GroupRepository groupRepository;
 
+	@Autowired
+	ParticipantRepository participantRepository;
+
 	@Override
 	public SaveGroupResponse saveGroup(SaveGroupRequest request) {
 		SaveGroupResponse response = null;
 		Group group = new Group();
 
 		Optional<User> userObj = userRepository.findById(request.getUserId());
-		
-		if(!userObj.isPresent()) {
+
+		if (!userObj.isPresent()) {
 			response = new SaveGroupResponse(HttpStatus.OK, "801", " User Not Found", null);
 		}
 
@@ -53,6 +59,24 @@ public class GroupServiceImpl implements GroupService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public DeleteGroupResponse deleteGroup(DeleteGroupRequest request) {
+		DeleteGroupResponse response = null;
+		Optional<Group> groupObj = groupRepository.findById(request.getGroupId());
+
+		if (!groupObj.isPresent()) {
+			response = new DeleteGroupResponse(HttpStatus.OK, "802", " GroupId Not Found", null);
+		}
+		Group group = groupObj.get();
+
+		int delete = group.getId();
+
+		groupRepository.deleteById(delete);
+
+		return response;
+
 	}
 
 }
