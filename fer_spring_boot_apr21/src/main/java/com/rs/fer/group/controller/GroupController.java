@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.group.request.DeleteGroupRequest;
+import com.rs.fer.group.request.GetGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
 import com.rs.fer.group.response.DeleteGroupResponse;
+import com.rs.fer.group.response.GetGroupResponse;
 import com.rs.fer.group.response.SaveGroupResponse;
 import com.rs.fer.group.service.GroupService;
 import com.rs.fer.group.validation.GroupValidation;
@@ -58,4 +60,18 @@ public class GroupController {
 		return response;
 	}
 
+	@PostMapping("/getParticipants")
+	public GetGroupResponse getGroup(@RequestBody GetGroupRequest request) {
+
+		GetGroupResponse response = null;
+		Set<String> errorMessages = groupValidation.validateGetGroupRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetGroupResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = groupService.getGroup(request);
+		}
+
+		return response;
+	}
 }
