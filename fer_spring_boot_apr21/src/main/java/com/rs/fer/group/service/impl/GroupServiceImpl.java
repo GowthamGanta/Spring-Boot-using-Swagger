@@ -47,7 +47,7 @@ public class GroupServiceImpl implements GroupService {
 
 		if (!userObj.isPresent()) {
 			response = new SaveGroupResponse(HttpStatus.OK, "801", " User Not Found", null);
-		}
+		} else {
 
 		group = groupUtil.loadSaveGroupRequest(request, request.getUserId(), request.getGroupName());
 
@@ -62,7 +62,7 @@ public class GroupServiceImpl implements GroupService {
 			response = new SaveGroupResponse(HttpStatus.INTERNAL_SERVER_ERROR, "001", "Group creating Failed", null);
 
 		}
-
+		}
 		return response;
 	}
 
@@ -73,7 +73,7 @@ public class GroupServiceImpl implements GroupService {
 
 		if (!groupObj.isPresent()) {
 			response = new DeleteGroupResponse(HttpStatus.OK, "802", " GroupId Not Found", null);
-		}
+		} else {
 		Group group = groupObj.get();
 
 		int delete = group.getId();
@@ -81,7 +81,7 @@ public class GroupServiceImpl implements GroupService {
 		groupRepository.deleteById(delete);
 
 		response = new DeleteGroupResponse(HttpStatus.OK, "000", " GroupId deleted Successfully", null);
-
+		}
 		return response;
 
 	}
@@ -98,7 +98,8 @@ public class GroupServiceImpl implements GroupService {
 
 			response = new GetGroupResponse(HttpStatus.PRECONDITION_FAILED, "803", "Group not Found", null);
 
-		}
+		} else {
+			
 		List<Participant> participantObj = participantRepository.findByGroupId(getGroupRequest.getGroupId());
 
 		for (Participant participant : participantObj) {
@@ -110,7 +111,7 @@ public class GroupServiceImpl implements GroupService {
 
 		response = new GetGroupResponse(HttpStatus.OK, "000", "Fetch Participants", null);
 		response.setUsers(users);
-
+		}
 		return response;
 	}
 }

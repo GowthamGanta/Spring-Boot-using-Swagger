@@ -42,7 +42,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 		Optional<Group> userObj = groupRepository.findById(request.getGroupId());
 		if (!userObj.isPresent()) {
 			response = new SaveParticipantResponse(HttpStatus.OK, "901", " No Group Present", null);
-		}
+		} else {
 
 		participants = participantUtil.loadSaveParticipantRequest(request, request.getParticipantId(),
 				request.getGroupId());
@@ -60,8 +60,10 @@ public class ParticipantServiceImpl implements ParticipantService {
 					null);
 
 		}
-
+		
+		}
 		return response;
+		
 	}
 
 	@Override
@@ -72,7 +74,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 				request.getParticipantId());
 		if (!participantObj.isPresent()) {
 			response = new DeleteParticipantResponse(HttpStatus.OK, "902", " No Participants Found", null);
-		}
+		} else {
 
 		Participant participant = participantObj.get();
 
@@ -80,7 +82,8 @@ public class ParticipantServiceImpl implements ParticipantService {
 		participantRepository.deleteById(delete);
 
 		response = new DeleteParticipantResponse(HttpStatus.OK, "000", " ParticipantId deleted Successfully", null);
-
+		}
+	
 		return response;
 	}
 
