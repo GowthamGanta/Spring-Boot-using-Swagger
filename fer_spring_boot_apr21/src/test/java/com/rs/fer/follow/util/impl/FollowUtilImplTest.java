@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.core.follow.util.impl.FollowUtilImpl;
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 
@@ -35,7 +34,7 @@ public class FollowUtilImplTest {
 	public void loadSaveFollowRequestFailure() {
 
 		SaveFollowerRequest request = new SaveFollowerRequest();
-		//request.setFollowerId(1);
+		// request.setFollowerId(1);
 		request.setUserId(2);
 
 		Follow follow = followUtilImpl.loadSaveFollowerRequest(request, 1, 2);
