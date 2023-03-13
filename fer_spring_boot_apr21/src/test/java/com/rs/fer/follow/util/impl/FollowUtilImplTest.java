@@ -43,5 +43,5 @@ public class FollowUtilImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
-	}
+	} 
 }
