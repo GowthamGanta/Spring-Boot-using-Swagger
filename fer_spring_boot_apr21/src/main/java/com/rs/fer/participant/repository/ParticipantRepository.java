@@ -14,4 +14,6 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
 	List<Participant> findByGroupId(int groupId);
 
 	Optional<Participant> findByParticipantId(int participantId);
+
+	Optional<Participant> findByGroupIdAndParticipantId(int groupId, int participantId);
 }

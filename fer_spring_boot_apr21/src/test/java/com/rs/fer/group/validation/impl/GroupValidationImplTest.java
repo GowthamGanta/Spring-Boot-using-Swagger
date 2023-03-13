@@ -12,6 +12,8 @@ import com.rs.fer.follow.request.DeletefollowerRequest;
 import com.rs.fer.follow.request.GetFollowersRequest;
 import com.rs.fer.follow.request.SaveFollowerRequest;
 import com.rs.fer.follow.validation.Impl.FollowValidationImpl;
+import com.rs.fer.group.request.DeleteGroupRequest;
+import com.rs.fer.group.request.GetGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
 import com.rs.fer.group.validation.Impl.GroupValidationImpl;
 
@@ -50,6 +52,69 @@ public class GroupValidationImplTest {
 
 		boolean isExpectedEmpty = false;
 
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testValidateDeleteGroupRequest() {
+
+		DeleteGroupRequest request = new DeleteGroupRequest();
+
+		request.setGroupId(4);
+
+		Set<String> follow = groupValidationImpl.validateDeleteGroupRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testvalidateDeleteGroupRequestFailure() {
+
+		DeleteGroupRequest request = new DeleteGroupRequest();
+
+		//request.setGroupId(4);
+
+		Set<String> follow = groupValidationImpl.validateDeleteGroupRequest(request);
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	} 
+
+	@Test
+	public void testValidateGetGroupRequest() {
+
+		GetGroupRequest request = new GetGroupRequest();
+		request.setGroupId(1);
+
+		Set<String> follow = groupValidationImpl.validateGetGroupRequest(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	@Test
+	public void testValidateGetGroupRequestFailure() {
+
+		GetGroupRequest request = new GetGroupRequest();
+		//request.getUserId();
+
+		Set<String> follow = groupValidationImpl.validateGetGroupRequest(request);
+
+		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = follow.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);

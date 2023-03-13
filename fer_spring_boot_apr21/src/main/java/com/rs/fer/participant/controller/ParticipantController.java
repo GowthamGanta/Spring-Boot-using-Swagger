@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.participant.request.DeleteParticipantRequest;
 import com.rs.fer.participant.request.SaveParticipantRequest;
+import com.rs.fer.participant.response.DeleteParticipantResponse;
 import com.rs.fer.participant.response.SaveParticipantResponse;
 import com.rs.fer.participant.service.ParticipantService;
 import com.rs.fer.participant.validation.ParticipantValidation;
@@ -35,6 +37,21 @@ public class ParticipantController {
 			response = new SaveParticipantResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
 			response = participantService.saveParticipant(request);
+		}
+
+		return response;
+	}
+
+	@PostMapping("/deleteParticipant")
+	public DeleteParticipantResponse deleteParticipant(@RequestBody DeleteParticipantRequest request) {
+
+		DeleteParticipantResponse response = null;
+		Set<String> errorMessages = participantValidation.validateDeleteParticipantRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new DeleteParticipantResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = participantService.deleteParticipant(request);
 		}
 
 		return response;

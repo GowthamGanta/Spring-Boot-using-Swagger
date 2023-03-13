@@ -29,8 +29,9 @@ public class ParticipantValidationImpl implements ParticipantValidation {
 	public Set<String> validateDeleteParticipantRequest(DeleteParticipantRequest request) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getParticipantId(),
-				"Please enter ParticipantId");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGroupId(), "Please enter groupId");
+		
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGroupId(), "Please enter ParticipantId");
 
 		return errorMessages;
 

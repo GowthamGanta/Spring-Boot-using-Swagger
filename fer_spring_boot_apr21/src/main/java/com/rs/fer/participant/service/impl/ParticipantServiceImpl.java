@@ -10,7 +10,9 @@ import com.rs.fer.group.entity.Group;
 import com.rs.fer.group.repository.GroupRepository;
 import com.rs.fer.participant.Participant;
 import com.rs.fer.participant.repository.ParticipantRepository;
+import com.rs.fer.participant.request.DeleteParticipantRequest;
 import com.rs.fer.participant.request.SaveParticipantRequest;
+import com.rs.fer.participant.response.DeleteParticipantResponse;
 import com.rs.fer.participant.response.SaveParticipantResponse;
 import com.rs.fer.participant.service.ParticipantService;
 import com.rs.fer.participant.util.ParticipantUtil;
@@ -39,7 +41,7 @@ public class ParticipantServiceImpl implements ParticipantService {
 
 		Optional<Group> userObj = groupRepository.findById(request.getGroupId());
 		if (!userObj.isPresent()) {
-			response = new SaveParticipantResponse(HttpStatus.OK, "999", " No Group Present", null);
+			response = new SaveParticipantResponse(HttpStatus.OK, "901", " No Group Present", null);
 		}
 
 		participants = participantUtil.loadSaveParticipantRequest(request, request.getParticipantId(),
@@ -58,6 +60,26 @@ public class ParticipantServiceImpl implements ParticipantService {
 					null);
 
 		}
+
+		return response;
+	}
+
+	@Override
+	public DeleteParticipantResponse deleteParticipant(DeleteParticipantRequest request) {
+		DeleteParticipantResponse response = null;
+
+		Optional<Participant> participantObj = participantRepository.findByGroupIdAndParticipantId(request.getGroupId(),
+				request.getParticipantId());
+		if (!participantObj.isPresent()) {
+			response = new DeleteParticipantResponse(HttpStatus.OK, "902", " No Participants Found", null);
+		}
+
+		Participant participant = participantObj.get();
+
+		int delete = participant.getId();
+		participantRepository.deleteById(delete);
+
+		response = new DeleteParticipantResponse(HttpStatus.OK, "000", " ParticipantId deleted Successfully", null);
 
 		return response;
 	}

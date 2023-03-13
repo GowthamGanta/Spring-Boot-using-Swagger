@@ -91,13 +91,12 @@ public class GroupServiceImpl implements GroupService {
 		GetGroupResponse response = null;
 
 		User user = new User();
-		Group group = new Group();
 		List<String> users = new LinkedList<>();
 
 		Optional<Group> groupObj = groupRepository.findById(getGroupRequest.getGroupId());
 		if (!groupObj.isPresent()) {
 
-			response = new GetGroupResponse(HttpStatus.PRECONDITION_FAILED, "802", "Group not Found", null);
+			response = new GetGroupResponse(HttpStatus.PRECONDITION_FAILED, "803", "Group not Found", null);
 
 		}
 		List<Participant> participantObj = participantRepository.findByGroupId(getGroupRequest.getGroupId());
