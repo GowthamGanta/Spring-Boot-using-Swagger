@@ -20,6 +20,7 @@
 	<classpathentry kind="src" path="src/main/java/message"/>
 	<classpathentry kind="src" path="src/main/java/participant"/>
 	<classpathentry kind="src" path="src/main/java/user"/>
+	<classpathentry kind="src" path="src/main/loan"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
