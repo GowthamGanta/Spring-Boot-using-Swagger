@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.loan.entity.Applicant;
 import com.rs.fer.response.AbstractResponse;
 
-public class ApplicantRegistrationResponse extends AbstractResponse {
-	public ApplicantRegistrationResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
+public class SaveApplicantResponse extends AbstractResponse {
+	public SaveApplicantResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
 		this.status = status;
 		this.statusCode = statusCode;

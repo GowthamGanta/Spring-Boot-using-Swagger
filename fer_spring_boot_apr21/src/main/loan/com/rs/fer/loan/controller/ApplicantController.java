@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.loan.request.SaveApplicantRequest;
-import com.rs.fer.loan.response.ApplicantRegistrationResponse;
+import com.rs.fer.loan.response.SaveApplicantResponse;
 import com.rs.fer.loan.service.ApplicantService;
 import com.rs.fer.loan.validation.ApplicantValidation;
-import com.rs.fer.user.request.RegistrationRequest;
-import com.rs.fer.user.response.RegistrationResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -28,14 +26,14 @@ public class ApplicantController {
 	ApplicantService applicantService;
 
 	@PostMapping("/loan/registration")
-	public ApplicantRegistrationResponse registration(@RequestBody SaveApplicantRequest request) {
+	public SaveApplicantResponse registration(@RequestBody SaveApplicantRequest request) {
 
-		ApplicantRegistrationResponse response = null;
+		SaveApplicantResponse response = null;
 
 		Set<String> errorMessages = applicantValidation.validateRegistrationRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new ApplicantRegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+			response = new SaveApplicantResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
 			response = applicantService.registration(request);
