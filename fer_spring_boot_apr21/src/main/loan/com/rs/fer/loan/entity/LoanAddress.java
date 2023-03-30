@@ -39,7 +39,7 @@ public class LoanAddress {
 	@Column
 	private String addressType;
 
-	@Column(name = "applicant_id")
+	@Column(name = "appl_id", insertable = false)
 	private int applicantId;
 
 	public LoanAddress() {

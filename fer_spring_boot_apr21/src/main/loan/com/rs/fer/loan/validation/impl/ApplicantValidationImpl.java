@@ -95,7 +95,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getEmployment(),
 					"Please enter Employment Details");
 		} else {
-			EmploymentDTO employment = new EmploymentDTO();
+			EmploymentDTO employment = request.getEmployment();
 
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, employment.getEmploymentStatus(),
 					"Please enter Employment Status");
@@ -144,7 +144,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFinancialDetails(),
 					"Please enter FinancialDetails");
 		} else {
-			FinancialDetailsDTO financialDetails = new FinancialDetailsDTO();
+			FinancialDetailsDTO financialDetails = request.getFinancialDetails();
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, financialDetails.getGrossSalary(),
 					"Please enter Gross Salary");
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, financialDetails.getNetSalary(),

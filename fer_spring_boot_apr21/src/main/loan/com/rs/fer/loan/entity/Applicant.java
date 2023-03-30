@@ -74,19 +74,19 @@ public class Applicant {
 	}
 
 	@OneToMany(targetEntity = LoanAddress.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "applicant_id")
+	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<LoanAddress> addresses;
 
 	@OneToMany(targetEntity = Kyc.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "kyc_id", referencedColumnName = "applicant_id")
+	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Kyc> kycList;
 
 	@OneToMany(targetEntity = Mobile.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "mobile_id", referencedColumnName = "applicant_id")
+	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Mobile> mobiles;
 
 	@OneToMany(targetEntity = Email.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "email_id", referencedColumnName = "applicant_id")
+	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Email> emails;
 
 	@OneToOne(targetEntity = Employment.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)

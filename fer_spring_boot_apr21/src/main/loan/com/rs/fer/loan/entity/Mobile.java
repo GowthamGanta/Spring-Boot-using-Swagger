@@ -31,7 +31,7 @@ public class Mobile {
 	@Column
 	private String updated;
 
-	@Column(name = "applicant_id")
+	@Column(name = "appl_id", insertable = false)
 	private int applicantId;
 
 	public Mobile() {
