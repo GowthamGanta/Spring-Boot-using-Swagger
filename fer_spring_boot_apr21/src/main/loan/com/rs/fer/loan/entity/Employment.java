@@ -31,6 +31,9 @@ public class Employment {
 	private LoanAddress employerAddress;
 
 	@Column
+	private String others;
+	
+	@Column
 	private String created;
 
 	@Column
@@ -81,6 +84,15 @@ public class Employment {
 		this.employerAddress = employerAddress;
 	}
 
+	
+	public String getOthers() {
+		return others;
+	}
+
+	public void setOthers(String others) {
+		this.others = others;
+	}
+
 	public String getCreated() {
 		return created;
 	}
@@ -104,5 +116,6 @@ public class Employment {
 	public void setApplicantId(int applicantId) {
 		this.applicantId = applicantId;
 	}
+	
 
 }

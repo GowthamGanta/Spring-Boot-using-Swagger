@@ -6,6 +6,6 @@ import com.rs.fer.loan.request.SaveApplicantRequest;
 
 public interface ApplicantValidation {
 
-	Set<String> validateRegistrationRequest(SaveApplicantRequest request);
+	Set<String> validateSaveApplicantRequest(SaveApplicantRequest request);
 
 }

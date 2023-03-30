@@ -26,17 +26,17 @@ public class ApplicantController {
 	ApplicantService applicantService;
 
 	@PostMapping("/loan/registration")
-	public SaveApplicantResponse registration(@RequestBody SaveApplicantRequest request) {
+	public SaveApplicantResponse SaveApplicant(@RequestBody SaveApplicantRequest request) {
 
 		SaveApplicantResponse response = null;
 
-		Set<String> errorMessages = applicantValidation.validateRegistrationRequest(request);
+		Set<String> errorMessages = applicantValidation.validateSaveApplicantRequest(request);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new SaveApplicantResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = applicantService.registration(request);
+			response = applicantService.SaveApplicant(request);
 		}
 
 		return response;

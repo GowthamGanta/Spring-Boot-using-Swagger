@@ -5,6 +5,6 @@ import com.rs.fer.loan.response.SaveApplicantResponse;
 
 public interface ApplicantService {
 
-	SaveApplicantResponse registration(SaveApplicantRequest request);
+	SaveApplicantResponse SaveApplicant(SaveApplicantRequest request);
 
 }
