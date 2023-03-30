@@ -25,7 +25,7 @@ public class ApplicantController {
 	@Autowired
 	ApplicantService applicantService;
 
-	@PostMapping("/loan/registration")
+	@PostMapping("/loan/saveApplicant")
 	public SaveApplicantResponse SaveApplicant(@RequestBody SaveApplicantRequest request) {
 
 		SaveApplicantResponse response = null;

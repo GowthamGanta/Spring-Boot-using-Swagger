@@ -66,8 +66,9 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		applicant.setKycList(kycs);
 
 		// Converting MobileDTO to entity
+		Mobile mobile=null;
 		for (MobileDTO mobileDTO : request.getMobiles()) {
-			Mobile mobile = new Mobile();
+			 mobile = new Mobile();
 			mobile.setNumber(mobileDTO.getNumber());
 			mobile.setCountryCode(mobileDTO.getCountryCode());
 
