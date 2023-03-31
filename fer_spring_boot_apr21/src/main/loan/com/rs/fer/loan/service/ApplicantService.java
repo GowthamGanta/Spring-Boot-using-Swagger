@@ -9,5 +9,4 @@ public interface ApplicantService {
 	SaveApplicantResponse SaveApplicant(SaveApplicantRequest request);
 
 	GetApplicantResponse getApplicant(Integer applicantId);
-	
 }
