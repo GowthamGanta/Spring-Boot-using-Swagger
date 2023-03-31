@@ -1,5 +1,6 @@
 package com.rs.fer.loan.validation.impl;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -152,6 +153,16 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 
 		}
 		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetapplicantRequest(Integer applicantId) {
+		Set<String> errorMessages = new HashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, applicantId, "Please enter valid applicantId");
+
+		return errorMessages;
+
 	}
 
 }

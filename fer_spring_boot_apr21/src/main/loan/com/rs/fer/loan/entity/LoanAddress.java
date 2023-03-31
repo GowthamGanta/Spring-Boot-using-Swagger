@@ -40,7 +40,7 @@ public class LoanAddress {
 	private String addressType;
 
 	@Column(name = "appl_id", insertable = false)
-	private int applicantId;
+	private Integer applicantId;
 
 	public LoanAddress() {
 
@@ -141,11 +141,11 @@ public class LoanAddress {
 		this.addressType = addressType;
 	}
 
-	public int getApplicantId() {
+	public Integer getApplicantId() {
 		return applicantId;
 	}
 
-	public void setApplicantId(int applicantId) {
+	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
 

@@ -20,6 +20,7 @@ import com.rs.fer.loan.request.LoanAddressDTO;
 import com.rs.fer.loan.request.MobileDTO;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.util.ApplicantUtil;
+import com.rs.fer.util.DateUtil;
 
 @Component
 public class ApplicantUtilImpl implements ApplicantUtil {
@@ -47,6 +48,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		for (EmailDTO emailDTO : request.getEmails()) {
 			email = new Email();
 			email.setEmailAddress(emailDTO.getEmailAddress());
+			email.setCreated(DateUtil.getCurrentDate());
 			emails.add(email);
 		}
 		applicant.setEmails(emails);
@@ -60,6 +62,8 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			kyc.setDateOfIssue(kycDTO.getDateOfIssue());
 			kyc.setDateOfExpiry(kycDTO.getDateOfExpiry());
 			kyc.setPlaceOfIssue(kycDTO.getPlaceOfIssue());
+			kyc.setCreated(DateUtil.getCurrentDate());
+
 
 			kycs.add(kyc);
 		}
@@ -71,6 +75,8 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			 mobile = new Mobile();
 			mobile.setNumber(mobileDTO.getNumber());
 			mobile.setCountryCode(mobileDTO.getCountryCode());
+			mobile.setCreated(DateUtil.getCurrentDate());
+
 
 			mobiles.add(mobile);
 
@@ -87,6 +93,8 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			loanAddress.setState(loanAddressDTO.getState());
 			loanAddress.setPincode(loanAddressDTO.getPincode());
 			loanAddress.setCountry(loanAddressDTO.getCountry());
+			loanAddress.setCreated(DateUtil.getCurrentDate());
+
 
 			loanAddresses.add(loanAddress);
 		}
@@ -99,6 +107,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		employment.setEmployerName(employmentDTO.getEmployerName());
 		employment.setEmploymentStatus(employmentDTO.getEmploymentStatus());
 		employment.setEmployerAddress(employmentDTO.getEmployerAddress());
+		employment.setCreated(DateUtil.getCurrentDate());
 
 		applicant.setEmployment(employment);
 
@@ -108,8 +117,11 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		FinancialDetails financialDetails = new FinancialDetails();
 		financialDetails.setGrossSalary(financialDetailsDTO.getGrossSalary());
 		financialDetails.setNetSalary(financialDetailsDTO.getNetSalary());
+		financialDetails.setCreated(DateUtil.getCurrentDate());
 
 		applicant.setFinancialDetails(financialDetails);
+		
+		applicant.setCreated(DateUtil.getCurrentDate());
 
 		return applicant;
 	}

@@ -23,7 +23,7 @@ public class Applicant {
 	@Id
 	@Column(name = "applicant_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int applicantId;
+	private Integer applicantId;
 
 	@Column
 	private String firstName;
@@ -97,11 +97,12 @@ public class Applicant {
 	@JoinColumn(name = "fin_id", referencedColumnName = "financial_id")
 	private FinancialDetails financialDetails;
 
-	public int getApplicantId() {
+	
+	public Integer getApplicantId() {
 		return applicantId;
 	}
 
-	public void setApplicantId(int applicantId) {
+	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
 

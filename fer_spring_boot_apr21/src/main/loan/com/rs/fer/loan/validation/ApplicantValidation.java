@@ -8,4 +8,7 @@ public interface ApplicantValidation {
 
 	Set<String> validateSaveApplicantRequest(SaveApplicantRequest request);
 
+	Set<String> validateGetapplicantRequest(Integer applicantId);
+	
+
 }

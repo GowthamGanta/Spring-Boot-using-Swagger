@@ -29,7 +29,7 @@ public class Email {
 	private String updated;
 
 	@Column(name = "appl_id", insertable = false)
-	private int applicantId;
+	private Integer applicantId;
 
 	public Email() {
 
@@ -81,11 +81,11 @@ public class Email {
 		this.updated = updated;
 	}
 
-	public int getApplicantId() {
+	public Integer getApplicantId() {
 		return applicantId;
 	}
 
-	public void setApplicantId(int applicantId) {
+	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
 
