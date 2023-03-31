@@ -164,5 +164,4 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 		return errorMessages;
 
 	}
-
 }

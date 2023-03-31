@@ -126,5 +126,4 @@ public class Kyc {
 		this.applicantId = applicantId;
 	}
 
-	
-}
+	}

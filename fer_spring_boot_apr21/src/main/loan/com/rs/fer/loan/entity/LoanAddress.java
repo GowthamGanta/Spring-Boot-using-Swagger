@@ -148,5 +148,4 @@ public class LoanAddress {
 	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
-
 }

@@ -10,5 +10,4 @@ public interface ApplicantValidation {
 
 	Set<String> validateGetapplicantRequest(Integer applicantId);
 	
-
 }

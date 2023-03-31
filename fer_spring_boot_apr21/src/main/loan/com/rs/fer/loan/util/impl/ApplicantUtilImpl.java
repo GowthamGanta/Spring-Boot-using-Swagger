@@ -125,5 +125,4 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 
 		return applicant;
 	}
-
 }

@@ -76,5 +76,4 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		return response;
 	}
-
 }

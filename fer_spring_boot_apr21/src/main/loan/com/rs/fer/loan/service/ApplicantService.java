@@ -10,5 +10,4 @@ public interface ApplicantService {
 
 	GetApplicantResponse getApplicant(Integer applicantId);
 	
-
 }

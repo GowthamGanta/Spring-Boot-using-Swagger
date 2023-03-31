@@ -234,5 +234,4 @@ public class Applicant {
 	public void setFinancialDetails(FinancialDetails financialDetails) {
 		this.financialDetails = financialDetails;
 	}
-
 }

@@ -100,5 +100,4 @@ public class Mobile {
 	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
-
 }
