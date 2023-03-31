@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.loan.entity.Applicant;
+import com.rs.fer.loan.entity.LoanAccount;
 import com.rs.fer.response.AbstractResponse;
 
 public class SaveApplicantResponse extends AbstractResponse {
@@ -16,14 +16,14 @@ public class SaveApplicantResponse extends AbstractResponse {
 		this.errorMessages = errorMessages;
 	}
 
-	private Applicant applicant;
+	private LoanAccount loanAccount;
 
-	public Applicant getApplicant() {
-		return applicant;
+	public LoanAccount getLoanAccount() {
+		return loanAccount;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setLoanAccount(LoanAccount loanAccount) {
+		this.loanAccount = loanAccount;
 	}
-
+	
 }

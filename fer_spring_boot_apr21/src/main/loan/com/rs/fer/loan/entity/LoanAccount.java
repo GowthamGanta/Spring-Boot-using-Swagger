@@ -37,12 +37,13 @@ public class LoanAccount {
 
 	public LoanAccount(String status) {
 
+		
 		this.status = status;
 	}
 
 	@OneToMany(targetEntity = Applicant.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "loan_acc_id", referencedColumnName = "loanaccount_id")
-	private Set<Applicant> applicant;
+	private Set<Applicant> applicants;
 
 	public int getLoanAccountId() {
 		return loanAccountId;
@@ -76,12 +77,12 @@ public class LoanAccount {
 		this.status = status;
 	}
 
-	public Set<Applicant> getApplicant() {
-		return applicant;
+	public Set<Applicant> getApplicants() {
+		return applicants;
 	}
 
-	public void setApplicant(Set<Applicant> applicant) {
-		this.applicant = applicant;
+	public void setApplicants(Set<Applicant> applicants) {
+		this.applicants = applicants;
 	}
 
 }

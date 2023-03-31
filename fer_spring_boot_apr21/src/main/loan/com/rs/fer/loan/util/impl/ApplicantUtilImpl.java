@@ -10,6 +10,7 @@ import com.rs.fer.loan.entity.Email;
 import com.rs.fer.loan.entity.Employment;
 import com.rs.fer.loan.entity.FinancialDetails;
 import com.rs.fer.loan.entity.Kyc;
+import com.rs.fer.loan.entity.LoanAccount;
 import com.rs.fer.loan.entity.LoanAddress;
 import com.rs.fer.loan.entity.Mobile;
 import com.rs.fer.loan.request.EmailDTO;
@@ -26,7 +27,7 @@ import com.rs.fer.util.DateUtil;
 public class ApplicantUtilImpl implements ApplicantUtil {
 
 	@Override
-	public Applicant loadSaveApplicantRequestToApplicant(SaveApplicantRequest request) {
+	public LoanAccount loadSaveApplicantRequestToApplicant(SaveApplicantRequest request) {
 
 		Applicant applicant = new Applicant();
 		Set<Email> emails = new LinkedHashSet<>();
@@ -123,6 +124,14 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		
 		applicant.setCreated(DateUtil.getCurrentDate());
 
-		return applicant;
+		LoanAccount loanAccount = new LoanAccount();
+		loanAccount.setStatus("P");
+		loanAccount.setCreated(DateUtil.getCurrentDate());
+	           	
+		Set<Applicant> applicants = new LinkedHashSet<Applicant>();
+		applicants.add(applicant);
+		loanAccount.setApplicants(applicants);
+		
+		return loanAccount;
 	}
 }

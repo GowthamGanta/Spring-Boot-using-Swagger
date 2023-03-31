@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.rs.fer.loan.entity.Applicant;
+import com.rs.fer.loan.entity.LoanAccount;
 import com.rs.fer.loan.repository.ApplicantRepository;
+import com.rs.fer.loan.repository.LoanAccountRepository;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
@@ -25,7 +27,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	ApplicantRepository applicantRepository;
 
-	
+	@Autowired
+	LoanAccountRepository loanAccountRepository;
+
 	@Override
 	public SaveApplicantResponse SaveApplicant(SaveApplicantRequest request) {
 		
@@ -33,16 +37,16 @@ public class ApplicantServiceImpl implements ApplicantService {
 		SaveApplicantResponse response = null;
 
 		// load vo to bean
-		Applicant applicant = applicantUtil.loadSaveApplicantRequestToApplicant(request);
+		LoanAccount loanAccount = applicantUtil.loadSaveApplicantRequestToApplicant(request);
 
 		// save bean to database
-		applicant = applicantRepository.save(applicant);
+		loanAccount = loanAccountRepository.save(loanAccount);
 
 		// load response
-		if (applicant.getApplicantId() > 0) {
+		if (loanAccount.getLoanAccountId() > 0) {
 			// success
 			response = new SaveApplicantResponse(HttpStatus.OK, "000", "Loan Application is saved successfully", null);
-			response.setApplicant(applicant);
+			response.setLoanAccount(loanAccount);
 		} else {
 			// failure
 			response = new SaveApplicantResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Loan Application is failed",
