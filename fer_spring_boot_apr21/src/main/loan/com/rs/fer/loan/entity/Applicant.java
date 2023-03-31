@@ -55,6 +55,9 @@ public class Applicant {
 	@Column
 	private String updated;
 
+	@Column(name = "loan_acc_id", insertable = false)
+	private int loanAccountId;
+
 	public Applicant() {
 
 	}
@@ -97,7 +100,6 @@ public class Applicant {
 	@JoinColumn(name = "fin_id", referencedColumnName = "financial_id")
 	private FinancialDetails financialDetails;
 
-	
 	public Integer getApplicantId() {
 		return applicantId;
 	}
@@ -186,7 +188,6 @@ public class Applicant {
 		this.updated = updated;
 	}
 
-	
 	public Set<LoanAddress> getAddresses() {
 		return addresses;
 	}
