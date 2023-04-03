@@ -11,5 +11,4 @@ public class GetLoanAccountRequest {
 	public void setLoanAccountId(int loanAccountId) {
 		this.loanAccountId = loanAccountId;
 	}
-
 }

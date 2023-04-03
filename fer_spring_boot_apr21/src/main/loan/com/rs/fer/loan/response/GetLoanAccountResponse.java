@@ -27,5 +27,4 @@ public class GetLoanAccountResponse extends AbstractResponse {
 	public void setLoanAccount(LoanAccount loanAccount) {
 		this.loanAccount = loanAccount;
 	}
-
 }

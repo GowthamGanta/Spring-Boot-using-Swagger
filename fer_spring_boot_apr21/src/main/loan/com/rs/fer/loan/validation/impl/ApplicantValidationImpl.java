@@ -195,6 +195,5 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, loanAccountId, "Please enter valid loanAccountId");
 
 		return errorMessages;
-
 	}
 }

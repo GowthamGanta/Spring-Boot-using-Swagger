@@ -20,4 +20,5 @@ public interface ApplicantService {
 	LoanAccountRejectResponse LoanAccount(LoanAccountRejectRequest request);
 
 	GetLoanAccountResponse getLoanAccount(int loanAccountId);
+	
 }

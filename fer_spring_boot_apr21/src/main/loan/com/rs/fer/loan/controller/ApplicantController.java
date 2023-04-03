@@ -117,5 +117,4 @@ public class ApplicantController {
 		}
 		return response;
 	}
-
 }
