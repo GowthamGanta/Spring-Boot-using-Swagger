@@ -10,6 +10,8 @@ import com.rs.fer.loan.request.EmailDTO;
 import com.rs.fer.loan.request.EmploymentDTO;
 import com.rs.fer.loan.request.FinancialDetailsDTO;
 import com.rs.fer.loan.request.KycDTO;
+import com.rs.fer.loan.request.LoanAccountApproveRequest;
+import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.LoanAddressDTO;
 import com.rs.fer.loan.request.MobileDTO;
 import com.rs.fer.loan.request.SaveApplicantRequest;
@@ -90,7 +92,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 						"Please enter Address Type");
 			}
 		}
-		
+
 		// To Validate Employment input
 		if (request.getEmployment() == null) {
 			errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getEmployment(),
@@ -131,10 +133,10 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 					}
 
 				}
-			}else {
-				if(employment.getEmploymentStatus() == "O") {
-				errorMessages = FERUtil.addErrorIfEmpty(errorMessages, employment.getOthers(),
-						"Please enter others");
+			} else {
+				if (employment.getEmploymentStatus() == "O") {
+					errorMessages = FERUtil.addErrorIfEmpty(errorMessages, employment.getOthers(),
+							"Please enter others");
 				}
 
 			}
@@ -163,5 +165,26 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 
 		return errorMessages;
 
+	}
+
+	@Override
+	public Set<String> loanAccountApproveRequest(LoanAccountApproveRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLoanAccountId(), "Please enter Id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getStatus(), "Please enter Status");
+
+		return errorMessages;
+
+	}
+
+	@Override
+	public Set<String> loanAccountRejectRequest(LoanAccountRejectRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLoanAccountId(), "Please enter Id");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getStatus(), "Please enter Status");
+
+		return errorMessages;
 	}
 }

@@ -37,7 +37,6 @@ public class LoanAccount {
 
 	public LoanAccount(String status) {
 
-		
 		this.status = status;
 	}
 

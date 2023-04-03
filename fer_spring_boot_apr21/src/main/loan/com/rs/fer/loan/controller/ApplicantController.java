@@ -2,19 +2,23 @@ package com.rs.fer.loan.controller;
 
 import java.util.Set;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rs.fer.loan.request.LoanAccountApproveRequest;
+import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
+import com.rs.fer.loan.response.LoanAccountApproveResponse;
+import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
 import com.rs.fer.loan.service.ApplicantService;
 import com.rs.fer.loan.validation.ApplicantValidation;
@@ -46,9 +50,9 @@ public class ApplicantController {
 		return response;
 
 	}
-	
+
 	@GetMapping("/loan/getApplicant/{applicantId}")
-	
+
 	public GetApplicantResponse getApplicant(@PathVariable("applicantId") Integer applicantId) {
 
 		GetApplicantResponse response = null;
@@ -60,6 +64,38 @@ public class ApplicantController {
 
 		} else {
 			response = applicantService.getApplicant(applicantId);
+		}
+		return response;
+	}
+
+	@PutMapping("/LoanAccountApprove")
+	public LoanAccountApproveResponse LoanAccount(@RequestBody LoanAccountApproveRequest request) {
+
+		LoanAccountApproveResponse response = null;
+
+		Set<String> errorMessages = applicantValidation.loanAccountApproveRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoanAccountApproveResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = applicantService.LoanAccount(request);
+		}
+		return response;
+	}
+
+	@PutMapping("/loan/LoanAccountReject")
+	public LoanAccountRejectResponse LoanAccount(@RequestBody LoanAccountRejectRequest request) {
+
+		LoanAccountRejectResponse response = null;
+
+		Set<String> errorMessages = applicantValidation.loanAccountRejectRequest(request);
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoanAccountRejectResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = applicantService.LoanAccount(request);
 		}
 		return response;
 	}

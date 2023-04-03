@@ -10,13 +10,15 @@ import com.rs.fer.loan.entity.Applicant;
 import com.rs.fer.loan.entity.LoanAccount;
 import com.rs.fer.loan.repository.ApplicantRepository;
 import com.rs.fer.loan.repository.LoanAccountRepository;
+import com.rs.fer.loan.request.LoanAccountApproveRequest;
+import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
+import com.rs.fer.loan.response.LoanAccountApproveResponse;
+import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
 import com.rs.fer.loan.service.ApplicantService;
 import com.rs.fer.loan.util.ApplicantUtil;
-import com.rs.fer.user.entity.User;
-import com.rs.fer.user.response.GetUserResponse;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
@@ -32,7 +34,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Override
 	public SaveApplicantResponse SaveApplicant(SaveApplicantRequest request) {
-		
 
 		SaveApplicantResponse response = null;
 
@@ -55,9 +56,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		return response;
 		// return null;
-	
-	}
 
+	}
 
 	@Override
 	public GetApplicantResponse getApplicant(Integer applicantId) {
@@ -74,11 +74,75 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		} else {
 			// IfApplicant not present
-			response = new GetApplicantResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get Applicant is failed", null);
+			response = new GetApplicantResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get Applicant is failed",
+					null);
 
 		}
 
 		return response;
 	}
-	
+
+	@Override
+	public LoanAccountApproveResponse LoanAccount(LoanAccountApproveRequest request) {
+
+		LoanAccountApproveResponse response = null;
+
+		Optional<LoanAccount> loanAccounts = loanAccountRepository.findById(request.getLoanAccountId());
+
+		if (loanAccounts.isPresent()) {
+			LoanAccount loanAccount = loanAccounts.get();
+			if (loanAccount.getStatus().equals(request.getStatus())) {
+				// success
+				loanAccount.setStatus("A");
+				loanAccountRepository.save(loanAccount);
+				response = new LoanAccountApproveResponse(HttpStatus.OK, "000", "LoanAccount Approved successfully",
+						null);
+			} else {
+				// failure
+
+				response = new LoanAccountApproveResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
+						"Id and Status which is on the account are not matching", null);
+
+			}
+		} else {
+			response = new LoanAccountApproveResponse(HttpStatus.PRECONDITION_FAILED, "101", "LoanAccount is not found",
+					null);
+
+		}
+
+		return response;
+
+	}
+
+	@Override
+	public LoanAccountRejectResponse LoanAccount(LoanAccountRejectRequest request) {
+
+		LoanAccountRejectResponse response = null;
+
+		Optional<LoanAccount> loanAccounts = loanAccountRepository.findById(request.getLoanAccountId());
+
+		if (loanAccounts.isPresent()) {
+			LoanAccount loanAccount = loanAccounts.get();
+			if (loanAccount.getStatus().equals(request.getStatus())) {
+				// success
+				loanAccount.setStatus("R");
+				loanAccountRepository.save(loanAccount);
+				response = new LoanAccountRejectResponse(HttpStatus.OK, "000", "LoanAccount Rejected", null);
+			} else {
+				// failure
+
+				response = new LoanAccountRejectResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
+						"Id and Status which is on the account are not matching", null);
+
+			}
+		} else {
+			response = new LoanAccountRejectResponse(HttpStatus.PRECONDITION_FAILED, "101", "LoanAccount is not found",
+					null);
+
+		}
+
+		return response;
+
+	}
+
 }
