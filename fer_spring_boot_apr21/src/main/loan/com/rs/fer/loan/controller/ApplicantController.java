@@ -17,6 +17,7 @@ import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
+import com.rs.fer.loan.response.GetLoanAccountResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
@@ -96,6 +97,23 @@ public class ApplicantController {
 
 		} else {
 			response = applicantService.LoanAccount(request);
+		}
+		return response;
+	}
+
+	@GetMapping("/loan/loanAccount/{loanAccountId}")
+
+	public GetLoanAccountResponse getloanAccount(@PathVariable("loanAccountId") Integer loanAccountId) {
+
+		GetLoanAccountResponse response = null;
+
+		Set<String> errorMessages = applicantValidation.validateGetloanAccountRequest(loanAccountId);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetLoanAccountResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = applicantService.getLoanAccount(loanAccountId);
 		}
 		return response;
 	}

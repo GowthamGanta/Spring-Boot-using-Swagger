@@ -14,6 +14,7 @@ import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
+import com.rs.fer.loan.response.GetLoanAccountResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
@@ -143,6 +144,29 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		return response;
 
+	}
+
+	@Override
+	public GetLoanAccountResponse getLoanAccount(int loanAccountId) {
+
+		GetLoanAccountResponse response = null;
+
+		// To get the Applicant based on userId
+		Optional<LoanAccount> loanAccounts = loanAccountRepository.findById(loanAccountId);
+
+		if (loanAccounts.isPresent()) {
+			// If Applicant is present
+			response = new GetLoanAccountResponse(HttpStatus.OK, "000", "get loanAccount list ", null);
+			response.setLoanAccount(loanAccounts.get());
+
+		} else {
+			// IfApplicant not present
+			response = new GetLoanAccountResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get loanAccount is failed",
+					null);
+
+		}
+
+		return response;
 	}
 
 }
