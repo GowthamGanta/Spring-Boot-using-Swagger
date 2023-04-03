@@ -5,7 +5,6 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.loan.entity.Applicant;
-import com.rs.fer.loan.entity.LoanAccount;
 import com.rs.fer.response.AbstractResponse;
 
 public class GetLoanAccountStatusResponse extends AbstractResponse {

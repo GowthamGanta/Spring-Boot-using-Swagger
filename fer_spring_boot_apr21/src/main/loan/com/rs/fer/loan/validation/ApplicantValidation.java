@@ -10,7 +10,7 @@ public interface ApplicantValidation {
 
 	Set<String> validateSaveApplicantRequest(SaveApplicantRequest request);
 
-	Set<String> validateGetapplicantRequest(Integer applicantId);
+	Set<String> validateGetApplicantRequest(Integer applicantId);
 
 	Set<String> loanAccountApproveRequest(LoanAccountApproveRequest request);
 

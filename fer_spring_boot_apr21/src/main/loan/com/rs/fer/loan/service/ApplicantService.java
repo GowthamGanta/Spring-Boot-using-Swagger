@@ -16,9 +16,9 @@ public interface ApplicantService {
 
 	GetApplicantResponse getApplicant(Integer applicantId);
 
-	LoanAccountApproveResponse LoanAccount(LoanAccountApproveRequest request);
+	LoanAccountApproveResponse LoanAccountApprove(LoanAccountApproveRequest request);
 
-	LoanAccountRejectResponse LoanAccount(LoanAccountRejectRequest request);
+	LoanAccountRejectResponse LoanAccountReject(LoanAccountRejectRequest request);
 
 	GetLoanAccountResponse getLoanAccount(int loanAccountId);
 	

@@ -87,20 +87,22 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public LoanAccountApproveResponse LoanAccount(LoanAccountApproveRequest request) {
+	public LoanAccountApproveResponse LoanAccountApprove(LoanAccountApproveRequest request) {
 
 		LoanAccountApproveResponse response = null;
 
 		Optional<LoanAccount> loanAccounts = loanAccountRepository.findById(request.getLoanAccountId());
-
 		if (loanAccounts.isPresent()) {
 			LoanAccount loanAccount = loanAccounts.get();
-			if (loanAccount.getStatus().equals(request.getStatus())) {
+			if (loanAccount.getStatus() != null) {
 				// success
 				loanAccount.setStatus("A");
+
 				loanAccountRepository.save(loanAccount);
+
 				response = new LoanAccountApproveResponse(HttpStatus.OK, "000", "LoanAccount Approved successfully",
 						null);
+
 			} else {
 				// failure
 
@@ -108,6 +110,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 						"Id and Status which is on the account are not matching", null);
 
 			}
+
 		} else {
 			response = new LoanAccountApproveResponse(HttpStatus.PRECONDITION_FAILED, "101", "LoanAccount is not found",
 					null);
@@ -119,7 +122,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public LoanAccountRejectResponse LoanAccount(LoanAccountRejectRequest request) {
+	public LoanAccountRejectResponse LoanAccountReject(LoanAccountRejectRequest request) {
 
 		LoanAccountRejectResponse response = null;
 
@@ -127,7 +130,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		if (loanAccounts.isPresent()) {
 			LoanAccount loanAccount = loanAccounts.get();
-			if (loanAccount.getStatus().equals(request.getStatus())) {
+			if (loanAccount.getStatus() != null) {
 				// success
 				loanAccount.setStatus("R");
 				loanAccountRepository.save(loanAccount);
@@ -173,35 +176,34 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	
-		public GetLoanAccountStatusResponse getLoanAccountStatus(String status) {
 
-			GetLoanAccountStatusResponse response = null;
+	public GetLoanAccountStatusResponse getLoanAccountStatus(String status) {
 
-			// To get the LoanAccountDetails based on Status
+		GetLoanAccountStatusResponse response = null;
 
-			Set<LoanAccount> loanAccounts = loanAccountRepository.findByStatus(status);
-			Set<Applicant> applicants = new HashSet<Applicant>();
-			if (loanAccounts.isEmpty()) {
+		// To get the LoanAccountDetails based on Status
 
-				response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "903", "No status list Found",
-						null);
+		Set<LoanAccount> loanAccounts = loanAccountRepository.findByStatus(status);
+		Set<Applicant> applicants = new HashSet<Applicant>();
+		if (loanAccounts.isEmpty()) {
 
-			} else {
-				for (LoanAccount loanAccount : loanAccounts) {
+			response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "903", "No status list Found",
+					null);
 
-					Set<Applicant> applicantObj = applicantRepository.findByLoanAccountId(loanAccount.getLoanAccountId());
+		} else {
+			for (LoanAccount loanAccount : loanAccounts) {
 
-					for (Applicant applicant : applicantObj) {
+				Set<Applicant> applicantObj = applicantRepository.findByLoanAccountId(loanAccount.getLoanAccountId());
 
-						applicants.add(applicant);
-					}
-					response = new GetLoanAccountStatusResponse(HttpStatus.OK, "000", "Fetch status List", null);
-					response.setLoanAccounts(applicants);
+				for (Applicant applicant : applicantObj) {
+
+					applicants.add(applicant);
 				}
+				response = new GetLoanAccountStatusResponse(HttpStatus.OK, "000", "Fetch status List", null);
+				response.setLoanAccounts(applicants);
 			}
-
-			return response;
 		}
-	}
 
+		return response;
+	}
+}

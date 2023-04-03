@@ -9,8 +9,7 @@ import com.rs.fer.response.AbstractResponse;
 
 public class LoanAccountApproveResponse extends AbstractResponse {
 
-	public LoanAccountApproveResponse(HttpStatus status, String statusCode, String message,
-			Set<String> errorMessages) {
+	public LoanAccountApproveResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
 		this.status = status;
 		this.statusCode = statusCode;
@@ -30,4 +29,3 @@ public class LoanAccountApproveResponse extends AbstractResponse {
 	}
 
 }
-

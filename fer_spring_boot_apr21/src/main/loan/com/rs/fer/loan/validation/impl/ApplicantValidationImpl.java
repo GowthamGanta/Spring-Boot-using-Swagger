@@ -158,7 +158,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 	}
 
 	@Override
-	public Set<String> validateGetapplicantRequest(Integer applicantId) {
+	public Set<String> validateGetApplicantRequest(Integer applicantId) {
 		Set<String> errorMessages = new HashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, applicantId, "Please enter valid applicantId");
@@ -172,7 +172,6 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLoanAccountId(), "Please enter Id");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getStatus(), "Please enter Status");
 
 		return errorMessages;
 
@@ -183,7 +182,6 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLoanAccountId(), "Please enter Id");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getStatus(), "Please enter Status");
 
 		return errorMessages;
 	}

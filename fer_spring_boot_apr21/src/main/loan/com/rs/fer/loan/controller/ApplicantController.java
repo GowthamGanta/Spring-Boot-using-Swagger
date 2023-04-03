@@ -60,7 +60,7 @@ public class ApplicantController {
 
 		GetApplicantResponse response = null;
 
-		Set<String> errorMessages = applicantValidation.validateGetapplicantRequest(applicantId);
+		Set<String> errorMessages = applicantValidation.validateGetApplicantRequest(applicantId);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetApplicantResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
@@ -72,7 +72,7 @@ public class ApplicantController {
 	}
 
 	@PutMapping("/LoanAccountApprove")
-	public LoanAccountApproveResponse LoanAccount(@RequestBody LoanAccountApproveRequest request) {
+	public LoanAccountApproveResponse LoanAccountApprove(@RequestBody LoanAccountApproveRequest request) {
 
 		LoanAccountApproveResponse response = null;
 
@@ -82,13 +82,13 @@ public class ApplicantController {
 			response = new LoanAccountApproveResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = applicantService.LoanAccount(request);
+			response = applicantService.LoanAccountApprove(request);
 		}
 		return response;
 	}
 
 	@PutMapping("/loan/LoanAccountReject")
-	public LoanAccountRejectResponse LoanAccount(@RequestBody LoanAccountRejectRequest request) {
+	public LoanAccountRejectResponse LoanAccountReject(@RequestBody LoanAccountRejectRequest request) {
 
 		LoanAccountRejectResponse response = null;
 
@@ -98,7 +98,7 @@ public class ApplicantController {
 			response = new LoanAccountRejectResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = applicantService.LoanAccount(request);
+			response = applicantService.LoanAccountReject(request);
 		}
 		return response;
 	}
