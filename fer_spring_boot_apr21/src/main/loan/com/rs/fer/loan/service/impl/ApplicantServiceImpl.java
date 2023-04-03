@@ -1,6 +1,8 @@
 package com.rs.fer.loan.service.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.GetLoanAccountResponse;
+import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
@@ -168,4 +171,37 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		return response;
 	}
-}
+
+	@Override
+	
+		public GetLoanAccountStatusResponse getLoanAccountStatus(String status) {
+
+			GetLoanAccountStatusResponse response = null;
+
+			// To get the LoanAccountDetails based on Status
+
+			Set<LoanAccount> loanAccounts = loanAccountRepository.findByStatus(status);
+			Set<Applicant> applicants = new HashSet<Applicant>();
+			if (loanAccounts.isEmpty()) {
+
+				response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "903", "No status list Found",
+						null);
+
+			} else {
+				for (LoanAccount loanAccount : loanAccounts) {
+
+					Set<Applicant> applicantObj = applicantRepository.findByLoanAccountId(loanAccount.getLoanAccountId());
+
+					for (Applicant applicant : applicantObj) {
+
+						applicants.add(applicant);
+					}
+					response = new GetLoanAccountStatusResponse(HttpStatus.OK, "000", "Fetch status List", null);
+					response.setLoanAccounts(applicants);
+				}
+			}
+
+			return response;
+		}
+	}
+

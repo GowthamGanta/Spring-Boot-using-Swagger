@@ -196,4 +196,14 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 
 		return errorMessages;
 	}
+
+	@Override
+	public Set<String> validateGetLoanAccountStatusRequest(String status) {
+		Set<String> errorMessages = new HashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, status, "please select Status");
+
+		return errorMessages;
+	}
+
 }

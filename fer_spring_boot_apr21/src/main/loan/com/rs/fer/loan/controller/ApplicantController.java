@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
@@ -18,6 +19,7 @@ import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.GetLoanAccountResponse;
+import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.response.SaveApplicantResponse;
@@ -117,4 +119,25 @@ public class ApplicantController {
 		}
 		return response;
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/loan/{status}getLoanAccountByStatus")
+	public GetLoanAccountStatusResponse getLoanAccountByStatus(@PathVariable("status") String status) {
+		GetLoanAccountStatusResponse response = null;
+
+		Set<String> errorMessages = applicantValidation.validateGetLoanAccountStatusRequest(status);
+
+		// return response with error messages
+
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = applicantService.getLoanAccountStatus(status);
+		}
+		return response;
+
+	}
+
+	
+	
 }
