@@ -50,6 +50,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			email = new Email();
 			email.setEmailAddress(emailDTO.getEmailAddress());
 			email.setCreated(DateUtil.getCurrentDate());
+			email.setUpdated(DateUtil.getCurrentDate());
 			emails.add(email);
 		}
 		applicant.setEmails(emails);
@@ -64,7 +65,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			kyc.setDateOfExpiry(kycDTO.getDateOfExpiry());
 			kyc.setPlaceOfIssue(kycDTO.getPlaceOfIssue());
 			kyc.setCreated(DateUtil.getCurrentDate());
-
+			kyc.setUpdated(DateUtil.getCurrentDate());
 
 			kycs.add(kyc);
 		}
@@ -77,6 +78,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			mobile.setNumber(mobileDTO.getNumber());
 			mobile.setCountryCode(mobileDTO.getCountryCode());
 			mobile.setCreated(DateUtil.getCurrentDate());
+			mobile.setUpdated(DateUtil.getCurrentDate());
 
 
 			mobiles.add(mobile);
@@ -95,6 +97,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 			loanAddress.setPincode(loanAddressDTO.getPincode());
 			loanAddress.setCountry(loanAddressDTO.getCountry());
 			loanAddress.setCreated(DateUtil.getCurrentDate());
+			loanAddress.setUpdated(DateUtil.getCurrentDate());
 
 
 			loanAddresses.add(loanAddress);
@@ -109,6 +112,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		employment.setEmploymentStatus(employmentDTO.getEmploymentStatus());
 		employment.setEmployerAddress(employmentDTO.getEmployerAddress());
 		employment.setCreated(DateUtil.getCurrentDate());
+		employment.setUpdated(DateUtil.getCurrentDate());
 
 		applicant.setEmployment(employment);
 
@@ -119,6 +123,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		financialDetails.setGrossSalary(financialDetailsDTO.getGrossSalary());
 		financialDetails.setNetSalary(financialDetailsDTO.getNetSalary());
 		financialDetails.setCreated(DateUtil.getCurrentDate());
+		financialDetails.setUpdated(DateUtil.getCurrentDate());
 
 		applicant.setFinancialDetails(financialDetails);
 		
