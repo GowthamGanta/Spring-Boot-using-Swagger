@@ -180,5 +180,4 @@ public class ApplicantControllerTest {
 		assertEquals("999", response.statusCode);
 
 	}
-
 }
