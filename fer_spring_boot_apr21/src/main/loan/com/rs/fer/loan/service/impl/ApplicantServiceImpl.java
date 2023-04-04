@@ -103,13 +103,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 				response = new LoanAccountApproveResponse(HttpStatus.OK, "000", "LoanAccount Approved successfully",
 						null);
 
-			} else {
-				// failure
-
-				response = new LoanAccountApproveResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
-						"Id and Status which is on the account are not matching", null);
-
-			}
+			} /*
+				  else { // failure
+				 
+				  response = new LoanAccountApproveResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+				  "102", "Id and Status which is on the account are not matching", null);
+				 
+				  }*/
+				 
 
 		} else {
 			response = new LoanAccountApproveResponse(HttpStatus.PRECONDITION_FAILED, "101", "LoanAccount is not found",
@@ -135,13 +136,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 				loanAccount.setStatus("R");
 				loanAccountRepository.save(loanAccount);
 				response = new LoanAccountRejectResponse(HttpStatus.OK, "000", "LoanAccount Rejected", null);
-			} else {
-				// failure
-
-				response = new LoanAccountRejectResponse(HttpStatus.INTERNAL_SERVER_ERROR, "102",
-						"Id and Status which is on the account are not matching", null);
-
-			}
+			} /*
+				 * else { // failure
+				 * 
+				 * response = new LoanAccountRejectResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+				 * "102", "Id and Status which is on the account are not matching", null);
+				 * 
+				 * }*/
+				 
 		} else {
 			response = new LoanAccountRejectResponse(HttpStatus.PRECONDITION_FAILED, "101", "LoanAccount is not found",
 					null);
