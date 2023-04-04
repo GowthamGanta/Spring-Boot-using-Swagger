@@ -127,7 +127,8 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		LoanAccount loanAccount = new LoanAccount();
 		loanAccount.setStatus("P");
 		loanAccount.setCreated(DateUtil.getCurrentDate());
-	           	
+		loanAccount.setUpdated(DateUtil.getCurrentDate());
+		
 		Set<Applicant> applicants = new LinkedHashSet<Applicant>();
 		applicants.add(applicant);
 		loanAccount.setApplicants(applicants);
