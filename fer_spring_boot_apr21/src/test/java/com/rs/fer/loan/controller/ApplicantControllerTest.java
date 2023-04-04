@@ -16,9 +16,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
+import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
+import com.rs.fer.loan.response.SaveApplicantResponse;
 import com.rs.fer.loan.service.ApplicantService;
 import com.rs.fer.loan.validation.ApplicantValidation;
 
@@ -108,7 +110,9 @@ public class ApplicantControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+
 	private String status;
+
 	@Test
 	public void testGetStatus() {
 
@@ -138,6 +142,43 @@ public class ApplicantControllerTest {
 		GetLoanAccountStatusResponse getLoanAccountStatusResponse = applicantController.getLoanAccountByStatus(status);
 
 		assertEquals("999", getLoanAccountStatusResponse.statusCode);
+	}
+
+	@Test
+	public void testSaveApplicant() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		SaveApplicantRequest request = new SaveApplicantRequest();
+		SaveApplicantResponse response = new SaveApplicantResponse(HttpStatus.OK, "000", "", null);
+
+		// when
+		when(applicantValidation.validateSaveApplicantRequest(Mockito.any())).thenReturn(errorMessages);
+		when(applicantService.SaveApplicant(Mockito.any())).thenReturn(response);
+
+		// Then
+		SaveApplicantResponse saveResponse = applicantController.SaveApplicant(request);
+
+		assertEquals("000", saveResponse.statusCode);
+
+	}
+
+	@Test
+	public void testSaveApplicantFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter loanAccountId");
+
+		SaveApplicantRequest request = new SaveApplicantRequest();
+
+		// when
+		when(applicantValidation.validateSaveApplicantRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		SaveApplicantResponse response = applicantController.SaveApplicant(request);
+
+		assertEquals("999", response.statusCode);
+
 	}
 
 }
