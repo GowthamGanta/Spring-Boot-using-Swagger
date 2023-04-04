@@ -128,6 +128,7 @@ public class ApplicantUtilImpl implements ApplicantUtil {
 		applicant.setFinancialDetails(financialDetails);
 		
 		applicant.setCreated(DateUtil.getCurrentDate());
+		applicant.setUpdated(DateUtil.getCurrentDate());
 
 		LoanAccount loanAccount = new LoanAccount();
 		loanAccount.setStatus("P");
