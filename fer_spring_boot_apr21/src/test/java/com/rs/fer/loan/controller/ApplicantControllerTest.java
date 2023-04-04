@@ -13,8 +13,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
+import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.service.ApplicantService;
@@ -105,6 +107,37 @@ public class ApplicantControllerTest {
 		LoanAccountRejectResponse response = applicantController.LoanAccountReject(request);
 
 		assertEquals("999", response.statusCode);
+	}
+	private String status;
+	@Test
+	public void testGetStatus() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+		GetLoanAccountStatusResponse response = new GetLoanAccountStatusResponse(HttpStatus.OK, "000", "", null);
+
+		when(applicantValidation.validateGetLoanAccountStatusRequest(Mockito.any())).thenReturn(errorMessages);
+		when(applicantService.getLoanAccountStatus(Mockito.any())).thenReturn(response);
+
+		GetLoanAccountStatusResponse getLoanAccountStatusResponse = applicantController.getLoanAccountByStatus(status);
+
+		assertEquals("000", getLoanAccountStatusResponse.statusCode);
+	}
+
+	@Test
+	public void testGetStatusFailure() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Status");
+
+		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+
+		when(applicantValidation.validateGetLoanAccountStatusRequest(Mockito.any())).thenReturn(errorMessages);
+
+		GetLoanAccountStatusResponse getLoanAccountStatusResponse = applicantController.getLoanAccountByStatus(status);
+
+		assertEquals("999", getLoanAccountStatusResponse.statusCode);
 	}
 
 }

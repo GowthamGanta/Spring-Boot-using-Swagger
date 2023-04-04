@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.Mockito.when;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,23 +14,30 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.loan.entity.Applicant;
 import com.rs.fer.loan.entity.LoanAccount;
+import com.rs.fer.loan.repository.ApplicantRepository;
 import com.rs.fer.loan.repository.LoanAccountRepository;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.response.GetLoanAccountResponse;
+import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
 import com.rs.fer.loan.util.ApplicantUtil;
 
 @SpringBootTest
 public class ApplicantServiceImplTest {
-
+ 
 	@InjectMocks
 	private ApplicantServiceImpl applicantServiceImpl;
 
 	@Mock
 	LoanAccountRepository loanAccountRepository;
+	
+	@Mock
+	ApplicantRepository applicantRepository;
+
 
 	@Mock
 	ApplicantUtil applicantUtil;
@@ -135,5 +144,51 @@ public class ApplicantServiceImplTest {
 
 		assertEquals("101", response.statusCode);
 	}
+	
+	@Test
+	public void testGetLoanAccountStatus() {
+
+		LoanAccount loanAccountStatus = new LoanAccount();
+		// String P = null;
+		loanAccountStatus.setStatus("P");
+
+		Set<LoanAccount> loanAccounts = new HashSet<>();
+		loanAccounts.add(loanAccountStatus);
+
+		Set<Applicant> applicant = new HashSet<>();
+		Applicant applicants = new Applicant();
+		applicant.add(applicants);
+
+		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(loanAccounts);
+
+		when(applicantRepository.findByLoanAccountId(Mockito.anyInt())).thenReturn(applicant);
+
+		// GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+
+		GetLoanAccountStatusResponse response = applicantServiceImpl.getLoanAccountStatus("p");
+		response.setLoanAccounts(applicant);
+		
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetLoanAccountStatusNotFound() {
+
+		LoanAccount loanAccountStatus = new LoanAccount();
+		// loanAccountStatus.setStatus("P");
+		Set<LoanAccount> loanAccounts = new HashSet<>();
+		loanAccounts.add(loanAccountStatus);
+
+		String P = null;
+
+		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(loanAccounts);
+
+		GetLoanAccountStatusResponse response = applicantServiceImpl.getLoanAccountStatus(P);
+
+		assertEquals("903", response.statusCode);
+
+	}
+
 
 }

@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 
 @SpringBootTest
 public class ApplicantValidationImplTest {
-
+ 
 	@InjectMocks
 	private ApplicantValidationImpl applicantValidationImpl;
 
@@ -80,5 +81,42 @@ public class ApplicantValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	
+	@Test
+	public void testvalidateGetLoanAccountStatusRequest() {
+
+		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+
+
+		String P = null;
+		request.setStatus(P);
+
+		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountStatusRequest(toString());
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+     
+	@Test
+	public void testvalidateGetLoanAccountStatusRequestFailure() {
+
+		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+
+
+		String P = null;
+		//request.setStatus(P);
+
+		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountStatusRequest(toString());
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
 
 }
