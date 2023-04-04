@@ -107,7 +107,7 @@ public class ApplicantController {
 
 	public GetLoanAccountResponse getloanAccount(@PathVariable("loanAccountId") Integer loanAccountId) {
 
-		GetLoanAccountResponse response = null;
+		GetLoanAccountResponse response = null; 
 
 		Set<String> errorMessages = applicantValidation.validateGetloanAccountRequest(loanAccountId);
 		// return response with error messages
@@ -120,7 +120,7 @@ public class ApplicantController {
 		return response;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/loan/{status}getLoanAccountByStatus")
+	@RequestMapping(method = RequestMethod.GET, path = "/loan/{status}LoanAccount")
 	public GetLoanAccountStatusResponse getLoanAccountByStatus(@PathVariable("status") String status) {
 		GetLoanAccountStatusResponse response = null;
 

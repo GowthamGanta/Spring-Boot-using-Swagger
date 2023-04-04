@@ -31,7 +31,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	ApplicantUtil applicantUtil;
 
 	@Autowired
-	ApplicantRepository applicantRepository;
+	ApplicantRepository applicantRepository; 
 
 	@Autowired
 	LoanAccountRepository loanAccountRepository;
@@ -189,7 +189,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		Set<Applicant> applicants = new HashSet<Applicant>();
 		if (loanAccounts.isEmpty()) {
 
-			response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "903", "No status list Found",
+			response = new GetLoanAccountStatusResponse(HttpStatus.PRECONDITION_FAILED, "903", "Loan Account Not found",
 					null);
 
 		} else {
