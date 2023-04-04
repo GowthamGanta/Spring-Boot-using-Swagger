@@ -20,6 +20,7 @@ import com.rs.fer.loan.repository.ApplicantRepository;
 import com.rs.fer.loan.repository.LoanAccountRepository;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
+import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.GetLoanAccountResponse;
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
@@ -28,22 +29,21 @@ import com.rs.fer.loan.util.ApplicantUtil;
 
 @SpringBootTest
 public class ApplicantServiceImplTest {
- 
+
 	@InjectMocks
 	private ApplicantServiceImpl applicantServiceImpl;
 
 	@Mock
 	LoanAccountRepository loanAccountRepository;
-	
+
 	@Mock
 	ApplicantRepository applicantRepository;
-
 
 	@Mock
 	ApplicantUtil applicantUtil;
 
 	@Test
-	public void testApplicantServiceImpl() {
+	public void testGetLoanAccountResponse() {
 		LoanAccount loanAccount = new LoanAccount();
 		loanAccount.setLoanAccountId(1);
 		Optional<LoanAccount> loanAccounts = Optional.of(loanAccount);
@@ -61,7 +61,7 @@ public class ApplicantServiceImplTest {
 	}
 
 	@Test
-	public <LoanAccountResponse> void testApplicantServiceImplFailure() {
+	public void testGetLoanAccountResponseFailure() {
 		LoanAccount loanAccount = new LoanAccount();
 		// loanAccount.setLoanAccountId(1);
 		loanAccount.getLoanAccountId();
@@ -144,7 +144,7 @@ public class ApplicantServiceImplTest {
 
 		assertEquals("101", response.statusCode);
 	}
-	
+
 	@Test
 	public void testGetLoanAccountStatus() {
 
@@ -167,7 +167,7 @@ public class ApplicantServiceImplTest {
 
 		GetLoanAccountStatusResponse response = applicantServiceImpl.getLoanAccountStatus("p");
 		response.setLoanAccounts(applicant);
-		
+
 		assertEquals("000", response.statusCode);
 
 	}
@@ -190,5 +190,40 @@ public class ApplicantServiceImplTest {
 
 	}
 
+	@Test
+	public void testGetApplicantResponse() {
+		Applicant applicant = new Applicant();
 
+		Optional<Applicant> applicantObj = Optional.of(applicant);
+		
+
+		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
+
+		int applicantId = 1;
+
+		GetApplicantResponse response = applicantServiceImpl.getApplicant(applicantId);
+
+		// 3.
+
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetApplicantResponseFailure() {
+
+		Optional<Applicant> applicantObj = Optional.empty();
+		
+
+		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
+
+		int applicantId = 0;
+
+		GetApplicantResponse response = applicantServiceImpl.getApplicant(applicantId);
+
+		// 3.
+
+		assertEquals("002", response.statusCode);
+
+	}
 }
