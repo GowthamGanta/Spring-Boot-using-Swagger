@@ -58,6 +58,7 @@ public class ApplicantController {
 
 	public GetApplicantResponse getApplicant(@PathVariable("applicantId") Integer applicantId) {
 
+		
 		GetApplicantResponse response = null;
 
 		Set<String> errorMessages = applicantValidation.validateGetApplicantRequest(applicantId);
