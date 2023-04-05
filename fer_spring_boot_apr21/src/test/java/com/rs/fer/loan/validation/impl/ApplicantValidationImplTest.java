@@ -148,7 +148,7 @@ public class ApplicantValidationImplTest {
 
 		// GetApplicantRequest request = new GetApplicantRequest();
 		int loanAccountId = 1;
-		Set<String> errorMessages = applicantValidationImpl.validateGetloanAccountRequest(loanAccountId);
+		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountRequest(loanAccountId);
 		boolean isExpectedEmpty = true;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
@@ -161,7 +161,7 @@ public class ApplicantValidationImplTest {
 
 		// GetApplicantRequest request = new GetApplicantRequest();
 		int loanAccountId = 0;
-		Set<String> errorMessages = applicantValidationImpl.validateGetloanAccountRequest(loanAccountId);
+		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountRequest(loanAccountId);
 		boolean isExpectedEmpty = false;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
