@@ -251,7 +251,7 @@ public class ApplicantControllerTest {
 		GetLoanAccountRequest request = new GetLoanAccountRequest();
 
 		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
-		int loanAccountId = 0;
+		Integer loanAccountId = 0;
 		GetLoanAccountResponse getResponse = applicantController.getloanAccount(loanAccountId);
 
 		assertEquals("999", getResponse.statusCode);
