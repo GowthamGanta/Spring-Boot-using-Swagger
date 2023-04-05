@@ -13,10 +13,12 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.loan.request.GetApplicantRequest;
 import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
+import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
@@ -113,6 +115,10 @@ public class ApplicantControllerTest {
 
 	private String status;
 
+	private GetApplicantResponse getApplicantResponse;
+
+	private Set<String> applicantId;
+
 	@Test
 	public void testGetStatus() {
 
@@ -180,4 +186,37 @@ public class ApplicantControllerTest {
 		assertEquals("999", response.statusCode);
 
 	}
+
+	@Test
+	public void testGetApplicantId() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		GetApplicantRequest request = new GetApplicantRequest();
+		GetApplicantResponse response = new GetApplicantResponse(HttpStatus.OK, "000", "", null);
+
+		when(applicantValidation.validateGetApplicantRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(applicantService.getApplicant(Mockito.anyInt())).thenReturn(response);
+		Integer applicantId = 1;
+		GetApplicantResponse Response = applicantController.getApplicant(applicantId);
+
+		assertEquals("000", Response.statusCode);
+
+	}
+
+	@Test
+	public void testGetApplicantIdFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter applicantId");
+
+		GetApplicantRequest request = new GetApplicantRequest();
+
+		when(applicantValidation.validateGetApplicantRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		Integer applicantId = 0;
+		GetApplicantResponse Response = applicantController.getApplicant(applicantId);
+
+		assertEquals("999", Response.statusCode);
+
+	}
+
 }
