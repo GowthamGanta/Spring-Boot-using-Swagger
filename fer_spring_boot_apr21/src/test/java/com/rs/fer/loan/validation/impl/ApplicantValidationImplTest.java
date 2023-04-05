@@ -17,6 +17,7 @@ public class ApplicantValidationImplTest {
 
 	@InjectMocks
 	private ApplicantValidationImpl applicantValidationImpl;
+	private Object loanAccountId;
 
 	@Test
 	public void testValidateLoanAccountApprove() {
@@ -135,6 +136,32 @@ public class ApplicantValidationImplTest {
 		// GetApplicantRequest request = new GetApplicantRequest();
 		int applicantId = 0;
 		Set<String> errorMessages = applicantValidationImpl.validateGetApplicantRequest(applicantId);
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test
+	public void testvalidateGetLoanAccountRequest() {
+
+		// GetApplicantRequest request = new GetApplicantRequest();
+		int loanAccountId = 1;
+		Set<String> errorMessages = applicantValidationImpl.validateGetloanAccountRequest(loanAccountId);
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test
+	public void testvalidateGetLoanAccountRequestFailure() {
+
+		// GetApplicantRequest request = new GetApplicantRequest();
+		int loanAccountId = 0;
+		Set<String> errorMessages = applicantValidationImpl.validateGetloanAccountRequest(loanAccountId);
 		boolean isExpectedEmpty = false;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
