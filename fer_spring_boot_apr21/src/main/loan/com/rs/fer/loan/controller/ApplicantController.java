@@ -110,7 +110,7 @@ public class ApplicantController {
 
 		GetLoanAccountResponse response = null; 
 
-		Set<String> errorMessages = applicantValidation.validateGetloanAccountRequest(loanAccountId);
+		Set<String> errorMessages = applicantValidation.validateGetLoanAccountRequest(loanAccountId);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetLoanAccountResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);

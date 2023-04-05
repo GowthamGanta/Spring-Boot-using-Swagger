@@ -115,7 +115,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 
 					errorMessages = FERUtil.addErrorIfEmpty(errorMessages, employment.getEmployerAddress(),
 							"Please enter Employer Address");
-
+ 
 				} else {
 
 					for (LoanAddressDTO address : request.getLoanAddresses()) {
@@ -187,7 +187,7 @@ public class ApplicantValidationImpl implements ApplicantValidation {
 	}
 
 	@Override
-	public Set<String> validateGetloanAccountRequest(int loanAccountId) {
+	public Set<String> validateGetLoanAccountRequest(int loanAccountId) {
 		Set<String> errorMessages = new HashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, loanAccountId, "Please enter valid loanAccountId");

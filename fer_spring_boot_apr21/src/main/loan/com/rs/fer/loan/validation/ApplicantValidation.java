@@ -16,7 +16,7 @@ public interface ApplicantValidation {
 
 	Set<String> loanAccountRejectRequest(LoanAccountRejectRequest request);
 
-	Set<String> validateGetloanAccountRequest(int loanAccountId);
+	Set<String> validateGetLoanAccountRequest(int loanAccountId);
 	
 	Set<String> validateGetLoanAccountStatusRequest(String status);
 }

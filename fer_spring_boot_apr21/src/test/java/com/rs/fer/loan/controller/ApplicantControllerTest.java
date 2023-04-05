@@ -233,7 +233,7 @@ public class ApplicantControllerTest {
 		GetLoanAccountRequest request = new GetLoanAccountRequest();
 		GetLoanAccountResponse response = new GetLoanAccountResponse(HttpStatus.OK, "000", "", null);
 
-		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(applicantValidation.validateGetLoanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		when(applicantService.getLoanAccount(Mockito.anyInt())).thenReturn(response);
 		Integer loanAccountId = 1;
 		GetLoanAccountResponse Response = applicantController.getloanAccount(loanAccountId);
@@ -250,7 +250,7 @@ public class ApplicantControllerTest {
 
 		GetLoanAccountRequest request = new GetLoanAccountRequest();
 
-		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(applicantValidation.validateGetLoanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		Integer loanAccountId = 0;
 		GetLoanAccountResponse Response = applicantController.getloanAccount(loanAccountId);
 
