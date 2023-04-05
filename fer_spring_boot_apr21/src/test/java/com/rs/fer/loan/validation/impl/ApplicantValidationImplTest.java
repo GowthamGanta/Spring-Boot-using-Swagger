@@ -14,7 +14,7 @@ import com.rs.fer.loan.request.LoanAccountRejectRequest;
 
 @SpringBootTest
 public class ApplicantValidationImplTest {
- 
+
 	@InjectMocks
 	private ApplicantValidationImpl applicantValidationImpl;
 
@@ -81,12 +81,11 @@ public class ApplicantValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
-	
+
 	@Test
 	public void testvalidateGetLoanAccountStatusRequest() {
 
 		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
-
 
 		String P = null;
 		request.setStatus(P);
@@ -99,15 +98,14 @@ public class ApplicantValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
-     
+
 	@Test
 	public void testvalidateGetLoanAccountStatusRequestFailure() {
 
 		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
 
-
 		String P = null;
-		//request.setStatus(P);
+		// request.setStatus(P);
 
 		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountStatusRequest(toString());
 
@@ -118,5 +116,30 @@ public class ApplicantValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 	}
 
+	@Test
+	public void testvalidateGetApplicantRequest() {
+
+		// GetApplicantRequest request = new GetApplicantRequest();
+		int applicantId = 1;
+		Set<String> errorMessages = applicantValidationImpl.validateGetApplicantRequest(applicantId);
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
+
+	@Test
+	public void testvalidateGetApplicantRequestFailure() {
+
+		// GetApplicantRequest request = new GetApplicantRequest();
+		int applicantId = 0;
+		Set<String> errorMessages = applicantValidationImpl.validateGetApplicantRequest(applicantId);
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+	}
 
 }
