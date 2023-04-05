@@ -14,11 +14,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.loan.request.GetApplicantRequest;
+
+import com.rs.fer.loan.entity.LoanAccount;
+import com.rs.fer.loan.request.GetLoanAccountRequest;
 import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
+
+import com.rs.fer.loan.response.GetLoanAccountResponse;
+
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
@@ -118,6 +124,7 @@ public class ApplicantControllerTest {
 	private GetApplicantResponse getApplicantResponse;
 
 	private Set<String> applicantId;
+	private Set<String> loanAccountId;
 
 	@Test
 	public void testGetStatus() {
@@ -181,6 +188,7 @@ public class ApplicantControllerTest {
 		when(applicantValidation.validateSaveApplicantRequest(Mockito.any())).thenReturn(errorMessages);
 
 		// Then
+
 		SaveApplicantResponse response = applicantController.SaveApplicant(request);
 
 		assertEquals("999", response.statusCode);
@@ -216,6 +224,37 @@ public class ApplicantControllerTest {
 		GetApplicantResponse Response = applicantController.getApplicant(applicantId);
 
 		assertEquals("999", Response.statusCode);
+	}
+
+	public void testGetLoanAccountId() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetLoanAccountRequest request = new GetLoanAccountRequest();
+		GetLoanAccountResponse response = new GetLoanAccountResponse(HttpStatus.OK, "000", "", null);
+
+		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(applicantService.getLoanAccount(Mockito.anyInt())).thenReturn(response);
+		Integer loanAccountId = 1;
+		GetLoanAccountResponse getresponse = applicantController.getloanAccount(loanAccountId);
+
+		assertEquals("000", getresponse.statusCode);
+
+	}
+
+	@Test
+	public void testGetLoanAccountIdFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter loanAccountId");
+
+		GetLoanAccountRequest request = new GetLoanAccountRequest();
+
+		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		int loanAccountId = 0;
+		GetLoanAccountResponse getResponse = applicantController.getloanAccount(loanAccountId);
+
+		assertEquals("999", getResponse.statusCode);
 
 	}
 
