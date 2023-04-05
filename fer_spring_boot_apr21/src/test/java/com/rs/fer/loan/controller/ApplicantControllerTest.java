@@ -226,19 +226,19 @@ public class ApplicantControllerTest {
 		assertEquals("999", Response.statusCode);
 	}
 
+	@Test
 	public void testGetLoanAccountId() {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-
 		GetLoanAccountRequest request = new GetLoanAccountRequest();
 		GetLoanAccountResponse response = new GetLoanAccountResponse(HttpStatus.OK, "000", "", null);
 
 		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		when(applicantService.getLoanAccount(Mockito.anyInt())).thenReturn(response);
 		Integer loanAccountId = 1;
-		GetLoanAccountResponse getresponse = applicantController.getloanAccount(loanAccountId);
+		GetLoanAccountResponse Response = applicantController.getloanAccount(loanAccountId);
 
-		assertEquals("000", getresponse.statusCode);
+		assertEquals("000", Response.statusCode);
 
 	}
 
@@ -252,10 +252,8 @@ public class ApplicantControllerTest {
 
 		when(applicantValidation.validateGetloanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		Integer loanAccountId = 0;
-		GetLoanAccountResponse getResponse = applicantController.getloanAccount(loanAccountId);
+		GetLoanAccountResponse Response = applicantController.getloanAccount(loanAccountId);
 
-		assertEquals("999", getResponse.statusCode);
-
+		assertEquals("999", Response.statusCode);
 	}
-
 }
