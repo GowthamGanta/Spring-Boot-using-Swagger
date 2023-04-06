@@ -38,6 +38,9 @@ public class Player {
 	private String specilization;
 
 	@Column
+	private String jerseyNumber;
+
+	@Column
 	private String created;
 
 	@Column
@@ -51,7 +54,7 @@ public class Player {
 	}
 
 	public Player(String firstName, String middleName, String lastName, char gender, String dob, String role,
-			String specilization) {
+			String specilization, String jerseyNumber) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -59,6 +62,7 @@ public class Player {
 		this.dob = dob;
 		this.role = role;
 		this.specilization = specilization;
+		this.jerseyNumber = jerseyNumber;
 
 	}
 
@@ -126,6 +130,14 @@ public class Player {
 		this.specilization = specilization;
 	}
 
+	public String getJerseyNumber() {
+		return jerseyNumber;
+	}
+
+	public void setJerseyNumber(String jerseyNumber) {
+		this.jerseyNumber = jerseyNumber;
+	}
+
 	public String getCreated() {
 		return created;
 	}
@@ -151,6 +163,3 @@ public class Player {
 	}
 
 }
-	
-
-
