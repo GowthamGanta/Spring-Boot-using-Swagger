@@ -1,6 +1,6 @@
 package com.rs.fer.ipl.request;
 
-public class PlayersRequest {
+public class SavePlayerRequest {
 
 	private String firstName;
 	private String middleName;
@@ -9,6 +9,8 @@ public class PlayersRequest {
 	private String dob;
 	private String role;
 	private String specialization;
+	private String jerseyNumber;
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -65,5 +67,17 @@ public class PlayersRequest {
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
+
+	public String getJerseyNumber() {
+		return jerseyNumber;
+	}
+
+	public void setJerseyNumber(String jerseyNumber) {
+		this.jerseyNumber = jerseyNumber;
+	}
+	
+	
+	
+	
 
 }
