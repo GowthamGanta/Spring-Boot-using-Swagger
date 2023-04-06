@@ -1,0 +1,31 @@
+package com.rs.fer.ipl.validation.impl;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import org.springframework.stereotype.Component;
+
+import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.validation.PlayerValidation;
+import com.rs.fer.util.FERUtil;
+
+@Component
+public class PlayerValidationImpl implements PlayerValidation {
+
+	@Override
+	public Set<String> validateSavePlayerRequest(SavePlayerRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFirstName(), "Please enter First Name");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLastName(), "Please enter Lastname");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGender(), "Please enter Gender");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getDob(), "Please enter Dob");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getRole(), "Please enter Role");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getSpecialization(),
+				"Please enter Specialization");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getJerseyNumber(), "Please entre JerseyNumber");
+
+		return errorMessages;
+	}
+
+}
