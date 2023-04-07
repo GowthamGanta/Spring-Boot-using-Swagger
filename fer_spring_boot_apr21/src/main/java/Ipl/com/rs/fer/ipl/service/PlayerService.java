@@ -5,6 +5,6 @@ import com.rs.fer.ipl.response.SavePlayerResponse;
 
 public interface PlayerService {
 
-	SavePlayerResponse SavePlayer(SavePlayerRequest request);
+	SavePlayerResponse savePlayer(SavePlayerRequest request);
 
 }

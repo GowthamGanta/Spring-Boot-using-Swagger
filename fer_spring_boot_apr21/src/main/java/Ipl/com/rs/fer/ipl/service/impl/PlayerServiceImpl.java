@@ -24,7 +24,7 @@ public class PlayerServiceImpl implements PlayerService {
 	PlayerRepository playerRepository;
 
 	@Override
-	public SavePlayerResponse SavePlayer(SavePlayerRequest request) {
+	public SavePlayerResponse savePlayer(SavePlayerRequest request) {
 		SavePlayerResponse response = null;
 		List<Player> players = playerRepository.findByJerseyNumber(request.getJerseyNumber());
 
