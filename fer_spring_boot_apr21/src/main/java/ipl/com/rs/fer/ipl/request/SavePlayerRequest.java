@@ -8,9 +8,8 @@ public class SavePlayerRequest {
 	private char gender;
 	private String dob;
 	private String role;
-	private String specialization;
+	private String specilization;
 	private String jerseyNumber;
-	
 
 	public String getFirstName() {
 		return firstName;
@@ -60,12 +59,12 @@ public class SavePlayerRequest {
 		this.role = role;
 	}
 
-	public String getSpecialization() {
-		return specialization;
+	public String getSpecilization() {
+		return specilization;
 	}
 
-	public void setSpecialization(String specialization) {
-		this.specialization = specialization;
+	public void setSpecilization(String specilization) {
+		this.specilization = specilization;
 	}
 
 	public String getJerseyNumber() {
@@ -75,9 +74,5 @@ public class SavePlayerRequest {
 	public void setJerseyNumber(String jerseyNumber) {
 		this.jerseyNumber = jerseyNumber;
 	}
-	
-	
-	
-	
 
 }

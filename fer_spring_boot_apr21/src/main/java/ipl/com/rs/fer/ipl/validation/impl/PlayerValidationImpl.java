@@ -21,7 +21,7 @@ public class PlayerValidationImpl implements PlayerValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getGender(), "Please enter Gender");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getDob(), "Please enter Dob");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getRole(), "Please enter Role");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getSpecialization(),
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getSpecilization(),
 				"Please enter Specialization");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getJerseyNumber(), "Please entre JerseyNumber");
 

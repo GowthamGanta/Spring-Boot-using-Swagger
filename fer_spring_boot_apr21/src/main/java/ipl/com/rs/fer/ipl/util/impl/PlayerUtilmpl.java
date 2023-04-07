@@ -1,15 +1,18 @@
-package com.rs.fer.ipl.utill.impl;
+package com.rs.fer.ipl.util.impl;
+
+import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.request.SavePlayerRequest;
-import com.rs.fer.ipl.utill.PlayerUtil;
+import com.rs.fer.ipl.util.PlayerUtil;
 import com.rs.fer.util.DateUtil;
 
-public class PlayerUtilImpl implements PlayerUtil {
+@Component
+public class PlayerUtilmpl implements PlayerUtil {
 
 	@Override
 	public Player loadSavePlayerRequestToPlayer(SavePlayerRequest request) {
-		
+
 		Player player = new Player();
 
 		player.setFirstName(request.getFirstName());
@@ -18,7 +21,7 @@ public class PlayerUtilImpl implements PlayerUtil {
 		player.setGender(request.getGender());
 		player.setDob(request.getDob());
 		player.setRole(request.getRole());
-		player.setSpecilization(request.getSpecialization());
+		player.setSpecilization(request.getSpecilization());
 		player.setJerseyNumber(request.getJerseyNumber());
 
 		player.setCreated(DateUtil.getCurrentDate());

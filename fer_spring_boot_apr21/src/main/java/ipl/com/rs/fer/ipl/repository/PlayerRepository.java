@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.rs.fer.ipl.entity.Player;
-import com.rs.fer.user.entity.User;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {

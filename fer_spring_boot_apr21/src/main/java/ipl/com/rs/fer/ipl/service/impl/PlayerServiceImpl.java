@@ -12,7 +12,7 @@ import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
-import com.rs.fer.ipl.utill.PlayerUtil;
+import com.rs.fer.ipl.util.PlayerUtil;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
