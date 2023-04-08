@@ -8,7 +8,7 @@ import com.rs.fer.ipl.util.PlayerUtil;
 import com.rs.fer.util.DateUtil;
 
 @Component
-public class PlayerUtilmpl implements PlayerUtil {
+public class PlayerUtilImpl implements PlayerUtil {
 
 	@Override
 	public Player loadSavePlayerRequestToPlayer(SavePlayerRequest request) {
