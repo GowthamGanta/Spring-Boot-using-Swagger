@@ -14,9 +14,11 @@ import com.rs.fer.ipl.request.SaveTeamRequest;
 public class TeamValidationImplTest {
 
 	@InjectMocks
+
 	TeamValidationImpl teamValidationImpl;
 
 	@Test
+
 	public void testValidateSaveTeamRequest() {
 
 		SaveTeamRequest request = new SaveTeamRequest();

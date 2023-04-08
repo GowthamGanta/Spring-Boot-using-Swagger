@@ -9,7 +9,9 @@ import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
+import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.util.TeamUtil;
@@ -52,5 +54,27 @@ public class TeamServiceImpl implements TeamService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public GetTeamResponse getTeam(GetTeamRequest request) {
+
+		GetTeamResponse response = null;
+
+		List<Team> teamObj = teamRepository.findByTeamId(request.getTeamId());
+
+		if (teamObj.isEmpty()) {
+
+			response = new GetTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "team not found", null);
+
+		} else {
+			// failure
+			response = new GetTeamResponse(HttpStatus.OK, "000", "team found", null);
+			response.setTeam(teamObj.get(request.getTeamId()));
+
+		}
+
+		return response;
+
 	}
 }
