@@ -13,7 +13,7 @@ public class PlayerUtilImpl implements PlayerUtil {
 	@Override
 	public Player loadSavePlayerRequestToPlayer(SavePlayerRequest request) {
 
-		Player player = new Player();
+		Player player = new Player(); 
 
 		player.setFirstName(request.getFirstName());
 		player.setMiddleName(request.getMiddleName());

@@ -34,7 +34,7 @@ package com.rs.fer.ipl.util.impl;
 
 			assertEquals(isExpectedNotEmpty, isActualNotEmpty);
 
-		}
+		} 
 		
 		@Test
 		public void testSavePlayerRequestFailure() {
