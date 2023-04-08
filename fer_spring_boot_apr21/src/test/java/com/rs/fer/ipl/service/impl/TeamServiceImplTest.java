@@ -36,11 +36,12 @@ public class TeamServiceImplTest {
 		List<Team> team = new ArrayList<>();
 
 		Team teams = new Team();
-		
+
 		teams.setTeamId(1);
 
 		// Mock
 		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
 		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);

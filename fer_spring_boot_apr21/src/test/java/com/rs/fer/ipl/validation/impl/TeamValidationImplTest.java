@@ -27,7 +27,7 @@ public class TeamValidationImplTest {
 		Set<String> errorMessages = teamValidationImpl.validateSaveTeamRequest(request);
 
 		boolean isExpectedEmpty = true;
-		
+
 		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
@@ -43,6 +43,7 @@ public class TeamValidationImplTest {
 		Set<String> errorMessages = teamValidationImpl.validateSaveTeamRequest(request);
 
 		boolean isExpectedEmpty = false;
+
 		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);

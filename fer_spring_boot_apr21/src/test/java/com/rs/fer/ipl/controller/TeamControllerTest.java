@@ -36,10 +36,11 @@ public class TeamControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		SaveTeamRequest request = new SaveTeamRequest();
-		
+
 		SaveTeamResponse response = new SaveTeamResponse(HttpStatus.OK, "000", "", null);
 
 		when(teamValidation.validateSaveTeamRequest(Mockito.any())).thenReturn(errorMessages);
+
 		when(teamService.saveTeam(Mockito.any())).thenReturn(response);
 
 		SaveTeamResponse saveTeamResponse = teamController.saveTeam(request);
