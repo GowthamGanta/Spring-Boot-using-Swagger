@@ -20,21 +20,21 @@ import com.rs.fer.ipl.validation.TeamValidation;
 public class TeamController {
 
 	@Autowired
-	TeamService TeamService;
+	TeamService teamService;
 
 	@Autowired
-	TeamValidation TeamValidation;
+	TeamValidation teamValidation;
 
 	@PostMapping("ipl/saveTeam")
 	public SaveTeamResponse saveTeam(@RequestBody SaveTeamRequest request) {
 
 		SaveTeamResponse response = null;
-		Set<String> errorMessages = TeamValidation.validateSaveTeamRequest(request);
+		Set<String> errorMessages = teamValidation.validateSaveTeamRequest(request);
 
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new SaveTeamResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
-			response = TeamService.saveTeam(request);
+			response = teamService.saveTeam(request);
 
 		}
 
