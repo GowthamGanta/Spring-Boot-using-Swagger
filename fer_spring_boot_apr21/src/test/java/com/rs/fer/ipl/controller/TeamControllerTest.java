@@ -13,7 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.validation.TeamValidation;
@@ -36,11 +38,9 @@ public class TeamControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		SaveTeamRequest request = new SaveTeamRequest();
-
 		SaveTeamResponse response = new SaveTeamResponse(HttpStatus.OK, "000", "", null);
 
 		when(teamValidation.validateSaveTeamRequest(Mockito.any())).thenReturn(errorMessages);
-
 		when(teamService.saveTeam(Mockito.any())).thenReturn(response);
 
 		SaveTeamResponse saveTeamResponse = teamController.saveTeam(request);
@@ -62,6 +62,41 @@ public class TeamControllerTest {
 
 		// Then
 		SaveTeamResponse response = teamController.saveTeam(request);
+
+		assertEquals("999", response.statusCode);
+	}
+
+	@Test
+	public void testgetTeam() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetTeamRequest request = new GetTeamRequest();
+		GetTeamResponse response = new GetTeamResponse(HttpStatus.OK, "000", "", null);
+
+		when(teamValidation.validateGetTeamRequest(Mockito.any())).thenReturn(errorMessages);
+		when(teamService.getTeam(Mockito.any())).thenReturn(response);
+
+		GetTeamResponse getTeamResponse = teamController.getTeam(request);
+
+		assertEquals("000", getTeamResponse.statusCode);
+
+	}
+
+	@Test
+	public void testGetTeamFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter TeamId");
+
+		GetTeamRequest request = new GetTeamRequest();
+
+		// When
+		when(teamValidation.validateGetTeamRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		GetTeamResponse response = teamController.getTeam(request);
 
 		assertEquals("999", response.statusCode);
 	}

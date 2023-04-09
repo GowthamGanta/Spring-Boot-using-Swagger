@@ -14,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
+import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.util.TeamUtil;
 
@@ -24,11 +26,12 @@ public class TeamServiceImplTest {
 	private TeamServiceImpl teamServiceImpl;
 
 	@Mock
-
 	TeamRepository teamRepository;
 
 	@Mock
 	TeamUtil teamUtil;
+
+	// private Object teams;
 
 	@Test
 	public void testSaveTeam() {
@@ -36,12 +39,10 @@ public class TeamServiceImplTest {
 		List<Team> team = new ArrayList<>();
 
 		Team teams = new Team();
-
 		teams.setTeamId(1);
 
 		// Mock
 		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
-
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
 		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);
@@ -103,6 +104,48 @@ public class TeamServiceImplTest {
 
 		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
 
+		assertEquals("002", response.statusCode);
+	}
+
+	@Test
+	public void testGetTeam() {
+
+		List<Team> team = new ArrayList<>();
+		Team teams = new Team();
+		teams.setTeamId(1);
+
+		team.add(teams);
+
+		// Mock
+
+		// Mock
+		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+
+		// 1.
+		GetTeamRequest request = new GetTeamRequest();
+
+		// 2.
+		GetTeamResponse response = teamServiceImpl.getTeam(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testGetTeamNotFound() {
+
+		List<Team> team = new ArrayList<>();
+		// Team teams = new Team();
+		// Mock
+		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+
+		// 1.
+		GetTeamRequest request = new GetTeamRequest();
+
+		// 2.
+		GetTeamResponse response = teamServiceImpl.getTeam(request);
+
+		// 3.
 		assertEquals("002", response.statusCode);
 	}
 

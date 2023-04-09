@@ -44,7 +44,7 @@ public class TeamController {
 		return response;
 	}
 
-	@GetMapping("/ipl/teamId")
+	@GetMapping("/ipl/getTeamId")
 	public GetTeamResponse getTeam(@RequestBody GetTeamRequest request) {
 
 		GetTeamResponse response = null;
