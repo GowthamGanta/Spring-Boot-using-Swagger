@@ -7,5 +7,6 @@ import com.rs.fer.ipl.request.SavePlayerRequest;
 public interface PlayerValidation {
 
 	Set<String> validateSavePlayerRequest(SavePlayerRequest request);
+	Set<String> validateDeletePlayerRequest (int playerId);
 
 }

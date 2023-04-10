@@ -85,7 +85,7 @@ public class TeamControllerTest {
 	}
 
 	@Test
-	public void testGetTeamFailure() {
+	public void testGetTeamIdFailure() {
 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();

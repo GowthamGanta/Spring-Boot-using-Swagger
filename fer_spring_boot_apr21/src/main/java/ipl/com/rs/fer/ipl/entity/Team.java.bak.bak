@@ -1,7 +1,5 @@
 package com.rs.fer.ipl.entity;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,15 +40,6 @@ public class Team {
 
 	@OneToMany(targetEntity = Player.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "t_id", referencedColumnName = "team_id")
-	private Set<Player> players;
-	
-	public Set<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(Set<Player> players) {
-		this.players = players;
-	}
 
 	public String getName() {
 		return name;

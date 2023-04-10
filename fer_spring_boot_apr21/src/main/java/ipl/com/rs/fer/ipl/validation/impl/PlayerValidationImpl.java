@@ -28,4 +28,15 @@ public class PlayerValidationImpl implements PlayerValidation {
 		return errorMessages;
 	}
 
+	@Override
+	public Set<String> validateDeletePlayerRequest(int playerId) {
+		
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, playerId, "Please enter valid PlayerId");
+
+		return errorMessages;
+
+	}
+
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.ipl.request.DeletePlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 
 @SpringBootTest
@@ -53,6 +54,34 @@ public class PlayerValidationImplTest {
 
 		Set<String> errorMessages = playerValidationImpl.validateSavePlayerRequest(request);
 
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testValidateDeletePlayerRequest() {
+
+		DeletePlayerRequest request = new DeletePlayerRequest();
+
+		int playerId = 1;
+		Set<String> errorMessages = playerValidationImpl.validateDeletePlayerRequest(playerId);
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testValidateDeletePlayerRequestFailure() {
+
+		DeletePlayerRequest request = new DeletePlayerRequest();
+
+		int playerId = 0;
+		Set<String> errorMessages = playerValidationImpl.validateDeletePlayerRequest(playerId);
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();
 
