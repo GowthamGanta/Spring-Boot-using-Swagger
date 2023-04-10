@@ -111,7 +111,7 @@ public class TeamServiceImplTest {
 	}
 
 	@Test
-	public void testTeamResponse() {
+	public void testgetTeamResponse() {
 		Team team = new Team();
 		team.setTeamId(1);
 		Optional<Team> teams = Optional.of(team);
