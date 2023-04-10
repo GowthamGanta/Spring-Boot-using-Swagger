@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.ipl.request.DeleteTeamRequest;
-import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
+import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.validation.TeamValidation;
@@ -81,7 +81,15 @@ public class TeamController {
 		
 		return response;
 		
+	}
+	
+	@GetMapping("/ipl/getTeams/{}")
+	public GetTeamsResponse getTeams() {
+
+		GetTeamsResponse response = null;
+		response = teamService.getTeams();
 		
+		return response;
 	}
 
 }

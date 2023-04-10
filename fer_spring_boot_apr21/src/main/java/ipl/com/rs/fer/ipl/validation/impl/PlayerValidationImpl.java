@@ -38,5 +38,15 @@ public class PlayerValidationImpl implements PlayerValidation {
 		return errorMessages;
 
 	}
+	
+	@Override
+	public Set<String> validateGetPlayersRequest(Integer teamId) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, teamId, "Please enter TeamId");
+
+		return errorMessages;
+	}
+
 
 }

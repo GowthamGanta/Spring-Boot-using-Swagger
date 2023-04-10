@@ -14,6 +14,7 @@ import com.rs.fer.ipl.request.DeleteTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
+import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.util.TeamUtil;
@@ -101,4 +102,25 @@ public class TeamServiceImpl implements TeamService {
 		return response;
 
 	}
+
+	@Override
+	public GetTeamsResponse getTeams() {
+		GetTeamsResponse response = null;
+
+		List<Team> teamObj = teamRepository.findAll();
+
+		if (!teamObj.isEmpty()) {
+
+			response = new GetTeamsResponse(HttpStatus.OK, "000", "Fetched Teams  succesfully", null);
+			response.setTeams(teamObj);
+
+		} else {
+
+			response = new GetTeamsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
+
+		}
+
+		return response;
+	}
+
 }

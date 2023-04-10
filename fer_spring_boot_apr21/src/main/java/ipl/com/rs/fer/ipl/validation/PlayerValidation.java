@@ -8,5 +8,7 @@ public interface PlayerValidation {
 
 	Set<String> validateSavePlayerRequest(SavePlayerRequest request);
 	Set<String> validateDeletePlayerRequest (int playerId);
+	
+	Set<String> validateGetPlayersRequest(Integer teamId);
 
 }

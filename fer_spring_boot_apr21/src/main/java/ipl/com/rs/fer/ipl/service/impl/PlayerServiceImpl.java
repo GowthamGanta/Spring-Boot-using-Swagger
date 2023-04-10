@@ -1,5 +1,6 @@
 package com.rs.fer.ipl.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.ipl.entity.Player;
+import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.PlayerRepository;
+import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
+import com.rs.fer.ipl.response.GetPlayersResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.util.PlayerUtil;
@@ -24,6 +28,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	PlayerRepository playerRepository;
+	
+	@Autowired
+	TeamRepository teamRepository;
 
 	@Override
 	public SavePlayerResponse savePlayer(SavePlayerRequest request) {
@@ -72,6 +79,35 @@ public class PlayerServiceImpl implements PlayerService {
 			response = new DeletePlayerResponse(HttpStatus.OK, "000", "Player is deleted successfully", null);
 		}
 
+		return response;
+	}
+
+	@Override
+	public GetPlayersResponse getPlayers(Integer teamId) {
+GetPlayersResponse response = null;
+		
+		List<Player> players = new ArrayList<Player>();
+
+		// To load the userObject based on userId
+		Optional<Team> teamObj = teamRepository.findById(teamId);
+
+		if (!teamObj.isPresent()) {
+
+			response = new GetPlayersResponse(HttpStatus.OK, "000", "No Teams found", null);
+
+		} else {
+
+			List<Player> playersObj = playerRepository.findByTeamId(teamId);
+
+			for (Player player : playersObj) {
+				players.add(player);
+				
+			}
+			// response.setGroupParticipants(users);
+
+			response = new GetPlayersResponse(HttpStatus.OK, "000", "Fetch Participants", null);
+			response.setPlayers(players);
+			}
 		return response;
 	}
 }
