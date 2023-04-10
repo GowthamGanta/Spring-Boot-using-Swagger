@@ -70,12 +70,12 @@ public class TeamServiceImpl implements TeamService {
 		if (teamtObj.isPresent()) {
 
 			// If Applicant is present
-			response = new GetTeamResponse(HttpStatus.OK, "000", "get Applicant is succesfull ", null);
+			response = new GetTeamResponse(HttpStatus.OK, "000", "getTeam is succesfull ", null);
 			response.setTeam(teamtObj.get());
 
 		} else {
 			// IfApplicant not present
-			response = new GetTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get Applicant is failed", null);
+			response = new GetTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "getTeam is not found", null);
 
 		}
 
