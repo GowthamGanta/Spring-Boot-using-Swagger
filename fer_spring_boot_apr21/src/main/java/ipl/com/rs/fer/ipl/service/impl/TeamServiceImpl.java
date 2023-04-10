@@ -10,14 +10,13 @@ import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
-import com.rs.fer.ipl.request.GetTeamRequest;
+import com.rs.fer.ipl.request.DeleteTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.util.TeamUtil;
-import com.rs.fer.loan.entity.Applicant;
-import com.rs.fer.loan.response.GetApplicantResponse;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -80,5 +79,26 @@ public class TeamServiceImpl implements TeamService {
 		}
 
 		return response;
+
+	}
+
+	@Override
+	public DeleteTeamResponse deleteTeam(DeleteTeamRequest request) {
+		DeleteTeamResponse response = null;
+		Optional<Team> teamobj = teamRepository.findById(request.getTeamId());
+
+		if (!teamobj.isPresent()) {
+			response = new DeleteTeamResponse(HttpStatus.OK, "002", "TeamId not found", null);
+		} else {
+			Team team = teamobj.get();
+
+			int delete = team.getTeamId();
+
+			teamRepository.deleteById(delete);
+
+			response = new DeleteTeamResponse(HttpStatus.OK, "000", " TeamId deleted Successfully", null);
+		}
+		return response;
+
 	}
 }

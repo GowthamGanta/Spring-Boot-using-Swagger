@@ -1,6 +1,7 @@
 package com.rs.fer.ipl.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.response.DeletePlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.util.PlayerUtil;
@@ -49,6 +51,25 @@ public class PlayerServiceImpl implements PlayerService {
 		} else {
 			// failure
 			response = new SavePlayerResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Player saved is failed", null);
+		}
+
+		return response;
+	}
+
+	@Override
+	public DeletePlayerResponse deletePlayer(int playerId) {
+
+		DeletePlayerResponse response = null;
+
+		// To Delete the Player based on playerId
+		Optional<Player> playerObj = playerRepository.findById(playerId);
+		if (!playerObj.isPresent()) {
+			return new DeletePlayerResponse(HttpStatus.PRECONDITION_FAILED, "002", "Player Id is not found", null);
+		} else {
+
+			playerRepository.deleteById(playerId);
+			// response if success
+			response = new DeletePlayerResponse(HttpStatus.OK, "000", "Player is deleted successfully", null);
 		}
 
 		return response;
