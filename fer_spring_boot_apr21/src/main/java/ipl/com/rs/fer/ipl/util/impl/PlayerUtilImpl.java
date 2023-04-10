@@ -23,7 +23,7 @@ public class PlayerUtilImpl implements PlayerUtil {
 		player.setRole(request.getRole());
 		player.setSpecilization(request.getSpecilization());
 		player.setJerseyNumber(request.getJerseyNumber());
-
+		player.setTeamId(request.getTeamId());
 		player.setCreated(DateUtil.getCurrentDate());
 		player.setUpdated(DateUtil.getCurrentDate());
 
