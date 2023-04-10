@@ -13,7 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.ipl.request.DeletePlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.response.DeletePlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.validation.PlayerValidation;
@@ -63,4 +65,40 @@ public class PlayerControllerTest {
 
 		assertEquals("999", response.statusCode);
 	}
+
+	@Test
+	public void testDeletePlayer() {
+		int playerId = 0;
+		Set<String> errorMessages = new LinkedHashSet<>();
+		DeletePlayerRequest request = new DeletePlayerRequest();
+		DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK, "000", "", null);
+
+		when(playerValidation.validateDeletePlayerRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(playerService.deletePlayer(Mockito.anyInt())).thenReturn(response);
+
+		DeletePlayerResponse deletePlayerResponse = playerController.deletePlayer(playerId);
+
+		assertEquals("000", deletePlayerResponse.statusCode);
+
+	}
+	
+	@Test
+	public void testDeletePlayerFailure() {
+		int playerId = 0;
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("please enter Id");
+
+		DeletePlayerRequest request = new DeletePlayerRequest();
+		//DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK, "000", "", null);
+
+		when(playerValidation.validateDeletePlayerRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		//when(playerService.deletePlayer(Mockito.anyInt())).thenReturn(response);
+
+		DeletePlayerResponse deletePlayerResponse = playerController.deletePlayer(playerId);
+
+		assertEquals("999", deletePlayerResponse.statusCode);
+
+	}
+
+
 }
