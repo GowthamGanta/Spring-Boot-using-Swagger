@@ -53,6 +53,7 @@ public class TeamController {
 		GetTeamResponse response = null;
 
 		Set<String> errorMessages = teamValidation.validateGetTeamRequest(teamId);
+
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetTeamResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);

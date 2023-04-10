@@ -89,6 +89,7 @@ public class TeamControllerTest {
 
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
+
 		errorMessages.add("Please enter TeamId");
 
 		GetTeamRequest request = new GetTeamRequest();

@@ -68,6 +68,7 @@ public class TeamServiceImpl implements TeamService {
 		Optional<Team> teamtObj = teamRepository.findById(teamId);
 
 		if (teamtObj.isPresent()) {
+
 			// If Applicant is present
 			response = new GetTeamResponse(HttpStatus.OK, "000", "get Applicant is succesfull ", null);
 			response.setTeam(teamtObj.get());

@@ -8,6 +8,6 @@ public interface TeamValidation {
 
 	Set<String> validateSaveTeamRequest(SaveTeamRequest request);
 
-	Set<String> validateGetTeamRequest(Integer teamId);
+	Set<String>  validateGetTeamRequest(Integer teamId);
 
 }
