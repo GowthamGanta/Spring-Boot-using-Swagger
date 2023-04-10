@@ -46,7 +46,7 @@ public class TeamController {
 		return response;
 	}
 
-	@GetMapping("/ipl/getTeam/{getTeamId}")
+	@GetMapping("/ipl/getTeam/{teamId}")
 
 	public GetTeamResponse getTeam(@PathVariable("teamId") Integer teamId) {
 
