@@ -50,18 +50,14 @@ public class TeamValidationImplTest {
 	@Test
 	public void testvalidateGetTeamRequest() {
 
-		GetTeamRequest request = new GetTeamRequest();
-
-		request.setTeamId(1);
-
-		Set<String> errorMessages = teamValidationImpl.validateGetTeamRequest(request);
-
+		// GetApplicantRequest request = new GetApplicantRequest();
+		int teamId = 1;
+		Set<String> errorMessages = teamValidationImpl.validateGetTeamRequest(teamId);
 		boolean isExpectedEmpty = true;
 
 		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
-
 	}
 
 	@Test
@@ -70,9 +66,8 @@ public class TeamValidationImplTest {
 
 		GetTeamRequest request = new GetTeamRequest();
 
-		request.setTeamId(0);
-
-		Set<String> errorMessages = teamValidationImpl.validateGetTeamRequest(request);
+		int teamId = 0;
+		Set<String> errorMessages = teamValidationImpl.validateGetTeamRequest(teamId);
 
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();

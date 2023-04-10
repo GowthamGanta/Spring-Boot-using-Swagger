@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,6 +20,8 @@ import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.util.TeamUtil;
+import com.rs.fer.loan.entity.LoanAccount;
+import com.rs.fer.loan.response.GetLoanAccountResponse;
 
 @SpringBootTest
 public class TeamServiceImplTest {
@@ -108,42 +111,37 @@ public class TeamServiceImplTest {
 	}
 
 	@Test
-	public void testGetTeam() {
+	public void testTeamResponse() {
+		Team team = new Team();
+		team.setTeamId(1);
+		Optional<Team> teams = Optional.of(team);
 
-		List<Team> team = new ArrayList<>();
-		Team teams = new Team();
-		teams.setTeamId(1);
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teams);
 
-		team.add(teams);
+		int teamId = 1;
 
-		// Mock
-
-		// Mock
-		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
-
-		// 1.
-		GetTeamRequest request = new GetTeamRequest();
-
-		// 2.
-		GetTeamResponse response = teamServiceImpl.getTeam(request);
+		GetTeamResponse response = teamServiceImpl.getTeam(teamId);
 
 		// 3.
+
 		assertEquals("000", response.statusCode);
+
 	}
 
 	@Test
 	public void testGetTeamNotFound() {
 
-		List<Team> team = new ArrayList<>();
+		Optional<Team> teams = Optional.empty();
 		// Team teams = new Team();
 		// Mock
-		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teams);
 
 		// 1.
 		GetTeamRequest request = new GetTeamRequest();
 
 		// 2.
-		GetTeamResponse response = teamServiceImpl.getTeam(request);
+		int teamId = 0;
+		GetTeamResponse response = teamServiceImpl.getTeam(teamId);
 
 		// 3.
 		assertEquals("002", response.statusCode);

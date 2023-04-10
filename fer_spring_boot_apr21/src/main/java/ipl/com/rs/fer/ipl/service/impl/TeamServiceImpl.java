@@ -1,6 +1,7 @@
 package com.rs.fer.ipl.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
 import com.rs.fer.ipl.util.TeamUtil;
+import com.rs.fer.loan.entity.Applicant;
+import com.rs.fer.loan.response.GetApplicantResponse;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -57,24 +60,24 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public GetTeamResponse getTeam(GetTeamRequest request) {
+	public GetTeamResponse getTeam(Integer teamId) {
 
 		GetTeamResponse response = null;
 
-		List<Team> teamObj = teamRepository.findByTeamId(request.getTeamId());
+		// To get the Applicant based on userId
+		Optional<Team> teamtObj = teamRepository.findById(teamId);
 
-		if (teamObj.isEmpty()) {
-
-			response = new GetTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "team not found", null);
+		if (teamtObj.isPresent()) {
+			// If Applicant is present
+			response = new GetTeamResponse(HttpStatus.OK, "000", "get Applicant is succesfull ", null);
+			response.setTeam(teamtObj.get());
 
 		} else {
-			// failure
-			response = new GetTeamResponse(HttpStatus.OK, "000", "team found", null);
-			response.setTeam(teamObj.get(request.getTeamId()));
+			// IfApplicant not present
+			response = new GetTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "get Applicant is failed", null);
 
 		}
 
 		return response;
-
 	}
 }

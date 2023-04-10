@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
@@ -44,21 +44,20 @@ public class TeamController {
 		return response;
 	}
 
-	@GetMapping("/ipl/getTeamId")
-	public GetTeamResponse getTeam(@RequestBody GetTeamRequest request) {
+	@GetMapping("/ipl/getTeam/{getTeamId}")
+
+	public GetTeamResponse getTeam(@PathVariable("teamId") Integer teamId) {
 
 		GetTeamResponse response = null;
 
-		Set<String> errorMessages = teamValidation.validateGetTeamRequest(request);
+		Set<String> errorMessages = teamValidation.validateGetTeamRequest(teamId);
 		// return response with error messages
 		if (!CollectionUtils.isEmpty(errorMessages)) {
 			response = new GetTeamResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
-			response = teamService.getTeam(request);
+			response = teamService.getTeam(teamId);
 		}
-
 		return response;
 	}
-
 }

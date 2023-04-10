@@ -1,11 +1,11 @@
 package com.rs.fer.ipl.validation.impl;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.validation.TeamValidation;
 import com.rs.fer.util.FERUtil;
@@ -22,10 +22,11 @@ public class TeamValidationImpl implements TeamValidation {
 	}
 
 	@Override
-	public Set<String> validateGetTeamRequest(GetTeamRequest request) {
-		Set<String> errorMessages = new LinkedHashSet<String>();
+	public Set<String> validateGetTeamRequest(Integer teamId) {
 
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamId(), "Please enter valid TeamId");
+		Set<String> errorMessages = new HashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, teamId, "Please enter valid teamId");
 
 		return errorMessages;
 	}

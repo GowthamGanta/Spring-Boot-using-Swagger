@@ -32,6 +32,8 @@ public class TeamControllerTest {
 	@Mock
 	TeamService teamService;
 
+	private Object teamId;
+
 	@Test
 	public void testSaveTeam() {
 
@@ -67,19 +69,18 @@ public class TeamControllerTest {
 	}
 
 	@Test
-	public void testgetTeam() {
-
+	public void testGetTeamId() {
+		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-
 		GetTeamRequest request = new GetTeamRequest();
 		GetTeamResponse response = new GetTeamResponse(HttpStatus.OK, "000", "", null);
 
-		when(teamValidation.validateGetTeamRequest(Mockito.any())).thenReturn(errorMessages);
-		when(teamService.getTeam(Mockito.any())).thenReturn(response);
+		when(teamValidation.validateGetTeamRequest(Mockito.anyInt())).thenReturn(errorMessages);
+		when(teamService.getTeam(Mockito.anyInt())).thenReturn(response);
+		Integer teamId = 1;
+		GetTeamResponse Response = teamController.getTeam(teamId);
 
-		GetTeamResponse getTeamResponse = teamController.getTeam(request);
-
-		assertEquals("000", getTeamResponse.statusCode);
+		assertEquals("000", Response.statusCode);
 
 	}
 
@@ -93,10 +94,12 @@ public class TeamControllerTest {
 		GetTeamRequest request = new GetTeamRequest();
 
 		// When
-		when(teamValidation.validateGetTeamRequest(Mockito.any())).thenReturn(errorMessages);
+		when(teamValidation.validateGetTeamRequest(Mockito.anyInt())).thenReturn(errorMessages);
 
 		// Then
-		GetTeamResponse response = teamController.getTeam(request);
+		Integer teamId = 0;
+
+		GetTeamResponse response = teamController.getTeam(teamId);
 
 		assertEquals("999", response.statusCode);
 	}
