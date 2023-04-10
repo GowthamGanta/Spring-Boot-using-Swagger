@@ -13,8 +13,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.ipl.request.DeleteTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
@@ -103,6 +105,43 @@ public class TeamControllerTest {
 		GetTeamResponse response = teamController.getTeam(teamId);
 
 		assertEquals("999", response.statusCode);
+	}
+
+	@Test
+	public void testDeleteTeam() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		DeleteTeamRequest request = new DeleteTeamRequest();
+		DeleteTeamResponse response = new DeleteTeamResponse(HttpStatus.OK, "000", "", null);
+
+		// when
+		when(teamValidation.validateDeleteTeamRequest(Mockito.any())).thenReturn(errorMessages);
+		when(teamService.deleteTeam(Mockito.any())).thenReturn(response);
+
+		// Then
+		DeleteTeamResponse Response = teamController.deleteTeam(request);
+
+		assertEquals("000", Response.statusCode);
+
+	}
+
+	@Test
+	public void testDeleteTeamFailure() {
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter id");
+
+		DeleteTeamRequest request = new DeleteTeamRequest();
+
+		// when
+		when(teamValidation.validateDeleteTeamRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		DeleteTeamResponse response = teamController.deleteTeam(request);
+
+		assertEquals("999", response.statusCode);
+
 	}
 
 }

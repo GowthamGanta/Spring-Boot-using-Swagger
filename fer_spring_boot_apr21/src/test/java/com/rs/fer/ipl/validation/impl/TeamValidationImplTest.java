@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.group.request.DeleteGroupRequest;
+import com.rs.fer.ipl.request.DeleteTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 
@@ -76,5 +78,40 @@ public class TeamValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
+	
+	@Test
+	public void testValidateDeleteTeamRequest() {
+
+		DeleteTeamRequest request = new DeleteTeamRequest();
+
+		request.setTeamId(4);
+
+		Set<String> player = teamValidationImpl.validateDeleteTeamRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = player.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testvalidateDeleteTeamRequestFailure() {
+
+		DeleteTeamRequest request = new DeleteTeamRequest();
+
+		//request.setGroupId(4);
+
+		Set<String> follow = teamValidationImpl.validateDeleteTeamRequest(request);
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = follow.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	} 
+
 
 }

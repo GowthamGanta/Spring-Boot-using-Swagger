@@ -15,13 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
+import com.rs.fer.ipl.request.DeleteTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
+import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.util.TeamUtil;
-import com.rs.fer.loan.entity.LoanAccount;
-import com.rs.fer.loan.response.GetLoanAccountResponse;
 
 @SpringBootTest
 public class TeamServiceImplTest {
@@ -146,6 +146,43 @@ public class TeamServiceImplTest {
 
 		// 3.
 		assertEquals("002", response.statusCode);
+	} 
+	
+	@Test
+	public void testDeleteTeam() {
+
+		Team teams = new Team();
+		Optional<Team> teamObj = Optional.of(teams);
+
+		DeleteTeamRequest request = new DeleteTeamRequest();
+		request.setTeamId(1);
+
+		Team team = new Team();
+		team.setTeamId(5);
+
+		// mock
+
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamObj);
+
+		DeleteTeamResponse response = teamServiceImpl.deleteTeam(request);
+
+		assertEquals("000", response.statusCode);
+
 	}
+
+	@Test
+	public void testDeleteTeamNotFound() {
+
+		Optional<Team> teamObj = Optional.empty();
+		DeleteTeamRequest request = new DeleteTeamRequest();
+
+		// mock
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamObj);
+		DeleteTeamResponse response = teamServiceImpl.deleteTeam(request);
+
+		assertEquals("002", response.statusCode);
+
+	}
+
 
 }
