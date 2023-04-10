@@ -14,8 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.ipl.request.DeletePlayerRequest;
+import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
+import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.validation.PlayerValidation;
@@ -98,6 +100,41 @@ public class PlayerControllerTest {
 
 		assertEquals("999", deletePlayerResponse.statusCode);
 
+	}
+	
+	@Test
+	public void testGetPlayerId() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		GetPlayerRequest request = new GetPlayerRequest();
+		GetPlayerResponse response = new GetPlayerResponse(HttpStatus.OK, "000", "", null);
+
+		when(playerValidation.validateGetPlayerRequest(Mockito.any())).thenReturn(errorMessages);
+		when(playerService.getPlayer(Mockito.any())).thenReturn(response);
+		Integer playerId = 1;
+		GetPlayerResponse getPlayerResponse = playerController.getPlayer(playerId);
+
+		assertEquals("000", getPlayerResponse.statusCode);
+
+	}
+
+	@Test
+	public void testGetPlayerFailure() {
+
+		// Mock
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter PlayerId");
+
+		GetPlayerRequest request = new GetPlayerRequest();
+
+		// When
+		when(playerValidation.validateGetPlayerRequest(Mockito.any())).thenReturn(errorMessages);
+
+		Integer playerId = 0;
+		GetPlayerResponse response = playerController.getPlayer(playerId);
+
+		assertEquals("999", response.statusCode);
 	}
 
 

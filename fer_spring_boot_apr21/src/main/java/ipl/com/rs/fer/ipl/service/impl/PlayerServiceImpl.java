@@ -15,6 +15,7 @@ import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
+import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.GetPlayersResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
@@ -28,7 +29,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	PlayerRepository playerRepository;
-	
+
 	@Autowired
 	TeamRepository teamRepository;
 
@@ -84,8 +85,8 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public GetPlayersResponse getPlayers(Integer teamId) {
-GetPlayersResponse response = null;
-		
+		GetPlayersResponse response = null;
+
 		List<Player> players = new ArrayList<Player>();
 
 		// To load the userObject based on userId
@@ -101,13 +102,35 @@ GetPlayersResponse response = null;
 
 			for (Player player : playersObj) {
 				players.add(player);
-				
+
 			}
 			// response.setGroupParticipants(users);
 
 			response = new GetPlayersResponse(HttpStatus.OK, "000", "Fetch Participants", null);
 			response.setPlayers(players);
-			}
+		}
 		return response;
+	}
+
+	@Override
+	public GetPlayerResponse getPlayer(Integer playerId) {
+
+		GetPlayerResponse response = null;
+
+		Optional<Player> playerObj = playerRepository.findById(playerId);
+
+		if (playerObj.isPresent()) {
+
+			response = new GetPlayerResponse(HttpStatus.OK, "000", "player found", null);
+			response.setPlayer(playerObj.get());
+		} else {
+			// failure
+
+			response = new GetPlayerResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "player not found", null);
+
+		}
+
+		return response;
+
 	}
 }

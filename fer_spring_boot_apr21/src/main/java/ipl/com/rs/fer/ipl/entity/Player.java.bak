@@ -66,11 +66,11 @@ public class Player {
 
 	}
 
-	public Integer getPlayerId() {
+	public int getPlayerId() {
 		return playerId;
 	}
 
-	public void setPlayerId(Integer playerId) {
+	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
 

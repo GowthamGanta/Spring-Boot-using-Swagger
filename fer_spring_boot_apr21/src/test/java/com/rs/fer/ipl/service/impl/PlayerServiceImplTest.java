@@ -13,15 +13,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.expense.request.DeleteExpenseRequest;
-import com.rs.fer.expense.response.DeleteExpenseResponse;
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.request.DeletePlayerRequest;
+import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
+import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
-import com.rs.fer.ipl.service.impl.PlayerServiceImpl;
 import com.rs.fer.ipl.util.PlayerUtil;
 
 @SpringBootTest
@@ -135,7 +134,7 @@ public class PlayerServiceImplTest {
 		// 3.
 		assertEquals("002", response.statusCode);
 	}
-	
+
 	@Test
 	public void testDeletePlayer() {
 		int playerId = 0;
@@ -156,14 +155,14 @@ public class PlayerServiceImplTest {
 		assertEquals("000", response.statusCode);
 
 	}
-	
+
 	@Test
 	public void testDeletePlayerFailure() {
 		int playerId = 0;
 		Player player = new Player();
-		//player.setPlayerId(1);
+		// player.setPlayerId(1);
 		Optional<Player> playerObj = Optional.empty();
-		//errorMessages.add("please enter Id");
+		// errorMessages.add("please enter Id");
 
 		when(playerRepository.findById(Mockito.anyInt())).thenReturn(playerObj);
 		when(playerRepository.save(Mockito.any())).thenReturn(playerObj);
@@ -179,5 +178,40 @@ public class PlayerServiceImplTest {
 
 	}
 
+	@Test
+	public void testGetPlayerResponse() {
+		Player player = new Player();
+		player.setPlayerId(1);
+		Optional<Player> players = Optional.of(player);
+
+		when(playerRepository.findById(Mockito.anyInt())).thenReturn(players);
+
+		int playerId = 1;
+
+		GetPlayerResponse response = playerServiceImpl.getPlayer(playerId);
+
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetPlayerNotFound() {
+
+		Optional<Player> players = Optional.empty();
+
+		// Team teams = new Team();
+		// Mock
+		when(playerRepository.findById(Mockito.anyInt())).thenReturn(players);
+
+		// 1.
+		GetPlayerRequest request = new GetPlayerRequest();
+
+		// 2.
+		int playerId = 0;
+		GetPlayerResponse response = playerServiceImpl.getPlayer(playerId);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+	}
 
 }

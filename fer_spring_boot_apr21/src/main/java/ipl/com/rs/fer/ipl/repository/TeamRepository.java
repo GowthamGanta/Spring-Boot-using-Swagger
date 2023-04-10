@@ -10,6 +10,6 @@ import com.rs.fer.ipl.entity.Team;
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
 
-	List<Team> findByTeamId(int teamId);
+	List<Team> findByName(String Name);
 
 }

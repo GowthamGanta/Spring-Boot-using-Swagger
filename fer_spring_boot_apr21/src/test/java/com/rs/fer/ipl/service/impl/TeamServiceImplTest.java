@@ -42,17 +42,18 @@ public class TeamServiceImplTest {
 		List<Team> team = new ArrayList<>();
 
 		Team teams = new Team();
-		teams.setTeamId(1);
+		teams.setName("csk");
+		team.add(teams);
 
 		// Mock
-		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+		when(teamRepository.findByName(Mockito.anyString())).thenReturn(team);
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
 		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);
 
 		// 1.
 		SaveTeamRequest request = new SaveTeamRequest();
-		request.setName("CSK");
+		// request.setName("CSK");
 
 		// 2.
 		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
@@ -67,12 +68,12 @@ public class TeamServiceImplTest {
 		List<Team> team = new ArrayList<>();
 
 		Team teams = new Team();
-		teams.setTeamId(1);
+		teams.setName("");
 
 		team.add(teams);
 
 		// Mock
-		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+		when(teamRepository.findByName(Mockito.anyString())).thenReturn(team);
 
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
@@ -96,7 +97,7 @@ public class TeamServiceImplTest {
 
 		Team teams = new Team();
 
-		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+		when(teamRepository.findByName(Mockito.anyString())).thenReturn(team);
 
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
@@ -146,8 +147,8 @@ public class TeamServiceImplTest {
 
 		// 3.
 		assertEquals("002", response.statusCode);
-	} 
-	
+	}
+
 	@Test
 	public void testDeleteTeam() {
 
@@ -183,6 +184,5 @@ public class TeamServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
-
 
 }

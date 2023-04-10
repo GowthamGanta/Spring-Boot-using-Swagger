@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.request.DeletePlayerRequest;
+import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 
 @SpringBootTest
@@ -82,6 +83,39 @@ public class PlayerValidationImplTest {
 
 		int playerId = 0;
 		Set<String> errorMessages = playerValidationImpl.validateDeletePlayerRequest(playerId);
+		boolean isExpectedEmpty = false;
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+	public void testvalidateGetPlayerRequest() {
+
+		GetPlayerRequest request = new GetPlayerRequest();
+
+		int playerId = 1;
+		Set<String> errorMessages = playerValidationImpl.validateGetPlayerRequest(playerId);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+
+	@Test
+
+	public void testvalidateGetPlayerRequestFailure() {
+
+		GetPlayerRequest request = new GetPlayerRequest();
+
+		int playerId = 0;
+
+		Set<String> errorMessages = playerValidationImpl.validateGetPlayerRequest(playerId);
+
 		boolean isExpectedEmpty = false;
 		boolean isActualEmpty = errorMessages.isEmpty();
 

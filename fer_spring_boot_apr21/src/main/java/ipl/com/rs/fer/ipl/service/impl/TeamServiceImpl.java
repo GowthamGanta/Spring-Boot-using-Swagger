@@ -31,12 +31,12 @@ public class TeamServiceImpl implements TeamService {
 	public SaveTeamResponse saveTeam(SaveTeamRequest request) {
 
 		SaveTeamResponse response = null;
-		List<Team> teams = teamRepository.findByTeamId(request.getTeamId());
+		List<Team> teams = teamRepository.findByName(request.getName());
 
 		if (!CollectionUtils.isEmpty(teams)) {
 
 			response = new SaveTeamResponse(HttpStatus.PRECONDITION_FAILED, "001",
-					"Team is already find with the given TeamId", null);
+					"Team is already find with the given ", null);
 			return response;
 		}
 
@@ -47,7 +47,7 @@ public class TeamServiceImpl implements TeamService {
 		team = teamRepository.save(team);
 
 		// load response
-		if (team.getTeamId() > 0) {
+		if (team.getName() != null) {
 			// success
 			response = new SaveTeamResponse(HttpStatus.OK, "000", "Team is succesfully saved", null);
 			response.setTeam(team);

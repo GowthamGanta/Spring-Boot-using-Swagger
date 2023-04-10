@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
+import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.GetPlayersResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
@@ -48,10 +49,10 @@ public class PlayerController {
 
 		return response;
 	}
-	
+
 	@DeleteMapping("/ipl/player/{id}")
-	public DeletePlayerResponse deletePlayer(@PathVariable ("id")int playerId) {
-		
+	public DeletePlayerResponse deletePlayer(@PathVariable("id") int playerId) {
+
 		DeletePlayerResponse response = null;
 		Set<String> errorMessages = playerValidation.validateDeletePlayerRequest(playerId);
 		// return response with error messages
@@ -64,9 +65,9 @@ public class PlayerController {
 		return response;
 
 	}
-	
-   @GetMapping("/ipl/getPlayers/{teamId}")
-	
+
+	@GetMapping("/ipl/getPlayers/{teamId}")
+
 	public GetPlayersResponse getPlayers(@PathVariable("teamId") Integer teamId) {
 		GetPlayersResponse response = null;
 
@@ -77,6 +78,22 @@ public class PlayerController {
 
 		} else {
 			response = playerService.getPlayers(teamId);
+		}
+		return response;
+	}
+
+	@GetMapping("/ipl/getPlayer/{playerId}")
+
+	public GetPlayerResponse getPlayer(@PathVariable("playerId") Integer playerId) {
+		GetPlayerResponse response = null;
+
+		Set<String> errorMessages = playerValidation.validateGetPlayerRequest(playerId);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetPlayerResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = playerService.getPlayer(playerId);
 		}
 		return response;
 	}

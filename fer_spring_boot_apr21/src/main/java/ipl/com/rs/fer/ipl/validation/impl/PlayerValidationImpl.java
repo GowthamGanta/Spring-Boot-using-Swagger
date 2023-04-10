@@ -30,7 +30,7 @@ public class PlayerValidationImpl implements PlayerValidation {
 
 	@Override
 	public Set<String> validateDeletePlayerRequest(int playerId) {
-		
+
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, playerId, "Please enter valid PlayerId");
@@ -38,7 +38,7 @@ public class PlayerValidationImpl implements PlayerValidation {
 		return errorMessages;
 
 	}
-	
+
 	@Override
 	public Set<String> validateGetPlayersRequest(Integer teamId) {
 		Set<String> errorMessages = new LinkedHashSet<String>();
@@ -48,5 +48,14 @@ public class PlayerValidationImpl implements PlayerValidation {
 		return errorMessages;
 	}
 
+	@Override
+	public Set<String> validateGetPlayerRequest(Integer playerId) {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, playerId, "Please enter PlayerId");
+
+		return errorMessages;
+	}
 
 }
