@@ -47,20 +47,19 @@ public class PlayerServiceImpl implements PlayerService {
 			return response;
 		}
 
-		// load vo to bean
-		Player player = playerUtil.loadSavePlayerRequestToPlayer(request);
+		Optional<Team> teamobj = teamRepository.findById(request.getTeamId());
 
-		// save bean to database
-		player = playerRepository.save(player);
-
-		// load response
-		if (player.getPlayerId() > 0) {
-			// success
+		if (teamobj.isPresent()) {
+			Player player = playerUtil.loadSavePlayerRequestToPlayer(request);
+			Team team = teamobj.get();
+			team.getPlayers().add(player);
+			player = playerRepository.save(player);
 			response = new SavePlayerResponse(HttpStatus.OK, "000", "Player is succesfully saved", null);
 			response.setPlayer(player);
+
 		} else {
 			// failure
-			response = new SavePlayerResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Player saved is failed", null);
+			response = new SavePlayerResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team is not found", null);
 		}
 
 		return response;

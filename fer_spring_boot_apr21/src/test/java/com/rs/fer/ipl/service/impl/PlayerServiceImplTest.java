@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.entity.Player;
+import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.PlayerRepository;
+import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.DeletePlayerRequest;
 import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
@@ -33,6 +36,8 @@ public class PlayerServiceImplTest {
 
 	@Mock
 	PlayerRepository playerRepository;
+	@Mock
+	TeamRepository teamRepository;
 
 	@Mock
 	PlayerUtil playerUtil;
@@ -41,12 +46,15 @@ public class PlayerServiceImplTest {
 	public void testSavePlayer() {
 
 		List<Player> player = new ArrayList<>();
-
+		Team team = new Team();
 		Player players = new Player();
-		players.setPlayerId(1);
+		team.setPlayers(new LinkedHashSet<Player>());
 
+		players.setPlayerId(1);
+		Optional<Team> teamobj = Optional.of(team);
 		// Mock
 		when(playerRepository.findByJerseyNumber(Mockito.anyString())).thenReturn(player);
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamobj);
 
 		when(playerRepository.save(Mockito.any())).thenReturn(players);
 
@@ -74,14 +82,16 @@ public class PlayerServiceImplTest {
 	public void testSavePlayerDuplicate() {
 
 		List<Player> player = new ArrayList<>();
-
+		Team team = new Team();
 		Player players = new Player();
+		team.setPlayers(new LinkedHashSet<Player>());
+
 		players.setPlayerId(1);
-
 		player.add(players);
-
+		Optional<Team> teamobj = Optional.of(team);
 		// Mock
 		when(playerRepository.findByJerseyNumber(Mockito.anyString())).thenReturn(player);
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamobj);
 
 		when(playerRepository.save(Mockito.any())).thenReturn(players);
 
@@ -101,7 +111,6 @@ public class PlayerServiceImplTest {
 		// 2.
 		SavePlayerResponse response = playerServiceImpl.savePlayer(request);
 
-		// 3.
 		assertEquals("001", response.statusCode);
 	}
 
@@ -109,11 +118,15 @@ public class PlayerServiceImplTest {
 	public void testSavePlayerFailure() {
 
 		List<Player> player = new ArrayList<>();
-
+		Team team = new Team();
 		Player players = new Player();
+		team.setPlayers(new LinkedHashSet<Player>());
 
+		// players.setPlayerId(1);
+		Optional<Team> teamobj = Optional.empty();
 		// Mock
 		when(playerRepository.findByJerseyNumber(Mockito.anyString())).thenReturn(player);
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamobj);
 
 		when(playerRepository.save(Mockito.any())).thenReturn(players);
 
