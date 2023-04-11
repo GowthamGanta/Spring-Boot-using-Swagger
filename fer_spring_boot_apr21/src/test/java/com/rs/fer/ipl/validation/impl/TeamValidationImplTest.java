@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.group.request.DeleteGroupRequest;
 import com.rs.fer.ipl.request.DeleteTeamRequest;
+import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 
@@ -78,7 +79,7 @@ public class TeamValidationImplTest {
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
-	
+
 	@Test
 	public void testValidateDeleteTeamRequest() {
 		DeleteTeamRequest request = new DeleteTeamRequest();
@@ -110,7 +111,43 @@ public class TeamValidationImplTest {
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
-	} 
+	}
+
+	@Test
+	public void testValidateEditTeamRequest() {
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		request.setTeamId(1);
+		request.setName("CSK");
+
+		Set<String> errorMessages = teamValidationImpl.validateEditTeamRequest(request);
+
+		boolean isExpectedEmpty = true;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
+	
+	@Test
+	public void testValidateEditTeamRequestFailure() {
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		//request.setTeamId(1);
+		request.setName("CSK");
+
+		Set<String> errorMessages = teamValidationImpl.validateEditTeamRequest(request);
+
+		boolean isExpectedEmpty = false;
+
+		boolean isActualEmpty = errorMessages.isEmpty();
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
+
+	}
 
 
 }
