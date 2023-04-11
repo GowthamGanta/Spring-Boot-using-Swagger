@@ -43,7 +43,7 @@ public class Team {
 	@OneToMany(targetEntity = Player.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "t_id", referencedColumnName = "team_id")
 	private Set<Player> players;
-	
+
 	public Set<Player> getPlayers() {
 		return players;
 	}

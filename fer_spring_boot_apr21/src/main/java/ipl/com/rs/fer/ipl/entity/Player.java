@@ -47,7 +47,7 @@ public class Player {
 	private String updated;
 
 	@Column(name = "t_id")
-	private int teamId;
+	private Integer teamId;
 
 	public Player() {
 
@@ -154,11 +154,11 @@ public class Player {
 		this.updated = updated;
 	}
 
-	public int getTeamId() {
+	public Integer getTeamId() {
 		return teamId;
 	}
 
-	public void setTeamId(int teamId) {
+	public void setTeamId(Integer teamId) {
 		this.teamId = teamId;
 	}
 

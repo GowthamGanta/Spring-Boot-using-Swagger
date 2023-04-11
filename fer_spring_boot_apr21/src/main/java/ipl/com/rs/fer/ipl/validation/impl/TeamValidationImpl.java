@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.request.DeleteTeamRequest;
+import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.validation.TeamValidation;
 import com.rs.fer.util.FERUtil;
@@ -37,6 +38,17 @@ public class TeamValidationImpl implements TeamValidation {
 
 		Set<String> errorMessages = new LinkedHashSet<String>();
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamId(), "Please enter Valid TeamId");
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateEditTeamRequest(EditTeamRequest request) {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamId(), "Please entre teamId");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please entre Name");
+
 		return errorMessages;
 	}
 

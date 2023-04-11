@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.request.UpdatePlayerRequest;
 
 @SpringBootTest
 public class PlayerUtilImplTest {
@@ -49,6 +50,50 @@ public class PlayerUtilImplTest {
 		request.setSpecilization("AR");
 		// request.setJerseyNumber("1");
 		Player player = playerUtilImpl.loadSavePlayerRequestToPlayer(request);
+
+		boolean isExpectedNotEmpty = false;
+		boolean isActualNotEmpty = (null != player.getJerseyNumber());
+
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+
+	}
+
+	@Test
+	public void testUpdatePlayerRequest() {
+
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+		request.setPlayerId(3);
+		request.setFirstName("abc");
+		request.setMiddleName("mno");
+		request.setLastName("xyz");
+		request.setDob("28-09-2022");
+		request.setGender('m');
+		request.setRole("c");
+		request.setSpecilization("AR");
+		request.setJerseyNumber("10");
+		Player player = playerUtilImpl.laodUpdatePlayerRequestToPlayer(request);
+
+		boolean isExpectedNotEmpty = true;
+		boolean isActualNotEmpty = (null != player.getJerseyNumber());
+
+		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+
+	}
+
+	@Test
+	public void testUpdatePlayerRequestFailure() {
+
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+		request.setPlayerId(3);
+		request.setFirstName("abc");
+		request.setMiddleName("mno");
+		request.setLastName("xyz");
+		request.setDob("28-09-2022");
+		request.setGender('m');
+		request.setRole("c");
+		request.setSpecilization("AR");
+		// request.setJerseyNumber("10");
+		Player player = playerUtilImpl.laodUpdatePlayerRequestToPlayer(request);
 
 		boolean isExpectedNotEmpty = false;
 		boolean isActualNotEmpty = (null != player.getJerseyNumber());

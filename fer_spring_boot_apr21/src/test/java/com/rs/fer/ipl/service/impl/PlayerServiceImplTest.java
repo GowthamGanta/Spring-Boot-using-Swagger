@@ -18,9 +18,11 @@ import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.request.DeletePlayerRequest;
 import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.request.UpdatePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
 import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
+import com.rs.fer.ipl.response.UpdatePlayerResponse;
 import com.rs.fer.ipl.util.PlayerUtil;
 
 @SpringBootTest
@@ -209,6 +211,71 @@ public class PlayerServiceImplTest {
 		// 2.
 		int playerId = 0;
 		GetPlayerResponse response = playerServiceImpl.getPlayer(playerId);
+
+		// 3.
+		assertEquals("002", response.statusCode);
+	}
+
+	@Test
+	public void testUpdatePlayer() {
+
+		Player player = new Player();
+		List<Player> players = new ArrayList<>();
+		player.setPlayerId(3);
+		players.add(player);
+		// Mock
+		when(playerRepository.findByPlayerId(Mockito.anyInt())).thenReturn(players);
+
+		when(playerRepository.save(Mockito.any())).thenReturn(player);
+
+		when(playerUtil.laodUpdatePlayerRequestToPlayer(Mockito.any())).thenReturn(player);
+
+		// 1.
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+		request.setPlayerId(3);
+		request.setFirstName("Dhoni");
+		request.setLastName("MS");
+		request.setMiddleName("Mahi");
+		request.setGender('M');
+		request.setDob("26-12-1995");
+		request.setRole("C");
+		request.setSpecilization("BA");
+		request.setJerseyNumber("7");
+
+		// 2.
+		UpdatePlayerResponse response = playerServiceImpl.updatePlayer(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+	}
+
+	@Test
+	public void testUpdatePlayerFailure() {
+
+		List<Player> players = new ArrayList<>();
+
+		Player player = new Player();
+		// Mock
+		when(playerRepository.findByPlayerId(Mockito.anyInt())).thenReturn(players);
+
+		// when(playerRepository.save(Mockito.any())).thenReturn(player);
+
+		when(playerUtil.laodUpdatePlayerRequestToPlayer(Mockito.any())).thenReturn(player);
+
+		// 1.
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+		// request.setPlayerId(3);
+		// request.setFirstName("virat");
+		// request.setLastName("kohli");
+		// request.setMiddleName("anushka");
+		// request.setGender('m');
+		// request.setDob("26-12-2000");
+		// request.setRole("M");
+		// request.setSpecilization("BA");
+		// request.setJerseyNumber("vk123");
+
+		// 2.
+		UpdatePlayerResponse response = playerServiceImpl.updatePlayer(request);
 
 		// 3.
 		assertEquals("002", response.statusCode);

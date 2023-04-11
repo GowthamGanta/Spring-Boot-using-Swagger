@@ -14,9 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.ipl.request.DeleteTeamRequest;
+import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
+import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.TeamService;
@@ -139,6 +141,41 @@ public class TeamControllerTest {
 
 		// Then
 		DeleteTeamResponse response = teamController.deleteTeam(request);
+
+		assertEquals("999", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditTeam() {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		EditTeamRequest request = new EditTeamRequest();
+		EditTeamResponse response = new EditTeamResponse(HttpStatus.OK, "000", "", null);
+
+		when(teamValidation.validateEditTeamRequest(Mockito.any())).thenReturn(errorMessages);
+		when(teamService.editTeam(Mockito.any())).thenReturn(response);
+
+		EditTeamResponse editTeamResponse = teamController.editTeam(request);
+
+		assertEquals("000", editTeamResponse.statusCode);
+
+	}
+
+	@Test
+	public void testEditTeamFailure() {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages.add("Please enter Type");
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		// When
+		when(teamValidation.validateEditTeamRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		EditTeamResponse response = teamController.editTeam(request);
 
 		assertEquals("999", response.statusCode);
 

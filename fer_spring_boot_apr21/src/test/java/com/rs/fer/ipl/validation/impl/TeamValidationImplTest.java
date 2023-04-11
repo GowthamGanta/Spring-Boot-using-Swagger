@@ -81,7 +81,6 @@ public class TeamValidationImplTest {
 	
 	@Test
 	public void testValidateDeleteTeamRequest() {
-
 		DeleteTeamRequest request = new DeleteTeamRequest();
 
 		request.setTeamId(4);

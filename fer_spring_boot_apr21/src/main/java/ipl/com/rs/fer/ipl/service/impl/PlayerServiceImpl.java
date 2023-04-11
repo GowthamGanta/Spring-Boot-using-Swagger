@@ -14,10 +14,12 @@ import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.request.UpdatePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
 import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.GetPlayersResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
+import com.rs.fer.ipl.response.UpdatePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.util.PlayerUtil;
 
@@ -132,5 +134,36 @@ public class PlayerServiceImpl implements PlayerService {
 
 		return response;
 
+	}
+
+	@Override
+	public UpdatePlayerResponse updatePlayer(UpdatePlayerRequest request) {
+
+		UpdatePlayerResponse response = null;
+
+		// Player is present or not check
+		List<Player> playerObj = playerRepository.findByPlayerId(request.getPlayerId());
+
+		if (!playerObj.isEmpty()) {
+
+			// load vo to bean
+			Player player = playerUtil.laodUpdatePlayerRequestToPlayer(request);
+
+			// save bean to database
+			player = playerRepository.save(player);
+
+			// load response
+			// success
+			response = new UpdatePlayerResponse(HttpStatus.OK, "000", "Player Updated successfully", null);
+			response.setPlayerId(player);
+		} else {
+			// failure
+
+			response = new UpdatePlayerResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Player Updating failed",
+					null);
+
+		}
+
+		return response;
 	}
 }

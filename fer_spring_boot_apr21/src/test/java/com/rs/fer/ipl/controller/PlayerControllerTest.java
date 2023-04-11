@@ -16,9 +16,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.ipl.request.DeletePlayerRequest;
 import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
+import com.rs.fer.ipl.request.UpdatePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
 import com.rs.fer.ipl.response.GetPlayerResponse;
 import com.rs.fer.ipl.response.SavePlayerResponse;
+import com.rs.fer.ipl.response.UpdatePlayerResponse;
 import com.rs.fer.ipl.service.PlayerService;
 import com.rs.fer.ipl.validation.PlayerValidation;
 
@@ -83,7 +85,7 @@ public class PlayerControllerTest {
 		assertEquals("000", deletePlayerResponse.statusCode);
 
 	}
-	
+
 	@Test
 	public void testDeletePlayerFailure() {
 		int playerId = 0;
@@ -91,17 +93,18 @@ public class PlayerControllerTest {
 		errorMessages.add("please enter Id");
 
 		DeletePlayerRequest request = new DeletePlayerRequest();
-		//DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK, "000", "", null);
+		// DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK,
+		// "000", "", null);
 
 		when(playerValidation.validateDeletePlayerRequest(Mockito.anyInt())).thenReturn(errorMessages);
-		//when(playerService.deletePlayer(Mockito.anyInt())).thenReturn(response);
+		// when(playerService.deletePlayer(Mockito.anyInt())).thenReturn(response);
 
 		DeletePlayerResponse deletePlayerResponse = playerController.deletePlayer(playerId);
 
 		assertEquals("999", deletePlayerResponse.statusCode);
 
 	}
-	
+
 	@Test
 	public void testGetPlayerId() {
 
@@ -137,5 +140,38 @@ public class PlayerControllerTest {
 		assertEquals("999", response.statusCode);
 	}
 
+	@Test
+	public void testUpdatePlayer() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+		UpdatePlayerResponse response = new UpdatePlayerResponse(HttpStatus.OK, "000", "", null);
+
+		when(playerValidation.validateUpdatePlayerRequest(Mockito.any())).thenReturn(errorMessages);
+		when(playerService.updatePlayer(Mockito.any())).thenReturn(response);
+
+		UpdatePlayerResponse updatePlayerResponse = playerController.updatePlayer(request);
+
+		assertEquals("000", updatePlayerResponse.statusCode);
+
+	}
+
+	@Test
+	public void testUpdatePlayerFailure() {
+
+		Set<String> errorMessages = new LinkedHashSet<>();
+		errorMessages.add("Please enter Id");
+
+		UpdatePlayerRequest request = new UpdatePlayerRequest();
+
+		// When
+		when(playerValidation.validateUpdatePlayerRequest(Mockito.any())).thenReturn(errorMessages);
+
+		// Then
+		UpdatePlayerResponse response = playerController.updatePlayer(request);
+
+		assertEquals("999", response.statusCode);
+	}
 
 }

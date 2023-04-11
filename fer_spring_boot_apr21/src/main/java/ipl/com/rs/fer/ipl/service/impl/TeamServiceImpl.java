@@ -11,8 +11,10 @@ import org.springframework.util.CollectionUtils;
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.DeleteTeamRequest;
+import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
+import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
@@ -121,6 +123,37 @@ public class TeamServiceImpl implements TeamService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public EditTeamResponse editTeam(EditTeamRequest request) {
+
+		EditTeamResponse response = null;
+
+		// Team is present or not check
+		Optional<Team> teamObj = teamRepository.findById(request.getTeamId());
+
+		if (teamObj.isPresent()) {
+
+			// load vo to bean
+			Team team = teamUtil.loadEditTeamRequestToTeam(request);
+
+			// save bean to database
+			team = teamRepository.save(team);
+
+			// load response
+			// success
+			response = new EditTeamResponse(HttpStatus.OK, "000", "Team edited successfully", null);
+			response.setTeamId(team);
+		} else {
+			// failure
+			response = new EditTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team editing failed", null);
+			response = new EditTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team editing failed", null);
+
+		}
+
+		return response;
+
 	}
 
 }

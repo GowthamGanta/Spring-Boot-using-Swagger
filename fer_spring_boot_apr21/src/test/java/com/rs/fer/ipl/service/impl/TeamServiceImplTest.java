@@ -16,9 +16,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.DeleteTeamRequest;
+import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
+import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.util.TeamUtil;
@@ -180,6 +182,57 @@ public class TeamServiceImplTest {
 		// mock
 		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamObj);
 		DeleteTeamResponse response = teamServiceImpl.deleteTeam(request);
+
+		assertEquals("002", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditTeam() {
+
+		Team team = new Team();
+		team.setTeamId(1);
+
+		Optional<Team> teamObj = Optional.of(team);
+
+		// Mock
+		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teamObj);
+		when(teamRepository.save(Mockito.any())).thenReturn(team);
+		when(teamUtil.loadEditTeamRequestToTeam(Mockito.any())).thenReturn(team);
+
+		// 1.
+		EditTeamRequest request = new EditTeamRequest();
+		request.setTeamId(1);
+		request.setName("CSK");
+		// 2.
+		EditTeamResponse response = teamServiceImpl.editTeam(request);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testEditTeamFailure() {
+
+		List<Team> team = new ArrayList<Team>();
+
+		Team teams = new Team();
+
+		Optional<Team> teamObj = Optional.of(teams);
+
+		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
+
+		when(teamRepository.save(Mockito.any())).thenReturn(teams);
+
+		when(teamUtil.loadEditTeamRequestToTeam(Mockito.any())).thenReturn(teams);
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		// request.setTeamId(1);
+		request.setName("CSK");
+
+		EditTeamResponse response = teamServiceImpl.editTeam(request);
 
 		assertEquals("002", response.statusCode);
 
