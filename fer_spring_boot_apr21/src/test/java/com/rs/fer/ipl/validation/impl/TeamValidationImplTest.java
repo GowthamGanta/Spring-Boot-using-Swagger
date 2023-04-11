@@ -86,11 +86,11 @@ public class TeamValidationImplTest {
 
 		request.setTeamId(4);
 
-		Set<String> player = teamValidationImpl.validateDeleteTeamRequest(request);
+		Set<String> errorMessages= teamValidationImpl.validateDeleteTeamRequest(request);
 
-		boolean isExpectedEmpty = true;
+		boolean isExpectedEmpty = true; 
 
-		boolean isActualEmpty = player.isEmpty();
+		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
@@ -103,11 +103,11 @@ public class TeamValidationImplTest {
 
 		//request.setGroupId(4);
 
-		Set<String> follow = teamValidationImpl.validateDeleteTeamRequest(request);
+		Set<String> errorMessages = teamValidationImpl.validateDeleteTeamRequest(request);
 
 		boolean isExpectedEmpty = false;
 
-		boolean isActualEmpty = follow.isEmpty();
+		boolean isActualEmpty = errorMessages.isEmpty();
 
 		assertEquals(isExpectedEmpty, isActualEmpty);
 
