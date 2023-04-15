@@ -141,7 +141,20 @@ public class PlayerServiceImpl implements PlayerService {
 		UpdatePlayerResponse response = null;
 
 		// Player is present or not check
+
 		List<Player> playerObj = playerRepository.findByPlayerId(request.getPlayerId());
+
+		List<Player> players = playerRepository.findByJerseyNumberAndPlayerIdNot(request.getJerseyNumber(),
+				request.getPlayerId());
+
+		if (!CollectionUtils.isEmpty(players)) {
+
+			// Player already Present
+			response = new UpdatePlayerResponse(HttpStatus.PRECONDITION_FAILED, "001",
+					"Player is already find with given JerseyNumber", null);
+
+			return response;
+		}
 
 		if (!playerObj.isEmpty()) {
 

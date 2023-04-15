@@ -26,6 +26,9 @@ public class Team {
 	private String name;
 
 	@Column
+	private String teamCode;
+
+	@Column
 	private String created;
 
 	@Column
@@ -66,6 +69,14 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	public String getCreated() {

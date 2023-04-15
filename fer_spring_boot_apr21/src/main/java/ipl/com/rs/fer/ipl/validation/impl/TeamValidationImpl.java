@@ -21,6 +21,9 @@ public class TeamValidationImpl implements TeamValidation {
 		Set<String> errorMessages = new LinkedHashSet<String>();
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please enter Name");
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamCode(), "Please entre teamCode");
+
 		return errorMessages;
 	}
 
@@ -48,6 +51,7 @@ public class TeamValidationImpl implements TeamValidation {
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamId(), "Please entre teamId");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please entre Name");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamCode(), "Please entre teamCode");
 
 		return errorMessages;
 	}

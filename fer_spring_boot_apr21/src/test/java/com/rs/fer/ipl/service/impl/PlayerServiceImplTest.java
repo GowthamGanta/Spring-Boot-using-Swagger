@@ -111,6 +111,7 @@ public class PlayerServiceImplTest {
 		// 2.
 		SavePlayerResponse response = playerServiceImpl.savePlayer(request);
 
+		// 3.
 		assertEquals("001", response.statusCode);
 	}
 

@@ -17,6 +17,8 @@ public class TeamUtilImpl implements TeamUtil {
 		Team team = new Team();
 
 		team.setName(request.getName());
+		team.setTeamCode(request.getTeamCode());
+		team.setTeamCode(request.getTeamCode());
 
 		team.setCreated(DateUtil.getCurrentDate());
 		team.setUpdated(DateUtil.getCurrentDate());
@@ -31,6 +33,7 @@ public class TeamUtilImpl implements TeamUtil {
 
 		team.setTeamId(request.getTeamId());
 		team.setName(request.getName());
+		team.setTeamCode(request.getTeamCode());
 
 		team.setCreated(DateUtil.getCurrentDate());
 		team.setUpdated(DateUtil.getCurrentDate());

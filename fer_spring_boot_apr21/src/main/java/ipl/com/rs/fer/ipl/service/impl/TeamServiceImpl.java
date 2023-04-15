@@ -131,9 +131,32 @@ public class TeamServiceImpl implements TeamService {
 		EditTeamResponse response = null;
 
 		// Team is present or not check
-		Optional<Team> teamObj = teamRepository.findById(request.getTeamId());
+		List<Team> teamObj = teamRepository.findByTeamId(request.getTeamId());
 
-		if (teamObj.isPresent()) {
+		List<Team> teams = teamRepository.findByTeamCodeAndTeamIdNot(request.getTeamCode(), request.getTeamId());
+
+		if (!CollectionUtils.isEmpty(teams)) {
+
+			// Team already present given Name or Not
+			response = new EditTeamResponse(HttpStatus.PRECONDITION_FAILED, "001",
+					"Team already find with given team Code", null);
+
+			return response;
+		}
+		
+		List<Team> team1 = teamRepository.findByNameAndTeamIdNot(request.getName(), request.getTeamId());
+
+		if (!CollectionUtils.isEmpty(team1)) {
+
+			// Team already present given Name or Not
+			response = new EditTeamResponse(HttpStatus.PRECONDITION_FAILED, "001",
+					"Team already find with given team Name", null);
+
+			return response;
+		}
+
+
+		if (!teamObj.isEmpty()) {
 
 			// load vo to bean
 			Team team = teamUtil.loadEditTeamRequestToTeam(request);

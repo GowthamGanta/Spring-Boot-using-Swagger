@@ -4,6 +4,7 @@ public class EditTeamRequest {
 
 	private int teamId;
 	private String name;
+	private String teamCode;
 	private String created;
 	private String updated;
 
@@ -21,6 +22,14 @@ public class EditTeamRequest {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTeamCode() {
+		return teamCode;
+	}
+
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
 	}
 
 	public String getCreated() {

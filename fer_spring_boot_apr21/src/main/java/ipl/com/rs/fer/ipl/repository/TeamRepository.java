@@ -13,4 +13,8 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 	List<Team> findByName(String Name);
 
 	List<Team> findByTeamId(int teamId);
+	
+	List<Team> findByTeamCodeAndTeamIdNot(String teamCode, int teamId);
+
+	List<Team> findByNameAndTeamIdNot(String name, int teamId);
 }
