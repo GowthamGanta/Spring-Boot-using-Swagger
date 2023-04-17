@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class Email {
@@ -39,53 +44,5 @@ public class Email {
 		this.emailAddress = emailAddress;
 		this.flag = flag;
 
-	}
-
-	public int getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(int emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
-	public String getFlag() {
-		return flag;
-	}
-
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public Integer getApplicantId() {
-		return applicantId;
-	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
 	}
 }

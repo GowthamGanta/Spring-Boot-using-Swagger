@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class Kyc {
@@ -22,6 +27,7 @@ public class Kyc {
 	@Column
 	private String docCode;
 
+	
 	@Column
 	private String dateOfIssue;
 
@@ -52,78 +58,6 @@ public class Kyc {
 		this.dateOfExpiry = dateOfExpiry;
 		this.placeOfIssue = placeOfIssue;
 
+	
 	}
-
-	public int getKycId() {
-		return kycId;
-	}
-
-	public void setKycId(int kycId) {
-		this.kycId = kycId;
-	}
-
-	public String getDocType() {
-		return docType;
-	}
-
-	public void setDocType(String docType) {
-		this.docType = docType;
-	}
-
-	public String getDocCode() {
-		return docCode;
-	}
-
-	public void setDocCode(String docCode) {
-		this.docCode = docCode;
-	}
-
-	public String getDateOfIssue() {
-		return dateOfIssue;
-	}
-
-	public void setDateOfIssue(String dateOfIssue) {
-		this.dateOfIssue = dateOfIssue;
-	}
-
-	public String getDateOfExpiry() {
-		return dateOfExpiry;
-	}
-
-	public void setDateOfExpiry(String dateOfExpiry) {
-		this.dateOfExpiry = dateOfExpiry;
-	}
-
-	public String getPlaceOfIssue() {
-		return placeOfIssue;
-	}
-
-	public void setPlaceOfIssue(String placeOfIssue) {
-		this.placeOfIssue = placeOfIssue;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public Integer getApplicantId() {
-		return applicantId;
-	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
-	}
-
 	}

@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.loan.entity.Applicant;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GetApplicantResponse extends AbstractResponse {
 
 	public GetApplicantResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -18,15 +23,7 @@ public class GetApplicantResponse extends AbstractResponse {
 		
 		
 	}
+	
+	
 	private Applicant applicant;
-
-	public Applicant getApplicant() {
-		return applicant;
-	}
-
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
-	}
-
-
 }

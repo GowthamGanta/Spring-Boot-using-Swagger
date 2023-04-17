@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class Mobile {
@@ -22,6 +27,7 @@ public class Mobile {
 	@Column
 	private String number;
 
+	
 	@Column
 	private String flag;
 
@@ -43,61 +49,5 @@ public class Mobile {
 		this.number = number;
 		this.flag = flag;
 
-	}
-
-	public int getMobileId() {
-		return mobileId;
-	}
-
-	public void setMobileId(int mobileId) {
-		this.mobileId = mobileId;
-	}
-
-	public int getCountryCode() {
-		return countryCode;
-	}
-
-	public void setCountryCode(int countryCode) {
-		this.countryCode = countryCode;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public String getFlag() {
-		return flag;
-	}
-
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public Integer getApplicantId() {
-		return applicantId;
-	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
 	}
 }

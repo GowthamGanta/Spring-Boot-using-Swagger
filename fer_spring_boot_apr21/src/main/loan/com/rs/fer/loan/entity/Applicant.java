@@ -14,8 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.rs.fer.user.entity.Address;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table
 public class Applicant {
@@ -42,7 +45,7 @@ public class Applicant {
 
 	@Column
 	private char maritalStatus;
-
+	
 	@Column
 	private String citizenship;
 
@@ -79,15 +82,15 @@ public class Applicant {
 	@OneToMany(targetEntity = LoanAddress.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<LoanAddress> addresses;
-
+	
 	@OneToMany(targetEntity = Kyc.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Kyc> kycList;
-
+	
 	@OneToMany(targetEntity = Mobile.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Mobile> mobiles;
-
+	
 	@OneToMany(targetEntity = Email.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "appl_id", referencedColumnName = "applicant_id")
 	private Set<Email> emails;
@@ -100,139 +103,4 @@ public class Applicant {
 	@JoinColumn(name = "fin_id", referencedColumnName = "financial_id")
 	private FinancialDetails financialDetails;
 
-	public Integer getApplicantId() {
-		return applicantId;
 	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public char getGender() {
-		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
-
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	public char getMaritalStatus() {
-		return maritalStatus;
-	}
-
-	public void setMaritalStatus(char maritalStatus) {
-		this.maritalStatus = maritalStatus;
-	}
-
-	public String getCitizenship() {
-		return citizenship;
-	}
-
-	public void setCitizenship(String citizenship) {
-		this.citizenship = citizenship;
-	}
-
-	public String getReligion() {
-		return religion;
-	}
-
-	public void setReligion(String religion) {
-		this.religion = religion;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public Set<LoanAddress> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(Set<LoanAddress> addresses) {
-		this.addresses = addresses;
-	}
-
-	public Set<Kyc> getKycList() {
-		return kycList;
-	}
-
-	public void setKycList(Set<Kyc> kycList) {
-		this.kycList = kycList;
-	}
-
-	public Set<Mobile> getMobiles() {
-		return mobiles;
-	}
-
-	public void setMobiles(Set<Mobile> mobiles) {
-		this.mobiles = mobiles;
-	}
-
-	public Set<Email> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(Set<Email> emails) {
-		this.emails = emails;
-	}
-
-	public Employment getEmployment() {
-		return employment;
-	}
-
-	public void setEmployment(Employment employment) {
-		this.employment = employment;
-	}
-
-	public FinancialDetails getFinancialDetails() {
-		return financialDetails;
-	}
-
-	public void setFinancialDetails(FinancialDetails financialDetails) {
-		this.financialDetails = financialDetails;
-	}
-}

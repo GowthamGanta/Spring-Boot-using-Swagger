@@ -1,16 +1,11 @@
 package com.rs.fer.loan.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GetLoanAccountStatusRequest {
 	
 	private String status;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-
 }

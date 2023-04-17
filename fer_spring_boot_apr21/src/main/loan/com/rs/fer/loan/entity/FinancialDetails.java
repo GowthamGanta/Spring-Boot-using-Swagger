@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class FinancialDetails {
@@ -40,53 +45,5 @@ public class FinancialDetails {
 		this.grossSalary = grossSalary;
 		this.netSalary = netSalary;
 
-	}
-
-	public int getFinancialId() {
-		return financialId;
-	}
-
-	public void setFinancialId(int financialId) {
-		this.financialId = financialId;
-	}
-
-	public Float getGrossSalary() {
-		return grossSalary;
-	}
-
-	public void setGrossSalary(Float grossSalary) {
-		this.grossSalary = grossSalary;
-	}
-
-	public Float getNetSalary() {
-		return netSalary;
-	}
-
-	public void setNetSalary(Float netSalary) {
-		this.netSalary = netSalary;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	public Integer getApplicantId() {
-		return applicantId;
-	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
 	}
 }

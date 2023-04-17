@@ -1,14 +1,11 @@
 package com.rs.fer.loan.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LoanAccountRejectRequest {
-
+	
 	private int loanAccountId;
-
-	public int getLoanAccountId() {
-		return loanAccountId;
-	}
-
-	public void setLoanAccountId(int loanAccountId) {
-		this.loanAccountId = loanAccountId;
-	}
 }
