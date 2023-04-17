@@ -12,6 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class MessageThread {
@@ -42,49 +47,8 @@ public class MessageThread {
 
 	}
 
-	public int getMessageThreadId() {
-		return messageThreadId;
-	}
-
-	public void setMessageThreadId(int messageThreadId) {
-		this.messageThreadId = messageThreadId;
-	}
-
-	public int getSenderId() {
-		return senderId;
-	}
-
-	public void setSenderId(int senderId) {
-		this.senderId = senderId;
-	}
-
-	public int getReceiverId() {
-		return receiverId;
-	}
-
-	public void setReceiverId(int receiverId) {
-		this.receiverId = receiverId;
-	}
-	
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
 	@OneToMany(targetEntity = Message.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "thread_id", referencedColumnName = "messageThread_id")
 	private Set<Message> messages;
-
-	public Set<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(Set<Message> messages) {
-		this.messages = messages;
-	}
-
 	
 }
