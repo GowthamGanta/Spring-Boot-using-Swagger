@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UpdatePlayerResponse extends AbstractResponse {
 	public UpdatePlayerResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
@@ -18,13 +23,4 @@ public class UpdatePlayerResponse extends AbstractResponse {
 	}
 
 	private Player playerId;
-
-	public Player getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(Player playerId) {
-		this.playerId = playerId;
-	}
-
 }

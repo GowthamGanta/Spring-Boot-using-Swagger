@@ -8,6 +8,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GetPlayersResponse extends AbstractResponse {
 	
 	public GetPlayersResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -20,12 +25,4 @@ public class GetPlayersResponse extends AbstractResponse {
 	}
 
 	private List<Player> players;
-   
-	public List<Player> getPlayers() {
-		return players;
-	}
-	
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
 }

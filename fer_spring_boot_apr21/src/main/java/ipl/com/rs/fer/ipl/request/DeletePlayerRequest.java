@@ -1,16 +1,11 @@
 package com.rs.fer.ipl.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class DeletePlayerRequest {
-	
+
 	private int playerId;
-
-	public int getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
-	}
-	
-
 }

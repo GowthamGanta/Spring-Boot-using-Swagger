@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SaveTeamResponse extends AbstractResponse {
 	public SaveTeamResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
@@ -18,13 +23,5 @@ public class SaveTeamResponse extends AbstractResponse {
 	}
 
 	private Team team;
-
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
 
 }
