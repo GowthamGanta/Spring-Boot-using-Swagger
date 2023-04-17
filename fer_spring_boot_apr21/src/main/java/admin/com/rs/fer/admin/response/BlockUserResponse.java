@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BlockUserResponse extends AbstractResponse {
 
 	private User user;
@@ -18,13 +23,4 @@ public class BlockUserResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
- 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 }

@@ -1,14 +1,10 @@
 package com.rs.fer.admin.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BlockUserRequest {
 	private int id;
-
-	public int getId() {
-		return id; 
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 }

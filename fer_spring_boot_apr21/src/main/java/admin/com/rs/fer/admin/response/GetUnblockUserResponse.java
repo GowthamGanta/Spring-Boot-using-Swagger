@@ -8,17 +8,14 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GetUnblockUserResponse extends AbstractResponse {
 	private List<User> users;
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
+	
 	public GetUnblockUserResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
 
