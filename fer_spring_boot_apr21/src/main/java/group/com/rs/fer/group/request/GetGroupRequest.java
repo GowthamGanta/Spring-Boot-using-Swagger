@@ -1,15 +1,12 @@
 package com.rs.fer.group.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GetGroupRequest {
 	
 	private int groupId;
-
-	public int getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
-	}
 
 }

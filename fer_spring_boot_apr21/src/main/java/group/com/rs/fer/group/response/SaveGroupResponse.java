@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class SaveGroupResponse extends AbstractResponse{
 	
 	public SaveGroupResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -19,14 +23,4 @@ public class SaveGroupResponse extends AbstractResponse{
 	}
 	
 	private Group Group;
-
-	public Group getGroup() {
-		return Group;
-	}
-
-	public void setGroup(Group group) {
-		Group = group;
-	}
-	
-
 }
