@@ -7,11 +7,15 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.participant.Participant;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SaveParticipantResponse extends AbstractResponse {
 
 	public SaveParticipantResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
-		// TODO Auto-generated constructor stub
 
 		this.status = status;
 		this.statusCode = statusCode;
@@ -21,15 +25,4 @@ public class SaveParticipantResponse extends AbstractResponse {
 	}
 
 	private Participant participants;
-
-	public Participant getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(Participant participants) {
-		this.participants = participants;
-	}
-
-	
-
 }

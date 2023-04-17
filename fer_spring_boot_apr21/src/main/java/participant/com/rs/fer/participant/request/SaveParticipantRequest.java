@@ -1,22 +1,13 @@
 package com.rs.fer.participant.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SaveParticipantRequest {
 	
 	private int participantId;
+	
 	private int groupId;
-
-	
-	public void setParticipantId(int participantId) {
-		this.participantId = participantId;
-	}
-	public int getParticipantId() {
-		return participantId;
-	}
-	public int getGroupId() {
-		return groupId;
-	}
-	
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
-	}
 }
