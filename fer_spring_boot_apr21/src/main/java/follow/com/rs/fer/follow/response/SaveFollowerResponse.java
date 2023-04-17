@@ -5,9 +5,13 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.follow.entity.Follow;
-import com.rs.fer.message.entity.Message;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SaveFollowerResponse extends AbstractResponse{
 
 	public SaveFollowerResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -20,15 +24,5 @@ public class SaveFollowerResponse extends AbstractResponse{
 		
 	}
 	
-	private Follow follower;
-
-	public Follow getFollower() {
-		return follower;
-	}
-
-	public void setFollower(Follow follower) {
-		this.follower = follower;
-	} 
-	
-	
+	private Follow follower;	
 }

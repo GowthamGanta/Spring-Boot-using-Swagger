@@ -1,22 +1,13 @@
 package com.rs.fer.follow.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class DeletefollowerRequest {
+	
 	private int userId;
+
 	private int followerId;
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public int getFollowerId() {
-		return followerId;
-	}
-
-	public void setFollowerId(int followerId) {
-		this.followerId = followerId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 }

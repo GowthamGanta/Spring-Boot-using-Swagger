@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.response.AbstractResponse;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class DeletefollowerResponse extends AbstractResponse{
 
 	public DeletefollowerResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -18,14 +23,6 @@ public class DeletefollowerResponse extends AbstractResponse{
 		this.errorMessages = errorMessages;
 		
 	}
-	
+
 	private Follow follower;
-
-	public Follow getFollower() {
-		return follower;
-	}
-
-	public void setFollower(Follow follower) {
-		this.follower = follower;
-	} 
 }

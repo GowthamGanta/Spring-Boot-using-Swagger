@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "follow")
 public class Follow {
@@ -18,10 +23,13 @@ public class Follow {
 
 	@Column(name="user_id")
 	private int userId;
+	
 	@Column
 	private int followerId;
+	
 	@Column
 	private String created;
+	
 	@Column
 	private String updated;
 
@@ -34,46 +42,4 @@ public class Follow {
 		this.userId = userId;
 
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getFollowerId() {
-		return followerId;
-	}
-
-	public void setFollowerId(int followerId) {
-		this.followerId = followerId;
-	}
-
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
-	
 }
