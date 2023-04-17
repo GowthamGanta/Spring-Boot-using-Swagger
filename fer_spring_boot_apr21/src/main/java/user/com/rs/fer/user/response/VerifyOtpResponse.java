@@ -7,9 +7,13 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class VerifyOtpResponse extends AbstractResponse {
 
-	
 	private User user;
 
 	public VerifyOtpResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -24,15 +28,4 @@ public class VerifyOtpResponse extends AbstractResponse {
 		this.message = message;
 
 	}
-
-	public User getUser() {
-
-		return user;
-	}
-
-	public void setUser(User user) {
-
-		this.user = user;
-	}
-
 }

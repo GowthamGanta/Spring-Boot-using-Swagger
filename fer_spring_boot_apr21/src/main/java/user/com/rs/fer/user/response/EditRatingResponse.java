@@ -5,9 +5,13 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.response.AbstractResponse;
-import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class EditRatingResponse extends AbstractResponse {
 
 	public EditRatingResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -17,12 +21,8 @@ public class EditRatingResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
-
+	
 	private User user;
-
-	public User getUser() {
-		return user;
-	}
 
 	public void setRating(User reviewer) {
 		// TODO Auto-generated method stub

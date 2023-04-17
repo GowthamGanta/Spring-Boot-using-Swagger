@@ -5,6 +5,11 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SaveRatingResponse extends AbstractResponse {
 
 	public SaveRatingResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -14,7 +19,6 @@ public class SaveRatingResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
-
 	private User user; 
 
 	public User getUser() {

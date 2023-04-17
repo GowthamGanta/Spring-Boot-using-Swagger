@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.response.AbstractResponse;
 import com.rs.fer.user.entity.User;
 
-public class VerifyEmailResponse extends AbstractResponse {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class VerifyEmailResponse extends AbstractResponse {
 	
 	private User user;
 
@@ -24,15 +28,4 @@ public class VerifyEmailResponse extends AbstractResponse {
 		this.message = message;
 
 	}
-
-	public User getUser() {
-
-		return user;
-	}
-
-	public void setUser(User user) {
-
-		this.user = user;
-	}
-
 }
