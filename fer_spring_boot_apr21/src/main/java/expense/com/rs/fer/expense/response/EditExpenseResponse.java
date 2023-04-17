@@ -7,8 +7,13 @@ import org.springframework.http.HttpStatus;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.response.AbstractResponse;
 
-public class EditExpenseResponse extends AbstractResponse{
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class EditExpenseResponse extends AbstractResponse{
+	
 	private Expense expense;
 	
 	public EditExpenseResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
@@ -18,14 +23,4 @@ public class EditExpenseResponse extends AbstractResponse{
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
-
-	public Expense getExpense() {
-		return expense;
-	}
-
-	public void setExpense(Expense expense) {
-		this.expense = expense;
-	}
-	
-	
 }
