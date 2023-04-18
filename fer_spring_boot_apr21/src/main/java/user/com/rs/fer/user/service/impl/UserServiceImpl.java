@@ -494,7 +494,7 @@ public class UserServiceImpl implements UserService {
 		if (ratings != null && !ratings.isEmpty()) {
 			// success
 			response = new GetRatingResponse(HttpStatus.OK, "000", "Rating Done successfully ", null);
-			response.setRating(ratings);
+			response.setRatings(ratings);
 		} else {
 			// failure
 			response = new GetRatingResponse(HttpStatus.INTERNAL_SERVER_ERROR, "105", "Rating Fetch is failed", null);

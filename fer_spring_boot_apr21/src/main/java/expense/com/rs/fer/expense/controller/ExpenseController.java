@@ -51,7 +51,7 @@ public class ExpenseController {
 		return response;
 	}
 
-	@PutMapping("/getExpense")
+	@PostMapping("/getExpense")
 	public GetExpenseResponse getExpense(@RequestBody GetExpenseRequest request) {
 
 		GetExpenseResponse response = null;
@@ -68,7 +68,7 @@ public class ExpenseController {
 
 	}
 
-	@GetMapping("/expenseReport")
+	@PostMapping("/expenseReport")
 	public ExpenseReportResponse expenseReport(@RequestBody ExpenseReportRequest request) {
 
 		ExpenseReportResponse response = null;
@@ -124,7 +124,7 @@ public class ExpenseController {
 
 	}
 
-	@GetMapping("/getExpenseOptions")
+	@PostMapping("/getExpenseOptions")
 	public GetExpenseOptionsResponse getExpense(@RequestBody GetExpenseOptionsRequest request) {
 
 		GetExpenseOptionsResponse response = null;

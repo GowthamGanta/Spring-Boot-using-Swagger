@@ -48,7 +48,7 @@ public class MessageController {
 		return response;
 	}
 
-	@PutMapping("/getMessages")
+	@PostMapping("/getMessages")
 	public GetMessagesResponse getMessages(@RequestBody GetMessagesRequest request) {
 
 		GetMessagesResponse response = null;

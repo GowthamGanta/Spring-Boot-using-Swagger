@@ -43,7 +43,7 @@ public class ExpenseUtilImpl implements ExpenseUtil {
 		expense.setNumberOfItems(request.getNumberOfItems());
 		expense.setTotal(request.getTotal());
 		expense.setBywhom(request.getBywhom());
-
+        expense.setUserId(request.getUserId());
 		expense.setUpdated(DateUtil.getCurrentDate());
 
 		return expense;
