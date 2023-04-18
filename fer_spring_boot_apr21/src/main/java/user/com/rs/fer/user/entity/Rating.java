@@ -29,9 +29,9 @@ public class Rating {
 	
 	private int userId;
 	
-	private int created;
+	private String created;
 	
-	private int updated;
+	private String updated;
 	
 	public Rating() {
 

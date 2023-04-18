@@ -319,7 +319,7 @@ public class UserServiceImpl implements UserService {
 
 		// Ratings given already
 		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(), request.getReviewerId());
-		if (CollectionUtils.isEmpty(ratings)) {
+		if (!CollectionUtils.isEmpty(ratings)) {
 			return new SaveRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
 		}
 		// load vo to bean

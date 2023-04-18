@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import com.rs.fer.user.entity.Address;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.mapper.RegistrationRequestMapper;
+import com.rs.fer.user.mapper.SaveRatingRequestMapper;
+import com.rs.fer.user.mapper.UpdateUserRequestMapper;
 import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetRatingRequest;
@@ -26,16 +29,7 @@ public class UserUtilImpl implements UserUtil {
 	@Override
 	public User loadRegistrationRequestToUser(RegistrationRequest request) {
 
-		User user = new User();
-		// user
-
-		user.setFirstname(request.getFirstname());
-		user.setMiddlename(request.getMiddlename());
-		user.setLastname(request.getLastname());
-		user.setEmail(request.getEmail());
-		user.setUsername(request.getUsername());
-		user.setPassword(request.getPassword()); 
-		user.setMobile(request.getMobile());
+		User user = RegistrationRequestMapper.MAPPER.mapToUser(request);
 
 		user.setCreated(DateUtil.getCurrentDate());
 
@@ -80,28 +74,11 @@ public class UserUtilImpl implements UserUtil {
 
 	public User loadUpdateUserRequestToUser(UpdateUserRequest request) {
 
-		User user = new User();
-
-		user.setUserId(request.getUserId());
-		user.setFirstname(request.getFirstname());
-		user.setMiddlename(request.getMiddlename());
-		user.setLastname(request.getLastname());
-		user.setEmail(request.getEmail());
-		user.setUsername(request.getUsername());
-		user.setPassword(request.getPassword());
-		user.setMobile(request.getMobile());
-
+		User user = UpdateUserRequestMapper.MAPPER.mapToUser(request);
 		if (user.getAddress() == null) {
-			user.setAddress(new Address());
-			user.getAddress().setCreated(DateUtil.getCurrentDate()); 
-			user.getAddress().setAddressId(request.getAddressId());
-			user.getAddress().setLineone(request.getLineone());
-			user.getAddress().setLinetwo(request.getLinetwo());
-			user.getAddress().setCity(request.getCity());
-			user.getAddress().setState(request.getState());
-			user.getAddress().setPincode(request.getPincode());
-			user.getAddress().setCountry(request.getCountry());
-
+			Address address = UpdateUserRequestMapper.MAPPER.mapToAddress(request);
+			address.setCreated(DateUtil.getCurrentDate());
+            user.setAddress(address);
 		} else {
 			user.getAddress().setUpdated(DateUtil.getCurrentDate());
 
@@ -116,12 +93,9 @@ public class UserUtilImpl implements UserUtil {
 	
 	public Rating loadSaveRatingRequestToUserId(SaveRatingRequest request) {
 		
-		Rating rating = new Rating();
-
-		rating.setComments(request.getComments());
-		rating.setRating(request.getRating());
-        rating.setReviewedBy(request.getReviewerId());
-        request.setUserId(request.getUserId());
+		Rating rating = SaveRatingRequestMapper.MAPPER.mapToRating(request);
+		rating.setCreated(DateUtil.getCurrentDate());
+		rating.setUpdated("");
         
 		return rating;
 	}
