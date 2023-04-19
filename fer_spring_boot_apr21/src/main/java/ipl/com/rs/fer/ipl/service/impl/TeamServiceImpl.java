@@ -41,6 +41,16 @@ public class TeamServiceImpl implements TeamService {
 					"Team is already find with the given ", null);
 			return response;
 		}
+		List<Team> teams1 = teamRepository.findByTeamCode(request.getTeamCode());
+
+		if (!CollectionUtils.isEmpty(teams1)) {
+
+			// Team already present given Name or Not
+			response = new SaveTeamResponse(HttpStatus.PRECONDITION_FAILED, "002",
+					"Team already find with given team Code", null);
+
+			return response;
+		}
 
 		// load vo to bean
 		Team team = teamUtil.loadSaveTeamRequestToTeam(request);
@@ -143,7 +153,7 @@ public class TeamServiceImpl implements TeamService {
 
 			return response;
 		}
-		
+
 		List<Team> team1 = teamRepository.findByNameAndTeamIdNot(request.getName(), request.getTeamId());
 
 		if (!CollectionUtils.isEmpty(team1)) {
@@ -154,7 +164,6 @@ public class TeamServiceImpl implements TeamService {
 
 			return response;
 		}
-
 
 		if (!teamObj.isEmpty()) {
 

@@ -11,6 +11,8 @@ import com.rs.fer.ipl.entity.Team;
 public interface TeamRepository extends JpaRepository<Team, Integer> {
 
 	List<Team> findByName(String Name);
+	
+	List<Team> findByTeamCode(String TeamCode);
 
 	List<Team> findByTeamId(int teamId);
 	

@@ -3,9 +3,12 @@ package com.rs.fer.ipl.util.impl;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.entity.Team;
+import com.rs.fer.ipl.mapper.EditTeamRequestMapper;
+import com.rs.fer.ipl.mapper.SaveTeamRequestMapper;
 import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.util.TeamUtil;
+import com.rs.fer.user.mapper.RegistrationRequestMapper;
 import com.rs.fer.util.DateUtil;
 
 @Component
@@ -14,11 +17,7 @@ public class TeamUtilImpl implements TeamUtil {
 	@Override
 	public Team loadSaveTeamRequestToTeam(SaveTeamRequest request) {
 
-		Team team = new Team();
-
-		team.setName(request.getName());
-		team.setTeamCode(request.getTeamCode());
-		team.setTeamCode(request.getTeamCode());
+		Team team = SaveTeamRequestMapper.MAPPER.mapToTeam(request);
 
 		team.setCreated(DateUtil.getCurrentDate());
 		team.setUpdated(DateUtil.getCurrentDate());
@@ -29,12 +28,9 @@ public class TeamUtilImpl implements TeamUtil {
 	@Override
 	public Team loadEditTeamRequestToTeam(EditTeamRequest request) {
 
-		Team team = new Team();
+		Team team = EditTeamRequestMapper.MAPPER.mapToTeam(request);
 
-		team.setTeamId(request.getTeamId());
-		team.setName(request.getName());
-		team.setTeamCode(request.getTeamCode());
-
+		
 		team.setCreated(DateUtil.getCurrentDate());
 		team.setUpdated(DateUtil.getCurrentDate());
 
