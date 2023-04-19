@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class EditRatingRequest {
 
+	private int ratingId;
+	
 	private String comments;
 
 	private int rating;

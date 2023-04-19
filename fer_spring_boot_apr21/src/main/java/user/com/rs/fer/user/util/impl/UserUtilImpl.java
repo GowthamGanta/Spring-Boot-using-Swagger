@@ -1,5 +1,6 @@
 package com.rs.fer.user.util.impl;
 
+import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.rs.fer.user.entity.Address;
 import com.rs.fer.user.entity.Rating;
 import com.rs.fer.user.entity.User;
+import com.rs.fer.user.mapper.EditRatingRequestMapper;
 import com.rs.fer.user.mapper.RegistrationRequestMapper;
 import com.rs.fer.user.mapper.SaveRatingRequestMapper;
 import com.rs.fer.user.mapper.UpdateUserRequestMapper;
@@ -96,18 +98,14 @@ public class UserUtilImpl implements UserUtil {
 		Rating rating = SaveRatingRequestMapper.MAPPER.mapToRating(request);
 		rating.setCreated(DateUtil.getCurrentDate());
 		rating.setUpdated("");
-        
 		return rating;
 	}
 
 	@Override
 	public Rating loadEditRatingRequestToUserId(EditRatingRequest request) {
-		Rating rating = new Rating();
-
-		rating.setComments(request.getComments());
-		rating.setRating(request.getRating());
-        rating.setReviewedBy(request.getReviewerId());
-        request.setUserId(request.getUserId());
+		
+		Rating rating = EditRatingRequestMapper.MAPPER.mapToRating(request);
+        rating.setUpdated(DateUtil.getCurrentDate());
         
 		return rating;
 	}

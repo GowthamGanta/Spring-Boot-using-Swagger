@@ -328,7 +328,7 @@ public class UserServiceImpl implements UserService {
 		// save bean to database
 		rating = ratingRepository.save(rating);
 		// load response
-		if (rating.getUserId() > 0) {
+		if (rating.getId() > 0) {
 			// success
 			response = new SaveRatingResponse(HttpStatus.OK, "000", "Rating saved successfully ", null);
 			response.setRating(reviewer);
@@ -356,6 +356,7 @@ public class UserServiceImpl implements UserService {
 
 		// User is blocked
 		User user = userObj.get();
+		
 		if ("Y".equals(user.getBlockStatus())) {
 			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "102", "User is blocked", null);
 		}
@@ -375,7 +376,7 @@ public class UserServiceImpl implements UserService {
 		// Ratings given already
 		List<Rating> ratings = ratingRepository.findByUserIdAndReviewedBy(request.getUserId(), request.getReviewerId());
 		if (CollectionUtils.isEmpty(ratings)) {
-			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "Rating given already", null);
+			return new EditRatingResponse(HttpStatus.PRECONDITION_FAILED, "105", "No Rating found", null);
 		}
 		// load vo to bean
 		Rating rating = userUtil.loadEditRatingRequestToUserId(request);

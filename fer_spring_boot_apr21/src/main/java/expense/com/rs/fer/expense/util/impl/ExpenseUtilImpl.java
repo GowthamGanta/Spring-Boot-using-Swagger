@@ -3,6 +3,8 @@ package com.rs.fer.expense.util.impl;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.expense.mapper.AddExpenseRequestMapper;
+import com.rs.fer.expense.mapper.EditExpenseRequestMapper;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
@@ -16,15 +18,7 @@ public class ExpenseUtilImpl implements ExpenseUtil {
 	@Override
 	public Expense loadAddExpenseRequestToExpense(AddExpenseRequest request) {
 
-		Expense expense = new Expense();
-		expense.setType(request.getType());
-		expense.setDate(request.getDate());
-		expense.setPrice(request.getPrice());
-		expense.setNumberOfItems(request.getNumberOfItems());
-		expense.setTotal(request.getTotal());
-		expense.setBywhom(request.getBywhom());
-		expense.setUserId(request.getUserId());
-
+		Expense expense = AddExpenseRequestMapper.MAPPER.mapToExpense(request);
 		expense.setCreated(DateUtil.getCurrentDate());
 
 		return expense;
@@ -33,17 +27,7 @@ public class ExpenseUtilImpl implements ExpenseUtil {
 	@Override
 	public Expense loadEditExpenseRequestToExpense(EditExpenseRequest request) {
 
-		Expense expense = new Expense();
-
-		expense.setExpenseId(request.getExpenseId());
-		expense.setExpenseId(request.getExpenseId());
-		expense.setType(request.getType());
-		expense.setDate(request.getDate());
-		expense.setPrice(request.getPrice());
-		expense.setNumberOfItems(request.getNumberOfItems());
-		expense.setTotal(request.getTotal());
-		expense.setBywhom(request.getBywhom());
-        expense.setUserId(request.getUserId());
+		Expense expense = EditExpenseRequestMapper.MAPPER.mapToExpense(request);
 		expense.setUpdated(DateUtil.getCurrentDate());
 
 		return expense;
