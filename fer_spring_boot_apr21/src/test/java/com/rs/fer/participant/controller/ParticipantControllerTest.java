@@ -13,16 +13,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.follow.request.DeletefollowerRequest;
-import com.rs.fer.follow.request.GetFollowersRequest;
-import com.rs.fer.follow.request.SaveFollowerRequest;
-import com.rs.fer.follow.response.DeletefollowerResponse;
-import com.rs.fer.follow.response.GetFollowersResponse;
-import com.rs.fer.follow.response.SaveFollowerResponse;
-import com.rs.fer.follow.service.FollowerService;
-import com.rs.fer.follow.validation.FollowValidation;
-import com.rs.fer.message.request.DeleteMessageRequest;
-import com.rs.fer.message.response.DeleteMessageResponse;
 import com.rs.fer.participant.request.DeleteParticipantRequest;
 import com.rs.fer.participant.request.SaveParticipantRequest;
 import com.rs.fer.participant.response.DeleteParticipantResponse;
