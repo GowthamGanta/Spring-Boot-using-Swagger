@@ -3,8 +3,6 @@ package com.rs.fer.participant.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -13,26 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.follow.entity.Follow;
-import com.rs.fer.follow.request.DeletefollowerRequest;
-import com.rs.fer.follow.request.GetFollowersRequest;
-import com.rs.fer.follow.request.SaveFollowerRequest;
-import com.rs.fer.follow.response.DeletefollowerResponse;
-import com.rs.fer.follow.response.GetFollowersResponse;
-import com.rs.fer.follow.response.SaveFollowerResponse;
-import com.rs.fer.follow.service.FollowerService;
-import com.rs.fer.follow.util.FollowerUtil;
-import com.rs.fer.follower.repository.FollowerRepository;
 import com.rs.fer.group.entity.Group;
 import com.rs.fer.group.repository.GroupRepository;
-import com.rs.fer.group.request.DeleteGroupRequest;
-import com.rs.fer.group.request.GetGroupRequest;
-import com.rs.fer.group.request.SaveGroupRequest;
-import com.rs.fer.group.response.DeleteGroupResponse;
-import com.rs.fer.group.response.GetGroupResponse;
-import com.rs.fer.group.response.SaveGroupResponse;
-import com.rs.fer.group.service.GroupService;
-import com.rs.fer.group.util.GroupUtil;
 import com.rs.fer.participant.Participant;
 import com.rs.fer.participant.repository.ParticipantRepository;
 import com.rs.fer.participant.request.DeleteParticipantRequest;
@@ -41,9 +21,7 @@ import com.rs.fer.participant.response.DeleteParticipantResponse;
 import com.rs.fer.participant.response.SaveParticipantResponse;
 import com.rs.fer.participant.service.ParticipantService;
 import com.rs.fer.participant.util.ParticipantUtil;
-import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
-import com.rs.fer.user.util.UserUtil;
 
 @SpringBootTest
 public class ParticipantServiceImplTest {
