@@ -8,10 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.follow.request.DeletefollowerRequest;
-import com.rs.fer.follow.request.GetFollowersRequest;
-import com.rs.fer.follow.request.SaveFollowerRequest;
-import com.rs.fer.follow.validation.Impl.FollowValidationImpl;
 import com.rs.fer.group.request.DeleteGroupRequest;
 import com.rs.fer.group.request.GetGroupRequest;
 import com.rs.fer.group.request.SaveGroupRequest;
