@@ -13,7 +13,7 @@ import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.GetTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 
-@SpringBootTest
+@SpringBootTest 
 public class TeamValidationImplTest {
 
 	@InjectMocks
