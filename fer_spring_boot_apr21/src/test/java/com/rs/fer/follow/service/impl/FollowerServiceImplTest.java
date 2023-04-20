@@ -23,9 +23,6 @@ import com.rs.fer.follow.response.SaveFollowerResponse;
 import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.util.FollowerUtil;
 import com.rs.fer.follower.repository.FollowerRepository;
-import com.rs.fer.message.entity.Message;
-import com.rs.fer.message.request.DeleteMessageRequest;
-import com.rs.fer.message.response.DeleteMessageResponse;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
@@ -319,9 +316,7 @@ public class FollowerServiceImplTest {
 		GetFollowersRequest request = new GetFollowersRequest();
 		//request.setUserId(1);
 		List<Follow> followers = new ArrayList<Follow>(1);
-		Follow follow = new Follow();
-		//follow.setUserId(5);
-		//followers.add(follow);
+		
 
 		// mock
 
