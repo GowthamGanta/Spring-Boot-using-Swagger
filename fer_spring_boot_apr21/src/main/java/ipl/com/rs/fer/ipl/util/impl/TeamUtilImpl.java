@@ -8,7 +8,6 @@ import com.rs.fer.ipl.mapper.SaveTeamRequestMapper;
 import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.util.TeamUtil;
-import com.rs.fer.user.mapper.RegistrationRequestMapper;
 import com.rs.fer.util.DateUtil;
 
 @Component
