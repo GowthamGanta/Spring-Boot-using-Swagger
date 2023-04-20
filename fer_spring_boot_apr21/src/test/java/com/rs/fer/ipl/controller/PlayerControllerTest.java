@@ -74,7 +74,7 @@ public class PlayerControllerTest {
 	public void testDeletePlayer() {
 		int playerId = 0;
 		Set<String> errorMessages = new LinkedHashSet<>();
-		DeletePlayerRequest request = new DeletePlayerRequest();
+		new DeletePlayerRequest();
 		DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK, "000", "", null);
 
 		when(playerValidation.validateDeletePlayerRequest(Mockito.anyInt())).thenReturn(errorMessages);
@@ -92,9 +92,7 @@ public class PlayerControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("please enter Id");
 
-		DeletePlayerRequest request = new DeletePlayerRequest();
-		// DeletePlayerResponse response = new DeletePlayerResponse(HttpStatus.OK,
-		// "000", "", null);
+		new DeletePlayerRequest();
 
 		when(playerValidation.validateDeletePlayerRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		// when(playerService.deletePlayer(Mockito.anyInt())).thenReturn(response);
@@ -110,7 +108,7 @@ public class PlayerControllerTest {
 
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		GetPlayerRequest request = new GetPlayerRequest();
+		new GetPlayerRequest();
 		GetPlayerResponse response = new GetPlayerResponse(HttpStatus.OK, "000", "", null);
 
 		when(playerValidation.validateGetPlayerRequest(Mockito.any())).thenReturn(errorMessages);
@@ -129,7 +127,7 @@ public class PlayerControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter PlayerId");
 
-		GetPlayerRequest request = new GetPlayerRequest();
+		new GetPlayerRequest();
 
 		// When
 		when(playerValidation.validateGetPlayerRequest(Mockito.any())).thenReturn(errorMessages);

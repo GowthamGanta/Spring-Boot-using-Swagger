@@ -52,7 +52,7 @@ public class TeamValidationImplTest {
 	@Test
 	public void testvalidateGetTeamRequest() {
 
-		GetTeamRequest request = new GetTeamRequest();
+		new GetTeamRequest();
 		int teamId = 1;
 		Set<String> errorMessages = teamValidationImpl.validateGetTeamRequest(teamId);
 		boolean isExpectedEmpty = true;
@@ -66,7 +66,7 @@ public class TeamValidationImplTest {
 
 	public void testvalidateGetTeamRequestFailure() {
 
-		GetTeamRequest request = new GetTeamRequest();
+		new GetTeamRequest();
 
 		int teamId = 0;
 
