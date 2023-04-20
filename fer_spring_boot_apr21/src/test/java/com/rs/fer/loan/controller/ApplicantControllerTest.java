@@ -13,18 +13,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.loan.request.GetApplicantRequest;
-
-import com.rs.fer.loan.entity.LoanAccount;
-import com.rs.fer.loan.request.GetLoanAccountRequest;
-import com.rs.fer.loan.request.GetLoanAccountStatusRequest;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
 import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
-
 import com.rs.fer.loan.response.GetLoanAccountResponse;
-
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
@@ -121,17 +114,12 @@ public class ApplicantControllerTest {
 
 	private String status;
 
-	private GetApplicantResponse getApplicantResponse;
-
-	private Set<String> applicantId;
-	private Set<String> loanAccountId;
-
 	@Test
 	public void testGetStatus() {
 
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
+		
 		GetLoanAccountStatusResponse response = new GetLoanAccountStatusResponse(HttpStatus.OK, "000", "", null);
 
 		when(applicantValidation.validateGetLoanAccountStatusRequest(Mockito.any())).thenReturn(errorMessages);
@@ -148,7 +136,6 @@ public class ApplicantControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter Status");
 
-		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
 
 		when(applicantValidation.validateGetLoanAccountStatusRequest(Mockito.any())).thenReturn(errorMessages);
 
@@ -199,7 +186,6 @@ public class ApplicantControllerTest {
 	public void testGetApplicantId() {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-		GetApplicantRequest request = new GetApplicantRequest();
 		GetApplicantResponse response = new GetApplicantResponse(HttpStatus.OK, "000", "", null);
 
 		when(applicantValidation.validateGetApplicantRequest(Mockito.anyInt())).thenReturn(errorMessages);
@@ -217,7 +203,6 @@ public class ApplicantControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter applicantId");
 
-		GetApplicantRequest request = new GetApplicantRequest();
 
 		when(applicantValidation.validateGetApplicantRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		Integer applicantId = 0;
@@ -230,7 +215,7 @@ public class ApplicantControllerTest {
 	public void testGetLoanAccountId() {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-		GetLoanAccountRequest request = new GetLoanAccountRequest();
+		
 		GetLoanAccountResponse response = new GetLoanAccountResponse(HttpStatus.OK, "000", "", null);
 
 		when(applicantValidation.validateGetLoanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
@@ -248,7 +233,6 @@ public class ApplicantControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter loanAccountId");
 
-		GetLoanAccountRequest request = new GetLoanAccountRequest();
 
 		when(applicantValidation.validateGetLoanAccountRequest(Mockito.anyInt())).thenReturn(errorMessages);
 		Integer loanAccountId = 0;
