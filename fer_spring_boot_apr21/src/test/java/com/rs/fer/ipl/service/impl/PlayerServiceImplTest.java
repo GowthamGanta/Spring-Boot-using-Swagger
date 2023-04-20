@@ -19,7 +19,6 @@ import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.PlayerRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.DeletePlayerRequest;
-import com.rs.fer.ipl.request.GetPlayerRequest;
 import com.rs.fer.ipl.request.SavePlayerRequest;
 import com.rs.fer.ipl.request.UpdatePlayerRequest;
 import com.rs.fer.ipl.response.DeletePlayerResponse;
@@ -175,7 +174,6 @@ public class PlayerServiceImplTest {
 	@Test
 	public void testDeletePlayerFailure() {
 		int playerId = 0;
-		Player player = new Player();
 		// player.setPlayerId(1);
 		Optional<Player> playerObj = Optional.empty();
 		// errorMessages.add("please enter Id");
@@ -218,9 +216,6 @@ public class PlayerServiceImplTest {
 		// Team teams = new Team();
 		// Mock
 		when(playerRepository.findById(Mockito.anyInt())).thenReturn(players);
-
-		// 1.
-		GetPlayerRequest request = new GetPlayerRequest();
 
 		// 2.
 		int playerId = 0;

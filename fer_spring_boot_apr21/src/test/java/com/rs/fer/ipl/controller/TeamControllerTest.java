@@ -36,8 +36,6 @@ public class TeamControllerTest {
 	@Mock
 	TeamService teamService;
 
-	private Object teamId;
-
 	@Test
 	public void testSaveTeam() {
 
@@ -76,7 +74,7 @@ public class TeamControllerTest {
 	public void testGetTeamId() {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
-		GetTeamRequest request = new GetTeamRequest();
+		new GetTeamRequest();
 		GetTeamResponse response = new GetTeamResponse(HttpStatus.OK, "000", "", null);
 
 		when(teamValidation.validateGetTeamRequest(Mockito.anyInt())).thenReturn(errorMessages);
@@ -95,8 +93,6 @@ public class TeamControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 
 		errorMessages.add("Please enter TeamId");
-
-		GetTeamRequest request = new GetTeamRequest();
 
 		// When
 		when(teamValidation.validateGetTeamRequest(Mockito.anyInt())).thenReturn(errorMessages);
