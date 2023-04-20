@@ -8,9 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.message.entity.Message;
 import com.rs.fer.message.entity.MessageThread;
-import com.rs.fer.message.request.DeleteMessageRequest;
 import com.rs.fer.message.request.SaveMessageRequest;
-import com.rs.fer.message.request.UpdateMessageRequest;
 
 @SpringBootTest
 public class MessageUtilImplTest {
