@@ -1,6 +1,5 @@
 package com.rs.fer.user.util.impl;
 
-import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.UUID;
