@@ -18,12 +18,12 @@ public class PlayerValidationImplTest {
 
 	@InjectMocks
 	PlayerValidationImpl playerValidationImpl;
-  
+
 	@Test
 	public void testValidateSavePlayerRequest() {
 
 		SavePlayerRequest request = new SavePlayerRequest();
-		request.setFirstName("Dhoni"); 
+		request.setFirstName("Dhoni");
 		request.setMiddleName("Mahi");
 		request.setLastName("MS");
 		request.setGender('M');
