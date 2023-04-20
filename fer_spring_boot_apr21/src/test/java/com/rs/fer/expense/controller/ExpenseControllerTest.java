@@ -232,7 +232,7 @@ public class ExpenseControllerTest {
 		when(expenseValidation.validateExpenseReportRequest(Mockito.any())).thenReturn(errorMessages);
 		when(expenseService.expenseReport(Mockito.any())).thenReturn(response);
 		
-		ExpenseReportResponse ExpenseReportResponse = expenseController.expenseReport(request);
+		expenseController.expenseReport(request);
 
 		assertEquals("000", response.statusCode);
 
