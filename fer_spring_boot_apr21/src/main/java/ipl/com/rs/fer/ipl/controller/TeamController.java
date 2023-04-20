@@ -86,7 +86,7 @@ public class TeamController {
 
 	}
 
-	@GetMapping("/ipl/getTeams/{}")
+	@GetMapping("/ipl/getTeams")
 	public GetTeamsResponse getTeams() {
 
 		GetTeamsResponse response = null;
