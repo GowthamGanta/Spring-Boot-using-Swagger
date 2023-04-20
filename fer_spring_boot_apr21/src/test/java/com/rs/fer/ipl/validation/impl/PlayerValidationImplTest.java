@@ -18,7 +18,7 @@ public class PlayerValidationImplTest {
 
 	@InjectMocks
 	PlayerValidationImpl playerValidationImpl;
- 
+  
 	@Test
 	public void testValidateSavePlayerRequest() {
 
