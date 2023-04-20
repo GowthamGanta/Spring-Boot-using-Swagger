@@ -16,7 +16,7 @@ import com.rs.fer.ipl.request.SaveTeamRequest;
 @SpringBootTest 
 public class TeamValidationImplTest {
 
-	@InjectMocks
+	@InjectMocks 
 	TeamValidationImpl teamValidationImpl;
 
 	@Test
