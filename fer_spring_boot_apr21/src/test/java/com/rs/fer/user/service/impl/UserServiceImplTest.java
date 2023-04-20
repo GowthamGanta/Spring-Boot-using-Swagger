@@ -993,7 +993,6 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testDeleteRatingUserNotFound() {
-		Optional<User> userObj = Optional.empty();
 
 		DeleteRatingRequest request = new DeleteRatingRequest();
 
