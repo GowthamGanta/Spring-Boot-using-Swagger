@@ -1,7 +1,6 @@
 package com.rs.fer.ipl.util.impl;
 
 import org.springframework.stereotype.Component;
-
 import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.mapper.SavePlayerRequestMapper;
 import com.rs.fer.ipl.mapper.UpdatePlayerRequestMapper;
