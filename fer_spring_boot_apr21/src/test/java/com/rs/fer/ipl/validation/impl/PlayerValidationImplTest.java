@@ -66,7 +66,7 @@ public class PlayerValidationImplTest {
 	@Test
 	public void testValidateDeletePlayerRequest() {
 
-		DeletePlayerRequest request = new DeletePlayerRequest();
+		new DeletePlayerRequest();
 
 		int playerId = 1;
 		Set<String> errorMessages = playerValidationImpl.validateDeletePlayerRequest(playerId);
@@ -80,7 +80,7 @@ public class PlayerValidationImplTest {
 	@Test
 	public void testValidateDeletePlayerRequestFailure() {
 
-		DeletePlayerRequest request = new DeletePlayerRequest();
+		new DeletePlayerRequest();
 
 		int playerId = 0;
 		Set<String> errorMessages = playerValidationImpl.validateDeletePlayerRequest(playerId);
@@ -94,7 +94,7 @@ public class PlayerValidationImplTest {
 	@Test
 	public void testvalidateGetPlayerRequest() {
 
-		GetPlayerRequest request = new GetPlayerRequest();
+		new GetPlayerRequest();
 
 		int playerId = 1;
 		Set<String> errorMessages = playerValidationImpl.validateGetPlayerRequest(playerId);
@@ -111,7 +111,7 @@ public class PlayerValidationImplTest {
 
 	public void testvalidateGetPlayerRequestFailure() {
 
-		GetPlayerRequest request = new GetPlayerRequest();
+		new GetPlayerRequest();
 
 		int playerId = 0;
 
