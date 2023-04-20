@@ -17,8 +17,6 @@ public class ApplicantValidationImplTest {
 
 	@InjectMocks
 	private ApplicantValidationImpl applicantValidationImpl;
-	private Object loanAccountId;
-
 	@Test
 	public void testValidateLoanAccountApprove() {
 
@@ -103,10 +101,7 @@ public class ApplicantValidationImplTest {
 	@Test
 	public void testvalidateGetLoanAccountStatusRequestFailure() {
 
-		GetLoanAccountStatusRequest request = new GetLoanAccountStatusRequest();
-
-		String P = null;
-		// request.setStatus(P);
+		new GetLoanAccountStatusRequest();
 
 		Set<String> errorMessages = applicantValidationImpl.validateGetLoanAccountStatusRequest(toString());
 
