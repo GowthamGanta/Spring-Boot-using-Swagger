@@ -140,8 +140,7 @@ public class TeamServiceImplTest {
 		// Mock
 		when(teamRepository.findById(Mockito.anyInt())).thenReturn(teams);
 
-		// 1.
-		GetTeamRequest request = new GetTeamRequest();
+		new GetTeamRequest();
 
 		// 2.
 		int teamId = 0;
@@ -218,8 +217,6 @@ public class TeamServiceImplTest {
 		List<Team> team = new ArrayList<Team>();
 
 		Team teams = new Team();
-
-		Optional<Team> teamObj = Optional.of(teams);
 
 		when(teamRepository.findByTeamId(Mockito.anyInt())).thenReturn(team);
 
