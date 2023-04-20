@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.response.AbstractResponse;
 
 public class DeletePlayerResponse extends AbstractResponse {
