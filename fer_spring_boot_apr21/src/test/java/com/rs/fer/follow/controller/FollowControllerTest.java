@@ -21,8 +21,6 @@ import com.rs.fer.follow.response.GetFollowersResponse;
 import com.rs.fer.follow.response.SaveFollowerResponse;
 import com.rs.fer.follow.service.FollowerService;
 import com.rs.fer.follow.validation.FollowValidation;
-import com.rs.fer.message.request.DeleteMessageRequest;
-import com.rs.fer.message.response.DeleteMessageResponse;
 
 @SpringBootTest
 public class FollowControllerTest {
