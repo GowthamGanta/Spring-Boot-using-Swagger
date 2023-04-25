@@ -73,20 +73,29 @@ public class UserUtilImpl implements UserUtil {
 
 	@Override
 
-	public User loadUpdateUserRequestToUser(UpdateUserRequest request) {
+	public User loadUpdateUserRequestToUser(UpdateUserRequest request, User user) {
 
-		User user = UpdateUserRequestMapper.MAPPER.mapToUser(request);
-		if (user.getAddress() == null) {
-			Address address = UpdateUserRequestMapper.MAPPER.mapToAddress(request);
-			address.setCreated(DateUtil.getCurrentDate());
-            user.setAddress(address);
-		} else {
-			user.getAddress().setUpdated(DateUtil.getCurrentDate());
-
-		}
-
-		user.setUpdated(DateUtil.getCurrentDate());
-		return user;
+		    user = UpdateUserRequestMapper.MAPPER.mapToUser(request, user);
+		    user.setUpdated(DateUtil.getCurrentDate());
+		    
+		    Address address  = null;
+		    if(user.getAddress()==null) {
+		      address  = new Address();
+		    }else {
+			  address = user.getAddress();
+		    }
+			address = UpdateUserRequestMapper.MAPPER.mapToAddress(request,address);
+		    
+            user.setAddress(address);	
+            if(request.getAddressId()==0) {
+            	address.setCreated(DateUtil.getCurrentDate());
+            } else {
+            	address.setUpdated(DateUtil.getCurrentDate());
+            }
+	        
+           
+            
+            return user;
 
 	}
 

@@ -10,7 +10,7 @@ public interface ExpenseUtil {
 
 	Expense loadAddExpenseRequestToExpense(AddExpenseRequest request);
 
-	Expense loadEditExpenseRequestToExpense(EditExpenseRequest request);
+	Expense loadEditExpenseRequestToExpense(EditExpenseRequest request, Expense expense);
 
 	Expense loadDeleteExpenseRequestToExpense(DeleteExpenseRequest request);
 

@@ -191,7 +191,7 @@ public class UserServiceImpl implements UserService {
 		UpdateUserResponse response = null;
 
 		// User is present or not check
-		List<User> users = userRepository.findByEmail(request.getEmail());
+		List<User> users = userRepository.findByEmailAndUserIdNot(request.getEmail(),request.getUserId());
 
 		if (!CollectionUtils.isEmpty(users)) {
 			// User already present
@@ -206,8 +206,9 @@ public class UserServiceImpl implements UserService {
 
 			// load vo to bean
 
-			User user = userUtil.loadUpdateUserRequestToUser(request);
-
+			User user = userObj.get();
+			
+			user = userUtil.loadUpdateUserRequestToUser(request, user);
 			// save bean to database
 			user = userRepository.save(user);
 

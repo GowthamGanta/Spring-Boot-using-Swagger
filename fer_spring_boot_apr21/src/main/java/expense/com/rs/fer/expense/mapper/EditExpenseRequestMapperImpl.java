@@ -12,13 +12,11 @@ import javax.annotation.Generated;
 public class EditExpenseRequestMapperImpl implements EditExpenseRequestMapper {
 
     @Override
-    public Expense mapToExpense(EditExpenseRequest request) {
+    public Expense mapToExpense(EditExpenseRequest request, Expense expense) {
         if ( request == null ) {
             return null;
         }
-
-        Expense expense = new Expense();
-
+        
         expense.setExpenseId( request.getExpenseId() );
         expense.setType( request.getType() );
         expense.setDate( request.getDate() );

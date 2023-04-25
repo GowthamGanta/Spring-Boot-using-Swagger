@@ -13,7 +13,7 @@ public interface UpdateUserRequestMapper {
 
 	UpdateUserRequestMapper MAPPER = Mappers.getMapper(UpdateUserRequestMapper.class);
 
-	  User mapToUser(UpdateUserRequest request);
+	  User mapToUser(UpdateUserRequest request, User user);
 	  
-	  Address mapToAddress(UpdateUserRequest request);
+	  Address mapToAddress(UpdateUserRequest request,Address address);
 }

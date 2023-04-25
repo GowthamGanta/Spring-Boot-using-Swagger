@@ -25,9 +25,9 @@ public class ExpenseUtilImpl implements ExpenseUtil {
 	}
 
 	@Override
-	public Expense loadEditExpenseRequestToExpense(EditExpenseRequest request) {
+	public Expense loadEditExpenseRequestToExpense(EditExpenseRequest request, Expense expense) {
 
-		Expense expense = EditExpenseRequestMapper.MAPPER.mapToExpense(request);
+	    expense = EditExpenseRequestMapper.MAPPER.mapToExpense(request,expense);
 		expense.setUpdated(DateUtil.getCurrentDate());
 
 		return expense;

@@ -20,7 +20,7 @@ public interface UserUtil {
 
 	User loadResetPasswordRequestToUser(ResetPasswordRequest request);
 
-	User loadUpdateUserRequestToUser(UpdateUserRequest request);
+	User loadUpdateUserRequestToUser(UpdateUserRequest request, User user1);
 
 	Rating loadSaveRatingRequestToUserId(SaveRatingRequest request);
 

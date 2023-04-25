@@ -11,5 +11,5 @@ public interface EditExpenseRequestMapper {
 
 	EditExpenseRequestMapper  MAPPER  = Mappers.getMapper(EditExpenseRequestMapper.class) ;
 	
-	Expense mapToExpense(EditExpenseRequest request);
+	Expense mapToExpense(EditExpenseRequest request, Expense expense);
 }

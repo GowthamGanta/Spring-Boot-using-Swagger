@@ -166,15 +166,7 @@ public class ExpenseServiceImplTest {
 
 		Expense expense = new Expense();
 		expense.setUserId(1);
-
-		Optional<Expense> expenseObj = Optional.of(expense);
-
-		// Mock
-		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
-		when(expenseRepository.save(Mockito.any())).thenReturn(expense);
-		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any())).thenReturn(expense);
-
-		// 1.
+		
 		EditExpenseRequest request = new EditExpenseRequest();
 		request.setType("tea");
 		request.setDate("28-09-2022");
@@ -182,6 +174,15 @@ public class ExpenseServiceImplTest {
 		request.setNumberOfItems(3);
 		request.setTotal(30);
 		request.setBywhom("rs");
+		
+		Optional<Expense> expenseObj = Optional.of(expense);
+
+		// Mock
+		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
+		
+		when(expenseRepository.save(Mockito.any())).thenReturn(expense);
+		
+		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any(),Mockito.any())).thenReturn(expense);
 
 		// 2.
 		EditExpenseResponse response = expenseServiceImpl.editExpense(request);
@@ -201,7 +202,7 @@ public class ExpenseServiceImplTest {
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
 		when(expenseRepository.save(Mockito.any())).thenReturn(expense);
-		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any())).thenReturn(expense);
+		when(expenseUtil.loadEditExpenseRequestToExpense(Mockito.any(),Mockito.any())).thenReturn(expense);
 
 		// 1.
 		EditExpenseRequest request = new EditExpenseRequest();

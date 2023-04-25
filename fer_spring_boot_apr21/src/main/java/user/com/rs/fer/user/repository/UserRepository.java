@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	List<User> findByBlockStatus(String BlockStatus);
 
+	List<User> findByEmailAndUserIdNot(String email, int userId);
+
 }

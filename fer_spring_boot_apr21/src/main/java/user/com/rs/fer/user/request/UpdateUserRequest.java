@@ -24,10 +24,6 @@ public class UpdateUserRequest {
 	
 	private String email;
 	
-	private String username;
-	
-	private String password;
-	
 	private String mobile;
 	
 	private int addressId;
@@ -44,5 +40,4 @@ public class UpdateUserRequest {
 	
 	private String country;
 	
-	private String created;
 }

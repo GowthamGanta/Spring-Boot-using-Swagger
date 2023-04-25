@@ -54,9 +54,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 		Optional<Expense> expenseObj = expenseRepository.findById(request.getExpenseId());
 
 		if (expenseObj.isPresent()) { 
-
+ 
+			Expense expense = expenseObj.get();
 			// load vo to bean
-			Expense expense = expenseUtil.loadEditExpenseRequestToExpense(request);
+			 expense = expenseUtil.loadEditExpenseRequestToExpense(request, expense);
 
 			// save bean to database
 			expense = expenseRepository.save(expense); 

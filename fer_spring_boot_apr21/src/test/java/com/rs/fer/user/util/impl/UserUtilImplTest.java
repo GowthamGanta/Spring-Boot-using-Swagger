@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.user.entity.Rating;
@@ -116,7 +117,11 @@ public class UserUtilImplTest {
 
 	@Test
 	public void testUpdateUserUtil() {
-
+		
+	    User user = new User();
+	    user.setUsername("Admin");
+	    user.setPassword("Admin");
+	    
 		UpdateUserRequest request = new UpdateUserRequest();
 
 		request.setUserId(1);
@@ -125,11 +130,7 @@ public class UserUtilImplTest {
 		request.setMiddlename("rs");
 		request.setLastname("suda");
 		request.setEmail("admin@rs.com");
-		request.setUsername("admin");
-		request.setPassword("rss");
 		request.setMobile("4545454545");
-
-		request.setCreated("created");
 		request.setAddressId(1);
 
 		request.setLineone("madhapur");
@@ -140,7 +141,7 @@ public class UserUtilImplTest {
 		request.setCountry("IND");
 		
 
-		User user = userUtilImpl.loadUpdateUserRequestToUser(request);
+	    user = userUtilImpl.loadUpdateUserRequestToUser(request,user);
 
 		boolean isExpectedNotEmpty = true;
 		boolean isActualNotEmpty = (null != user.getUsername()); 
@@ -150,7 +151,11 @@ public class UserUtilImplTest {
 
 	@Test
 	public void testUpdateUserUtilfailure() {
-
+		
+		User user = new User();
+	    user.setUsername("Admin");
+	    user.setPassword("Admin");
+	    
 		UpdateUserRequest request = new UpdateUserRequest();
 
 		//request.setUserId(1);
@@ -159,8 +164,6 @@ public class UserUtilImplTest {
 		request.setMiddlename("rs");
 		request.setLastname("suda");
 		request.setEmail("admin@rs.com");
-		request.setUsername("admin");
-		request.setPassword("rss");
 		request.setMobile("4545454545");
 
 		//request.setAddressId(1);
@@ -172,7 +175,7 @@ public class UserUtilImplTest {
 		request.setPincode("500018");
 		request.setCountry("IND");
 
-		User user = userUtilImpl.loadUpdateUserRequestToUser(request);
+		user = userUtilImpl.loadUpdateUserRequestToUser(request,user);
 
 		boolean isExpectedEmpty = true;
 		boolean isActualEmpty = (null != user.getUsername());

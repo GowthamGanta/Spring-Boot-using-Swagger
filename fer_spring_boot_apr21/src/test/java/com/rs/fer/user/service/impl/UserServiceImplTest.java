@@ -294,8 +294,6 @@ public class UserServiceImplTest {
 		request.setMiddlename("k");
 		request.setLastname("rs");
 		request.setEmail("admin@rs.com");
-		request.setUsername("admin");
-		request.setPassword("rs");
 		request.setMobile("2342343243");
 
 		Optional<User> userObj = Optional.of(user);
@@ -304,7 +302,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");
@@ -337,8 +335,6 @@ public class UserServiceImplTest {
 		request.setMiddlename("k");
 		request.setLastname("rs");
 		request.setEmail("admin@rs.com");
-		request.setUsername("admin");
-		request.setPassword("rs");
 		request.setMobile("2342343243");
 
 		Optional<User> userObj = Optional.empty();
@@ -347,7 +343,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");
@@ -381,8 +377,6 @@ public class UserServiceImplTest {
 		request.setMiddlename("k");
 		request.setLastname("rs");
 		request.setEmail("admin@rs.com");
-		request.setUsername("admin");
-		request.setPassword("rs");
 		request.setMobile("2342343243");
 
 		Optional<User> userObj = Optional.of(user);
@@ -391,7 +385,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");

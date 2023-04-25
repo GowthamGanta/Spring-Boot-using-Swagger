@@ -68,6 +68,8 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 		@Test
 		public void testUtilloadEditExpenseRequestToExpense() {
 
+			Expense expense = new Expense();
+			
 			EditExpenseRequest request = new EditExpenseRequest();
 
 			request.setType("coffee");
@@ -79,7 +81,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setExpenseId(2);
 
 
-			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request,expense);
 
 			boolean isExpectedEmpty = true;
 			boolean isActualEmpty = (0 != errorMessage.getExpenseId());
@@ -91,6 +93,8 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 		@Test
 		public void testUtilloadEditExpenseRequestToExpenseFailure() {
 
+			Expense expense = new Expense();
+			
 			EditExpenseRequest request = new EditExpenseRequest();
 
 			request.setType("coffee");
@@ -101,7 +105,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setBywhom("Myself");
 			//request.setExpenseId(1);
 
-			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request, expense);
 
 			boolean isExpectedEmpty = false;
 			boolean isActualEmpty = (0 != errorMessage.getExpenseId());

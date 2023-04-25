@@ -236,8 +236,6 @@ public class UserValidationImplTest {
 		request.setFirstname("adminn");
 		request.setMiddlename("rss");
 		request.setEmail("adminn@rss.com.");
-		request.setUsername("adminss");
-		request.setPassword("rss");
 		request.setMobile("12341234");
 		
 		
@@ -267,8 +265,6 @@ public class UserValidationImplTest {
 		//request.setFirstname("adminn");
 		request.setMiddlename("rss");
 		request.setEmail("adminn@rss.com.");
-		request.setUsername("adminss");
-		request.setPassword("rss");
 		request.setMobile("12341234");
 		
 		

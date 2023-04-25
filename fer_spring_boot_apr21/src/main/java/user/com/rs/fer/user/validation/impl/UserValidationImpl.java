@@ -70,12 +70,7 @@ public class UserValidationImpl implements UserValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getFirstname(), "Please enter First Name");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLastname(), "Please enter Lastname");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getEmail(), "Please enter Email");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getUsername(), "Please enter Username");
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getPassword(), "Please enter Password");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getMobile(), "Please enter Mobile");
-
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getAddressId(), "Please enter address Id");
-
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLineone(), "Please enter Line One");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getLinetwo(), "Please enter Line Two");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getCity(), "Please enter City");
