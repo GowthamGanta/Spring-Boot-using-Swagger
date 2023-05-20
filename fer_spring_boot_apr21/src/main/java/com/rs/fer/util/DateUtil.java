@@ -21,5 +21,10 @@ public class DateUtil {
 		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat(format);
 		return simpleDateFormat.format(new Date());
 	}
+	public static String getCurrentDateAndTime(String format) {
+		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(new Date());
+	}
 	
+
 }
