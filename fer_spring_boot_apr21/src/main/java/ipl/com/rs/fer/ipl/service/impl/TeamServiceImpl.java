@@ -59,7 +59,7 @@ public class TeamServiceImpl implements TeamService {
 		team = teamRepository.save(team);
 
 		// load response
-		if (team.getTeamId() > 0) {
+		if (team.getTeamId() >0) {
 			// success
 			response = new SaveTeamResponse(HttpStatus.OK, "000", "Team is succesfully saved", null);
 			response.setTeam(team);
@@ -116,10 +116,10 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public GetTeamsResponse getTeams() {
+	public GetTeamsResponse getTeams(String name) {
 		GetTeamsResponse response = null;
 
-		List<Team> teamObj = teamRepository.findAll();
+		List<Team> teamObj = teamRepository.findByNameContaining(name);
 
 		if (!teamObj.isEmpty()) {
 

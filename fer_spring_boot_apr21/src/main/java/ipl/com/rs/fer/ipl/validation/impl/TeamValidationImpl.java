@@ -22,7 +22,7 @@ public class TeamValidationImpl implements TeamValidation {
 
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please enter Name");
 
-		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamCode(), "Please entre teamCode");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getTeamCode(), "Please enter teamCode");
 
 		return errorMessages;
 	}

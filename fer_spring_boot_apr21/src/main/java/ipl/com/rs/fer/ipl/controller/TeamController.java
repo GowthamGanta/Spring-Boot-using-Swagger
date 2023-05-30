@@ -86,11 +86,11 @@ public class TeamController {
 
 	}
 
-	@GetMapping("/ipl/getTeams")
-	public GetTeamsResponse getTeams() {
+	@GetMapping("/ipl/getTeams/{name}")
+	public GetTeamsResponse getTeams(@PathVariable("name") String name) {
 
 		GetTeamsResponse response = null;
-		response = teamService.getTeams();
+		response = teamService.getTeams(name);
 
 		return response;
 	}
