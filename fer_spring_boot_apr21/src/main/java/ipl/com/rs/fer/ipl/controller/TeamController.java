@@ -47,7 +47,6 @@ public class TeamController {
 			response = new SaveTeamResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 		} else {
 			response = teamService.saveTeam(request);
-
 		}
 
 		return response;

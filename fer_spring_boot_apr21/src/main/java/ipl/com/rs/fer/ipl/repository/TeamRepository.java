@@ -21,5 +21,6 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 	List<Team> findByNameAndTeamIdNot(String name, int teamId);
 
 	List<Team> findByNameContaining(String name);
+	
 }
 

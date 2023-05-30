@@ -20,5 +20,4 @@ public interface TeamService {
 	GetTeamsResponse getTeams(String name);
 
 	EditTeamResponse editTeam(EditTeamRequest request);
-
 }
