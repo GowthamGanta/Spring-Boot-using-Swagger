@@ -16,5 +16,15 @@ public class DateUtil {
 		return simpleDateFormat.format(new Date());
 	}
 	
+	public static String getCurrentDate(String format) {
+
+		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(new Date());
+	}
+	public static String getCurrentDateAndTime(String format) {
+		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(new Date());
+	}
 	
+
 }
