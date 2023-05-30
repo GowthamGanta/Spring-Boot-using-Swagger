@@ -38,7 +38,7 @@ public class TeamServiceImpl implements TeamService {
 		if (!CollectionUtils.isEmpty(teams)) {
 
 			response = new SaveTeamResponse(HttpStatus.PRECONDITION_FAILED, "001",
-					"Team is already find with the given ", null);
+					"Team is already find with the given Team Name", null);
 			return response;
 		}
 		List<Team> teams1 = teamRepository.findByTeamCode(request.getTeamCode());
@@ -59,7 +59,7 @@ public class TeamServiceImpl implements TeamService {
 		team = teamRepository.save(team);
 
 		// load response
-		if (team.getName() != null) {
+		if (team.getTeamId() >0) {
 			// success
 			response = new SaveTeamResponse(HttpStatus.OK, "000", "Team is succesfully saved", null);
 			response.setTeam(team);
