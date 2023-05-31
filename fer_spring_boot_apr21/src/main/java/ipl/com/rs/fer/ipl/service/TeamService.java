@@ -17,7 +17,9 @@ public interface TeamService {
 
 	DeleteTeamResponse deleteTeam(DeleteTeamRequest request);
 
-	GetTeamsResponse getTeams(String name);
+	GetTeamsResponse getTeamsByName(String name);
 
 	EditTeamResponse editTeam(EditTeamRequest request);
+
+	GetTeamsResponse getTeams();
 }

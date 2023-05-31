@@ -116,10 +116,30 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public GetTeamsResponse getTeams(String name) {
+	public GetTeamsResponse getTeamsByName(String name) {
 		GetTeamsResponse response = null;
 
 		List<Team> teamObj = teamRepository.findByNameContaining(name);
+
+		if (!teamObj.isEmpty()) {
+
+			response = new GetTeamsResponse(HttpStatus.OK, "000", "Fetched Teams  succesfully", null);
+			response.setTeams(teamObj);
+
+		} else {
+
+			response = new GetTeamsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
+
+		}
+
+		return response;
+	}
+	
+	@Override
+	public GetTeamsResponse getTeams() {
+		GetTeamsResponse response = null;
+
+		List<Team> teamObj = teamRepository.findAll();
 
 		if (!teamObj.isEmpty()) {
 
