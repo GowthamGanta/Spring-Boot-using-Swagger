@@ -19,4 +19,6 @@ public interface PlayerService {
 	GetPlayerResponse getPlayer(Integer playerId);
 
 	UpdatePlayerResponse updatePlayer(UpdatePlayerRequest request);
+	
+	GetPlayersResponse getPlayersByName(Integer teamId, String name);
 }

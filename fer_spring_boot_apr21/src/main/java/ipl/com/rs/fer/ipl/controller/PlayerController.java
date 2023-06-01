@@ -117,6 +117,22 @@ public class PlayerController {
 		return response;
 	}
 
+	@GetMapping("/ipl/getPlayers/{teamId}/{name}")
+
+	public GetPlayersResponse getPlayersByName(@PathVariable("teamId") Integer teamId, @PathVariable("name") String name) {
+		GetPlayersResponse response = null;
+
+		Set<String> errorMessages = playerValidation.validateGetPlayersByNameRequest(teamId, name);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new GetPlayersResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = playerService.getPlayersByName(teamId, name);
+		}
+		return response;
+	}
+
 }
 
 

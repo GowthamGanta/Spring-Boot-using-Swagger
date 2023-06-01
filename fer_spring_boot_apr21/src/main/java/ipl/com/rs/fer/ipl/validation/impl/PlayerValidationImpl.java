@@ -48,6 +48,16 @@ public class PlayerValidationImpl implements PlayerValidation {
 
 		return errorMessages;
 	}
+	
+	@Override
+	public Set<String> validateGetPlayersByNameRequest(Integer teamId, String name) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, teamId, "Please enter TeamId");
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, teamId, "Please enter Player Name");
+
+		return errorMessages;
+	}
 
 	@Override
 	public Set<String> validateGetPlayerRequest(Integer playerId) {

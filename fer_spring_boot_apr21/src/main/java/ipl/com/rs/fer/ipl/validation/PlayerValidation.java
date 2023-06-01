@@ -17,4 +17,6 @@ public interface PlayerValidation {
 
 	Set<String> validateUpdatePlayerRequest(UpdatePlayerRequest request);
 
+	Set<String> validateGetPlayersByNameRequest(Integer teamId, String name);
+
 }

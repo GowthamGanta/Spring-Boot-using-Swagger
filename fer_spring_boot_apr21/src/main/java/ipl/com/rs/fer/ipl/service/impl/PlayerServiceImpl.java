@@ -178,4 +178,36 @@ public class PlayerServiceImpl implements PlayerService {
 
 		return response;
 	}
+	
+	@Override
+	public GetPlayersResponse getPlayersByName(Integer teamId, String name) {
+		GetPlayersResponse response = null;
+
+		List<Player> players = new ArrayList<Player>();
+
+		// To load the userObject based on userId
+		Optional<Team> teamObj = teamRepository.findById(teamId);
+
+		if (!teamObj.isPresent()) {
+
+			response = new GetPlayersResponse(HttpStatus.OK, "000", "No Teams found", null);
+
+		} else {
+			
+			List<Player> playersByNameObj = playerRepository.findByTeamIdAndFirstNameContaining(teamId, name);
+			
+			for (Player player : playersByNameObj) {
+				players.add(player);
+
+			}
+			
+			if(playersByNameObj.isEmpty()) {
+				response = new GetPlayersResponse(HttpStatus.OK, "000", "No Players Found with the given Name", null);
+			} else {
+				response = new GetPlayersResponse(HttpStatus.OK, "000", "Players Found", null);
+			}
+			response.setPlayers(players);
+		}
+		return response;
+	}
 }
