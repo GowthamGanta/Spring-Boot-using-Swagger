@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-19T11:06:36+0530",
-    comments = "version: 1.5.4.Final, compiler: javac, environment: Java 1.8.0_331 (Oracle Corporation)"
+    date = "2023-06-02T11:29:47+0530",
+    comments = "version: 1.5.4.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 @Component
 public class UpdatePlayerRequestMapperImpl implements UpdatePlayerRequestMapper {
@@ -30,6 +30,7 @@ public class UpdatePlayerRequestMapperImpl implements UpdatePlayerRequestMapper 
         player.setRole( request.getRole() );
         player.setSpecilization( request.getSpecilization() );
         player.setJerseyNumber( request.getJerseyNumber() );
+        player.setTeamId( request.getTeamId() );
 
         return player;
     }

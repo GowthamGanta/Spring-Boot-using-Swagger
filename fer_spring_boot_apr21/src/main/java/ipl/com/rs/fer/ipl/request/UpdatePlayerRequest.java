@@ -8,6 +8,7 @@ import lombok.Setter;
 public class UpdatePlayerRequest {
 	
 		private int playerId;
+		private int teamId;
 		private String firstName;
 		private String middleName;
 		private String lastName;
