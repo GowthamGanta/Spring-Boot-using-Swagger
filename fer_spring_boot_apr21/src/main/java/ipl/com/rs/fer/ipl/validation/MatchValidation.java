@@ -1,5 +1,12 @@
 package com.rs.fer.ipl.validation;
 
-public class MatchValidation {
+import java.util.Set;
+
+import com.rs.fer.ipl.request.SaveMatchRequest;
+
+public interface MatchValidation {
+  
+	
+	Set<String> validateSaveMatchRequest(SaveMatchRequest request);
 
 }
