@@ -19,6 +19,6 @@ public class SaveMatchRequest {
 		private String homeTeam;
 		private String awayTeam;
 
-		private int teamId;
+		
 	}
 
