@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.rs.fer.ipl.entity.Match;
 
 @Repository
+
 public interface MatchRepository extends JpaRepository<Match, Integer> {
 	List<Match> findByMatchNumber(int matchNumber);
 
