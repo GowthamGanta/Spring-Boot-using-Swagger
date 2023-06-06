@@ -3,10 +3,12 @@ package com.rs.fer.ipl.validation.impl;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.validation.MatchValidation;
 import com.rs.fer.util.FERUtil;
-
+@Component
 public class MatchValidationImpl implements MatchValidation {
 
 	@Override
