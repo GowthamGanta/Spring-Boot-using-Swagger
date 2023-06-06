@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.ipl.entity.Match;
+import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.response.AbstractResponse;
 
 import lombok.Getter;
@@ -23,5 +23,5 @@ public class SaveMatchResponse extends AbstractResponse {
 
 	}
 
-	private Match match;
+	private IPLMatch match;
 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table
-public class Match {
+public class IPLMatch {
 
 	@Id
 	@Column(name = "match_id")
@@ -63,11 +63,11 @@ public class Match {
 	@Column(name = "t_id")
 	private Integer teamId;
 
-	public Match() {
+	public IPLMatch() {
 
 	}
 
-	public Match(int matchNumber, String matchDay, String teamOne, String teamTwo, String venue, String date,
+	public IPLMatch(int matchNumber, String matchDay, String teamOne, String teamTwo, String venue, String date,
 			String startTime, String endTime, String umpire, String thirdUmpire, String referee, String homeTeam,
 			String awayTeam) {
 		this.matchNumber = matchNumber;
