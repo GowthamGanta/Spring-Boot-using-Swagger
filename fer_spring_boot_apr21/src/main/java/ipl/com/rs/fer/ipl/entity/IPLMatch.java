@@ -60,8 +60,7 @@ public class IPLMatch {
 	@Column
 	private String awayTeam;
 
-	@Column(name = "t_id")
-	private Integer teamId;
+	
 
 	public IPLMatch() {
 
