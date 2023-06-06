@@ -2,6 +2,7 @@ package com.rs.fer.ipl.controller;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,10 +20,10 @@ import com.rs.fer.ipl.validation.MatchValidation;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class MatchController {
-	
+	@Autowired
 	MatchValidation matchValidation;
 
-	
+	@Autowired
 	MatchService matchService;
 
 	@PostMapping("/ipl/saveMatch")

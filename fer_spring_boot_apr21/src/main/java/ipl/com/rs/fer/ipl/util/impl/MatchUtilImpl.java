@@ -21,7 +21,7 @@ public class MatchUtilImpl implements MatchUtil {
 		match.setTeamOne(request.getTeamOne());
 		match.setTeamTwo(request.getTeamTwo());
 		match.setVenue(request.getVenue());
-		match.setDate(DateUtil.getCurrentDate());
+		match.setDate(request.getDate());
 		match.setStartTime(request.getStartTime());
 		match.setEndTime(request.getEndTime());
 		match.setUmpire(request.getUmpire());
