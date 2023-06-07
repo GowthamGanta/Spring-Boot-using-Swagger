@@ -11,7 +11,6 @@ import com.rs.fer.util.DateUtil;
 
 
 public class MatchUtilImpl implements MatchUtil {
-
 	@Override
 	public IPLMatch loadSaveMatchRequestToMatch(SaveMatchRequest request) {
 		

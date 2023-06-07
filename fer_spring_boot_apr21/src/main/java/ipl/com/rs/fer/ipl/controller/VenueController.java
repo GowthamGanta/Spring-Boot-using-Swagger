@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.request.SaveVenueRequest;
-import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.response.SaveVenueResponse;
-import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.service.VenueService;
-import com.rs.fer.ipl.validation.MatchValidation;
 import com.rs.fer.ipl.validation.VenueValidation;
 
 @RestController
