@@ -73,7 +73,7 @@ public class VenueServiceImpl implements VenueService {
 			response = new GetVenuesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
 
 		}
-		return null;
+		return response;
 	}
 
 }
