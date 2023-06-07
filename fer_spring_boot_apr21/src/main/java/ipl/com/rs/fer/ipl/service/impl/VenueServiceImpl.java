@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.entity.Venue;
 import com.rs.fer.ipl.repository.VenueRepository;
 import com.rs.fer.ipl.request.SaveVenueRequest;
+import com.rs.fer.ipl.response.GetTeamsResponse;
+import com.rs.fer.ipl.response.GetVenuesResponse;
 import com.rs.fer.ipl.response.SaveVenueResponse;
 import com.rs.fer.ipl.service.VenueService;
 import com.rs.fer.ipl.util.VenueUtil;
@@ -51,6 +54,26 @@ public class VenueServiceImpl implements VenueService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public GetVenuesResponse getVenues() {
+		
+		GetVenuesResponse response = null;
+
+		List<Venue> venueObj =venueRepository.findAll();
+
+		if (!venueObj.isEmpty()) {
+
+			response = new GetVenuesResponse(HttpStatus.OK, "000", "Fetched Venues  succesfully", null);
+			response.setVenues(venueObj);
+
+		} else {
+
+			response = new GetVenuesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
+
+		}
+		return null;
 	}
 
 }

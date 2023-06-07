@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.ipl.request.SaveVenueRequest;
+import com.rs.fer.ipl.response.GetVenuesResponse;
 import com.rs.fer.ipl.response.SaveVenueResponse;
 import com.rs.fer.ipl.service.VenueService;
 import com.rs.fer.ipl.validation.VenueValidation;
@@ -39,6 +41,14 @@ public class VenueController {
 		} else {
 			response = venueService.saveVenue(request);
 		}
+
+		return response;
+	}
+	@GetMapping("/ipl/getVenues")
+	public GetVenuesResponse getVenues() {
+
+		GetVenuesResponse response = null;
+		response = venueService.getVenues();
 
 		return response;
 	}
