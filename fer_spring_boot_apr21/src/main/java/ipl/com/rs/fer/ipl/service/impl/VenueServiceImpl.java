@@ -37,21 +37,13 @@ VenueRepository venueRepository;
 		SaveVenueResponse response = null;
 	List<Venue> venue=venueRepository.findByStadiumName(request.getStadiumName());
 		
-	if(!CollectionUtils.isEmpty(venue)) {
-		
-		response = new SaveVenueResponse(HttpStatus.PRECONDITION_FAILED, "001",
-				"Venue is already found with given Stadium Name", null);
-		
-		return response;
 
-	}else {
-	Venue venue1 = VenueUtil.loadSaveVenueRequestToVenue(request);
-	venue1 = venueRepository.save(venue1);
+
 
 
 		response = new SaveVenueResponse(HttpStatus.OK, "000", "Venue is succesfully saved", null);
-		response.setVenue(venue1);
-	}
+	
+	
 	return response;
 
 }
