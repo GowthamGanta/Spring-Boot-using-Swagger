@@ -13,4 +13,5 @@ import com.rs.fer.ipl.entity.IPLMatch;
 public interface MatchRepository extends JpaRepository<IPLMatch, Integer> {
 	List<IPLMatch> findByMatchNumber(int matchNumber);
 
+
 }

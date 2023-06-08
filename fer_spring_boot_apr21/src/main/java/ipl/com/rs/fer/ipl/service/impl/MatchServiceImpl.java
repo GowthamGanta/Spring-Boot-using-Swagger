@@ -1,7 +1,6 @@
 package com.rs.fer.ipl.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +12,10 @@ import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.MatchRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.SaveMatchRequest;
+import com.rs.fer.ipl.response.GetMatchResponse;
+import com.rs.fer.ipl.response.GetMatchesResponse;
+import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveMatchResponse;
-import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.util.MatchUtil;
 @Service
@@ -27,7 +28,8 @@ MatchRepository matchRepository;
 
 TeamRepository teamRepository;
 
-	@Override
+	
+@Override
 	public SaveMatchResponse saveMatch(SaveMatchRequest request) {
 
 		SaveMatchResponse response = null;
@@ -56,5 +58,40 @@ TeamRepository teamRepository;
 
 	return response;
 
+}
+
+
+@Override
+public GetMatchesResponse getMatches() {
+	GetMatchesResponse response = null;
+
+	List<IPLMatch> matchobj = matchRepository.findAll();
+
+	if (!matchobj.isEmpty()) {
+
+		response = new GetMatchesResponse(HttpStatus.OK, "000", "Fetched Matches  succesfully", null);
+		response.setMatches(matchobj);
+
+	} else {
+
+		response = new GetMatchesResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching matches is failed", null);
+
+	}
+
+	return response;
+}
+	
+	
+
+
+
+@Override
+public GetMatchResponse getMatch() {
+
+	
+	
+	
+	
+	return null;
 }
 }
