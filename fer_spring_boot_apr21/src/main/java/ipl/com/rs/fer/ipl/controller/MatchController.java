@@ -81,6 +81,7 @@ public class MatchController {
 	}
 
 	@PutMapping("/ipl/editMatch/{id}")
+
 	public EditMatchResponse editMatch(@RequestBody EditMatchRequest request) {
 
 		EditMatchResponse response = null;

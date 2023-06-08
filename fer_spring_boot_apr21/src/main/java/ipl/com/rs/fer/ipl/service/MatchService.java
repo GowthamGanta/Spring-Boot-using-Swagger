@@ -12,7 +12,9 @@ public interface MatchService {
 	SaveMatchResponse saveMatch(SaveMatchRequest request);
 
 	GetMatchesResponse getMatches();
+
 	GetMatchResponse getMatch(Integer matchId);
+
 	EditMatchResponse editMatch(EditMatchRequest request);
 
 }

@@ -21,4 +21,5 @@ public class EditMatchRequest {
 	private String referee;
 	private String homeTeam;
 	private String awayTeam;
+
 }

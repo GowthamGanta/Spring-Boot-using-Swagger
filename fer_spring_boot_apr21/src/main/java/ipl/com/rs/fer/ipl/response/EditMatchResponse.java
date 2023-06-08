@@ -12,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class EditMatchResponse extends AbstractResponse {
 
 	public EditMatchResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {

@@ -35,7 +35,7 @@ public class MatchValidationImpl implements MatchValidation {
 		return errorMessages;
 	}
 
-	@Override 
+	@Override
 	public Set<String> validateGetMatchRequest(Integer matchId) {
 
 		Set<String> errorMessages = new HashSet<String>();
@@ -46,6 +46,7 @@ public class MatchValidationImpl implements MatchValidation {
 
 	@Override
 	public Set<String> validateEditMatchRequest(EditMatchRequest request) {
+
 		Set<String> errorMessages = new LinkedHashSet<String>();
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getMatchId(), "Please enter matchId");
 
@@ -63,7 +64,6 @@ public class MatchValidationImpl implements MatchValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getHomeTeam(), "Please enter homeTeam");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getAwayTeam(), "Please enter awayTeam");
 		return errorMessages;
-		
 
 	}
 

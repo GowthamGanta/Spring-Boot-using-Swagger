@@ -5,6 +5,7 @@ import com.rs.fer.ipl.request.EditMatchRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 
 public interface MatchUtil {
+
 	IPLMatch loadSaveMatchRequestToMatch(SaveMatchRequest request);
 
 	IPLMatch loadEditMatchRequestToMatch(EditMatchRequest request);

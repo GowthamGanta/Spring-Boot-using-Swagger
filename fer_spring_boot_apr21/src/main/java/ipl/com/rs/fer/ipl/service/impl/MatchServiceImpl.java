@@ -8,15 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.rs.fer.ipl.entity.IPLMatch;
-import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.MatchRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.EditMatchRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.response.EditMatchResponse;
-import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.response.GetMatchesResponse;
 
@@ -118,25 +115,26 @@ public class MatchServiceImpl implements MatchService {
 
 		List<IPLMatch> matches = matchRepository.findByMatchNumber(request.getMatchNumber());
 
-		/*	if (!CollectionUtils.isEmpty(matches)) {
-
-			// Team already present given Name or Not
-			response = new EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
-					"match already find with given matchnumber", null);
-
-			return response;
-		}
-
-		List<IPLMatch> match = matchRepository.findByMatchNumber(request.getMatchNumber());
-
-		if (!CollectionUtils.isEmpty(match)) {
-
-			// Team already present given Name or Not
-			response = new EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
-					"Match already find with given matchnumber", null);
-
-			return response;
-		}*/
+		/*
+		 * if (!CollectionUtils.isEmpty(matches)) {
+		 * 
+		 * // Team already present given Name or Not response = new
+		 * EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
+		 * "match already find with given matchnumber", null);
+		 * 
+		 * return response; }
+		 * 
+		 * List<IPLMatch> match =
+		 * matchRepository.findByMatchNumber(request.getMatchNumber());
+		 * 
+		 * if (!CollectionUtils.isEmpty(match)) {
+		 * 
+		 * // Team already present given Name or Not response = new
+		 * EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
+		 * "Match already find with given matchnumber", null);
+		 * 
+		 * return response; }
+		 */
 
 		if (!matchObj.isEmpty()) {
 

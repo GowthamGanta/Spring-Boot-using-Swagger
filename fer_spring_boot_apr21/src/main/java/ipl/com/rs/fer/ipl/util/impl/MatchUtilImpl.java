@@ -39,7 +39,6 @@ public class MatchUtilImpl implements MatchUtil {
 		IPLMatch match = new IPLMatch();
 		match.setMatchId(request.getMatchId());
 		match.setMatchNumber(request.getMatchNumber());
-
 		match.setMatchDay(request.getMatchDay());
 		match.setTeamOne(request.getTeamOne());
 		match.setTeamTwo(request.getTeamTwo());
