@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GetMatchesRequest {
+public class GetMatcheRequest {
 
 	private int matchId;
 }

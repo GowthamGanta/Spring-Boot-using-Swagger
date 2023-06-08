@@ -1,5 +1,6 @@
 package com.rs.fer.ipl.validation.impl;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.validation.MatchValidation;
 import com.rs.fer.util.FERUtil;
+
 @Component
 public class MatchValidationImpl implements MatchValidation {
 
@@ -29,6 +31,15 @@ public class MatchValidationImpl implements MatchValidation {
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getReferee(), "Please enter referee");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getHomeTeam(), "Please enter homeTeam");
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getAwayTeam(), "Please enter awayTeam");
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetMatchRequest(Integer matchId) {
+
+		Set<String> errorMessages = new HashSet<String>();
+
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, matchId, "Please enter valid matchId");
 		return errorMessages;
 	}
 

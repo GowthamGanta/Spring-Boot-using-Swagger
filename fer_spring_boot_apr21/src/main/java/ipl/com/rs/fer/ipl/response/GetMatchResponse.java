@@ -22,5 +22,5 @@ public class GetMatchResponse extends AbstractResponse {
 		this.errorMessages = errorMessages;
 	}
 
-	private IPLMatch match;
+	private IPLMatch iplmatch;
 }

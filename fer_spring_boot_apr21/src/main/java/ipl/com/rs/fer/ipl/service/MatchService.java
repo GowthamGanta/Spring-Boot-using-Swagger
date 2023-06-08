@@ -10,5 +10,5 @@ public interface MatchService {
 	SaveMatchResponse saveMatch(SaveMatchRequest request);
 
 	GetMatchesResponse getMatches();
-	GetMatchResponse getMatch();
+	GetMatchResponse getMatch(Integer matchId);
 }

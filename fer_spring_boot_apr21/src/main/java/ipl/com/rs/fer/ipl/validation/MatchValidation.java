@@ -8,5 +8,6 @@ public interface MatchValidation {
   
 	
 	Set<String> validateSaveMatchRequest(SaveMatchRequest request);
+	Set<String> validateGetMatchRequest(Integer matchId);
 
 }

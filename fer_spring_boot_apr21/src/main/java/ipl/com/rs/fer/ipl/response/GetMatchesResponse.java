@@ -24,5 +24,5 @@ public class GetMatchesResponse extends AbstractResponse {
 
 	}
 
-	private List<IPLMatch> matches;
+	private List<IPLMatch> iplmatches;
 }
