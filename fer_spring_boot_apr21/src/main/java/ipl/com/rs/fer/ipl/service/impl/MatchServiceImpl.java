@@ -8,15 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.MatchRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
+import com.rs.fer.ipl.request.EditMatchRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
+import com.rs.fer.ipl.response.EditMatchResponse;
+import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.response.GetMatchesResponse;
-import com.rs.fer.ipl.response.GetTeamResponse;
-import com.rs.fer.ipl.response.GetTeamsResponse;
+
 import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.util.MatchUtil;
@@ -104,5 +107,56 @@ public class MatchServiceImpl implements MatchService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public EditMatchResponse editMatch(EditMatchRequest request) {
+		EditMatchResponse response = null;
+
+		// Team is present or not check
+		List<IPLMatch> matchObj = matchRepository.findByMatchNumber(request.getMatchNumber());
+
+		List<IPLMatch> matches = matchRepository.findByMatchNumber(request.getMatchNumber());
+
+		/*	if (!CollectionUtils.isEmpty(matches)) {
+
+			// Team already present given Name or Not
+			response = new EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
+					"match already find with given matchnumber", null);
+
+			return response;
+		}
+
+		List<IPLMatch> match = matchRepository.findByMatchNumber(request.getMatchNumber());
+
+		if (!CollectionUtils.isEmpty(match)) {
+
+			// Team already present given Name or Not
+			response = new EditMatchResponse(HttpStatus.PRECONDITION_FAILED, "001",
+					"Match already find with given matchnumber", null);
+
+			return response;
+		}*/
+
+		if (!matchObj.isEmpty()) {
+
+			// load vo to bean
+			IPLMatch iplmatch = matchUtil.loadEditMatchRequestToMatch(request);
+
+			// save bean to database
+			iplmatch = matchRepository.save(iplmatch);
+
+			// load response
+			// success
+			response = new EditMatchResponse(HttpStatus.OK, "000", "Team edited successfully", null);
+			response.setMatchId(iplmatch);
+		} else {
+			// failure
+			response = new EditMatchResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team editing failed", null);
+
+		}
+
+		return response;
+
 	}
 }

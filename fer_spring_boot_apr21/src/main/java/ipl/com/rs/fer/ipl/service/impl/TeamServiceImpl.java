@@ -200,7 +200,6 @@ public class TeamServiceImpl implements TeamService {
 		} else {
 			// failure
 			response = new EditTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team editing failed", null);
-			response = new EditTeamResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Team editing failed", null);
 
 		}
 
