@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.ipl.request.SaveMatchRequest;
+import com.rs.fer.ipl.response.GetMatchesResponse;
+import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.validation.MatchValidation;
@@ -39,6 +42,14 @@ public class MatchController {
 		} else {
 			response = matchService.saveMatch(request);
 		}
+
+		return response;
+	}
+	@GetMapping("/ipl/geMatches")
+	public GetMatchesResponse getMatches() {
+
+		GetMatchesResponse response = null;
+		response = matchService.getMatches();
 
 		return response;
 	}
