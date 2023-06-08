@@ -7,9 +7,7 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.entity.IPLMatch;
-import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.request.SaveMatchRequest;
-import com.rs.fer.ipl.request.SavePlayerRequest;
 
 @SpringBootTest
 public class MatchUtilImplTest {
