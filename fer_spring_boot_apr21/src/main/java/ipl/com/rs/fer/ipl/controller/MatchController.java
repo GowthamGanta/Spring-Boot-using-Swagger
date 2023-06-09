@@ -53,7 +53,7 @@ public class MatchController {
 		return response;
 	}
 
-	@GetMapping("/ipl/geMatches")
+	@GetMapping("/ipl/getMatches")
 	public GetMatchesResponse getMatches() {
 
 		GetMatchesResponse response = null;
@@ -80,7 +80,7 @@ public class MatchController {
 		return response;
 	}
 
-	@PutMapping("/ipl/editMatch/{id}")
+	@PutMapping("/ipl/editMatch/{matchId}")
 
 	public EditMatchResponse editMatch(@RequestBody EditMatchRequest request) {
 
