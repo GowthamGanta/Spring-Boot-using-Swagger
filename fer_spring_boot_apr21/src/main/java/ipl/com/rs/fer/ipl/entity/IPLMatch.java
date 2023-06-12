@@ -60,8 +60,6 @@ public class IPLMatch {
 	@Column
 	private String awayTeam;
 
-	
-
 	public IPLMatch() {
 
 	}
@@ -83,6 +81,6 @@ public class IPLMatch {
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
 
+	
 	}
-
 }
