@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.ipl.request.EditMatchRequest;
-import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.response.EditMatchResponse;
-import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.response.GetMatchesResponse;
-import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.validation.MatchValidation;

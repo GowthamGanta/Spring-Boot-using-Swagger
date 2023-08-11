@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 
 @SpringBootTest
@@ -31,7 +30,7 @@ public class MatchUtilImplTest {
 		request.setReferee("Venkat kirshna");
 		request.setHomeTeam("SRH");
 		request.setAwayTeam("CSK");
-		IPLMatch iplMatch = matchUtilImpl.loadSaveMatchRequestToMatch(request);
+		matchUtilImpl.loadSaveMatchRequestToMatch(request);
 
 		boolean isExpectedNotEmpty = true;
 		boolean isActualNotEmpty =true ;
@@ -57,7 +56,7 @@ public class MatchUtilImplTest {
 		request.setReferee("Venkat kirshna");
 		request.setHomeTeam("SRH");
 		request.setAwayTeam("CSK");
-		IPLMatch iplMatch = matchUtilImpl.loadSaveMatchRequestToMatch(request);
+		matchUtilImpl.loadSaveMatchRequestToMatch(request);
 
 		boolean isExpectedNotEmpty = false;
 		boolean isActualNotEmpty = false;
