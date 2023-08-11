@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import lombok.Getter;
 import lombok.Setter;
 
