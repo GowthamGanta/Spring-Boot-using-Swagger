@@ -3,30 +3,23 @@ package com.rs.fer.ipl.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import java.awt.*;
-import java.applet.*;
-import java.awt.color.*;
-import java.io.*;
-
-import java.lang.*;
-import java.lang.annotation.*;
-import javax.servlet.http.*;
-import java.util.*;
-
-import java.lang.*;
-import java.lang.annotation.*;
-import javax.servlet.http.*;
-import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.awt.*;
-import java.applet.*;
-import java.awt.color.*;
-import java.io.*;
+import com.rs.fer.ipl.entity.IPLMatch;
+import com.rs.fer.ipl.repository.MatchRepository;
+import com.rs.fer.ipl.repository.TeamRepository;
+import com.rs.fer.ipl.request.EditMatchRequest;
+import com.rs.fer.ipl.request.SaveMatchRequest;
+import com.rs.fer.ipl.response.EditMatchResponse;
+import com.rs.fer.ipl.response.GetMatchResponse;
+import com.rs.fer.ipl.response.GetMatchesResponse;
+import com.rs.fer.ipl.response.SaveMatchResponse;
+import com.rs.fer.ipl.service.MatchService;
+import com.rs.fer.ipl.util.MatchUtil;
 
 import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.ipl.repository.MatchRepository;
