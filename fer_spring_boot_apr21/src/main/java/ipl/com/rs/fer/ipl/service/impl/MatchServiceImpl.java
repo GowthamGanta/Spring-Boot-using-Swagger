@@ -3,7 +3,6 @@ package com.rs.fer.ipl.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,11 @@ import com.rs.fer.ipl.response.GetMatchesResponse;
 import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.util.MatchUtil;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.ipl.repository.MatchRepository;
