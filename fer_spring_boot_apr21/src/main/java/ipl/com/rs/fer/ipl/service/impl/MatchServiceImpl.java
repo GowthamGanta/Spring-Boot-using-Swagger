@@ -33,9 +33,6 @@ import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.response.EditMatchResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.response.GetMatchesResponse;
-import com.rs.fer.ipl.response.SaveMatchResponse;
-import com.rs.fer.ipl.service.MatchService;
-import com.rs.fer.ipl.util.MatchUtil;
 
 @Service
 public class MatchServiceImpl implements MatchService {
