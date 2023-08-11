@@ -329,7 +329,7 @@ public class UserServiceImpl implements UserService {
 		// save bean to database
 		rating = ratingRepository.save(rating);
 		// load response
-		if (rating.getId() > 0) {
+		if (rating.getRatingId() > 0) {
 			// success
 			response = new SaveRatingResponse(HttpStatus.OK, "000", "Rating saved successfully ", null);
 			response.setRating(reviewer);

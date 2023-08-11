@@ -19,7 +19,7 @@ public class EditRatingRequestMapperImpl implements EditRatingRequestMapper {
 
         Rating rating = new Rating();
 
-        rating.setId( request.getRatingId() );
+        rating.setRatingId( request.getRatingId() );
         rating.setReviewedBy( request.getReviewerId() );
         rating.setComments( request.getComments() );
         rating.setRating( request.getRating() );

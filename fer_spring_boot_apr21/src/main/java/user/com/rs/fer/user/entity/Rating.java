@@ -19,7 +19,7 @@ public class Rating {
 	@Id
 	@Column(name = "rating_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int ratingId;
 	
 	private String comments;
 	
@@ -40,7 +40,7 @@ public class Rating {
 	public Rating(int id, String comments, int rating, int reviewedBy, int userId) {
 
 		
-		this.id = id;
+		this.ratingId = id;
 		this.comments = comments;
 		this.rating = rating;
 		this.reviewedBy = reviewedBy;

@@ -112,7 +112,7 @@ public class MatchServiceImpl implements MatchService {
 		// Team is present or not check
 		List<IPLMatch> matchObj = matchRepository.findByMatchNumber(request.getMatchNumber());
 
-		List<IPLMatch> matches = matchRepository.findByMatchNumber(request.getMatchNumber());
+		
 
 		/*
 		 * if (!CollectionUtils.isEmpty(matches)) {

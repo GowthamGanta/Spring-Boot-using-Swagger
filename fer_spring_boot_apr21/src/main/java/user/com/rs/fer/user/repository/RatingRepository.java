@@ -12,9 +12,8 @@ public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
 	List<Rating> findByUserIdAndReviewedBy(int userId, int reviewedById);
 	
-	List<Rating> findById(int userId);
 	
-	List<Rating> findById(String RatingId);
+	List<Rating> findByRatingId(int RatingId);
 	
 
 	List<Rating> findByUserId(int userId);
