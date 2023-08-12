@@ -25,10 +25,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.ipl.entity.IPLMatch;
+import com.rs.fer.ipl.repository.MatchRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.EditMatchRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
-import com.rs.fer.ipl.response.EditMatchResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
 
 @Service
