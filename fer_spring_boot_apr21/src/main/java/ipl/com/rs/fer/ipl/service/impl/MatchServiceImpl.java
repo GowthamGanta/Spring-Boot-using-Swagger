@@ -20,8 +20,6 @@ import com.rs.fer.ipl.response.SaveMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.util.MatchUtil;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.ipl.repository.TeamRepository;
