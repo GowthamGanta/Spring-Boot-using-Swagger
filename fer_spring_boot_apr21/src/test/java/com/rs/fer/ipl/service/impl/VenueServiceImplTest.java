@@ -102,7 +102,7 @@ public class VenueServiceImplTest<StadiumName> {
 		when(venueUtil.loadSaveVenueRequestToVenue(Mockito.any())).thenReturn(venue);
 
 		// 1.
-		SaveVenueRequest saveVenueRequest = new SaveVenueRequest();
+	  	SaveVenueRequest saveVenueRequest = new SaveVenueRequest();
 
 		saveVenueRequest.setStadiumName("LBStadium");
 
