@@ -1,10 +1,10 @@
 package com.rs.fer.user.repository;
 
 import java.util.List;
-
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import java.util.LinkedList;
 import com.rs.fer.user.entity.Rating;
 
 @Repository

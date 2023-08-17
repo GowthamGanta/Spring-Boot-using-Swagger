@@ -13,4 +13,6 @@ import com.rs.fer.ipl.entity.Venue;
 public interface VenueRepository extends JpaRepository<Venue, Integer> {
 	List<Venue> findByStadiumName(String stadiumName);
 
+	
+
 }
