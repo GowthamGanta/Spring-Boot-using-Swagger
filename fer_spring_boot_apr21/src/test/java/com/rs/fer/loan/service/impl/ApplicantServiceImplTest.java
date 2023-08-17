@@ -1,7 +1,6 @@
 package com.rs.fer.loan.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
@@ -20,11 +19,13 @@ import com.rs.fer.loan.repository.ApplicantRepository;
 import com.rs.fer.loan.repository.LoanAccountRepository;
 import com.rs.fer.loan.request.LoanAccountApproveRequest;
 import com.rs.fer.loan.request.LoanAccountRejectRequest;
+import com.rs.fer.loan.request.SaveApplicantRequest;
 import com.rs.fer.loan.response.GetApplicantResponse;
 import com.rs.fer.loan.response.GetLoanAccountResponse;
 import com.rs.fer.loan.response.GetLoanAccountStatusResponse;
 import com.rs.fer.loan.response.LoanAccountApproveResponse;
 import com.rs.fer.loan.response.LoanAccountRejectResponse;
+import com.rs.fer.loan.response.SaveApplicantResponse;
 import com.rs.fer.loan.util.ApplicantUtil;
 
 @SpringBootTest
@@ -195,7 +196,6 @@ public class ApplicantServiceImplTest {
 		Applicant applicant = new Applicant();
 
 		Optional<Applicant> applicantObj = Optional.of(applicant);
-		
 
 		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
 
@@ -213,7 +213,6 @@ public class ApplicantServiceImplTest {
 	public void testGetApplicantResponseFailure() {
 
 		Optional<Applicant> applicantObj = Optional.empty();
-		
 
 		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
 
@@ -222,6 +221,51 @@ public class ApplicantServiceImplTest {
 		GetApplicantResponse response = applicantServiceImpl.getApplicant(applicantId);
 
 		// 3.
+
+		assertEquals("002", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveApplicant() {
+		// load vo to bean
+
+		// save bean to database
+		LoanAccount loanAccount = new LoanAccount();
+
+		Set<LoanAccount> status = new HashSet<>();
+		loanAccount.getLoanAccountId();
+
+		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(status);
+		when(loanAccountRepository.save(Mockito.any())).thenReturn(loanAccount);
+		when(applicantUtil.loadSaveApplicantRequestToApplicant(Mockito.any())).thenReturn(loanAccount);
+		SaveApplicantRequest request = new SaveApplicantRequest();
+
+		SaveApplicantResponse response = applicantServiceImpl.SaveApplicant(request);
+
+// 3.
+
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveApplicantResponseFailure() {
+		// load vo to bean
+
+		// save bean to database
+		LoanAccount loanAccount = new LoanAccount();
+
+		Set<LoanAccount> status = new HashSet<>();
+		loanAccount.getLoanAccountId();
+
+		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(status);
+
+		SaveApplicantRequest request = new SaveApplicantRequest();
+
+		SaveApplicantResponse response = applicantServiceImpl.SaveApplicant(request);
+
+// 3.
 
 		assertEquals("002", response.statusCode);
 
