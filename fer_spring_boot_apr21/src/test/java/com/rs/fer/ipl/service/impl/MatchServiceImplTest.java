@@ -13,15 +13,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.rs.fer.ipl.entity.IPLMatch;
-import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.MatchRepository;
 import com.rs.fer.ipl.repository.TeamRepository;
 import com.rs.fer.ipl.request.EditMatchRequest;
-import com.rs.fer.ipl.request.EditTeamRequest;
 import com.rs.fer.ipl.response.EditMatchResponse;
-import com.rs.fer.ipl.response.EditTeamResponse;
+import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.util.MatchUtil;
 
 @SpringBootTest
@@ -114,6 +111,31 @@ public class MatchServiceImplTest {
 		EditMatchResponse response = matchServiceImpl.editMatch(request);
 
 		// 3.
+		assertEquals("002", response.statusCode);
+
+	}
+	
+	@Test
+	public void testGetMatchResponse() {
+
+		IPLMatch iplMatch = new IPLMatch();
+		Optional<IPLMatch> matchObj = Optional.of(iplMatch);
+
+		// To get the Applicant based on userId
+		when(matchRepository.findById(Mockito.anyInt())).thenReturn(matchObj);
+		int matchId = 1;
+
+		GetMatchResponse response = matchServiceImpl.getMatch(matchId);
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetMatchNotFound() {
+		Optional<IPLMatch> matches = Optional.empty();
+		when(matchRepository.findById(Mockito.anyInt())).thenReturn(matches);
+		int matchId = 0;
+		GetMatchResponse response = matchServiceImpl.getMatch(matchId);
 		assertEquals("002", response.statusCode);
 
 	}
