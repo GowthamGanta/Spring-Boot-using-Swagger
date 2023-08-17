@@ -28,10 +28,13 @@ import com.rs.fer.ipl.util.MatchUtil;
 public class MatchServiceImplTest {
 	@InjectMocks
 	private MatchServiceImpl matchServiceImpl;
+
 	@Mock
 	MatchRepository matchRepository;
+
 	@Mock
 	MatchUtil matchUtil;
+
 	@Mock
 	TeamRepository teamRepository;
 
@@ -55,7 +58,7 @@ public class MatchServiceImplTest {
 		assertEquals("000", response.statusCode);
 
 	}
-	
+
 	@Test
 	public void testEditMatchNumberFailure() {
 
@@ -74,7 +77,7 @@ public class MatchServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
-	
+
 	@Test
 	public void testEditMatchId() {
 
@@ -95,7 +98,7 @@ public class MatchServiceImplTest {
 		assertEquals("000", response.statusCode);
 
 	}
-	
+
 	@Test
 	public void testEditMatchIdFailure() {
 
@@ -114,6 +117,5 @@ public class MatchServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
-
 
 }
