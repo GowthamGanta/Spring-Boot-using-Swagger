@@ -53,7 +53,7 @@ public class VenueServiceImplTest<StadiumName> {
 
 		// 2.
 		SaveVenueResponse response=venueServiceImpl.saveVenue(saveVenueRequest);
-		
+		  
 		//3.
 		assertEquals("000", response.statusCode);
 
