@@ -116,14 +116,15 @@ public class MatchServiceImplTest {
 	}
 	
 	@Test
-	public void testGetMatchResponse() {
+	public void testGetMatchId() {
 
 		IPLMatch iplMatch = new IPLMatch();
-		Optional<IPLMatch> matchObj = Optional.of(iplMatch);
+		List<IPLMatch> matchObj = new ArrayList<>();
 
 		// To get the Applicant based on userId
-		when(matchRepository.findById(Mockito.anyInt())).thenReturn(matchObj);
+		when(matchRepository.findByMatchId(Mockito.anyInt())).thenReturn(matchObj);
 		int matchId = 1;
+		
 
 		GetMatchResponse response = matchServiceImpl.getMatch(matchId);
 		assertEquals("000", response.statusCode);
@@ -131,11 +132,42 @@ public class MatchServiceImplTest {
 	}
 
 	@Test
-	public void testGetMatchNotFound() {
-		Optional<IPLMatch> matches = Optional.empty();
-		when(matchRepository.findById(Mockito.anyInt())).thenReturn(matches);
+	public void testGetMatchIdNotFound() {
+		IPLMatch iplMatch = new IPLMatch();
+		List<IPLMatch> matchObj = new ArrayList<>();
+		when(matchRepository.findByMatchId(Mockito.anyInt())).thenReturn(matchObj);
 		int matchId = 0;
 		GetMatchResponse response = matchServiceImpl.getMatch(matchId);
+		assertEquals("002", response.statusCode);
+
+	}
+	
+
+	@Test
+	public void testGetMatchNumber() {
+
+		IPLMatch iplMatch = new IPLMatch();
+		List<IPLMatch> matchObj = new ArrayList<>();
+
+		// To get the Applicant based on userId
+		when(matchRepository.findByMatchNumber(Mockito.anyInt())).thenReturn(matchObj);
+		int matchNumber = 1;
+
+		GetMatchResponse response = matchServiceImpl.getMatch(matchNumber);
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testGetMatchNumberNotFound() {
+		IPLMatch iplMatch = new IPLMatch();
+		List<IPLMatch> matchObj = new ArrayList<>();
+
+		// To get the Applicant based on userId
+		when(matchRepository.findByMatchNumber(Mockito.anyInt())).thenReturn(matchObj);
+		int matchNumber = 0;
+
+		GetMatchResponse response = matchServiceImpl.getMatch(matchNumber);
 		assertEquals("002", response.statusCode);
 
 	}
