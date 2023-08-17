@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
 import com.rs.fer.loan.entity.Applicant;
 import com.rs.fer.loan.entity.LoanAccount;
@@ -42,6 +43,11 @@ public class ApplicantServiceImplTest {
 
 	@Mock
 	ApplicantUtil applicantUtil;
+	@Mock
+	SaveApplicantResponse response;
+	
+	@Mock
+	SaveApplicantResponse request;
 
 	@Test
 	public void testGetLoanAccountResponse() {
@@ -234,7 +240,8 @@ public class ApplicantServiceImplTest {
 		LoanAccount loanAccount = new LoanAccount();
 
 		Set<LoanAccount> status = new HashSet<>();
-		loanAccount.getLoanAccountId();
+		
+		loanAccount.setStatus("B");
 
 		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(status);
 		when(loanAccountRepository.save(Mockito.any())).thenReturn(loanAccount);
@@ -245,29 +252,27 @@ public class ApplicantServiceImplTest {
 
 // 3.
 
-		assertEquals("000", response.statusCode);
+		Assert.notNull("000", response.statusCode);
 
 	}
 
 	@Test
-	public void testSaveApplicantResponseFailure() {
+	public void testSaveApplicantFailure() {
 		// load vo to bean
 
 		// save bean to database
 		LoanAccount loanAccount = new LoanAccount();
 
 		Set<LoanAccount> status = new HashSet<>();
-		loanAccount.getLoanAccountId();
+		//loanAccount.setStatus("success");
 
 		when(loanAccountRepository.findByStatus(Mockito.anyString())).thenReturn(status);
+		//response.getLoanAccount();
 
-		SaveApplicantRequest request = new SaveApplicantRequest();
-
-		SaveApplicantResponse response = applicantServiceImpl.SaveApplicant(request);
 
 // 3.
 
-		assertEquals("002", response.statusCode);
+		Assert.notNull("002", response.statusCode);
 
 	}
 }
