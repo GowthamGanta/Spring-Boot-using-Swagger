@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.rs.fer.ipl.entity.Venue;
 import com.rs.fer.ipl.repository.VenueRepository;
 import com.rs.fer.ipl.request.SaveVenueRequest;
-import com.rs.fer.ipl.response.SavePlayerResponse;
 import com.rs.fer.ipl.response.SaveVenueResponse;
 import com.rs.fer.ipl.util.VenueUtil;
 
