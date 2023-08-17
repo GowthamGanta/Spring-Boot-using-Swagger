@@ -82,7 +82,7 @@ public class VenueServiceImplTest<StadiumName> {
 
 		// 3.
 		assertEquals("001", response.statusCode);
-
+ 
 	}
 
 	@Test
