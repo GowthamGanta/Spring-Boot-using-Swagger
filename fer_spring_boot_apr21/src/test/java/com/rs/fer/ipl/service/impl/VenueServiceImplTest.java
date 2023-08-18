@@ -5,22 +5,22 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import com.rs.fer.ipl.entity.Venue;
 import com.rs.fer.ipl.repository.VenueRepository;
-import com.rs.fer.ipl.response.GetVenuesResponse;
+import com.rs.fer.ipl.request.SaveVenueRequest;
+import com.rs.fer.ipl.response.SaveVenueResponse;
 import com.rs.fer.ipl.util.VenueUtil;
+
 @SpringBootTest
-public class VenueServiceImplTest {
-	
+public class VenueServiceImplTest<StadiumName> {
+
 	@InjectMocks
 	private VenueServiceImpl venueServiceImpl;
 
@@ -30,34 +30,88 @@ public class VenueServiceImplTest {
 	@Mock
 	VenueUtil venueUtil;
 
-	// private Object teams;
-	public void testGetVenue() {
-		List<Venue> venue = new ArrayList<>();
-        
-        ((Venue) venue).setStadiumName("LBstadium");
-        
-        when(venueRepository.findByStadiumName(Mockito.anyString())).thenReturn(venue);
-        
-        String StadiumName="LBStadium";
-        GetVenuesResponse response=venueServiceImpl.getVenues();
-        
-        Assert.notNull("000", response.statusCode);
-        		   
-	}
 	@Test
-	public void testGetVenueNotFound() {
-		List<Venue> venue = new ArrayList<>();
+	public void testSaveVenue() {
 
-		// Team teams = new Team();
-		// Mock
-		when(venueRepository.findByStadiumName(Mockito.anyString())).thenReturn(venue);
+		Venue venue = new Venue();
+
+		venue.setVenueId(5);
+
+		List<Venue> venues = new ArrayList<>();
+
+		// when
+		when(venueRepository.findByStadiumName(Mockito.anyString())).thenReturn(venues);
+
+		when(venueRepository.save(Mockito.any())).thenReturn(venue);
+
+		when(venueUtil.loadSaveVenueRequestToVenue(Mockito.any())).thenReturn(venue);
+
+		// 1.
+		SaveVenueRequest saveVenueRequest = new SaveVenueRequest();
+
+		saveVenueRequest.setStadiumName("LBStadium");
 
 		// 2.
-		String StadiumName = null;
-		GetVenuesResponse response=venueServiceImpl.getVenues();
-		
+		SaveVenueResponse response = venueServiceImpl.saveVenue(saveVenueRequest);
+
+		// 3.
+		assertEquals("000", response.statusCode);
+
+	}
+
+	@Test
+	public void testSaveVenueDuplicateStadiumName() {
+
+		Venue venue = new Venue();
+
+		venue.setVenueId(5);
+
+		List<Venue> venues = new ArrayList<>();
+
+		venues.add(venue);
+		// when
+		when(venueRepository.findByStadiumName(Mockito.anyString())).thenReturn(venues);
+
+		// 1.
+		SaveVenueRequest saveVenueRequest = new SaveVenueRequest();
+
+		saveVenueRequest.setStadiumName("LBStadium");
+
+		// 2.
+		SaveVenueResponse response = venueServiceImpl.saveVenue(saveVenueRequest);
+
+		// 3.
+		assertEquals("001", response.statusCode);
+ 
+	}
+
+	@Test
+	public void testSaveVenueFailure() {
+
+		Venue venue = new Venue();
+
+		// venue.setVenueId(5);
+
+		List<Venue> venues = new ArrayList<>();
+
+		// when
+		when(venueRepository.findByStadiumName(Mockito.anyString())).thenReturn(venues);
+
+		when(venueRepository.save(Mockito.any())).thenReturn(venue);
+
+		when(venueUtil.loadSaveVenueRequestToVenue(Mockito.any())).thenReturn(venue);
+
+		// 1.
+	  	SaveVenueRequest saveVenueRequest = new SaveVenueRequest();
+
+		saveVenueRequest.setStadiumName("LBStadium");
+
+		// 2.
+		SaveVenueResponse response = venueServiceImpl.saveVenue(saveVenueRequest);
 
 		// 3.
 		assertEquals("002", response.statusCode);
+
 	}
+
 }

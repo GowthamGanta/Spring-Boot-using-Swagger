@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
@@ -62,7 +61,7 @@ public class TeamServiceImplTest {
 		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
 
 		// 3.
-		Assert.notNull("000", response.statusCode);
+		assertEquals("000", response.statusCode);
 	}
 
 	@Test
@@ -208,7 +207,7 @@ public class TeamServiceImplTest {
 		EditTeamResponse response = teamServiceImpl.editTeam(request);
 
 		// 3.
-		Assert.notNull("000", response.statusCode);
+		assertEquals("000", response.statusCode);
 
 	}
 
