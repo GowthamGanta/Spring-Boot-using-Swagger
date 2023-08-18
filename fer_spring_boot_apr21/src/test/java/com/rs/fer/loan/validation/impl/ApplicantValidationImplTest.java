@@ -355,7 +355,7 @@ public class ApplicantValidationImplTest {
 			Set<FinancialDetailsDTO> financialDetailsDTO = new LinkedHashSet<FinancialDetailsDTO>();
 			FinancialDetailsDTO financialDetails = new FinancialDetailsDTO();
 			financialDetails.setGrossSalary((float) 40000);
-			financialDetails.setNetSalary((float) 45000);
+			financialDetails.setNetSalary((float) 47000);
 			financialDetailsDTO.add(financialDetails);
 			
 			request.getFinancialDetails();
