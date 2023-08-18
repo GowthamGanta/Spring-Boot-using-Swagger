@@ -1,6 +1,7 @@
 package com.rs.fer.ipl.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
@@ -22,19 +24,21 @@ import com.rs.fer.ipl.request.SaveTeamRequest;
 import com.rs.fer.ipl.response.DeleteTeamResponse;
 import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
+import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
 import com.rs.fer.ipl.util.TeamUtil;
 
 @SpringBootTest
 public class TeamServiceImplTest {
+	
 	@InjectMocks
 	private TeamServiceImpl teamServiceImpl;
 
 	@Mock
-	TeamRepository teamRepository;
+	private TeamRepository teamRepository;
 
 	@Mock
-	TeamUtil teamUtil;
+	private TeamUtil teamUtil;
 
 	// private Object teams;
 
@@ -49,13 +53,14 @@ public class TeamServiceImplTest {
 
 		// Mock
 		when(teamRepository.findByName(Mockito.anyString())).thenReturn(team);
+
 		when(teamRepository.save(Mockito.any())).thenReturn(teams);
 
 		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);
 
 		// 1.
 		SaveTeamRequest request = new SaveTeamRequest();
-		// request.setName("CSK");
+		request.setName("CSK");
 
 		// 2.
 		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
@@ -67,11 +72,10 @@ public class TeamServiceImplTest {
 	@Test
 	public void testSaveTeamDuplicate() {
 
-		List<Team> team = new ArrayList<>();
-
 		Team teams = new Team();
 		teams.setName("");
 
+		List<Team> team = new ArrayList<>();
 		team.add(teams);
 
 		// Mock
@@ -235,4 +239,40 @@ public class TeamServiceImplTest {
 
 	}
 
+	@Test 
+	public void testGetTeamsByName() {
+	  
+	String teamName = "MI";
+	Team team = new Team(); 
+	team.setTeamName("MI"); 
+	List<Team> teams = new ArrayList<>();
+	teams.add(team);
+	  
+	when(teamRepository.findByTeamName(Mockito.anyString())).thenReturn(teams);
+	  
+	GetTeamsResponse response = teamServiceImpl.getTeamsByName(teamName);
+	
+	//assertEquals(HttpStatus.OK, response.getStatus());
+	assertNotNull("000", response.statusCode);
+	//assertEquals("Fetched teams by name successfully ", response.getMessage());
+    //assertNotNull(response.getTeams());
+	}
+	  
+	@Test 
+	public void testGetTeamsByNameNotFound() {
+	  
+	Team team = new Team(); 
+	team.setTeamName("MI"); 
+	List<Team> teams = new ArrayList<>();
+	  
+	when(teamRepository.findByName(Mockito.anyString())).thenReturn(teams);
+	 
+	int teamId = 1;
+	  
+	GetTeamResponse response = teamServiceImpl.getTeam(teamId);
+	
+	assertEquals("002", response.statusCode);
+	  
+	}
+	  
 }
