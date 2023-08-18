@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.rs.fer.ipl.entity.Player;
 import com.rs.fer.ipl.entity.Venue;
 import com.rs.fer.ipl.repository.VenueRepository;
 import com.rs.fer.ipl.request.SaveVenueRequest;
