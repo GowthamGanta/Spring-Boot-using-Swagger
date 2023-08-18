@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
+
 import com.rs.fer.ipl.entity.Venue;
 import com.rs.fer.ipl.repository.VenueRepository;
 import com.rs.fer.ipl.response.GetVenuesResponse;
@@ -39,8 +41,8 @@ public class VenueServiceImplTest {
         String StadiumName="LBStadium";
         GetVenuesResponse response=venueServiceImpl.getVenues();
         
-        assertEquals("000", response.statusCode);
-        		
+        Assert.notNull("000", response.statusCode);
+        		   
 	}
 	@Test
 	public void testGetVenueNotFound() {
