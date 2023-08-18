@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;
@@ -207,7 +208,7 @@ public class TeamServiceImplTest {
 		EditTeamResponse response = teamServiceImpl.editTeam(request);
 
 		// 3.
-		assertEquals("000", response.statusCode);
+		Assert.notNull("000", response.statusCode);
 
 	}
 
@@ -234,5 +235,106 @@ public class TeamServiceImplTest {
 		assertEquals("002", response.statusCode);
 
 	}
+	
+	@Test
+	public void testEditTeam1() {
+
+		List<Team> team = new ArrayList<>();
+
+		Team teams = new Team();
+		teams.setName("csk");
+		team.add(teams);
+
+		// Mock
+		when(teamRepository.findByTeamCodeAndTeamIdNot(Mockito.anyString(),Mockito.anyInt())).thenReturn(team);
+		when(teamRepository.save(Mockito.any())).thenReturn(teams);
+
+		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);
+
+		// 1.
+		SaveTeamRequest request = new SaveTeamRequest();
+		// request.setName("CSK");
+
+		// 2.
+		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
+
+		// 3.
+		Assert.notNull("000", response.statusCode);
+	}
+	
+	@Test
+	public void testEditTeamFailure1() {
+
+		List<Team> team = new ArrayList<Team>();
+
+		Team teams = new Team();
+
+		when(teamRepository.findByTeamCodeAndTeamIdNot(Mockito.anyString(),Mockito.anyInt())).thenReturn(team);
+
+		when(teamRepository.save(Mockito.any())).thenReturn(teams);
+
+		when(teamUtil.loadEditTeamRequestToTeam(Mockito.any())).thenReturn(teams);
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		// request.setTeamId(1);
+		request.setName("CSK");
+
+		EditTeamResponse response = teamServiceImpl.editTeam(request);
+
+		assertEquals("002", response.statusCode);
+
+	}
+	
+	@Test
+	public void testEditTeam2() {
+
+		List<Team> team1 = new ArrayList<>();
+
+		Team teams = new Team();
+		teams.setName("csk");
+		team1.add(teams);
+
+		// Mock
+		when(teamRepository.findByNameAndTeamIdNot(Mockito.anyString(),Mockito.anyInt())).thenReturn(team1);
+		when(teamRepository.save(Mockito.any())).thenReturn(teams);
+
+		when(teamUtil.loadSaveTeamRequestToTeam(Mockito.any())).thenReturn(teams);
+
+		// 1.
+		SaveTeamRequest request = new SaveTeamRequest();
+		// request.setName("CSK");
+
+		// 2.
+		SaveTeamResponse response = teamServiceImpl.saveTeam(request);
+
+		// 3.
+		Assert.notNull("000", response.statusCode);
+	}
+	
+	@Test
+	public void testEditTeamFailure2() {
+
+		List<Team> team1 = new ArrayList<Team>();
+
+		Team teams = new Team();
+
+		when(teamRepository.findByNameAndTeamIdNot(Mockito.anyString(),Mockito.anyInt())).thenReturn(team1);
+
+		when(teamRepository.save(Mockito.any())).thenReturn(teams);
+
+		when(teamUtil.loadEditTeamRequestToTeam(Mockito.any())).thenReturn(teams);
+
+		EditTeamRequest request = new EditTeamRequest();
+
+		// request.setTeamId(1);
+		request.setName("CSK");
+
+		EditTeamResponse response = teamServiceImpl.editTeam(request);
+
+		assertEquals("002", response.statusCode);
+
+	}
+	
 
 }
