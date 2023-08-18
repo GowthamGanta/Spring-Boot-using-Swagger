@@ -1,6 +1,7 @@
 package com.rs.fer.ipl.service;
 
 import com.rs.fer.ipl.request.EditMatchRequest;
+import com.rs.fer.ipl.request.GetMatcheRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.response.EditMatchResponse;
 import com.rs.fer.ipl.response.GetMatchResponse;
@@ -16,5 +17,6 @@ public interface MatchService {
 	GetMatchResponse getMatch(Integer matchId);
 
 	EditMatchResponse editMatch(EditMatchRequest request);
+
 
 }

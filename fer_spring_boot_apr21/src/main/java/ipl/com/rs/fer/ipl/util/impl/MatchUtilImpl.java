@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.entity.IPLMatch;
 import com.rs.fer.ipl.request.EditMatchRequest;
+import com.rs.fer.ipl.request.GetMatcheRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 import com.rs.fer.ipl.util.MatchUtil;
 
@@ -51,6 +52,11 @@ public class MatchUtilImpl implements MatchUtil {
 		match.setHomeTeam(request.getHomeTeam());
 		match.setAwayTeam(request.getAwayTeam());
 		return match;
+	}
+
+	public IPLMatch getMatchById(GetMatcheRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

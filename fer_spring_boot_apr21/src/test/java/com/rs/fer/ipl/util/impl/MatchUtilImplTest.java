@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.ipl.entity.IPLMatch;
+import com.rs.fer.ipl.request.GetMatcheRequest;
 import com.rs.fer.ipl.request.SaveMatchRequest;
 
 @SpringBootTest
@@ -62,6 +64,22 @@ public class MatchUtilImplTest {
 		boolean isActualNotEmpty = false;
 
 		assertEquals(isExpectedNotEmpty, isActualNotEmpty);
+
+	}
+	@Test
+	public void testUtilGetMatch() {
+
+		GetMatcheRequest request = new GetMatcheRequest();
+
+		request.getMatchId();
+
+
+		IPLMatch errorMessage = matchUtilImpl.getMatchById(request);
+
+		boolean isExpectedEmpty = true;
+		boolean isActualEmpty = (0 != errorMessage.getMatchId());
+
+		assertEquals(isExpectedEmpty, isActualEmpty);
 
 	}
 
