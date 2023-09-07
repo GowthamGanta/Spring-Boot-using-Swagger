@@ -187,7 +187,6 @@ public class MatchServiceImplTest {
 	@Test
 	public void testGetMatchId() {
 
-		IPLMatch iplMatch = new IPLMatch();
 		List<IPLMatch> matchObj = new ArrayList<>();
 
 		// To get the Applicant based on userId
@@ -202,7 +201,6 @@ public class MatchServiceImplTest {
 
 	@Test
 	public void testGetMatchIdNotFound() {
-		IPLMatch iplMatch = new IPLMatch();
 		List<IPLMatch> matchObj = new ArrayList<>();
 		when(matchRepository.findByMatchId(Mockito.anyInt())).thenReturn(matchObj);
 		int matchId = 0;
@@ -215,7 +213,6 @@ public class MatchServiceImplTest {
 	@Test
 	public void testGetMatchNumber() {
 
-		IPLMatch iplMatch = new IPLMatch();
 		List<IPLMatch> matchObj = new ArrayList<>();
 
 		// To get the Applicant based on userId
@@ -229,7 +226,6 @@ public class MatchServiceImplTest {
 
 	@Test
 	public void testGetMatchNumberNotFound() {
-		IPLMatch iplMatch = new IPLMatch();
 		List<IPLMatch> matchObj = new ArrayList<>();
 
 		// To get the Applicant based on userId
