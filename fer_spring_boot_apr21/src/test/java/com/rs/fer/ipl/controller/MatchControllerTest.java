@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.ipl.controller.MatchController;
-import com.rs.fer.ipl.request.GetMatcheRequest;
 import com.rs.fer.ipl.response.GetMatchResponse;
 import com.rs.fer.ipl.service.MatchService;
 import com.rs.fer.ipl.validation.MatchValidation;
@@ -36,7 +34,6 @@ public class MatchControllerTest {
 
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		GetMatcheRequest request = new GetMatcheRequest();
 		GetMatchResponse response = new GetMatchResponse(HttpStatus.OK, "000", "", null);
 
 		when(matchValidation.validateGetMatchRequest(Mockito.anyInt())).thenReturn(errorMessages);
@@ -55,7 +52,6 @@ public class MatchControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter Type");
 		
-		GetMatcheRequest request = new GetMatcheRequest();
 		
 		//When
 		when(matchValidation.validateGetMatchRequest(Mockito.anyInt())).thenReturn(errorMessages);
