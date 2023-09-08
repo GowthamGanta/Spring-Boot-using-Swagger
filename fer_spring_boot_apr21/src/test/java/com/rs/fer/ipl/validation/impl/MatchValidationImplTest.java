@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.rs.fer.ipl.request.GetMatcheRequest;
-import com.rs.fer.ipl.validation.impl.MatchValidationImpl;
 
 @SpringBootTest
 public class MatchValidationImplTest {
