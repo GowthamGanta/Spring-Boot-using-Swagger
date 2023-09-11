@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
@@ -309,7 +310,7 @@ public class ExpenseServiceImplTest {
 
 		List<Expense> expenseReport = new ArrayList<>(1);
 		expenseReport.add(expense);
-		
+		 
 		when(expenseRepository.findByUserIdAndTypeAndDateBetween(Mockito.anyInt(), Mockito.anyString(),
 				Mockito.anyString(), Mockito.anyString())).thenReturn(expenseReport);
 

@@ -10,7 +10,7 @@ import com.rs.fer.ipl.entity.Team;
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
 
-	List<Team> findByName(String Name);
+	List<Team> findByName(String name);
 	
 	List<Team> findByTeamCode(String TeamCode);
 
@@ -20,7 +20,7 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
 	List<Team> findByNameAndTeamIdNot(String name, int teamId);
 
-	List<Team> findByNameContaining(String name);
-	
+	List<Team> findByTeamName(String anyString);
+
 }
 

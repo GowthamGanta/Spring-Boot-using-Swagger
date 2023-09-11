@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// load response
-		if (userid > 0) {
+		if (userid > 0) { 
 			// success
 			response = new LoginResponse(HttpStatus.OK, "000", "Welcome to user", null);
 			// response.setUser(user);

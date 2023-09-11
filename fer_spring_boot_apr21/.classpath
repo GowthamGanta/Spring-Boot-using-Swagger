@@ -6,8 +6,8 @@
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
-	</classpathentry>
-	<classpathentry excluding="admin/|expense/|follow/|group/|message/|participant/|user/|ipl/|ipl/|Ipl/" kind="src" output="target/classes" path="src/main/java"/>
+	</classpathentry> 
+	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/" kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -15,6 +15,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/java/admin"/>
 	<classpathentry kind="src" path="src/main/java/expense"/>
+	<classpathentry kind="src" path="src/main/java/eis"/> 
 	<classpathentry kind="src" path="src/main/java/follow"/>
 	<classpathentry kind="src" path="src/main/java/group"/>
 	<classpathentry kind="src" path="src/main/java/message"/>

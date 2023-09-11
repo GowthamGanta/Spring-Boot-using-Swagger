@@ -32,6 +32,9 @@ public class Team {
 
 	@Column
 	private String teamCode;
+	
+	@Column
+	private String teamName;
 
 	@Column
 	private String created;
@@ -51,5 +54,11 @@ public class Team {
 	@OneToMany(targetEntity = Player.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "t_id", referencedColumnName = "team_id")
 	private Set<Player> players;
+
+	public void setTeamName(String string) {
+		
+	}
+	
+	
 
 }

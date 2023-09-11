@@ -26,7 +26,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			AddExpenseRequest request = new AddExpenseRequest();
 
 			request.setType("tea");
-			request.setDate("28-01-2022");
+			request.setDate("28-01-2022"); 
 			request.setPrice(90);
 			request.setNumberOfItems(5);
 			request.setTotal(4);
