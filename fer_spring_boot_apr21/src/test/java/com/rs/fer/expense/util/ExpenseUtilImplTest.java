@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.eis.entity.Employee;
+import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
@@ -26,7 +26,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			AddExpenseRequest request = new AddExpenseRequest();
 
 			request.setType("tea");
-			request.setDate("28-01-2022");
+			request.setDate("28-01-2022"); 
 			request.setPrice(90);
 			request.setNumberOfItems(5);
 			request.setTotal(4);
@@ -34,7 +34,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setUserId(1);
 
 
-			Employee errorMessage = expenseUtilImpl.loadAddExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadAddExpenseRequestToExpense(request);
 
 			boolean isExpectedEmpty = true;
 			boolean isActualEmpty = (0 != errorMessage.getUserId());
@@ -56,7 +56,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setBywhom("Myself");
 			//request.setUserId(1);
 
-			Employee errorMessage = expenseUtilImpl.loadAddExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadAddExpenseRequestToExpense(request);
 
 			boolean isExpectedEmpty = false;
 			boolean isActualEmpty = (0 != errorMessage.getUserId());
@@ -68,7 +68,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 		@Test
 		public void testUtilloadEditExpenseRequestToExpense() {
 
-			Employee expense = new Employee();
+			Expense expense = new Expense();
 			
 			EditExpenseRequest request = new EditExpenseRequest();
 
@@ -81,7 +81,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setExpenseId(2);
 
 
-			Employee errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request,expense);
+			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request,expense);
 
 			boolean isExpectedEmpty = true;
 			boolean isActualEmpty = (0 != errorMessage.getExpenseId());
@@ -93,7 +93,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 		@Test
 		public void testUtilloadEditExpenseRequestToExpenseFailure() {
 
-			Employee expense = new Employee();
+			Expense expense = new Expense();
 			
 			EditExpenseRequest request = new EditExpenseRequest();
 
@@ -105,7 +105,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setBywhom("Myself");
 			//request.setExpenseId(1);
 
-			Employee errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request, expense);
+			Expense errorMessage = expenseUtilImpl.loadEditExpenseRequestToExpense(request, expense);
 
 			boolean isExpectedEmpty = false;
 			boolean isActualEmpty = (0 != errorMessage.getExpenseId());
@@ -123,7 +123,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setExpenseid(1); 
 
 
-			Employee errorMessage = expenseUtilImpl.loadDeleteExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadDeleteExpenseRequestToExpense(request);
 
 			boolean isExpectedEmpty = true;
 			boolean isActualEmpty = (0 != errorMessage.getExpenseId());
@@ -140,7 +140,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			//request.setExpenseid(1);
 
 
-			Employee errorMessage = expenseUtilImpl.loadDeleteExpenseRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadDeleteExpenseRequestToExpense(request);
 
 			boolean isExpectedEmpty = false;
 			boolean isActualEmpty = ( null != errorMessage.getExpenseId());
@@ -159,7 +159,7 @@ import com.rs.fer.expense.util.impl.ExpenseUtilImpl;
 			request.setToDate("30-01-2022");
 			
 
-			Employee errorMessage = expenseUtilImpl.loadExpenseReportRequestToExpense(request);
+			Expense errorMessage = expenseUtilImpl.loadExpenseReportRequestToExpense(request);
 
 			boolean isExpectedEmpty = true;
 			boolean isActualEmpty = ( null != errorMessage.getType());
