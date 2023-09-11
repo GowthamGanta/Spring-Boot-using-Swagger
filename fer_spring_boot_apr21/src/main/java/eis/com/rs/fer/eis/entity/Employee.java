@@ -56,7 +56,7 @@ public class Employee {
 		this.mobile = mobile;
 		this.departmentName = departmentName;
 		this.salary = salary;
-		
+
 	}
 
 }
