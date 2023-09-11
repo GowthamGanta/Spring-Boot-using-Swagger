@@ -19,24 +19,18 @@ public class Employee {
 	@Id
 	@Column(name = "employee_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int employeeId;
-
 	private String firstName;
-
 	private String middleName;
 
 	private String lastName;
-
 	private String dateOfBirth;
-
 	private char gender;
 
 	private String email;
-
 	private int mobile;
-
 	private int departmentName;
-
 	private float salary;
 
 	public Employee() {
@@ -49,9 +43,11 @@ public class Employee {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.middleName = middleName;
+
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
+
 		this.email = email;
 		this.mobile = mobile;
 		this.departmentName = departmentName;
