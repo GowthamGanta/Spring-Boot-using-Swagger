@@ -47,6 +47,11 @@ public class Employee {
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeAddress.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<EmployeeAddress> employeeAddress;
+	
+	//one to many Employee Educational  Details
+		@OneToMany(cascade = CascadeType.ALL, targetEntity = Educational_Details.class)
+		@JoinColumn(name = "eid", referencedColumnName = "employee_id")
+		private Set<Educational_Details> educational_Details;
 
 	public Employee() {
 
