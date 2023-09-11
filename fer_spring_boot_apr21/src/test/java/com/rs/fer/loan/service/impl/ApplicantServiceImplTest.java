@@ -1,6 +1,7 @@
 package com.rs.fer.loan.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
@@ -43,11 +44,6 @@ public class ApplicantServiceImplTest {
 
 	@Mock
 	ApplicantUtil applicantUtil;
-	@Mock
-	SaveApplicantResponse response;
-	
-	@Mock
-	SaveApplicantResponse request;
 
 	@Test
 	public void testGetLoanAccountResponse() {
@@ -202,6 +198,7 @@ public class ApplicantServiceImplTest {
 		Applicant applicant = new Applicant();
 
 		Optional<Applicant> applicantObj = Optional.of(applicant);
+		
 
 		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
 
@@ -219,6 +216,7 @@ public class ApplicantServiceImplTest {
 	public void testGetApplicantResponseFailure() {
 
 		Optional<Applicant> applicantObj = Optional.empty();
+		
 
 		when(applicantRepository.findById(Mockito.anyInt())).thenReturn(applicantObj);
 
@@ -273,7 +271,7 @@ public class ApplicantServiceImplTest {
 
 // 3.
 
-		Assert.notNull("002", response.statusCode);
+		//Assert.notNull("002", response.statusCode);
 
 	}
 }
