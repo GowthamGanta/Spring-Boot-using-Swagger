@@ -37,8 +37,13 @@ public class Employee {
 	private int mobile;
 	private int departmentName;
 	private float salary;
+	
+	//one to many Employee Experience  Details
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Experience_Details.class)
+	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
+	private Set<Experience_Details> experience_Details;
 
-	// One to many
+	// One to many Employee Address
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeAddress.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<EmployeeAddress> employeeAddress;
