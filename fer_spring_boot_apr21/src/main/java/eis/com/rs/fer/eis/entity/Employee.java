@@ -42,7 +42,7 @@ public class Employee {
 	public Employee() {
 
 	}
-
+	
 	public Employee(int employeeId, String firstName, String middleName, String lastName, String dateOfBirth,
 			char gender, String email, int mobile, int departmentName, float salary) {
 
