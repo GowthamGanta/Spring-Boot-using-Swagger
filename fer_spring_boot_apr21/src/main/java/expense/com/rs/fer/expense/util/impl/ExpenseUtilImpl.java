@@ -2,6 +2,7 @@ package com.rs.fer.expense.util.impl;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.eis.util.ExpenseUtil;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.mapper.AddExpenseRequestMapper;
 import com.rs.fer.expense.mapper.EditExpenseRequestMapper;
@@ -9,7 +10,6 @@ import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
-import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.util.DateUtil;
 
 @Component

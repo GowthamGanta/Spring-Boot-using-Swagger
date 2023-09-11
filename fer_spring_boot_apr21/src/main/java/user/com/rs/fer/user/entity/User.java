@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.follow.entity.Follow;
 import com.rs.fer.group.entity.Group;
 
@@ -103,9 +103,9 @@ public class User implements Serializable {
 	@OneToMany(targetEntity = Rating.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Rating> ratings;
 	
-	@OneToMany(targetEntity = Expense.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = Employee.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	private Set<Expense> expenses;
+	private Set<Employee> expenses;
 	
 	@OneToOne(targetEntity = Address.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "addr_id", referencedColumnName = "address_id")

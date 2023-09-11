@@ -205,8 +205,8 @@ public class UserControllerTest {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		new LoginRequest();
-		new LoginResponse(HttpStatus.OK, "000", "", null);
+		LoginRequest request = new LoginRequest();
+		LoginResponse response = new LoginResponse(HttpStatus.OK, "000", "", null);
 
 		// When
 		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);
@@ -226,7 +226,7 @@ public class UserControllerTest {
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter Password");
 
-		new LoginRequest();
+		LoginRequest request = new LoginRequest();
 
 		// When
 		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);

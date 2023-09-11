@@ -25,9 +25,10 @@ import com.rs.fer.ipl.util.TeamUtil;
 public class TeamServiceImpl implements TeamService {
 
 	@Autowired
-	TeamUtil teamUtil;
+	private TeamUtil teamUtil;
+	
 	@Autowired
-	TeamRepository teamRepository;
+	private TeamRepository teamRepository;
 
 	@Override
 	public SaveTeamResponse saveTeam(SaveTeamRequest request) {
@@ -119,16 +120,16 @@ public class TeamServiceImpl implements TeamService {
 	public GetTeamsResponse getTeamsByName(String name) {
 		GetTeamsResponse response = null;
 
-		List<Team> teamObj = teamRepository.findByNameContaining(name);
+		List<Team> teamObj = teamRepository.findByName(name);
 
 		if (!teamObj.isEmpty()) {
 
-			response = new GetTeamsResponse(HttpStatus.OK, "000", "Fetched Teams  succesfully", null);
+			response = new GetTeamsResponse();
 			response.setTeams(teamObj);
 
 		} else {
 
-			response = new GetTeamsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
+			response = new GetTeamsResponse();
 
 		}
 
@@ -143,12 +144,12 @@ public class TeamServiceImpl implements TeamService {
 
 		if (!teamObj.isEmpty()) {
 
-			response = new GetTeamsResponse(HttpStatus.OK, "000", "Fetched Teams  succesfully", null);
+			response = new GetTeamsResponse();
 			response.setTeams(teamObj);
 
 		} else {
 
-			response = new GetTeamsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Fetching is failed", null);
+			response = new GetTeamsResponse();
 
 		}
 
@@ -207,4 +208,5 @@ public class TeamServiceImpl implements TeamService {
 
 	}
 
+	
 }

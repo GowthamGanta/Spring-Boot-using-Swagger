@@ -5,13 +5,13 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.eis.validation.ExpenseValidation;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
 import com.rs.fer.expense.request.ExpenseReportRequest;
 import com.rs.fer.expense.request.GetExpenseOptionsRequest;
 import com.rs.fer.expense.request.GetExpenseRequest;
-import com.rs.fer.expense.validation.ExpenseValidation;
 import com.rs.fer.util.FERUtil;
 
 @Component

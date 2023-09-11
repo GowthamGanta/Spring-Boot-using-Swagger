@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.response.AbstractResponse;
@@ -11,18 +12,28 @@ import com.rs.fer.response.AbstractResponse;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class GetTeamsResponse extends AbstractResponse {
+@Component
+public class GetTeamsResponse {
 	
-	public GetTeamsResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
-		super(status, statusCode, message, errorMessages);
-		this.status = status;
-		this.statusCode = statusCode;
-		this.message = message;
-		this.errorMessages = errorMessages;
-
+	    private HttpStatus status;
+	    public String statusCode;
+	    private String message;
+	    private String errorMessages;
+	    private List<Team> teams;
+		public void setTeams(List<Team> teamObj) {
+			
+		}
+		public Object getStatus() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public Object getTeams() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		public Object getMessage() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
-	private List<Team> teams;
-}

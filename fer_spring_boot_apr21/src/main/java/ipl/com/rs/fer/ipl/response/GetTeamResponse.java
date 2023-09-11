@@ -22,4 +22,9 @@ public class GetTeamResponse extends AbstractResponse {
 	}
 
 	private Team team;
+
+	public Object getTeamName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

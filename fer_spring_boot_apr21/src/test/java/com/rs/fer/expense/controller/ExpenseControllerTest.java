@@ -13,6 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.rs.fer.eis.controller.ExpenseController;
+import com.rs.fer.eis.service.ExpenseService;
+import com.rs.fer.eis.validation.ExpenseValidation;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
@@ -25,8 +28,6 @@ import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
-import com.rs.fer.expense.service.ExpenseService;
-import com.rs.fer.expense.validation.ExpenseValidation;
 
 @SpringBootTest
 public class ExpenseControllerTest {

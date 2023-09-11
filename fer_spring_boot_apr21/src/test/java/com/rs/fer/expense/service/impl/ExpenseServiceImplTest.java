@@ -14,8 +14,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.rs.fer.eis.entity.Employee;
+import com.rs.fer.eis.repository.ExpenseRepository;
+import com.rs.fer.eis.util.ExpenseUtil;
 import com.rs.fer.expense.entity.Expense;
-import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
 import com.rs.fer.expense.request.DeleteExpenseRequest;
 import com.rs.fer.expense.request.EditExpenseRequest;
@@ -28,7 +30,6 @@ import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
-import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
@@ -73,7 +74,7 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testDeleteExpenseNotPresent() {
 
-		Optional<Expense> expenseObj = Optional.empty();
+		Optional<Employee> expenseObj = Optional.empty();
 
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
@@ -134,7 +135,7 @@ public class ExpenseServiceImplTest {
 		// Expense expense = new Expense();
 		// User user = null;
 
-		Expense expense = null;
+		Employee expense = null;
 		// Mock
 		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
 
@@ -164,7 +165,7 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testEditExpenseSuccess() {
 
-		Expense expense = new Expense();
+		Employee expense = new Employee();
 		expense.setUserId(1);
 		
 		EditExpenseRequest request = new EditExpenseRequest();
@@ -175,7 +176,7 @@ public class ExpenseServiceImplTest {
 		request.setTotal(30);
 		request.setBywhom("rs");
 		
-		Optional<Expense> expenseObj = Optional.of(expense);
+		Optional<Employee> expenseObj = Optional.of(expense);
 
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
@@ -194,10 +195,10 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testEditExpenseFailure() {
 
-		Expense expense = new Expense();
+		Employee expense = new Employee();
 		// expense.setUserId(1);
 
-		Optional<Expense> expenseObj = Optional.empty();
+		Optional<Employee> expenseObj = Optional.empty();
 
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
@@ -223,10 +224,10 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testGetExpense() {
 
-		Expense expense = new Expense();
+		Employee expense = new Employee();
 		expense.setUserId(1);
 
-		Optional<Expense> expenseObj = Optional.of(expense);
+		Optional<Employee> expenseObj = Optional.of(expense);
 
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
@@ -245,7 +246,7 @@ public class ExpenseServiceImplTest {
 	public void testGetExpenseNotFound() {
 
 
-		Optional<Expense> expenseObj = Optional.empty();
+		Optional<Employee> expenseObj = Optional.empty();
 
 		// Mock
 		when(expenseRepository.findById(Mockito.anyInt())).thenReturn(expenseObj);
@@ -267,7 +268,7 @@ public class ExpenseServiceImplTest {
 
 		User user = new User();
 		user.setUserId(1);
-		user.setExpenses(new LinkedHashSet<Expense>());
+		user.setExpenses(new LinkedHashSet<Employee>());
 
 		Optional<User> userObj = Optional.of(user);
 
@@ -304,10 +305,10 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testExpenseReport() {
 
-		Expense expense = new Expense();
+		Employee expense = new Employee();
 		expense.setUserId(1);
 
-		List<Expense> expenseReport = new ArrayList<>(1);
+		List<Employee> expenseReport = new ArrayList<>(1);
 		expenseReport.add(expense);
 		
 		when(expenseRepository.findByUserIdAndTypeAndDateBetween(Mockito.anyInt(), Mockito.anyString(),
@@ -330,7 +331,7 @@ public class ExpenseServiceImplTest {
 	@Test
 	public void testExpenseReportIsEmpty() {
 
-		List<Expense> expenseReport = new ArrayList<>(1);
+		List<Employee> expenseReport = new ArrayList<>(1);
 
 		when(expenseRepository.findByUserIdAndTypeAndDateBetween(Mockito.anyInt(), Mockito.anyString(),
 				Mockito.anyString(), Mockito.anyString())).thenReturn(expenseReport);

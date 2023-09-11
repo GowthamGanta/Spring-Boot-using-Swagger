@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.rs.fer.eis.service.ExpenseService;
+import com.rs.fer.eis.util.ExpenseUtil;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;
@@ -21,8 +23,6 @@ import com.rs.fer.expense.response.EditExpenseResponse;
 import com.rs.fer.expense.response.ExpenseReportResponse;
 import com.rs.fer.expense.response.GetExpenseOptionsResponse;
 import com.rs.fer.expense.response.GetExpenseResponse;
-import com.rs.fer.expense.service.ExpenseService;
-import com.rs.fer.expense.util.ExpenseUtil;
 import com.rs.fer.user.entity.User;
 import com.rs.fer.user.repository.UserRepository;
 
