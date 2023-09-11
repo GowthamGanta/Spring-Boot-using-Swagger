@@ -1,10 +1,15 @@
 package com.rs.fer.eis.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -32,6 +37,11 @@ public class Employee {
 	private int mobile;
 	private int departmentName;
 	private float salary;
+
+	// One to many
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeAddress.class)
+	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
+	private Set<EmployeeAddress> employeeAddress;
 
 	public Employee() {
 
