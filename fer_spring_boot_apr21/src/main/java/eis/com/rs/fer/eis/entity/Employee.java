@@ -39,6 +39,7 @@ public class Employee {
 
 	private float salary;
 
+	
 	public Employee() {
 
 	}
