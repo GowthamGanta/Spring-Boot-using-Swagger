@@ -42,7 +42,7 @@ public class Employee {
 	public Employee() {
 
 	}
-	
+
 	public Employee(int employeeId, String firstName, String middleName, String lastName, String dateOfBirth,
 			char gender, String email, int mobile, int departmentName, float salary) {
 
@@ -56,7 +56,7 @@ public class Employee {
 		this.mobile = mobile;
 		this.departmentName = departmentName;
 		this.salary = salary;
+		
 	}
 
-	
 }
