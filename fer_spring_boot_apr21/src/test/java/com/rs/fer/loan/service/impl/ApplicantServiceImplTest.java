@@ -251,6 +251,7 @@ public class ApplicantServiceImplTest {
 		SaveApplicantResponse response = applicantServiceImpl.SaveApplicant(request);
 
 // 3.
+		
 
 		Assert.notNull("000", response.statusCode);
 
