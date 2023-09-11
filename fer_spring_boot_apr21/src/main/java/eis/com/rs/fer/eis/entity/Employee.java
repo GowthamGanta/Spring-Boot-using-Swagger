@@ -38,7 +38,7 @@ public class Employee {
 	private int departmentName;
 
 	private float salary;
-	
+
 	public Employee() {
 
 	}
