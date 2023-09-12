@@ -30,7 +30,7 @@ public class Employee {
 
 	private String lastName;
 	private String dateOfBirth;
-	private char gender;
+	private String gender;
 	private String email;
 
 	private String mobile;
@@ -73,7 +73,7 @@ public class Employee {
 	}
 
 	public Employee(int employeeId, String firstName, String middleName, String lastName, String dateOfBirth,
-			char gender, String email, String mobile, float salary, String created, String updated) {
+			String gender, String email, String mobile, float salary, String created, String updated) {
 
 		this.employeeId = employeeId;
 		this.firstName = firstName;
