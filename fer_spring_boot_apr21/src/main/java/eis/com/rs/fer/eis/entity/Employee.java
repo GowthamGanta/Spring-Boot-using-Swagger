@@ -53,17 +53,17 @@ public class Employee {
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<Educational_Details> educational_Details;
 
-	// one to one Employee EmployeeRole Details
+	// one to Many Employee EmployeeRole Details
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRole.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<EmployeeRole> employeeRole;
 
-	// one to one Employee EmployeeRole Details
+	// one to Many Employee Department
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Department.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<Department> department;
 
-	// one to one Employee Employee skills
+	// one to Many Employee Employee skills
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeSkills.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<EmployeeSkills> employeeSkills;
