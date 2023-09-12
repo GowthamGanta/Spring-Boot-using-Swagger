@@ -22,17 +22,24 @@ public class Experience_Details {
 	private int id;
 	private String firm;
 	private String fromDate;
+
 	private String toDate;
+	private String created;
+	private String updated;
 
 	public Experience_Details() {
 
 	}
 
-	public Experience_Details(int id, String firm, String fromDate, String toDate) {
+	public Experience_Details(int id, String firm, String fromDate, String toDate, String created, String updated) {
+
 		this.id = id;
 		this.firm = firm;
 		this.fromDate = fromDate;
+
 		this.toDate = toDate;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

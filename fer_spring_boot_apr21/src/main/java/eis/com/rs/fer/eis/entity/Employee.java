@@ -24,7 +24,6 @@ public class Employee {
 	@Id
 	@Column(name = "employee_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int employeeId;
 	private String firstName;
 	private String middleName;
@@ -32,11 +31,12 @@ public class Employee {
 	private String lastName;
 	private String dateOfBirth;
 	private char gender;
-
 	private String email;
+
 	private String mobile;
-	private String departmentName;
 	private float salary;
+	private String created;
+	private String updated;
 
 	// one to many Employee Experience Details
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Experience_Details.class)
@@ -73,7 +73,7 @@ public class Employee {
 	}
 
 	public Employee(int employeeId, String firstName, String middleName, String lastName, String dateOfBirth,
-			char gender, String email, String mobile, String departmentName, float salary) {
+			char gender, String email, String mobile, float salary, String created, String updated) {
 
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -82,12 +82,12 @@ public class Employee {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
-
 		this.email = email;
-		this.mobile = mobile;
-		this.departmentName = departmentName;
-		this.salary = salary;
 
+		this.mobile = mobile;
+		this.salary = salary;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

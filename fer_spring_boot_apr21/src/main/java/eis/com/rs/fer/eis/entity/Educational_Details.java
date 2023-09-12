@@ -15,23 +15,32 @@ import lombok.Setter;
 @Entity
 @Table(name = "employee_education")
 public class Educational_Details {
+
 	@Id
 	@Column(name = "education_Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String type;
 	private String yearOfPassing;
+
 	private String university;
+	private String created;
+	private String updated;
 
 	public Educational_Details() {
 
 	}
 
-	public Educational_Details(int id, String type, String yearOfPassing, String university) {
+	public Educational_Details(int id, String type, String yearOfPassing, String university, String created,
+			String updated) {
+
 		this.id = id;
 		this.type = type;
 		this.yearOfPassing = yearOfPassing;
+
 		this.university = university;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

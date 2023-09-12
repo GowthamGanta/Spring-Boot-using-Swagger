@@ -21,13 +21,18 @@ public class EmployeeSkills {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private int id;
+	private String created;
+	private String updated;
 
 	public EmployeeSkills() {
 
 	}
 
-	public EmployeeSkills(int id) {
+	public EmployeeSkills(int id, String created, String updated) {
+
 		this.id = id;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

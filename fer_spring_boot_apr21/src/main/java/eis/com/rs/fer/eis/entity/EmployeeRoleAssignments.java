@@ -19,21 +19,28 @@ public class EmployeeRoleAssignments {
 	@Id
 	@Column(name = "role_assigned_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int roleAssignedId;
 	private String assignmentName;
 	private String startDate;
+
 	private String endDate;
+	private String created;
+	private String updated;
 
 	public EmployeeRoleAssignments() {
 
 	}
 
-	public EmployeeRoleAssignments(int roleAssignedId, String assignmentName, String startDate, String endDate) {
+	public EmployeeRoleAssignments(int roleAssignedId, String assignmentName, String startDate, String endDate,
+			String created, String updated) {
+
 		this.roleAssignedId = roleAssignedId;
 		this.assignmentName = assignmentName;
 		this.startDate = startDate;
+
 		this.endDate = endDate;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

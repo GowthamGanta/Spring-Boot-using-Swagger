@@ -24,9 +24,10 @@ public class EmployeeRole {
 	@Id
 	@Column(name = "role_Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int id;
 	private String roleName;
+	private String created;
+	private String updated;
 
 	// One to many Employee Role Assignments
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRoleAssignments.class)
@@ -37,11 +38,11 @@ public class EmployeeRole {
 
 	}
 
-	public EmployeeRole(int id, String roleName) {
-
+	public EmployeeRole(int id, String roleName, String created, String updated) {
 		this.id = id;
 		this.roleName = roleName;
-
+		this.created = created;
+		this.updated = updated;
 	}
 
 }

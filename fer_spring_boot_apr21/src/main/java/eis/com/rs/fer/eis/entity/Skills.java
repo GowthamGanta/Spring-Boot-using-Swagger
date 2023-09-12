@@ -27,6 +27,8 @@ public class Skills {
 
 	private int id;
 	private String name;
+	private String created;
+	private String updated;
 
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeSkills.class)
 	@JoinColumn(name = "skill_id", referencedColumnName = "id")
@@ -36,10 +38,12 @@ public class Skills {
 
 	}
 
-	public Skills(int id, String name) {
+	public Skills(int id, String name, String created, String updated) {
 
 		this.id = id;
 		this.name = name;
+		this.created = created;
+		this.updated = updated;
 	}
 
 }
