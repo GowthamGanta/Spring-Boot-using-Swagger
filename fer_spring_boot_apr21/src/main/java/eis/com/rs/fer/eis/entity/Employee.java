@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -63,6 +62,11 @@ public class Employee {
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = Department.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
 	private Set<Department> department;
+
+	// one to one Employee Employee skills
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeSkills.class)
+	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
+	private Set<EmployeeSkills> employeeSkills;
 
 	public Employee() {
 

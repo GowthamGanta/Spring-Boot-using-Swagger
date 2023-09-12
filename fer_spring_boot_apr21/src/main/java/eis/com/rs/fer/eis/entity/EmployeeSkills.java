@@ -13,26 +13,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "employee_experience")
-public class Experience_Details {
+@Table(name = "employee_skills")
+public class EmployeeSkills {
+
 	@Id
-	@Column(name = "experience_Id")
+	@Column(name = "employeeSkill_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private int id;
-	private String firm;
-	private String fromDate;
-	private String toDate;
 
-	public Experience_Details() {
+	public EmployeeSkills() {
 
 	}
 
-	public Experience_Details(int id, String firm, String fromDate, String toDate) {
+	public EmployeeSkills(int id) {
 		this.id = id;
-		this.firm = firm;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
 	}
 
 }

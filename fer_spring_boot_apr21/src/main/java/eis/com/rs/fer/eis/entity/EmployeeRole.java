@@ -29,9 +29,9 @@ public class EmployeeRole {
 	private String roleName;
 
 	// One to many Employee Role Assignments
-		@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRoleAssignments.class)
-		@JoinColumn(name = "roleId", referencedColumnName = "role_Id")
-		private Set<EmployeeRoleAssignments> employeeRoleAssignments;
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRoleAssignments.class)
+	@JoinColumn(name = "roleId", referencedColumnName = "role_Id")
+	private Set<EmployeeRoleAssignments> employeeRoleAssignments;
 
 	public EmployeeRole() {
 
