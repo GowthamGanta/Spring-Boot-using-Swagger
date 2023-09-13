@@ -20,7 +20,7 @@ import lombok.Setter;
 public class EmployeeRole {
 
 	@Id
-	@Column(name = "role_Id")
+	@Column(name = "employee_role_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
@@ -32,7 +32,7 @@ public class EmployeeRole {
 
 	// One to many Employee Role Assignments
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = Role.class)
-	@JoinColumn(name = "r_id", referencedColumnName = "roleid")
+	@JoinColumn(name = "role_id", referencedColumnName = "role_id")
 	private Role role;
 
 	public EmployeeRole() {
