@@ -43,7 +43,7 @@ public class AssignmentsServiveImpl implements AssignmentsService {
 			// save bean to database
 			employeeRole = employeeRoleRepository.save(employeeRole);
 
-			response = new AddAssignmentsResponse(HttpStatus.OK, "000", "Assignments Added succesfully ", null);
+			response = new AddAssignmentsResponse(HttpStatus.OK, "000", "Assignments Added Succesfully ", null);
 			response.setAssignments(role);
 
 		} else {
