@@ -6,18 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.eis.entity.EmployeeRole;
 import com.rs.fer.eis.entity.EmployeeRoleAssignments;
 import com.rs.fer.eis.repository.AssignmentsRepository;
+import com.rs.fer.eis.repository.EmployeeRoleRepository;
 import com.rs.fer.eis.request.AddAssignmentsRequest;
 import com.rs.fer.eis.response.AddAssignmentsResponse;
 import com.rs.fer.eis.service.AssignmentsService;
 import com.rs.fer.eis.util.AssignmentsUtil;
-import com.rs.fer.expense.entity.Expense;
-import com.rs.fer.expense.request.AddExpenseRequest;
-import com.rs.fer.expense.response.AddExpenseResponse;
-import com.rs.fer.user.entity.User;
 
 @Service
 public class AssignmentsServiveImpl implements AssignmentsService {
