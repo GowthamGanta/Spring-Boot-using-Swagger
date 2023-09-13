@@ -28,35 +28,27 @@ public class EducationalDetailsServiceImpl implements EducationalDetailsService 
 	EmployeeRepository employeeRepository;
 
 	public EducationalDetailsResponse saveEducationalDetails(EducationalDetailsRequest request) {
-		
-		
-		
+
 		EducationalDetailsResponse response = null;
-		Optional<Employee> education = employeeRepository.findById(request.getEmployeeId());
-		if (education.isPresent()) {
-			EducationalDetails educationaldetails = educationalDetailsUtil.loadSaveEducationalDetailsRequestToEducationalDetails(request);
-			
-			Employee employee=education.get();
-			employee.getEducationalDetails().add(educationaldetails)
-;			employee=employeeRepository.save(employee);
-			response = new EducationalDetailsResponse(HttpStatus.OK, "000", "Employee Education Details Added is succesfully ",
-					null);
+		Optional<Employee> empObj = employeeRepository.findById(request.getEmployeeId());
+		if (empObj.isPresent()) {
+			EducationalDetails educationaldetails = educationalDetailsUtil
+					.loadSaveEducationalDetailsRequestToEducationalDetails(request);
+
+			Employee employee = empObj.get();
+			employee.getEducationalDetails().add(educationaldetails);
+			employee = employeeRepository.save(employee);
+			response = new EducationalDetailsResponse(HttpStatus.OK, "000",
+					"Employee Education Details Added is succesfully ", null);
 			response.setEducationalDetails(educationaldetails);
-		
-			}
-		else {
+
+		} else {
 			response = new EducationalDetailsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
 					"Employee is not present", null);
 		}
-		
-		
+
 		return response;
-
-			
-
 
 	}
 
 }
-
-

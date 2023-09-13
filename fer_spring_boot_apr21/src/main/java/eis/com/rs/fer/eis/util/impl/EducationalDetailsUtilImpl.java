@@ -13,16 +13,13 @@ public class EducationalDetailsUtilImpl implements EducationalDetailsUtil {
 
 	@Override
 	public EducationalDetails loadSaveEducationalDetailsRequestToEducationalDetails(EducationalDetailsRequest request) {
-		
 
-			EducationalDetails educationalDetails = SaveEducationalDetailsRequestMapper.MAPPER.mapToEducationalDetails(request);
-			educationalDetails.setCreated(DateUtil.getCurrentDate());
+		EducationalDetails educationalDetails = SaveEducationalDetailsRequestMapper.MAPPER
+				.mapToEducationalDetails(request);
+		educationalDetails.setCreated(DateUtil.getCurrentDate());
 
-			return educationalDetails;
-		
+		return educationalDetails;
+
 	}
-
-	
-
 
 }

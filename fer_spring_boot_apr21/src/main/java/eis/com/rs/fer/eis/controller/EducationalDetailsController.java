@@ -37,5 +37,3 @@ public class EducationalDetailsController {
 		return response;
 	}
 }
-	
-

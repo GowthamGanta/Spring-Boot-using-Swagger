@@ -15,16 +15,13 @@ import lombok.Setter;
 public class EducationalDetailsResponse extends AbstractResponse {
 	private EducationalDetails educationalDetails;
 
-	public EducationalDetailsResponse(HttpStatus status, String statusCode, String message,
-			Set<String> errorMessages) {
+	public EducationalDetailsResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);
 		this.status = status;
 		this.statusCode = statusCode;
 		this.message = message;
 		this.errorMessages = errorMessages;
-		
-	}
-	
 
+	}
 
 }

@@ -7,6 +7,4 @@ public interface EducationalDetailsUtil {
 
 	EducationalDetails loadSaveEducationalDetailsRequestToEducationalDetails(EducationalDetailsRequest request);
 
-	
-
 }

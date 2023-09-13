@@ -9,7 +9,7 @@ import com.rs.fer.eis.request.EducationalDetailsRequest;
 @Mapper
 public interface SaveEducationalDetailsRequestMapper {
 
-	SaveEducationalDetailsRequestMapper  MAPPER  = Mappers.getMapper(SaveEducationalDetailsRequestMapper.class) ;
-	
+	SaveEducationalDetailsRequestMapper MAPPER = Mappers.getMapper(SaveEducationalDetailsRequestMapper.class);
+
 	EducationalDetails mapToEducationalDetails(EducationalDetailsRequest request);
 }
