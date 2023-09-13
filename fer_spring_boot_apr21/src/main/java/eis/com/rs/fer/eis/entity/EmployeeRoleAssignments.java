@@ -26,6 +26,9 @@ public class EmployeeRoleAssignments {
 	private String endDate;
 	private String created;
 	private String updated;
+	
+	@Column(name="role_id")
+	private int roleId;
 
 	public EmployeeRoleAssignments() {
 
