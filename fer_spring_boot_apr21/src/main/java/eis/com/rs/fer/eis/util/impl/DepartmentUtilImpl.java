@@ -18,6 +18,7 @@ public class DepartmentUtilImpl implements DepartmentUtil {
 		department.setCreated(DateUtil.getCurrentDate());
 
 		return department;
+	
 	}
 
 }

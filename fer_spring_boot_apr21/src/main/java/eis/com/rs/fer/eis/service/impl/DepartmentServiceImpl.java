@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.Department;
 import com.rs.fer.eis.entity.Employee;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
 import com.rs.fer.eis.repository.DepartmentRepository;
+import com.rs.fer.eis.repository.EmployeeRepository;
 import com.rs.fer.eis.request.AddDepartmentRequest;
 import com.rs.fer.eis.response.AddDepartmentResponse;
 import com.rs.fer.eis.service.DepartmentService;
@@ -25,13 +25,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 	DepartmentRepository departmentRepository;
 
 	@Autowired
-	AddEmployeeRepository addEmployeeRepository;
+	EmployeeRepository employeeRepository;
 
 	public AddDepartmentResponse addDepartment(AddDepartmentRequest request)  {
 
 		AddDepartmentResponse response = null;
 
-		Optional<Employee> employeeObj = addEmployeeRepository.findById(request.getId());
+		Optional<Employee> employeeObj = employeeRepository.findById(request.getId());
 
 		if (employeeObj.isPresent()) {
 			// load vo to bean
@@ -51,6 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		return response;
 
+		
 	}
 }
 	

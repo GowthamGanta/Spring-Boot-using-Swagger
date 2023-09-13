@@ -24,5 +24,6 @@ public class AddDepartmentResponse extends AbstractResponse {
 		this.message = message;
 		this.errorMessages = errorMessages;
 	}
+	
 }
 

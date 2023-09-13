@@ -35,5 +35,6 @@ public class DepartmentController {
 			response = departmentService.addDepartment(request);
 		}
 		return response;
+		
 	}
 }

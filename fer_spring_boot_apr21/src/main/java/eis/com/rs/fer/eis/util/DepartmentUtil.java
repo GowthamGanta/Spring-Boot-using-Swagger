@@ -6,4 +6,5 @@ import com.rs.fer.eis.request.AddDepartmentRequest;
 public interface DepartmentUtil {
 	Department loadAddDepartmentRequestToDepartment(AddDepartmentRequest request);
 
+	
 }
