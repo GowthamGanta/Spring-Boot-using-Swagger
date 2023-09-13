@@ -9,5 +9,5 @@ import com.rs.fer.eis.entity.EducationalDetails;
 
 @Repository
 public interface EducationalDetailsRepository extends JpaRepository<EducationalDetails, Integer> {
-	List<EducationalDetails> findByEmployeeId(int employeeId);
+	List<EducationalDetails> findById(int employeeId);
 }
