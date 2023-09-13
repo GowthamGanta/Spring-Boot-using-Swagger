@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.eis.entity.EmployeeAddress;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
+import com.rs.fer.eis.repository.EmployeeRepository;
 import com.rs.fer.eis.repository.EmployeeAddressRepository;
 import com.rs.fer.eis.request.AddEmployeeAddressRequest;
 import com.rs.fer.eis.response.AddEmployeeAddressResponse;
@@ -25,7 +25,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 	EmployeeAddressRepository employeeAddressRepository;
 
 	@Autowired
-	AddEmployeeRepository addEmployeeRepository;
+	EmployeeRepository addEmployeeRepository;
 
 	@Override
 	public AddEmployeeAddressResponse addEmployee(AddEmployeeAddressRequest request) {

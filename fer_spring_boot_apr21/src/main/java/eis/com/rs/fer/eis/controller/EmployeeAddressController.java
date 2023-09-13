@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.eis.request.AddEmployeeAddressRequest;
 import com.rs.fer.eis.response.AddEmployeeAddressResponse;
-import com.rs.fer.eis.service.AddEmployeeService;
+import com.rs.fer.eis.service.EmployeeService;
 import com.rs.fer.eis.service.EmployeeAddressService;
-import com.rs.fer.eis.validation.AddEmployeeValidation;
+import com.rs.fer.eis.validation.EmployeeValidation;
 import com.rs.fer.eis.validation.EmployeeAddressValidation;
 
 @RestController
@@ -21,10 +21,10 @@ import com.rs.fer.eis.validation.EmployeeAddressValidation;
 public class EmployeeAddressController {
 
 	@Autowired
-	AddEmployeeValidation addEmployeeValidation;
+	EmployeeValidation addEmployeeValidation;
 
 	@Autowired
-	AddEmployeeService addEmployeeService;
+	EmployeeService addEmployeeService;
 
 	@Autowired
 	EmployeeAddressService employeeAddressService;
