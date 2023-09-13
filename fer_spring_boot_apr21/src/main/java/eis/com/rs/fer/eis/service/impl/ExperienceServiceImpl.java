@@ -31,20 +31,22 @@ public class ExperienceServiceImpl implements SaveExperienceService {
 
 		Optional<Employee> experience = employeeRepository.findById(request.getEid());
 		if (experience.isPresent()) {
-			// load  to bean
+			// load to bean
 
 			Experience_Details experienceDetails = experienceUtil.loadSaveExperienceRequestToEmployee(request);
-			
+
 			Employee employee = experience.get();
+
 			employee.getExperience_Details().add(experienceDetails);
 
 			employee = employeeRepository.save(employee);
-			response = new SaveExperienceResponse(HttpStatus.OK, "000", " Save  succesfully ", null);
+			response = new SaveExperienceResponse(HttpStatus.OK, "000", " Experience save  succesfully ", null);
 			response.setExperienceDetails(experienceDetails);
-			
+
 		} else {
 			// failure
-			response = new SaveExperienceResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "User is not present", null);
+			response = new SaveExperienceResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "employee is not present",
+					null);
 		}
 
 		return response;
