@@ -49,9 +49,9 @@ public class Employee {
 	private Set<EmployeeAddress> employeeAddress;
 
 	// one to many Employee Educational Details
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Educational_Details.class)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = EducationalDetails.class)
 	@JoinColumn(name = "eid", referencedColumnName = "employee_id")
-	private Set<Educational_Details> educational_Details;
+	private Set<EducationalDetails> educationalDetails;
 
 	// one to Many Employee EmployeeRole Details
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRole.class)
