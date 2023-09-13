@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.eis.entity.Experience_Details;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
+import com.rs.fer.eis.repository.EmployeeRepository;
 import com.rs.fer.eis.repository.ExperienceRepository;
 import com.rs.fer.eis.request.SaveExperienceRequest;
 import com.rs.fer.eis.response.SaveExperienceResponse;
@@ -22,14 +22,14 @@ public class ExperienceServiceImpl implements SaveExperienceService {
 	@Autowired
 	ExperienceRepository experienceRepository;
 	@Autowired
-	AddEmployeeRepository addEmployeeRepository;
+	EmployeeRepository employeeRepository;
 
 	@Override
 	public SaveExperienceResponse saveExperience(SaveExperienceRequest request) {
 
 		SaveExperienceResponse response = null;
 
-		Optional<Employee> experience = addEmployeeRepository.findById(request.getEid());
+		Optional<Employee> experience = employeeRepository.findById(request.getEid());
 		if (experience.isPresent()) {
 			// load  to bean
 
@@ -38,7 +38,7 @@ public class ExperienceServiceImpl implements SaveExperienceService {
 			Employee employee = experience.get();
 			employee.getExperience_Details().add(experienceDetails);
 
-			employee = addEmployeeRepository.save(employee);
+			employee = employeeRepository.save(employee);
 			response = new SaveExperienceResponse(HttpStatus.OK, "000", " Save  succesfully ", null);
 			response.setExperienceDetails(experienceDetails);
 			

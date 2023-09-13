@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.rs.fer.eis.request.AddEmployeeRequest;
 
-public interface AddEmployeeValidation {
+public interface EmployeeValidation {
 
 	Set<String> validateAddEmployeeRequest(AddEmployeeRequest request);
 
