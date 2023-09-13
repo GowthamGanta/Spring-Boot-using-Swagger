@@ -45,4 +45,9 @@ public class EmployeeRole {
 		this.updated = updated;
 	}
 
+	public Object getAssignments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -7,13 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.Employee;
+import com.rs.fer.eis.entity.EmployeeRole;
 import com.rs.fer.eis.entity.EmployeeRoleAssignments;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
 import com.rs.fer.eis.repository.AssignmentsRepository;
 import com.rs.fer.eis.request.AddAssignmentsRequest;
 import com.rs.fer.eis.response.AddAssignmentsResponse;
 import com.rs.fer.eis.service.AssignmentsService;
-import com.rs.fer.eis.util.AddEmployeeUtil;
 import com.rs.fer.eis.util.AssignmentsUtil;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.request.AddExpenseRequest;
@@ -24,13 +23,13 @@ import com.rs.fer.user.entity.User;
 public class AssignmentsServiveImpl implements AssignmentsService {
 	
 	@Autowired
-	AssignmentsUtil AssignmentsUtil;
+	AssignmentsUtil assignmentsUtil;
 	
 	@Autowired
-	AssignmentsRepository AssignmentsRepository;
+	AssignmentsRepository assignmentsRepository;
 	
-	/*@Autowired
-	EmployeeRoleRepository EmployeeRoleRepository;*/
+	@Autowired
+	EmployeeRoleRepository employeeRoleRepository;
 
 	
 	@Override
@@ -38,18 +37,18 @@ public class AssignmentsServiveImpl implements AssignmentsService {
 
 		AddAssignmentsResponse response = null;
 
-		Optional<Employee> employeeObj = EmployeeRoleRepository.findById(request.getRoleId());
+		Optional<EmployeeRole> employeeRoleObj = employeeRoleRepository.findById(request.getRoleId());
 
-		if (employeeObj.isPresent()) {
+		if (employeeRoleObj.isPresent()) {
 			// load vo to bean
-			EmployeeRoleAssignments assignments = EmployeeRoleUtil.loadAddAssignmentsRequestToAssignments(request);
-			Employee employee = employeeObj.get();
-			employee.getEmployeeRole().add(assignments);
+			EmployeeRoleAssignments employeeRoleAssignments = assignmentsUtil.loadAddAssignmentsRequestToAssignments(request);
+			EmployeeRole employeeRole = employeeRoleObj.get();
+			employeeRole.getEmployeeRoleAssignments().add(employeeRoleAssignments);
 			// save bean to database
-			employee = EmployeeRoleRepository.save(assignments);
+			employeeRole = employeeRoleRepository.save(employeeRole);
 
 			response = new AddAssignmentsResponse(HttpStatus.OK, "000", "Assignments Added succesfully ", null);
-			EmployeeRoleAssignments assignments1;
+			response.setAssignments(employeeRoleAssignments);
 
 		} else {
 			// failure
