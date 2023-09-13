@@ -17,17 +17,16 @@ import com.rs.fer.eis.util.AssignmentsUtil;
 
 @Service
 public class AssignmentsServiveImpl implements AssignmentsService {
-	
+
 	@Autowired
 	AssignmentsUtil assignmentsUtil;
-	
+
 	@Autowired
 	AssignmentsRepository assignmentsRepository;
-	
+
 	@Autowired
 	EmployeeRoleRepository employeeRoleRepository;
 
-	
 	@Override
 	public AddAssignmentsResponse addAssignments(AddAssignmentsRequest request) {
 
@@ -48,7 +47,8 @@ public class AssignmentsServiveImpl implements AssignmentsService {
 
 		} else {
 			// failure
-			response = new AddAssignmentsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Employee is not present", null);
+			response = new AddAssignmentsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Employee is not present",
+					null);
 		}
 		return response;
 
