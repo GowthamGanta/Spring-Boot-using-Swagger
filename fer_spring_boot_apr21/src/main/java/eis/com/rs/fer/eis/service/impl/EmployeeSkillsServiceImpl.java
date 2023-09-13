@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.eis.entity.EmployeeSkills;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
+import com.rs.fer.eis.repository.EmployeeRepository;
 import com.rs.fer.eis.request.SaveEmployeeSkillsRequest;
 import com.rs.fer.eis.response.SaveEmployeeSkillsResponse;
 import com.rs.fer.eis.service.EmployeeSkillsService;
@@ -20,12 +20,12 @@ public class EmployeeSkillsServiceImpl implements EmployeeSkillsService {
 	EmployeeSkillsUtil employeeSkillsUtil;
 
 	@Autowired
-	AddEmployeeRepository addEmployeeRepository;
+	EmployeeRepository employeeRepository;
 
 
 	public SaveEmployeeSkillsResponse saveEmployeeSkills(SaveEmployeeSkillsRequest request) {
 		SaveEmployeeSkillsResponse response = null;
-		Optional<Employee> empObj = addEmployeeRepository.findById(request.getEmployeeId());
+		Optional<Employee> empObj = employeeRepository.findById(request.getEmployeeId());
 		if (empObj.isPresent()) {
 			
 			EmployeeSkills employeeSkills = employeeSkillsUtil.loadSaveEmployeeSkillsRequestToEmployeeSkills(request);
@@ -33,7 +33,7 @@ public class EmployeeSkillsServiceImpl implements EmployeeSkillsService {
 			Employee employee = empObj.get();
 			employee.getEmployeeSkills().add(employeeSkills);
 			
-			employee = addEmployeeRepository.save(employee);
+			employee = employeeRepository.save(employee);
 			response = new SaveEmployeeSkillsResponse(HttpStatus.OK, "000", " skills added  succesfully ", null);
 			response.setEmployeeSkills(employeeSkills);
 		} else {
