@@ -34,7 +34,7 @@ public class EmployeeSkillsServiceImpl implements EmployeeSkillsService {
 			employee.getEmployeeSkills().add(employeeSkills);
 			
 			employee = addEmployeeRepository.save(employee);
-			response = new SaveEmployeeSkillsResponse(HttpStatus.OK, "000", " save succesfully ", null);
+			response = new SaveEmployeeSkillsResponse(HttpStatus.OK, "000", " skills added  succesfully ", null);
 			response.setEmployeeSkills(employeeSkills);
 		} else {
 			// failure
