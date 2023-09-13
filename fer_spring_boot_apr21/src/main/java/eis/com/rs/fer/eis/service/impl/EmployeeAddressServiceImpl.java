@@ -25,14 +25,14 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 	EmployeeAddressRepository employeeAddressRepository;
 
 	@Autowired
-	EmployeeRepository addEmployeeRepository;
+	EmployeeRepository employeeRepository;
 
 	@Override
 	public AddEmployeeAddressResponse addEmployee(AddEmployeeAddressRequest request) {
 
 		AddEmployeeAddressResponse response = null;
 
-		Optional<Employee> employeeObj = addEmployeeRepository.findById(request.getEmployeeId());
+		Optional<Employee> employeeObj = employeeRepository.findById(request.getEmployeeId());
 
 		if (employeeObj.isPresent()) {
 
@@ -44,7 +44,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 			employee.getEmployeeAddress().add(employeeAddress);
 
 			// save bean to database
-			employee = addEmployeeRepository.save(employee);
+			employee = employeeRepository.save(employee);
 
 			response = new AddEmployeeAddressResponse(HttpStatus.OK, "000", "Employee Address Added is succesfully ",
 					null);
