@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddEmployeeAddressRequest {
-	
+public class EditEmployeeAddressRequest {
 
+	private int id;
 	private String lineOne;
 	private String lineTwo;
 	private String city;

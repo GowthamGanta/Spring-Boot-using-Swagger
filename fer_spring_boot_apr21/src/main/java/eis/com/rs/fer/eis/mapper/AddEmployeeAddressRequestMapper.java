@@ -5,9 +5,9 @@ import org.mapstruct.factory.Mappers;
 import com.rs.fer.eis.entity.EmployeeAddress;
 import com.rs.fer.eis.request.AddEmployeeAddressRequest;
 
-public interface EmployeeAddressRequestMapper {
+public interface AddEmployeeAddressRequestMapper {
 
-	EmployeeAddressRequestMapper MAPPER = Mappers.getMapper(EmployeeAddressRequestMapper.class);
+	AddEmployeeAddressRequestMapper MAPPER = Mappers.getMapper(AddEmployeeAddressRequestMapper.class);
 
 	EmployeeAddress mapToEmployeeAddress(AddEmployeeAddressRequest request);
 }
