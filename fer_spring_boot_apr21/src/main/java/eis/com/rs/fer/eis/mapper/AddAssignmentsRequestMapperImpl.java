@@ -16,8 +16,6 @@ public class AddAssignmentsRequestMapperImpl implements AddAssignmentsRequestMap
 		Role assignments = new Role();
 
 		assignments.setName(request.getAssignmentName());
-		assignments.setStartDate(request.getStartDate());
-		assignments.setEndDate(request.getEndDate());
 		assignments.setId(request.getRoleId());
 
 		return assignments;

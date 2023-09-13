@@ -17,21 +17,15 @@ import lombok.Setter;
 public class Role {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "roleid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String name;
-
-	private String startDate;
-	private String endDate;
-
+	
 	private String created;
 	private String updated;
-	
-	@Column(name="roleid")
-	private String roleid;
-	
+
 	public Role() {
 
 	}
@@ -41,9 +35,6 @@ public class Role {
 
 		this.id = id;
 		this.name = name;
-		this.startDate = startDate;
-
-		this.endDate = endDate;
 		this.created = created;
 		this.updated = updated;
 	}

@@ -16,7 +16,7 @@ import com.rs.fer.eis.service.AssignmentsService;
 import com.rs.fer.eis.util.AssignmentsUtil;
 
 @Service
-public class AssignmentsServiveImpl implements AssignmentsService {
+public class AssignmentsServiceImpl implements AssignmentsService {
 
 	@Autowired
 	AssignmentsUtil assignmentsUtil;
@@ -38,7 +38,7 @@ public class AssignmentsServiveImpl implements AssignmentsService {
 			// load vo to bean
 			Role role = assignmentsUtil.loadAddAssignmentsRequestToAssignments(request);
 			EmployeeRole employeeRole = employeeRoleObj.get();
-			employeeRole.getRoles().add(role);
+			employeeRole.setRole(role);
 			// save bean to database
 			employeeRole = employeeRoleRepository.save(employeeRole);
 
