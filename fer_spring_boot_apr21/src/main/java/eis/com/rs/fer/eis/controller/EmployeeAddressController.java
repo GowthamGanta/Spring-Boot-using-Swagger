@@ -11,20 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.eis.request.AddEmployeeAddressRequest;
 import com.rs.fer.eis.response.AddEmployeeAddressResponse;
-import com.rs.fer.eis.service.EmployeeService;
 import com.rs.fer.eis.service.EmployeeAddressService;
-import com.rs.fer.eis.validation.EmployeeValidation;
 import com.rs.fer.eis.validation.EmployeeAddressValidation;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeAddressController {
-
-	@Autowired
-	EmployeeValidation addEmployeeValidation;
-
-	@Autowired
-	EmployeeService addEmployeeService;
 
 	@Autowired
 	EmployeeAddressService employeeAddressService;

@@ -18,17 +18,17 @@ import com.rs.fer.eis.util.EmployeeUtil;
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired 
-	EmployeeUtil addEmployeeUtil;
+	EmployeeUtil employeeUtil;
 	
 	@Autowired
-	EmployeeRepository addEmployeeRepository;
+	EmployeeRepository employeeRepository;
 	
 	@Override
 	public AddEmployeeResponse addEmployee(AddEmployeeRequest request) {
 		AddEmployeeResponse response = null;
 		
 		// Employee is present or not check
-		List<Employee> employees = addEmployeeRepository.findByEmail(request.getEmail());
+		List<Employee> employees = employeeRepository.findByEmail(request.getEmail());
 		
 		if(!CollectionUtils.isEmpty(employees)) {
 			// Employee already there
@@ -37,10 +37,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		// load vo to bean
-		Employee employee = addEmployeeUtil.loadAddEmployeeRequestToEmployee(request);
+		Employee employee = employeeUtil.loadAddEmployeeRequestToEmployee(request);
 		
 		// save bean to database
-		employee = addEmployeeRepository.save(employee);
+		employee = employeeRepository.save(employee);
 		
 		// load response
 		if (employee.getEmployeeId() > 0) {

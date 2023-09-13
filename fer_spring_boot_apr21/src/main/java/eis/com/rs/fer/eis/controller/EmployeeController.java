@@ -20,23 +20,23 @@ import com.rs.fer.eis.validation.EmployeeValidation;
 public class EmployeeController {
 
 	@Autowired
-	EmployeeValidation addEmployeeValidation;
+	EmployeeValidation employeeValidation;
 	
 	@Autowired
-	EmployeeService addEmployeeService;
+	EmployeeService employeeService;
 	
 	@PostMapping("/addEmployee")
 	public AddEmployeeResponse addEmployee(@RequestBody AddEmployeeRequest request) {
 		
 		AddEmployeeResponse response = null;
 		
-		Set<String> errorMessages = addEmployeeValidation.validateAddEmployeeRequest(request);
+		Set<String> errorMessages = employeeValidation.validateAddEmployeeRequest(request);
 		
 		if(!CollectionUtils.isEmpty(errorMessages)) {
 			response = new AddEmployeeResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 			
 		} else {
-			response = addEmployeeService.addEmployee(request);
+			response = employeeService.addEmployee(request);
 		}
 		return response;
 		
