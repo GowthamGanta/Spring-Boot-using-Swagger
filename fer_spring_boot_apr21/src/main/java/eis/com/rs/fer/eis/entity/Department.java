@@ -24,6 +24,9 @@ public class Department {
 	private String created;
 	private String updated;
 
+	@Column(name = "employee_id")
+	private int employeeId;
+
 	public Department() {
 
 	}
