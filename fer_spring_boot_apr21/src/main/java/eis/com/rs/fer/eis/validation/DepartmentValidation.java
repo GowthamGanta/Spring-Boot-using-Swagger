@@ -9,5 +9,4 @@ public interface DepartmentValidation {
 	Set<String> validateAddDepartmentRequest(AddDepartmentRequest request);
 
 	
-	
 }

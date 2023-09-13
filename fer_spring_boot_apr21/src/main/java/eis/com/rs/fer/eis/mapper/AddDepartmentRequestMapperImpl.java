@@ -24,5 +24,4 @@ public class AddDepartmentRequestMapperImpl implements AddDepartmentRequestMappe
         
         return department;
     }
-    
 }

@@ -38,6 +38,5 @@ public class Department {
 		this.created = created;
 		this.updated = updated;
 	}
-	
 
 }
