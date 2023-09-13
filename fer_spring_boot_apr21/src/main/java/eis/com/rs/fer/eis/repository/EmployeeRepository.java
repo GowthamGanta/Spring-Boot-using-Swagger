@@ -14,6 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findByEmail(String email);
 	
+	List<Employee> findByEmployeeId(int employeeId);
+	
 	// List<User> findByUserIdAndPassword(int userId,String password);
 
 	//List<User> findByUserIdAndPassword(int userId, String password);
@@ -23,3 +25,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	//List<User> findByEmailAndUserIdNot(String email, int userId);
 
 }
+

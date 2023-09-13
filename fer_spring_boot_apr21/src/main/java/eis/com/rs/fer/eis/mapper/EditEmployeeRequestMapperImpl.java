@@ -1,0 +1,40 @@
+package com.rs.fer.eis.mapper;
+
+import javax.annotation.Generated;
+
+import org.springframework.stereotype.Component;
+
+import com.rs.fer.eis.entity.Employee;
+import com.rs.fer.eis.request.EditEmployeeRequest;
+
+@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2023-04-18T12:16:17+0530", comments = "version: 1.5.4.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)")
+@Component
+public class EditEmployeeRequestMapperImpl implements EditEmployeeRequestMapper {
+
+	@Override
+	public Employee mapToEmployee(EditEmployeeRequest request, Employee employee) {
+
+		if (request == null) {
+			return null;
+		}
+
+		employee.setEmployeeId(request.getEmployeeId());
+		employee.setFirstName(request.getFirstName());
+		employee.setMiddleName(request.getMiddleName());
+		employee.setLastName(request.getLastName());
+		employee.setDateOfBirth(request.getDateOfBirth());
+		employee.setGender(request.getGender());
+		employee.setEmail(request.getEmail());
+		employee.setMobile(request.getMobile());
+		employee.setSalary(request.getSalary());
+
+		return employee;
+	}
+
+	@Override
+	public Employee mapToEmployee(EditEmployeeRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

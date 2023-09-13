@@ -7,9 +7,10 @@ import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.eis.request.AddEmployeeRequest;
 
 @Mapper(componentModel = "spring")
-public interface EmployeeRequestMapper {
+public interface AddEmployeeRequestMapper {
 
-	EmployeeRequestMapper MAPPER = Mappers.getMapper(EmployeeRequestMapper.class);
+	AddEmployeeRequestMapper MAPPER = Mappers.getMapper(AddEmployeeRequestMapper.class);
 	
 	Employee mapToEmployee(AddEmployeeRequest request);
 }
+

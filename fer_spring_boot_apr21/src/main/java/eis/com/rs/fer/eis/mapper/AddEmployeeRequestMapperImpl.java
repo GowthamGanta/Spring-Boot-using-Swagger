@@ -13,7 +13,7 @@ import com.rs.fer.eis.request.AddEmployeeRequest;
 	    comments = "version: 1.5.4.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 	)
 @Component
-public class EmployeeRequestMapperImpl implements EmployeeRequestMapper{
+public class AddEmployeeRequestMapperImpl implements AddEmployeeRequestMapper{
 
 	@Override
 	public Employee mapToEmployee(AddEmployeeRequest request) {
@@ -37,3 +37,4 @@ public class EmployeeRequestMapperImpl implements EmployeeRequestMapper{
 	}
 
 }
+

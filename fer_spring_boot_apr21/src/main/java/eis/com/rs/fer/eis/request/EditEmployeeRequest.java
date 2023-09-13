@@ -1,18 +1,13 @@
-/**
- * 
- */
 package com.rs.fer.eis.request;
 
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * @author
- *
- */
 @Getter
 @Setter
-public class AddEmployeeRequest{
+public class EditEmployeeRequest {
+
+	private int employeeId;
 	
 	private String firstName;
 
@@ -31,5 +26,4 @@ public class AddEmployeeRequest{
 	private float salary;
 	
 }
-
 
