@@ -6,11 +6,11 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.eis.request.AddEmployeeRequest;
-import com.rs.fer.eis.validation.AddEmployeeValidation;
+import com.rs.fer.eis.validation.EmployeeValidation;
 import com.rs.fer.util.FERUtil;
 
 @Component
-public class AddEmployeeValidationImpl implements AddEmployeeValidation {
+public class EmployeeValidationImpl implements EmployeeValidation {
 
 	@Override
 	public Set<String> validateAddEmployeeRequest(AddEmployeeRequest request) {

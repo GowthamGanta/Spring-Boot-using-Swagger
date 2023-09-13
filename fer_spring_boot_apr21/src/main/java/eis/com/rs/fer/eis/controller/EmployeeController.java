@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.eis.request.AddEmployeeRequest;
 import com.rs.fer.eis.response.AddEmployeeResponse;
-import com.rs.fer.eis.service.AddEmployeeService;
-import com.rs.fer.eis.validation.AddEmployeeValidation;
+import com.rs.fer.eis.service.EmployeeService;
+import com.rs.fer.eis.validation.EmployeeValidation;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 
 	@Autowired
-	AddEmployeeValidation addEmployeeValidation;
+	EmployeeValidation addEmployeeValidation;
 	
 	@Autowired
-	AddEmployeeService addEmployeeService;
+	EmployeeService addEmployeeService;
 	
 	@PostMapping("/addEmployee")
 	public AddEmployeeResponse addEmployee(@RequestBody AddEmployeeRequest request) {

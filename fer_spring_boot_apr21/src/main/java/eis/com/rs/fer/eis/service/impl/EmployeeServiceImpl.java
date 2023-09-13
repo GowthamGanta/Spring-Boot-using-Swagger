@@ -8,20 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.rs.fer.eis.entity.Employee;
-import com.rs.fer.eis.repository.AddEmployeeRepository;
+import com.rs.fer.eis.repository.EmployeeRepository;
 import com.rs.fer.eis.request.AddEmployeeRequest;
 import com.rs.fer.eis.response.AddEmployeeResponse;
-import com.rs.fer.eis.service.AddEmployeeService;
-import com.rs.fer.eis.util.AddEmployeeUtil;
+import com.rs.fer.eis.service.EmployeeService;
+import com.rs.fer.eis.util.EmployeeUtil;
 
 @Service
-public class AddEmployeeServiceImpl implements AddEmployeeService{
+public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired 
-	AddEmployeeUtil addEmployeeUtil;
+	EmployeeUtil addEmployeeUtil;
 	
 	@Autowired
-	AddEmployeeRepository addEmployeeRepository;
+	EmployeeRepository addEmployeeRepository;
 	
 	@Override
 	public AddEmployeeResponse addEmployee(AddEmployeeRequest request) {

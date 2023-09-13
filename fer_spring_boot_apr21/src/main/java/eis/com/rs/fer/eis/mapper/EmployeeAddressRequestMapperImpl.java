@@ -6,7 +6,7 @@ import com.rs.fer.eis.entity.EmployeeAddress;
 import com.rs.fer.eis.request.AddEmployeeAddressRequest;
 
 @Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2023-04-19T07:34:40+0530", comments = "version: 1.5.4.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)")
-public class AddEmployeeAddressRequestMapperImpl implements AddEmployeeAddressRequestMapper {
+public class EmployeeAddressRequestMapperImpl implements EmployeeAddressRequestMapper {
 
 	@Override
 	public EmployeeAddress mapToEmployeeAddress(AddEmployeeAddressRequest request) {

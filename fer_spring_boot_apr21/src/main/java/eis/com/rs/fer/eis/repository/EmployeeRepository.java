@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.rs.fer.eis.entity.Employee;
 
 @Repository
-public interface AddEmployeeRepository extends JpaRepository<Employee, Integer> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	//List<User> findByUsernameAndPassword(String username, String password);
 
