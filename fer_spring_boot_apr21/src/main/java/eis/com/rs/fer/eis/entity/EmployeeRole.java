@@ -26,13 +26,14 @@ public class EmployeeRole {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String roleName;
+
 	private String created;
 	private String updated;
 
 	// One to many Employee Role Assignments
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeRoleAssignments.class)
-	@JoinColumn(name = "roleId", referencedColumnName = "role_Id")
-	private Set<EmployeeRoleAssignments> employeeRoleAssignments;
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Role.class)
+	@JoinColumn(name = "roleid", referencedColumnName = "role_Id")
+	private Set<Role> roles;
 
 	public EmployeeRole() {
 

@@ -1,7 +1,6 @@
 package com.rs.fer.eis.entity;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,21 +23,24 @@ public class EmployeeSkills {
 	private int id;
 	private String created;
 	private String updated;
-	private int skill_id;
+	
 	
 	@Column(name="employee_id")
 	private int employeeId;
 
+	@Column(name="skills_id")
+	private int skillsId;
+	
 	public EmployeeSkills() {
 
 	}
 
-	public EmployeeSkills(int id, String created, String updated,int skill_id) {
+	public EmployeeSkills(int id, String created, String updated,int skillsId) {
 
 		this.id = id;
 		this.created = created;
 		this.updated = updated;
-		this.skill_id=skill_id;
+		this.skillsId= skillsId;
 	}
 
 }

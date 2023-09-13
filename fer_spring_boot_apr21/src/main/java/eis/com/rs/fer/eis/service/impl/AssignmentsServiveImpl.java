@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.rs.fer.eis.entity.EmployeeRole;
-import com.rs.fer.eis.entity.EmployeeRoleAssignments;
+import com.rs.fer.eis.entity.Role;
 import com.rs.fer.eis.repository.AssignmentsRepository;
 import com.rs.fer.eis.repository.EmployeeRoleRepository;
 import com.rs.fer.eis.request.AddAssignmentsRequest;
@@ -37,14 +37,14 @@ public class AssignmentsServiveImpl implements AssignmentsService {
 
 		if (employeeRoleObj.isPresent()) {
 			// load vo to bean
-			EmployeeRoleAssignments employeeRoleAssignments = assignmentsUtil.loadAddAssignmentsRequestToAssignments(request);
+			Role role = assignmentsUtil.loadAddAssignmentsRequestToAssignments(request);
 			EmployeeRole employeeRole = employeeRoleObj.get();
-			employeeRole.getEmployeeRoleAssignments().add(employeeRoleAssignments);
+			employeeRole.getRoles().add(role);
 			// save bean to database
 			employeeRole = employeeRoleRepository.save(employeeRole);
 
 			response = new AddAssignmentsResponse(HttpStatus.OK, "000", "Assignments Added succesfully ", null);
-			response.setAssignments(employeeRoleAssignments);
+			response.setAssignments(role);
 
 		} else {
 			// failure

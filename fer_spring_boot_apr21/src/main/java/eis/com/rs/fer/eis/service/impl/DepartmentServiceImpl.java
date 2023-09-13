@@ -37,7 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			// load vo to bean
 			Department department = departmentUtil.loadAddDepartmentRequestToDepartment(request);
 			Employee employee = employeeObj.get();
-			employee.getDepartment().add(department);
+			employee.setDepartment(department);
 
 			// save bean to database
 			department = departmentRepository.save(department);

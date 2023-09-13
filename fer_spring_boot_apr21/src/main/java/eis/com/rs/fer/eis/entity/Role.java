@@ -13,32 +13,34 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "employee_role_assignments")
-public class EmployeeRoleAssignments {
+@Table(name = "role")
+public class Role {
 
 	@Id
-	@Column(name = "role_assigned_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int roleAssignedId;
-	private String assignmentName;
-	private String startDate;
+	private int id;
+	
+	private String name;
 
+	private String startDate;
 	private String endDate;
+
 	private String created;
 	private String updated;
 	
-	@Column(name="role_id")
-	private int roleId;
-
-	public EmployeeRoleAssignments() {
+	@Column(name="roleid")
+	private String roleid;
+	
+	public Role() {
 
 	}
 
-	public EmployeeRoleAssignments(int roleAssignedId, String assignmentName, String startDate, String endDate,
+	public Role(int id, String name, String startDate, String endDate,
 			String created, String updated) {
 
-		this.roleAssignedId = roleAssignedId;
-		this.assignmentName = assignmentName;
+		this.id = id;
+		this.name = name;
 		this.startDate = startDate;
 
 		this.endDate = endDate;

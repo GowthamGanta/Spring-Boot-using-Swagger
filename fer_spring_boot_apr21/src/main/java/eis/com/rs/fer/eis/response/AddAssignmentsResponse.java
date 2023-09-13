@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 
-import com.rs.fer.eis.entity.EmployeeRoleAssignments;
+import com.rs.fer.eis.entity.Role;
 import com.rs.fer.response.AbstractResponse;
 
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class AddAssignmentsResponse extends AbstractResponse{
 
-	private EmployeeRoleAssignments assignments;
+	private Role assignments;
 	
 	public AddAssignmentsResponse(HttpStatus status, String statusCode, String message, Set<String> errorMessages) {
 		super(status, statusCode, message, errorMessages);

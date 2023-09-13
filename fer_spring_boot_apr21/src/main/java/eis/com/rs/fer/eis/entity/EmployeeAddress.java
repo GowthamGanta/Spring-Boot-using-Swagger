@@ -31,7 +31,8 @@ public class EmployeeAddress {
 	private String addressType;
 	private String created;
 	private String updated;
-	@Column(name="employee_id")
+	
+	@Column(name="eid")
 	private int employeeId;
 
 	public EmployeeAddress() {

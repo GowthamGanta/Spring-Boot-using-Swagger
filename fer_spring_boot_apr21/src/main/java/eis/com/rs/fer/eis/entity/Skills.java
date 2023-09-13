@@ -30,10 +30,6 @@ public class Skills {
 	private String created;
 	private String updated;
 
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = EmployeeSkills.class)
-	@JoinColumn(name = "skill_id", referencedColumnName = "id")
-	private Set<EmployeeSkills> employeeSkills;
-
 	public Skills() {
 
 	}
