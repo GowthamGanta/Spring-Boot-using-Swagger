@@ -26,3 +26,4 @@ public class SaveEducationalDetailsMapperImpl implements SaveEducationalDetailsR
 		return educationalDetails;
 	}
 }
+

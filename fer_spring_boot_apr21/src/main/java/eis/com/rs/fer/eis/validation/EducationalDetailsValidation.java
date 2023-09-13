@@ -9,3 +9,4 @@ public interface EducationalDetailsValidation {
 	Set<String> validateSaveEducationalDetailsRequest(EducationalDetailsRequest request);
 
 }
+

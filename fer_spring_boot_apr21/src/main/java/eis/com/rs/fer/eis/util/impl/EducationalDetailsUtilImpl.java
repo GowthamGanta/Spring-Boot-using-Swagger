@@ -23,3 +23,4 @@ public class EducationalDetailsUtilImpl implements EducationalDetailsUtil {
 	}
 
 }
+

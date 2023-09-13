@@ -25,6 +25,7 @@ public class EducationalDetailsController {
 	@PostMapping("/saveEducationalDetails")
 	public EducationalDetailsResponse addEducationalDetails(@RequestBody EducationalDetailsRequest request) {
 
+		
 		EducationalDetailsResponse response = null;
 
 		Set<String> errorMessages = educationalDetailsValidation.validateSaveEducationalDetailsRequest(request);

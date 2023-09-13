@@ -52,3 +52,4 @@ public class EducationalDetailsServiceImpl implements EducationalDetailsService 
 	}
 
 }
+

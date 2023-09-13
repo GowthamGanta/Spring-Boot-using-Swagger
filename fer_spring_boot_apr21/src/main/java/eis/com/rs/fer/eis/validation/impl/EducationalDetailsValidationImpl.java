@@ -26,3 +26,4 @@ public class EducationalDetailsValidationImpl implements EducationalDetailsValid
 	}
 
 }
+

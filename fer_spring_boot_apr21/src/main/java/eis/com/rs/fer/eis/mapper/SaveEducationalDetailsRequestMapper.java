@@ -13,3 +13,4 @@ public interface SaveEducationalDetailsRequestMapper {
 
 	EducationalDetails mapToEducationalDetails(EducationalDetailsRequest request);
 }
+

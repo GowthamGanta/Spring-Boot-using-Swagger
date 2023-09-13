@@ -18,3 +18,4 @@ public class EducationalDetailsRequest {
 
 	private int employeeId;
 }
+

@@ -8,3 +8,4 @@ public interface EducationalDetailsService {
 	EducationalDetailsResponse saveEducationalDetails(EducationalDetailsRequest request);
 
 }
+
