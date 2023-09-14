@@ -1,20 +1,35 @@
 package com.rs.fer.eis.service.impl;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.rs.fer.eis.entity.Employee;
+import com.rs.fer.eis.entity.EmployeeAddress;
 import com.rs.fer.eis.entity.Skills;
 import com.rs.fer.eis.repository.SkillsRepository;
+import com.rs.fer.eis.request.DeleteSkillsRequest;
+import com.rs.fer.eis.request.EditSkillsRequest;
+import com.rs.fer.eis.request.GetSkillsOptionsRequest;
+import com.rs.fer.eis.request.GetSkillsRequest;
 import com.rs.fer.eis.request.SaveSkillsRequest;
+import com.rs.fer.eis.response.DeleteSkillsResponse;
+import com.rs.fer.eis.response.EditEmployeeAddressResponse;
+import com.rs.fer.eis.response.EditSkillsResponse;
+import com.rs.fer.eis.response.GetEmployeeAddressOptionsResponse;
+import com.rs.fer.eis.response.GetEmployeeAddressResponse;
+import com.rs.fer.eis.response.GetSkillsOptionsResponse;
+import com.rs.fer.eis.response.GetSkillsResponse;
 import com.rs.fer.eis.response.SaveSkillsResponse;
 import com.rs.fer.eis.service.SkillsService;
 import com.rs.fer.eis.util.SkillsUtil;
-
-import java.util.List;
+import com.rs.fer.expense.entity.Expense;
+import com.rs.fer.expense.response.DeleteExpenseResponse;
 
 @Service
 public class SkillsServiceImpl implements SkillsService {
@@ -24,8 +39,6 @@ public class SkillsServiceImpl implements SkillsService {
 	@Autowired
 	SkillsRepository skillsRepository;
 
-	
-	
 	@Override
 	public SaveSkillsResponse saveSkills(SaveSkillsRequest request) {
 		SaveSkillsResponse response = null;
@@ -61,4 +74,91 @@ public class SkillsServiceImpl implements SkillsService {
 		return response;
 
 	}
+
+	@Override
+	public EditSkillsResponse editSkills(EditSkillsRequest request) {
+		EditSkillsResponse response = null;
+
+		List<Skills> skills = skillsRepository.findByName(request.getName());
+		Skills skill = skillsUtil.loadEditSkillsRequestToSkills(request, skills);
+		skills = skillsRepository.save(skills);
+
+		if (skills.ispresent()) {
+			// success
+			response = new EditSkillsResponse(HttpStatus.OK, "000", "Skills edit  succesfully ", null);
+			response.setSkills(skills);
+		} else {
+			// failure
+			response = new EditSkillsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Skills is failed", null);
+		}
+
+		return response;
+
+	}
+
+	@Override
+	public DeleteSkillsResponse deleteSkills(DeleteSkillsRequest request) {
+		DeleteSkillsResponse response = null;
+
+		List<Skills> skills = skillsRepository.findById(request.getId());
+
+		if (skills.ispresent()) {
+
+			// Delete expense based based on expenseid
+			skillsRepository.findById(request.getId());
+
+			// if expense is deleted success case
+			response = new DeleteSkillsResponse(HttpStatus.OK, "000", "Skills is succesfully Deleted", null);
+			response.setSkills(skills);
+		} else {
+			// if expense is deleted failure case
+			response = new DeleteSkillsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "Delete Skills is failed",
+					null);
+		}
+
+		return response;
+	}
+
+	@Override
+	public GetSkillsResponse getSkills(GetSkillsRequest request) {
+		GetSkillsResponse response = null;
+
+		List<Skills> skills = skillsRepository.findById(request.getId());
+
+		if (skills.ispresent()) {
+
+			response = new GetSkillsResponse(HttpStatus.OK, "000", "fetch Skills", null);
+
+			response.setSkills(Skills.get());
+
+		} else {
+			// failure
+			response = new GetSkillsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No Skills found", null);
+
+		}
+
+		return response;
+	}
+
+	@Override
+	public GetSkillsOptionsResponse getSkillsOptions(GetSkillsOptionsRequest request) {
+		GetSkillsOptionsResponse response = null;
+
+		// To load the userObject based on userId
+		List<Skills> skills = skillsRepository.findById(request.getId());
+
+		if (skills.ispresent()) {
+
+			// success
+			response = new GetSkillsOptionsResponse(HttpStatus.OK, "000", "Get Skills Success", null);
+			response.setEmployeeAddress(skills.get());
+		} else {
+
+			// failure
+			response = new GetSkillsOptionsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No Skills", null);
+		}
+
+		return response;
+	}
+
 }
