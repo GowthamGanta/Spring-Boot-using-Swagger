@@ -26,6 +26,10 @@ public class Experience_Details {
 	private String toDate;
 	private String created;
 	private String updated;
+	
+	
+	
+	
 
 	public Experience_Details() {
 
