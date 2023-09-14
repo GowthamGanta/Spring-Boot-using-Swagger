@@ -25,7 +25,7 @@ public class EmployeeSkills {
 	private String updated;
 	
 	
-	@Column(name="employee_id")
+	@Column(name="eid")
 	private int employeeId;
 
 	@Column(name="skills_id")
@@ -38,9 +38,9 @@ public class EmployeeSkills {
 	public EmployeeSkills(int id, String created, String updated,int skillsId) {
 
 		this.id = id;
+		this.skillsId= skillsId;
 		this.created = created;
 		this.updated = updated;
-		this.skillsId= skillsId;
 	}
 
 }
