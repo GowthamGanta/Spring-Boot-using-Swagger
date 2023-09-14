@@ -6,9 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class AddDepartmentRequest {
-	private int id;
-	private String departmentName;
+public class GetDepartmentOptionsRequest {
+	private int employeeid;
 }
-
 

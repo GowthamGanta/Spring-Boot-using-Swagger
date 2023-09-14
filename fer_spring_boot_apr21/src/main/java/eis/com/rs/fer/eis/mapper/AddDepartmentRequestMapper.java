@@ -14,3 +14,4 @@ public interface AddDepartmentRequestMapper {
 	Department mapToDepartment(AddDepartmentRequest request);
 	
 }
+

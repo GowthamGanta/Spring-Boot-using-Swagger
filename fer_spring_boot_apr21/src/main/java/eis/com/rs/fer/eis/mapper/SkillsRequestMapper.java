@@ -10,6 +10,8 @@ import com.rs.fer.eis.request.SaveSkillsRequest;
 public interface SkillsRequestMapper {
 
 	SkillsRequestMapper MAPPER = Mappers.getMapper(SkillsRequestMapper.class);
-	
+
 	Skills mapToSkills(SaveSkillsRequest request);
+
+
 }
