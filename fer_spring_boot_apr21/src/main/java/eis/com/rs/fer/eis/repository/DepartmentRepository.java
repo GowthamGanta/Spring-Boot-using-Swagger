@@ -10,16 +10,10 @@ import com.rs.fer.eis.entity.Department;
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
-	//List<Department> findById(int Id);
+	List<Department> findById(int Id);
 
 	// List<Department> findByDepartmentName(String departmentName);
 
 }
-
-
-
-
-
-
 
 
