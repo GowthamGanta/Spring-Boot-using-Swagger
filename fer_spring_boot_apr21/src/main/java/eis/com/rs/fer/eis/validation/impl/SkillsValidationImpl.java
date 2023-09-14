@@ -5,6 +5,10 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.rs.fer.eis.request.DeleteSkillsRequest;
+import com.rs.fer.eis.request.EditSkillsRequest;
+import com.rs.fer.eis.request.GetSkillsOptionsRequest;
+import com.rs.fer.eis.request.GetSkillsRequest;
 import com.rs.fer.eis.request.SaveSkillsRequest;
 import com.rs.fer.eis.validation.SkillsValidation;
 import com.rs.fer.util.FERUtil;
@@ -17,6 +21,39 @@ public class SkillsValidationImpl implements SkillsValidation {
 
 		Set<String> errorMessages = new LinkedHashSet<String>();
 		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please enter name");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateEditSkillsRequest(EditSkillsRequest request) {
+
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getName(), "Please enter name");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateDeleteSkillsRequest(DeleteSkillsRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter id");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetSkillsRequest(GetSkillsRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter id");
+
+		return errorMessages;
+	}
+
+	@Override
+	public Set<String> validateGetSkillsOptionsRequest(GetSkillsOptionsRequest request) {
+		Set<String> errorMessages = new LinkedHashSet<String>();
+		errorMessages = FERUtil.addErrorIfEmpty(errorMessages, request.getId(), "Please enter id");
 
 		return errorMessages;
 	}
