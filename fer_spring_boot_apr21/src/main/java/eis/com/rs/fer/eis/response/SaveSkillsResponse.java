@@ -1,6 +1,5 @@
 package com.rs.fer.eis.response;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
@@ -25,5 +24,8 @@ public class SaveSkillsResponse extends AbstractResponse {
 		this.errorMessages = errorMessages;
 
 	}
-
 }
+
+
+
+	
