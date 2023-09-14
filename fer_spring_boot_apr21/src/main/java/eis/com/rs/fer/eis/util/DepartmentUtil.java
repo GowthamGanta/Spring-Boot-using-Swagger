@@ -14,3 +14,4 @@ public interface DepartmentUtil {
 	Department loadDeleteDepartmentRequestToDepartment(DeleteDepartmentRequest request);
 
 }
+

@@ -95,6 +95,7 @@ public class DepartmentController {
 		}
 		return response;
 	}
+
 	@GetMapping("/getDepartmentOptions")
 	public GetDepartmentOptionsResponse getDepartmentOptions(@RequestBody GetDepartmentOptionsRequest request) {
 
@@ -103,8 +104,7 @@ public class DepartmentController {
 		Set<String> errorMessages = departmentValidation.validateGetDepartmentOptionsRequest(request);
 		// return response with error messages
 		if (!org.springframework.util.CollectionUtils.isEmpty(errorMessages)) {
-			response = new GetDepartmentOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null,
-					errorMessages);
+			response = new GetDepartmentOptionsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
 
 		} else {
 			response = departmentService.getdepartmentOptions(request);

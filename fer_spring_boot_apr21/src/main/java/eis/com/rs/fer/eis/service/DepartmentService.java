@@ -24,3 +24,4 @@ public interface DepartmentService {
 	GetDepartmentResponse getDepartment(GetDepartmentRequest request);
 
 }
+

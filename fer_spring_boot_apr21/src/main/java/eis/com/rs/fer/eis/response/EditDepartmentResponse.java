@@ -24,3 +24,4 @@ public class EditDepartmentResponse extends AbstractResponse{
 		this.errorMessages = errorMessages;
 	}
 }
+

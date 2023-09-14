@@ -14,3 +14,4 @@ public interface EditDepartmentRequestMapper {
 	Department mapToDepartment(EditDepartmentRequest request);
 
 }
+
