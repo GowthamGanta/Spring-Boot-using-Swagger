@@ -31,5 +31,4 @@ public class GetDepartmentResponse extends AbstractResponse {
 		
 	}
 
-
 }

@@ -9,3 +9,4 @@ import lombok.Setter;
 public class GetDepartmentRequest {
 	private int id;
 }
+

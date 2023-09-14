@@ -30,3 +30,4 @@ public class DeleteDepartmentResponse extends AbstractResponse{
 		
 	}
 }
+
