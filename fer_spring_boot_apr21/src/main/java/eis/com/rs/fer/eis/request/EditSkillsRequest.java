@@ -6,7 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EditSkillsRequest {
-	 private int id;
+
+	private int id;
+
 	private String name;
 
 }

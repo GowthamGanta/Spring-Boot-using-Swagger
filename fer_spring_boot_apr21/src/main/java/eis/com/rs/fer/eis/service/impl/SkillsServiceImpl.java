@@ -12,9 +12,11 @@ import org.springframework.util.CollectionUtils;
 import com.rs.fer.eis.entity.Skills;
 import com.rs.fer.eis.repository.SkillsRepository;
 import com.rs.fer.eis.request.DeleteSkillsRequest;
+import com.rs.fer.eis.request.EditSkillsRequest;
 import com.rs.fer.eis.request.GetSkillsRequest;
 import com.rs.fer.eis.request.SaveSkillsRequest;
 import com.rs.fer.eis.response.DeleteSkillsResponse;
+import com.rs.fer.eis.response.EditSkillsResponse;
 import com.rs.fer.eis.response.GetSkillsResponse;
 import com.rs.fer.eis.response.SaveSkillsResponse;
 import com.rs.fer.eis.service.SkillsService;
@@ -64,9 +66,6 @@ public class SkillsServiceImpl implements SkillsService {
 
 	}
 
-	
-	
-
 	@Override
 	public DeleteSkillsResponse deleteSkills(DeleteSkillsRequest request) {
 		DeleteSkillsResponse response = null;
@@ -107,6 +106,34 @@ public class SkillsServiceImpl implements SkillsService {
 			// if user not present
 			response = new GetSkillsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "No Skills found", null);
 		}
+		return response;
+	}
+
+	@Override
+	public EditSkillsResponse editSkills(EditSkillsRequest request) {
+		EditSkillsResponse response = null;
+		// employee is present or not check
+		Optional<Skills> skillsObj = skillsRepository.findById(request.getId());
+
+		if (skillsObj.isPresent()) {
+
+			Skills skills = skillsObj.get();
+
+			// load vo to bean
+			skills = skillsUtil.loadEditSkillsRequestToSkills(request,skills);
+
+			// save bean to databae
+			skills = skillsRepository.save(skills);
+
+			// load response
+			// success
+			response = new EditSkillsResponse(HttpStatus.OK, "000", " skills edited  succesfully ", null);
+			response.setSkills(skills);
+		} else {
+			// failure
+			response = new EditSkillsResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002", "skills editing failed", null);
+		}
+
 		return response;
 	}
 

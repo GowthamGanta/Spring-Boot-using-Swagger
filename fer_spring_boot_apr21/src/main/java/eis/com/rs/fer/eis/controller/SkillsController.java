@@ -8,14 +8,19 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.eis.request.DeleteSkillsRequest;
+import com.rs.fer.eis.request.EditEmployeeRequest;
+import com.rs.fer.eis.request.EditSkillsRequest;
 import com.rs.fer.eis.request.GetSkillsRequest;
 import com.rs.fer.eis.request.SaveSkillsRequest;
 import com.rs.fer.eis.response.DeleteSkillsResponse;
+import com.rs.fer.eis.response.EditEmployeeResponse;
+import com.rs.fer.eis.response.EditSkillsResponse;
 import com.rs.fer.eis.response.GetSkillsResponse;
 import com.rs.fer.eis.response.SaveSkillsResponse;
 import com.rs.fer.eis.service.SkillsService;
@@ -45,7 +50,6 @@ public class SkillsController {
 		return response;
 	}
 
-	
 	@DeleteMapping("/deleteSkills")
 
 	public DeleteSkillsResponse deleteSkills(@ModelAttribute DeleteSkillsRequest request) {
@@ -79,6 +83,22 @@ public class SkillsController {
 		}
 		return response;
 
+	}
+
+	@PutMapping("/editSkills")
+	public EditSkillsResponse editSkills(@RequestBody EditSkillsRequest request) {
+
+		EditSkillsResponse response = null;
+
+		Set<String> errorMessages = skillsValidation.validateEditSkillsRequest(request);
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new EditSkillsResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+
+		} else {
+			response = skillsService.editSkills(request);
+		}
+		return response;
 	}
 
 }

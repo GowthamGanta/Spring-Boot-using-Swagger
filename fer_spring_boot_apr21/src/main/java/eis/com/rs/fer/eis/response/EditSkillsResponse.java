@@ -10,8 +10,8 @@ import com.rs.fer.response.AbstractResponse;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class EditSkillsResponse extends AbstractResponse {
 
 	private Skills skills;
@@ -22,10 +22,6 @@ public class EditSkillsResponse extends AbstractResponse {
 		this.statusCode = statusCode;
 		this.message = message;
 		this.errorMessages = errorMessages;
-
 	}
 }
 
-
-
-	
