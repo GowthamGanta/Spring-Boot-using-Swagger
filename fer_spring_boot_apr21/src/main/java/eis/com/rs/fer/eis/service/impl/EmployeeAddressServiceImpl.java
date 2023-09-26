@@ -94,9 +94,6 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 			response = new EditEmployeeAddressResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
 					"Address editing failed", null);
 
-			response = new EditEmployeeAddressResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
-					"expense editing failed", null);
-
 		}
 
 		return response;

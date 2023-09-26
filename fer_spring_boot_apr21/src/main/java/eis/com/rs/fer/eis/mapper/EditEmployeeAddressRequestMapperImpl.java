@@ -28,7 +28,6 @@ public class EditEmployeeAddressRequestMapperImpl implements EditEmployeeAddress
 		employeeAddress.setState(request.getState());
 		employeeAddress.setCountry(request.getCountry());
 		employeeAddress.setAddressType(request.getAddressType());
-		employeeAddress.setEmployeeId(request.getEmployeeId());
 
 		return employeeAddress;
 	}

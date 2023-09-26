@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 
 import com.rs.fer.ipl.entity.Team;
 import com.rs.fer.ipl.repository.TeamRepository;

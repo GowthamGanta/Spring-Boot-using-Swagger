@@ -17,6 +17,5 @@ public class EditEmployeeAddressRequest {
 	private String country;
 
 	private String addressType;
-	private int employeeId;
 
 }

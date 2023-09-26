@@ -13,6 +13,5 @@ public interface EditEmployeeRequestMapper {
 	
 	Employee mapToEmployee(EditEmployeeRequest request, Employee employee);
 
-	Employee mapToEmployee(EditEmployeeRequest request);
 }
 

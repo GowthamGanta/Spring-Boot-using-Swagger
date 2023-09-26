@@ -28,11 +28,12 @@ public class Employee {
 	private int employeeId;
 	private String firstName;
 	private String middleName;
-
 	private String lastName;
+
 	private String dateOfBirth;
 	private String gender;
 	private String email;
+	private String password;
 
 	private String mobile;
 	private float salary;
@@ -74,16 +75,17 @@ public class Employee {
 	}
 
 	public Employee(int employeeId, String firstName, String middleName, String lastName, String dateOfBirth,
-			String gender, String email, String mobile, float salary, String created, String updated) {
+			String gender, String email, String password, String mobile, float salary, String created, String updated) {
 
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.middleName = middleName;
-
 		this.lastName = lastName;
+
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
 		this.email = email;
+		this.password = password;
 
 		this.mobile = mobile;
 		this.salary = salary;
@@ -92,4 +94,3 @@ public class Employee {
 	}
 
 }
-

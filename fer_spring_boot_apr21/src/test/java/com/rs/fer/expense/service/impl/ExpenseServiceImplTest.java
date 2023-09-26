@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.rs.fer.eis.entity.Employee;
 import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.expense.repository.ExpenseRepository;
 import com.rs.fer.expense.request.AddExpenseRequest;

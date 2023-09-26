@@ -4,10 +4,12 @@ import com.rs.fer.eis.request.AddEmployeeRequest;
 import com.rs.fer.eis.request.DeleteEmployeeRequest;
 import com.rs.fer.eis.request.EditEmployeeRequest;
 import com.rs.fer.eis.request.GetEmployeeRequest;
+import com.rs.fer.eis.request.LoginEmployeeRequest;
 import com.rs.fer.eis.response.AddEmployeeResponse;
 import com.rs.fer.eis.response.DeleteEmployeeResponse;
 import com.rs.fer.eis.response.EditEmployeeResponse;
 import com.rs.fer.eis.response.GetEmployeeResponse;
+import com.rs.fer.eis.response.LoginEmployeeResponse;
 
 public interface EmployeeService {
 	
@@ -18,6 +20,8 @@ public interface EmployeeService {
 	DeleteEmployeeResponse deleteEmployee(DeleteEmployeeRequest request);
 	
 	GetEmployeeResponse getEmployee(GetEmployeeRequest request);
+	
+	LoginEmployeeResponse loginEmployee(LoginEmployeeRequest request);
 }
 
 

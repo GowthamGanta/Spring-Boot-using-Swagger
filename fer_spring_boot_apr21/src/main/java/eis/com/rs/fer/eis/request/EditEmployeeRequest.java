@@ -20,6 +20,8 @@ public class EditEmployeeRequest {
 	private String gender;
 
 	private String email;
+	
+	private String password;
 
 	private String mobile;
 

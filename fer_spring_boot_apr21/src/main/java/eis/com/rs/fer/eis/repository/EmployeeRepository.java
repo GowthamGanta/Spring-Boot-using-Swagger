@@ -10,7 +10,7 @@ import com.rs.fer.eis.entity.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-	//List<User> findByUsernameAndPassword(String username, String password);
+	List<Employee> findByEmailAndPassword(String email, String password);
 
 	List<Employee> findByEmail(String email);
 	

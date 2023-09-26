@@ -25,16 +25,11 @@ public class EditEmployeeRequestMapperImpl implements EditEmployeeRequestMapper 
 		employee.setDateOfBirth(request.getDateOfBirth());
 		employee.setGender(request.getGender());
 		employee.setEmail(request.getEmail());
+		employee.setPassword(request.getPassword());
 		employee.setMobile(request.getMobile());
 		employee.setSalary(request.getSalary());
 
 		return employee;
-	}
-
-	@Override
-	public Employee mapToEmployee(EditEmployeeRequest request) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

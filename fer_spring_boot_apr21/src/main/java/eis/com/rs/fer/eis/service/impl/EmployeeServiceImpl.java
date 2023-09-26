@@ -14,10 +14,12 @@ import com.rs.fer.eis.request.AddEmployeeRequest;
 import com.rs.fer.eis.request.DeleteEmployeeRequest;
 import com.rs.fer.eis.request.EditEmployeeRequest;
 import com.rs.fer.eis.request.GetEmployeeRequest;
+import com.rs.fer.eis.request.LoginEmployeeRequest;
 import com.rs.fer.eis.response.AddEmployeeResponse;
 import com.rs.fer.eis.response.DeleteEmployeeResponse;
 import com.rs.fer.eis.response.EditEmployeeResponse;
 import com.rs.fer.eis.response.GetEmployeeResponse;
+import com.rs.fer.eis.response.LoginEmployeeResponse;
 import com.rs.fer.eis.service.EmployeeService;
 import com.rs.fer.eis.util.EmployeeUtil;
 
@@ -59,6 +61,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public LoginEmployeeResponse loginEmployee(LoginEmployeeRequest request) {
+		LoginEmployeeResponse response = null;
+		int employeeId = 0;
+
+		// load vo to bean
+		String email = request.getEmail();
+		String password = request.getPassword();
+
+		List<Employee> employee = employeeRepository.findByEmailAndPassword(email, password);
+		if (employee != null && !employee.isEmpty()) {
+			Employee employeeObj = employee.get(0);
+			employeeId = employeeObj.getEmployeeId();
+		}
+
+		// load response
+		if (employeeId > 0) {
+			// success
+			response = new LoginEmployeeResponse(HttpStatus.OK, "000", "Welcome to Employee", null);
+
+		} else {
+			// failure
+			response = new LoginEmployeeResponse(HttpStatus.INTERNAL_SERVER_ERROR, "002",
+					"Invalid Email/password..Please try again.", null);
+		}
+
+		return response;
+
 	}
 
 	@Override
@@ -146,4 +178,3 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 }
-

@@ -30,6 +30,7 @@ public class AddEmployeeRequestMapperImpl implements AddEmployeeRequestMapper{
 		employee.setDateOfBirth(request.getDateOfBirth());
 		employee.setGender(request.getGender());
 		employee.setEmail(request.getEmail());
+		employee.setPassword(request.getPassword());
 		employee.setMobile(request.getMobile());
 		employee.setSalary(request.getSalary());
 		

@@ -17,10 +17,12 @@ import com.rs.fer.eis.request.AddEmployeeRequest;
 import com.rs.fer.eis.request.DeleteEmployeeRequest;
 import com.rs.fer.eis.request.EditEmployeeRequest;
 import com.rs.fer.eis.request.GetEmployeeRequest;
+import com.rs.fer.eis.request.LoginEmployeeRequest;
 import com.rs.fer.eis.response.AddEmployeeResponse;
 import com.rs.fer.eis.response.DeleteEmployeeResponse;
 import com.rs.fer.eis.response.EditEmployeeResponse;
 import com.rs.fer.eis.response.GetEmployeeResponse;
+import com.rs.fer.eis.response.LoginEmployeeResponse;
 import com.rs.fer.eis.service.EmployeeService;
 import com.rs.fer.eis.validation.EmployeeValidation;
 
@@ -33,6 +35,7 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
+	
 	
 	@PostMapping("/addEmployee")
 	public AddEmployeeResponse addEmployee(@RequestBody AddEmployeeRequest request) {
@@ -50,6 +53,23 @@ public class EmployeeController {
 		return response;
 		
 	}
+	
+	@PostMapping("/loginEmployee")
+	public LoginEmployeeResponse loginEmployee(@RequestBody LoginEmployeeRequest request) {
+
+		LoginEmployeeResponse response = null;
+
+		Set<String> errorMessages = employeeValidation.validateLoginEmployeeRequest(request);
+
+		// return response with error messages
+		if (!CollectionUtils.isEmpty(errorMessages)) {
+			response = new LoginEmployeeResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
+		} else {
+			response = employeeService.loginEmployee(request);
+		}
+		return response;
+	}
+
 	
 	@PutMapping("/editEmployee")
 	public EditEmployeeResponse editEmployee(@RequestBody EditEmployeeRequest request) {

@@ -8,7 +8,6 @@ import com.rs.fer.ipl.response.EditTeamResponse;
 import com.rs.fer.ipl.response.GetTeamResponse;
 import com.rs.fer.ipl.response.GetTeamsResponse;
 import com.rs.fer.ipl.response.SaveTeamResponse;
-import com.rs.fer.ipl.service.impl.GetTeamsRequest;
 
 public interface TeamService {
 

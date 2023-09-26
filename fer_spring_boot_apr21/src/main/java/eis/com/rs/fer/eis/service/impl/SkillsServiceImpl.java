@@ -38,7 +38,6 @@ public class SkillsServiceImpl implements SkillsService {
 		List skill = (List) skillsRepository.findByName(request.getName());
 
 		if (!CollectionUtils.isEmpty((Collection<?>) skill)) {
-			// User alreadypresent
 
 			response = new SaveSkillsResponse(HttpStatus.PRECONDITION_FAILED, "001",
 					"User is already registered with the given name", null);

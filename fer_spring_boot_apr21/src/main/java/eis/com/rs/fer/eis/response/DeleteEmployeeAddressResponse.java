@@ -5,7 +5,6 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 import com.rs.fer.eis.entity.EmployeeAddress;
-import com.rs.fer.expense.entity.Expense;
 import com.rs.fer.response.AbstractResponse;
 
 import lombok.Getter;

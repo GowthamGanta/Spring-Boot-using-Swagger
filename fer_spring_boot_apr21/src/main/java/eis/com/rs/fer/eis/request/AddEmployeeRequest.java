@@ -25,6 +25,8 @@ public class AddEmployeeRequest{
 	private String gender;
 
 	private String email;
+	
+	private String password;
 
 	private String mobile;
 

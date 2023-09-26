@@ -18,13 +18,11 @@ import com.rs.fer.eis.request.DeleteDepartmentRequest;
 import com.rs.fer.eis.request.EditDepartmentRequest;
 import com.rs.fer.eis.request.GetDepartmentOptionsRequest;
 import com.rs.fer.eis.request.GetDepartmentRequest;
-import com.rs.fer.eis.request.GetEmployeeAddressOptionsRequest;
 import com.rs.fer.eis.response.AddDepartmentResponse;
 import com.rs.fer.eis.response.DeleteDepartmentResponse;
 import com.rs.fer.eis.response.EditDepartmentResponse;
 import com.rs.fer.eis.response.GetDepartmentOptionsResponse;
 import com.rs.fer.eis.response.GetDepartmentResponse;
-import com.rs.fer.eis.response.GetEmployeeAddressOptionsResponse;
 import com.rs.fer.eis.service.DepartmentService;
 import com.rs.fer.eis.validation.DepartmentValidation;
 
