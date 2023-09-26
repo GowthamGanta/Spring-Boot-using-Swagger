@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rs.fer.eis.request.DeleteSkillsRequest;
-import com.rs.fer.eis.request.EditEmployeeRequest;
 import com.rs.fer.eis.request.EditSkillsRequest;
 import com.rs.fer.eis.request.GetSkillsRequest;
 import com.rs.fer.eis.request.SaveSkillsRequest;
 import com.rs.fer.eis.response.DeleteSkillsResponse;
-import com.rs.fer.eis.response.EditEmployeeResponse;
 import com.rs.fer.eis.response.EditSkillsResponse;
 import com.rs.fer.eis.response.GetSkillsResponse;
 import com.rs.fer.eis.response.SaveSkillsResponse;
