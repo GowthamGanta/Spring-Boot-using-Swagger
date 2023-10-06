@@ -17,7 +17,6 @@ import com.rs.fer.user.request.DeleteRatingRequest;
 import com.rs.fer.user.request.EditRatingRequest;
 import com.rs.fer.user.request.GetRatingRequest;
 import com.rs.fer.user.request.GetUserRequest;
-import com.rs.fer.user.request.LoginRequest;
 import com.rs.fer.user.request.RegistrationRequest;
 import com.rs.fer.user.request.ResetPasswordRequest;
 import com.rs.fer.user.request.SaveRatingRequest;
@@ -28,7 +27,6 @@ import com.rs.fer.user.response.DeleteRatingResponse;
 import com.rs.fer.user.response.EditRatingResponse;
 import com.rs.fer.user.response.GetRatingResponse;
 import com.rs.fer.user.response.GetUserResponse;
-import com.rs.fer.user.response.LoginResponse;
 import com.rs.fer.user.response.RegistrationResponse;
 import com.rs.fer.user.response.ResetPasswordResponse;
 import com.rs.fer.user.response.SaveRatingResponse;
@@ -205,8 +203,8 @@ public class UserControllerTest {
 		// Mock
 		Set<String> errorMessages = new LinkedHashSet<>();
 
-		LoginRequest request = new LoginRequest();
-		LoginResponse response = new LoginResponse(HttpStatus.OK, "000", "", null);
+		//LoginRequest request = new LoginRequest();
+		//LoginResponse response = new LoginResponse(HttpStatus.OK, "000", "", null);
 
 		// When
 		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);
@@ -223,10 +221,12 @@ public class UserControllerTest {
 	public void testLoginFailure() {
 
 		// Mock
+		
+		
 		Set<String> errorMessages = new LinkedHashSet<>();
 		errorMessages.add("Please enter Password");
 
-		LoginRequest request = new LoginRequest();
+		//LoginRequest request = new LoginRequest();
 
 		// When
 		when(userValidation.validateLoginRequest(Mockito.any())).thenReturn(errorMessages);
