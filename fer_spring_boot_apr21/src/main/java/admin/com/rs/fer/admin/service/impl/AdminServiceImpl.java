@@ -1,6 +1,7 @@
 package com.rs.fer.admin.service.impl;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
 	public BlockUserResponse blockUser(BlockUserRequest request) {
 		BlockUserResponse response = null;
 
-		// To get the user based on userId
+	   // To get the user based on userId
 		Optional<User> userObj = userRepository.findById(request.getId());
 		// user is not present
 		if (!userObj.isPresent()) {
@@ -132,7 +133,7 @@ public class AdminServiceImpl implements AdminService {
 			response = new GetBlockUserResponse(HttpStatus.OK, "101", "No users found", null);
 
 		} else {
-			// success
+			//success
 			response = new GetBlockUserResponse(HttpStatus.OK, "000", "User present ", null);
 			response.setUsers(users);
 		}
