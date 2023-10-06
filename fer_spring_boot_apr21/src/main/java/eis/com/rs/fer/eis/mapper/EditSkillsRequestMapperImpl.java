@@ -20,7 +20,7 @@ public class EditSkillsRequestMapperImpl implements EditSkillsRequestMapper {
 		//Skills skills1 = new Skills();
 
 		skills.setName(request.getName());
-		//skills.setId(request.getId());
+		skills.setId(request.getId());
 		return skills;
 	}
 
