@@ -35,7 +35,7 @@ public class SkillsServiceImpl implements SkillsService {
 		SaveSkillsResponse response = null;
 
 		// User is present or not check
-		List skill = (List) skillsRepository.findByName(request.getName());
+		List<Skills> skill = (List<Skills>) skillsRepository.findByName(request.getName());
 
 		if (!CollectionUtils.isEmpty((Collection<?>) skill)) {
 
