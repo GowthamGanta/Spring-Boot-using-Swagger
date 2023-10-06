@@ -2,7 +2,6 @@ package com.rs.fer.ipl.response;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.rs.fer.ipl.entity.Team;
@@ -10,11 +9,11 @@ import com.rs.fer.ipl.entity.Team;
 @Component
 public class GetTeamsResponse {
 	
-	    private HttpStatus status;
+	   // private HttpStatus status;
 	    public String statusCode;
-	    private String message;
-	    private String errorMessages;
-	    private List<Team> teams;
+	    //private String message;
+	    //private String errorMessages;
+	    //private List<Team> teams;
 		public void setTeams(List<Team> teamObj) {
 			
 		}
