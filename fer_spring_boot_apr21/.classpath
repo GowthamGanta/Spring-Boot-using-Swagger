@@ -6,7 +6,7 @@
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
-	</classpathentry> 
+	</classpathentry>
 	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/" kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
@@ -15,7 +15,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/java/admin"/>
 	<classpathentry kind="src" path="src/main/java/expense"/>
-	<classpathentry kind="src" path="src/main/java/eis"/> 
+	<classpathentry kind="src" path="src/main/java/eis"/>
 	<classpathentry kind="src" path="src/main/java/follow"/>
 	<classpathentry kind="src" path="src/main/java/group"/>
 	<classpathentry kind="src" path="src/main/java/message"/>
@@ -23,7 +23,7 @@
 	<classpathentry kind="src" path="src/main/java/user"/>
 	<classpathentry kind="src" path="src/main/loan"/>
 	<classpathentry kind="src" path="src/main/java/ipl"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_331">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
