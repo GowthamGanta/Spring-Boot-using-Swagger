@@ -66,22 +66,6 @@ public class UserController {
 		
 	}
  
-	/*@PostMapping("/registration/ma")
-	public RegistrationResponse registrationMa(@ModelAttribute RegistrationRequest request) {
-
-		RegistrationResponse response = null;
-
-		Set<String> errorMessages = userValidation.validateRegistrationRequest(request);
-		// return response with error messages
-		if (!CollectionUtils.isEmpty(errorMessages)) {
-			response = new RegistrationResponse(HttpStatus.PRECONDITION_FAILED, "999", null, errorMessages);
-
-		} else {
-			response = userService.registration(request);
-		}
-		return response;
-	}*/
-
 	@PostMapping("/login")
 	public LoginResponse login(@RequestBody LoginRequest request) {
 
