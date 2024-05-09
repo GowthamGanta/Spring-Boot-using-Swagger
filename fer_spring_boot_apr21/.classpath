@@ -7,7 +7,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/|apartment/"  kind="src" output="target/classes" path="src/main/java"/>
+	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/|apartment/" kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
