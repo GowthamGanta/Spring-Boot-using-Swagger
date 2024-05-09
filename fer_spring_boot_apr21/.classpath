@@ -7,7 +7,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/" kind="src" output="target/classes" path="src/main/java"/>
+	<classpathentry excluding="Ipl/|admin/|eis/|expense/|follow/|group/|ipl/|ipl/|message/|participant/|user/|hr/apartment/" kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -23,6 +23,11 @@
 	<classpathentry kind="src" path="src/main/java/user"/>
 	<classpathentry kind="src" path="src/main/loan"/>
 	<classpathentry kind="src" path="src/main/java/ipl"/>
+	<classpathentry kind="src" path="src/main/java/hr/apartment">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
