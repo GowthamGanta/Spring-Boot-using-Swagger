@@ -1,5 +1,5 @@
 package com.rs.fer.apartment.entity;
 
-public class APT {
+public class Apt {
 
 }
