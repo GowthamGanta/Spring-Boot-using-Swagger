@@ -10,11 +10,10 @@ public class FERBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FERBootApplication.class, args);
 		
-		System.out.println("To test commit or to push...!");
+		System.out.println("Hii commit...!");
 		
 		
 	}  
-	
 
 }
  
