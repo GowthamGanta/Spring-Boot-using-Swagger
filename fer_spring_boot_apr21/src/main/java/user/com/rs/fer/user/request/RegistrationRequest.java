@@ -30,14 +30,4 @@ public class RegistrationRequest {
 	
 	private String mobile;
 	
-	public void setId(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setUserId(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
