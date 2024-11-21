@@ -6,14 +6,11 @@ import java.util.Date;
 public class DateUtil {
 
 	public static String getCurrentDate() {
-
-		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		return simpleDateFormat.format(new Date());
+		return getCurrentDate("dd/MM/yyyy");
 	}
 
 	public static String getCurrentDateAndTime() {
-		SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return simpleDateFormat.format(new Date());
+		return getCurrentDate("dd/MM/yyyy HH:mm:ss");
 	}
 	
 	public static String getCurrentDate(String format) {
