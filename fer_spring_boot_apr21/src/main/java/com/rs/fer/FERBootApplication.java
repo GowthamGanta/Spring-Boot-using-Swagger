@@ -10,7 +10,7 @@ public class FERBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FERBootApplication.class, args);
 		
-		System.out.println("Hii commit...!");
+		System.out.println("Hello commit...!");
 		
 		
 	}  
