@@ -24,6 +24,7 @@ public class TeamValidationImplTest {
 
 		SaveTeamRequest request = new SaveTeamRequest();
 		request.setName("CSK");
+		request.setTeamCode("CSK01");
 
 		Set<String> errorMessages = teamValidationImpl.validateSaveTeamRequest(request);
 
