@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -302,7 +303,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(), Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");
@@ -343,7 +344,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(), Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");
@@ -385,7 +386,7 @@ public class UserServiceImplTest {
 
 		when(userRepository.save(Mockito.any())).thenReturn(user);
 
-		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(),Mockito.any())).thenReturn(user);
+		when(userUtil.loadUpdateUserRequestToUser(Mockito.any(), Mockito.any())).thenReturn(user);
 
 		request.setLineone("100ft");
 		request.setLinetwo("road");
@@ -590,41 +591,40 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testSaveRatingFailure() {
-
+		// User setup
 		User user = new User();
 		user.setUserId(2);
+		user.setBlockStatus("N"); // Not blocked
 		Optional<User> userObj = Optional.of(user);
 
 		User reviewer = new User();
-		reviewer.setUserId(3);
+		reviewer.setUserId(7); // reviewerId must match request
+		reviewer.setBlockStatus("N"); // Not blocked
 		Optional<User> reviewerObj = Optional.of(reviewer);
 
-		List<Rating> ratings = new ArrayList<>();
-
+		// Request setup
 		SaveRatingRequest request = new SaveRatingRequest();
+		request.setUserId(2);
+		request.setReviewerId(7);
 		request.setComments("found");
 		request.setRating(6);
-		request.setReviewerId(7);
 
-		Rating rating = new Rating();
-		// rating.setUserId(3);
-		ratings.add(rating);
-		// Mock
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(userObj);
+		// Mock rating object with NO ID set (simulate save failure)
+		Rating rating = new Rating(); // ratingId = 0 by default
 
-		when(userRepository.findById(Mockito.anyInt())).thenReturn(reviewerObj);
+		// Mocks
+		when(userRepository.findById(2)).thenReturn(userObj);
+		when(userRepository.findById(7)).thenReturn(reviewerObj);
+		when(ratingRepository.findByUserIdAndReviewedBy(2, 7)).thenReturn(Collections.emptyList()); // No previous
+																									// rating
+		when(userUtil.loadSaveRatingRequestToUserId(request)).thenReturn(rating);
+		when(ratingRepository.save(Mockito.any())).thenReturn(rating); // saving fails (no ID set)
 
-		when(ratingRepository.findByUserIdAndReviewedBy(Mockito.anyInt(), Mockito.anyInt())).thenReturn(ratings);
-
-		when(userUtil.loadSaveRatingRequestToUserId(Mockito.any())).thenReturn(rating);
-
-		when(ratingRepository.save(Mockito.any())).thenReturn(rating);
-
+		// Call method
 		SaveRatingResponse response = userServiceImpl.saveRating(request);
 
-		// 3.
+		// Assert
 		assertEquals("106", response.statusCode);
-
 	}
 
 	@Test
